@@ -29,7 +29,7 @@ Du kan testa ett färdigt projekt här: TODO
 
 It’s traditional to write a program to output ‘Hello world!’ when you learn a new programming language.
 
->Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: https://trinket.io/python/cb3c5d8930
+:pencil2: Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: https://trinket.io/python/cb3c5d8930
 ![image](https://user-images.githubusercontent.com/4598641/219971993-cc7b2b07-d871-4bff-b6e3-6b234e0b1d43.png)
 
 The line `#!/bin/python3` tells repl.it that you are using Python 3 (the latest version). The import lines tell Python that you are going to use code you didn’t write.
@@ -38,9 +38,10 @@ In Python, `print()` outputs text (words or numbers) to the screen.
 
 Lines beginning with `#` are comments, they explain the code to humans and are ignored by Python.
 
-> Find the `# Put code to run below here` line.<br>
-> Click below that line. The flashing `|` is the cursor and shows where you will type.<br>
-> Type the code to `print()` hello:<br>
+:pencil2:
+- Find the `# Put code to run below here` line.<br>
+- Click below that line. The flashing `|` is the cursor and shows where you will type.<br>
+- Type the code to `print()` hello:<br>
 
 **main.py**
  
@@ -48,13 +49,14 @@ Lines beginning with `#` are comments, they explain the code to humans and are i
 
 > Test: Click on the Run button to run your code. In Trinket, the output will appear on the right:
 
-FIXA: skärmdump
+![image](https://user-images.githubusercontent.com/4598641/220738163-1e3ba089-ba30-4492-9fe9-23cc645a244d.png)
 
 > Debug: If you get an error then check your code really carefully. In this example, the single quotes around Hello are missing so Python doesn’t know it is supposed to be text.
 
-FIXA: skärmdump
+![image](https://user-images.githubusercontent.com/4598641/220738431-406b3a27-805b-4fcc-82d7-e4e0ba9f5d9b.png)
 
 In Python, a variable is used to store text or numbers. Variables make it easier for humans to read code. You can use the same variable in lots of places in your code.
+Du kan också vara misstänksam när den oranga understrykningen visas.
 
 We have included some variables that store emoji characters.
 
@@ -72,6 +74,11 @@ print(f"Hello {world}")
 
 Tips: Hej är en textsträng. Klamrarna runt {world} betyder att vi vill skriva ut variabelns värde, ’🌍🌍🌍’
 Tip: 'Hello' is a text string because it has single quotes around it, whereas world is a variable so the value stored in it will be printed.
+![image](https://user-images.githubusercontent.com/4598641/220739447-a48012ec-df89-4ee7-9db6-526bfb291139.png)
+
+![image](https://user-images.githubusercontent.com/4598641/220739616-55e9dca1-4bf7-420a-95da-0fd2f12d8116.png)
+
+![image](https://user-images.githubusercontent.com/4598641/220739775-da61c759-eae4-42cd-9f96-5b13c3f7ce3b.png)
 
 
 # Källor
