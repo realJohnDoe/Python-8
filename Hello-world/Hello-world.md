@@ -1,8 +1,8 @@
 # Hello 🌍🌎🌏
 
 ## Detta kommer du att göra
-- Säga **hej**
-- Summor och datum
+- [Säga hej](#säg-hej)
+- [Summor och datum](#summor-och-datum)
 - Rulla en tärning
 - Påbörja en mening
 - Kunskapsquiz
@@ -80,6 +80,7 @@ Tip: 'Hello' is a text string because it has single quotes around it, whereas wo
 
 ![image](https://user-images.githubusercontent.com/4598641/220739775-da61c759-eae4-42cd-9f96-5b13c3f7ce3b.png)
 
+# Summor och datum
 
 # Källor
 
