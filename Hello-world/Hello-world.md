@@ -98,12 +98,10 @@ Om du har ett konto på repl.it, kan du klicka på Remix och spara en egen kopia
 
 # Summor och datum
 
-Python is great at working with numbers and dates.
+Python är bra på tal och datum.
 ![image](https://user-images.githubusercontent.com/4598641/221425501-a8fa5bed-d694-4529-a28b-8ad465316482.png)
 
-The output area with five printed lines showing new sum and current date outputs.
-
-In Python you can use maths operators to do sums:
+I Python använder du matematiska symboler för uträkningar:
 
 | Symbol | Räknesätt |
 | ------------- | ------------- |
@@ -113,7 +111,7 @@ In Python you can use maths operators to do sums:
 | `/`	| division |
 | `**` | upphöjt till |
 
-Add another two print() lines to your code including a sum for Python to work out:
+Lägg till två `print()`-rader till i din kod där den ena är en räkneuppgift för Python.
 
 **main.py**
 ```python
@@ -123,54 +121,49 @@ print(f"{python} is very good at {sums}")
 print(230 * 5782 ** 2 / 23781)
 ```
 
-Test: Run your code. Did Python calculate the sum correctly? Only joking! Python does the hard maths for you so you don’t need to work it out.
+Testa: Kör din kod. Räknade Python rätt på uppgiften? Skojar! Python gör de svåra uträkningarna så slipper du.
 
->Japanese computer scientist Emma Haruka Iwao used a computer to calculate the value of Pi (π) to 31 trillion digits. That answer is so long that it would take over 300,000 years just to say it!
+>Den japanska datalogen Emma Haruka Iwao använde en dator för räkna ut värdet på pi (π) med 31 biljoner siffror. Svaret är så långt att det skulle ta över 300 000 år bara att säga det!
 
+Pröva att ändra uträkningen som Python gör till något krångligare!
 
-Try changing the sum that Python does to a complicated one!
-
-You can also use brackets if you want to control the order that Python calculates the sum: 
+Du kan också använda parenteser om du vill ändra prioritetsordningen för uträkningen:
 
 ```print( (2 + 4) * (5 + 3) )
 ```
 
-Test: Run your code and get Python to calculate your sum.
+Testa: Kör din kod och låt Python räkna ut svaret åt dig.
 
-Debug: Make sure your sum has a left and right round bracket around it ( 2 * 45 ). If you use extra brackets to control the order, make you have a right bracket to match every left bracket.
+Felsök: Kontrollera att din uträkning har vänster- och högerparenteser på rätt plats. Om du använder extra parenteser för att ändra ordningen, kontrollera att du har matchande vänster- och högerparenteser.
 
+Om du ber Python att göra en riktigt stor uträkning kan det hända att svaret tar flera rader i terminalfönstret.
 
-If you have asked Python to calculate a really big sum, you might find the answer goes across multiple lines in the output area.
-
-Tip: Click on the hamburger menu (the icon with three lines) in the top-left of your Trinket editor. Then click on the Fullscreen button to view your project in fullscreen mode.
+Tips: Klicka på pilarna uppe till höger för att se terminalfönstret i helskärmslägge.
 
 ![image](https://user-images.githubusercontent.com/4598641/221425982-34cc44ef-02fe-4d99-ba27-1787921c3b3d.png)
 
-The Trinket editor with left-hand side menu expanded, via the hamburger menu, to show the fullscreen option.
+För att gå ur helskärmsläge, klicka på ... FIXAS eller Esc-knappen på tangentbordet.
 
-To exit fullscreen mode, click on the Fullscreen button again or press Esc on your keyboard.
-
-The line `from datetime import *` at the top of the main.py tab includes a library with helpful functions for getting the current date and time.
+Raden `from datetime import *` överst i fliken `main.py` hämtar ett bibliotek med användbara funktioner för att hämta datum och tid.
 
 >One of the great things about Python is all the libraries of code that are available to use. A Python library allows you to easily use code that other people have written. There are libraries for drawing charts and graphs, making art, doing calculations, and lots more.
 
+Lägg till en rad i din kod som skriver lite mer text och emoji-variablerna `calendar` och `clock`.
 
-Add another line to your code to print some more text and the emoji variables calendar and clock.
-
-Get the current date and time by using the now() function from the datetime library:
+Hämta aktuellt datum och aktuell tid med funktionen `now()` i **datetime**-biblioteket.
 
 **main.py**
 ```
 print(f"{python} is very good at {sums}")
 print(230 * 5782 ** 2 / 23781) #Print the result of the sum
-print(f"The {calendar} {clock] is {datetime.now()}") #Print with emoji
+print(f"The {calendar} {clock} is {datetime.now()}") #Print with emoji
 ```
 
-Tip: You don’t need to type the comments, they are just there to help you understand the code. Just type the part before the #.
+Tips: du behöver inte mata in kommentarerna; de är till för att du ska förstå koden. Det räcker att skriva det som står före `#`.
 
-Test: Run your code a couple of times to see the date and time update.
+Testa: kör din kod några gånger för att se att tiden uppdateras.
 
-Debug: Check that you have a fullstop . between datetime and now. Check all the punctuation carefully.
+Felsök: Kolla att du har en punkt (.) mellan `datetime` och `now`. Kolla noga att skiljetecknen är rätt.
 
 💾 **Spara** ditt projekt!
 
