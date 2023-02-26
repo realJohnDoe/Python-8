@@ -117,15 +117,15 @@ Add another two print() lines to your code including a sum for Python to work ou
 
 **main.py**
 ```python
-print('Hello', world)
-print('Welcome to', python)
-print(python, 'is very good at', sums)
+print(f'Hello {world}")
+print(f"Welcome to {python}")
+print(f"{python} is very good at {sums}")
 print(230 * 5782 ** 2 / 23781)
 ```
 
 Test: Run your code. Did Python calculate the sum correctly? Only joking! Python does the hard maths for you so you don’t need to work it out.
 
->Japanese computer scientist Emma Haruka Iwao used a computer to calculate the value of Pi (π) to 31 trillion digits. That answer is so long that it would >take over 300,000 years just to say it!
+>Japanese computer scientist Emma Haruka Iwao used a computer to calculate the value of Pi (π) to 31 trillion digits. That answer is so long that it would take over 300,000 years just to say it!
 
 
 Try changing the sum that Python does to a complicated one!
@@ -161,13 +161,12 @@ Get the current date and time by using the now() function from the datetime libr
 
 **main.py**
 ```
-print(python, 'is very good at', sums)
+print(f"{python} is very good at {sums}")
 print(230 * 5782 ** 2 / 23781) #Print the result of the sum
-print('The', calendar, clock, 'is', datetime.now()) #Print with emoji
+print(f"The {calendar} {clock] is {datetime.now()}") #Print with emoji
 ```
 
 Tip: You don’t need to type the comments, they are just there to help you understand the code. Just type the part before the #.
-
 
 Test: Run your code a couple of times to see the date and time update.
 
