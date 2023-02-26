@@ -15,7 +15,7 @@ Detta är projekt 1 av 6 i kursen *Introduction to Python: Variables, functions,
 ## Detta kommer du att göra
 Ta reda på vad programmeringsspråket Python kan göra, genom att koda ett interaktivt projekt som använder emoji.
 
-> **Emoji** are small colourful images used to add extra meaning to messages. Emoji means ‘picture word’ in Japanese.
+> **Emoji** är små färgglada bilder som ger extra innebörd till en text. Emoji betyder 'bild-tecken' på japanska.
 
 Du kommer att:
 - Skriva ut text och emoji med `print()` och få `input()` från användaren
@@ -27,58 +27,74 @@ Du kan testa ett färdigt projekt här: TODO
 
 # Säg hej
 
-It’s traditional to write a program to output ‘Hello world!’ when you learn a new programming language.
+Det är en tradition att skriva ett program som säger "Hej världen" när man lär sig ett nytt programspråk.
 
 :pencil2: Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: https://trinket.io/python/cb3c5d8930
 ![image](https://user-images.githubusercontent.com/4598641/219971993-cc7b2b07-d871-4bff-b6e3-6b234e0b1d43.png)
 
-The line `#!/bin/python3` tells repl.it that you are using Python 3 (the latest version). The import lines tell Python that you are going to use code you didn’t write.
+Raden `#!/bin/python3` berättar för repl.it att du använder Python 3, senaste versionen av Python.
+Raderna med `import` berättar för Python att du ska använda kod som du inte skrivit själv.
 
-In Python, `print()` outputs text (words or numbers) to the screen.
+I Python används `print()` för att skriva ut text (ord eller siffror) på skärmen. 
 
-Lines beginning with `#` are comments, they explain the code to humans and are ignored by Python.
+Rader som börjar med `#` är kommentarer. De förklarar koden för människor och ignoreras av Python.
 
 :pencil2:
-- Find the `# Put code to run below here` line.<br>
-- Click below that line. The flashing `|` is the cursor and shows where you will type.<br>
-- Type the code to `print()` hello:<br>
+- Hitta kodraden `# Skriv koden som ska köras här nedanför`<br>
+- Klicka på raden under. Det blinkande strecket `|` är markören och visar var du skriver just nu.<br>
+- Mata in koden för att skriva **hej**<br>
 
 **main.py**
  
 ![image](https://user-images.githubusercontent.com/4598641/219972382-af779079-2354-4e10-aad4-0b1e1b8b7738.png)
 
-> Test: Click on the Run button to run your code. In Trinket, the output will appear on the right:
+> Testa din kod: klicka på knappen knappen Run högst upp i repl.it-fönstret så visas resultatet till höger:
 
 ![image](https://user-images.githubusercontent.com/4598641/220738163-1e3ba089-ba30-4492-9fe9-23cc645a244d.png)
 
-> Debug: If you get an error then check your code really carefully. In this example, the single quotes around Hello are missing so Python doesn’t know it is supposed to be text.
+> Leta fel: om du får en felutskrift, kontrollera din kod noga. I exemplet här under, fattas citattecknen runt hej och Python förstår då inte vad som menas. Du kan också vara misstänksam när den oranga understrykningen visas.
 
 ![image](https://user-images.githubusercontent.com/4598641/220738431-406b3a27-805b-4fcc-82d7-e4e0ba9f5d9b.png)
 
-In Python, a variable is used to store text or numbers. Variables make it easier for humans to read code. You can use the same variable in lots of places in your code.
-Du kan också vara misstänksam när den oranga understrykningen visas.
+I Python används variabler för att spara text eller tal. Variabler gör det lättare för människor att läsa koden. Du kan använda samma variabel på många ställen i din kod.
 
-We have included some variables that store emoji characters.
+Vi har förberett några variabler som innehåller emoji-tecken.
 
->In your Trinket, click on the emoji.py tab. Find the variable world, which stores the text ‘🌍🌍🌍’.<br>
->You can print() more than one item at a time by including a comma , in between the items. print() will add a space between each item.<br>
->Click on the main.py tab to go back to your print() code.<br>
->Change your code to also print() the contents of the world variable:
+:pencil2:
+>I repl.it kan du klicka till vänster på fliken `emoji.py`. Hitta variabeln *world*, som innehåller texten ‘🌍🌍🌍’.<br>
+>Du kan skriva ut mer än en sak i taget genom att lägga till det innanför citattecknen. Lägg till mellanslag där det behövs.
+>Klicka på fliken `main.py` för att komma tillbaks till din kod.<br>
+>Ändra din kod så att den också skriver ut variabeln *world*.
+>Lägg till ett **f** före citattecknet så vet Python att du vill använda variabler i din sträng.
 
 **main.py**
 
 ```python
-#Put code to run under here
-print(f"Hello {world}")
+# Skriv koden som ska köras här nedanför
+print(f"Hej {world}")
 ```
 
-Tips: Hej är en textsträng. Klamrarna runt {world} betyder att vi vill skriva ut variabelns värde, ’🌍🌍🌍’
-Tip: 'Hello' is a text string because it has single quotes around it, whereas world is a variable so the value stored in it will be printed.
+Tips: Hej är en textsträng. Klamrarna runt {world} betyder att vi vill skriva ut variabelns värde, ’🌍🌍🌍’.
 ![image](https://user-images.githubusercontent.com/4598641/220739447-a48012ec-df89-4ee7-9db6-526bfb291139.png)
 
 ![image](https://user-images.githubusercontent.com/4598641/220739616-55e9dca1-4bf7-420a-95da-0fd2f12d8116.png)
 
+:pencil2:
+Lägg till en ny rad för att skriva ut en till text och emoji:
+
+**main.py**
+
+![image](https://user-images.githubusercontent.com/4598641/221403615-05239dfc-f84e-4dbb-bb03-f2e88f2d9006.png)
+
+Tips: Koden du behöver skriva in är markerad. Koden utan markering hjälper dig att hitta var den nya koden ska hamna.
+
+Testa: Klicka på Run.
+
 ![image](https://user-images.githubusercontent.com/4598641/220739775-da61c759-eae4-42cd-9f96-5b13c3f7ce3b.png)
+
+Felsök: Kontrollera noga parenteser, citattecken och stavning. Python är väldigt petigt.
+
+Om du har ett konto på repl.it, kan du klicka på Remix och spara en egen kopia av projektet i din repl.it.
 
 # Summor och datum
 
