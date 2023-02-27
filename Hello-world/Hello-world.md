@@ -52,11 +52,11 @@ Rader som börjar med `#` är kommentarer. De förklarar koden för människor o
  
 ![image](https://user-images.githubusercontent.com/4598641/219972382-af779079-2354-4e10-aad4-0b1e1b8b7738.png)
 
-> Testa din kod: klicka på knappen knappen Run högst upp i repl.it-fönstret så visas resultatet till höger:
+🧪 **Testa din kod:** klicka på knappen knappen Run högst upp i repl.it-fönstret så visas resultatet till höger:
 
 ![image](https://user-images.githubusercontent.com/4598641/220738163-1e3ba089-ba30-4492-9fe9-23cc645a244d.png)
 
-> **Leta fel:** om du får en felutskrift, kontrollera din kod noga. I exemplet här under, fattas citattecknen runt hej och Python förstår då inte vad som menas. Du kan också vara extra misstänksam när den oranga understrykningen visas.
+🤔 **Leta fel:** om du får en felutskrift, kontrollera din kod noga. I exemplet här under, fattas citattecknen runt hej och Python förstår då inte vad som menas. Du kan också vara extra misstänksam när den oranga understrykningen visas.
 
 ![image](https://user-images.githubusercontent.com/4598641/220738431-406b3a27-805b-4fcc-82d7-e4e0ba9f5d9b.png)
 
@@ -88,17 +88,17 @@ Lägg till en ny rad för att skriva mer text och emoji:
 
 **main.py**
 ```python
-print('Hello', world)
-print('Welcome to', python)
+print(f"Hello {world}")
+print(f"Welcome to {python}") # Lägg till den här raden
 ```
 
 **Tips:** Koden du behöver skriva in är markerad. Koden utan markering hjälper dig att hitta var den nya koden ska hamna.
 
-**Testa:** Klicka på Run.
+🧪 **Testa:** Klicka på Run.
 
 ![image](https://user-images.githubusercontent.com/4598641/220739775-da61c759-eae4-42cd-9f96-5b13c3f7ce3b.png)
 
-**Leta fel:** Kontrollera noga parenteser, citattecken och stavning. Python är väldigt petigt.
+🤔**Leta fel:** Kontrollera noga parenteser, citattecken och stavning. Python är väldigt petigt.
 
 💾 Om du har ett konto på repl.it, kan du klicka på Remix och spara en egen kopia av projektet i din repl.it.
 
@@ -110,37 +110,37 @@ Python är bra på tal och datum.
 I Python använder du matematiska symboler för uträkningar:
 
 | Symbol | Räknesätt |
-| ------------- | ------------- |
-| `+` | addition  |
-| `-` | subtraktion |
-| `*`	| multiplikation |
-| `/`	| division |
-| `**` | upphöjt till |
+| ------ | --------- |
+| `+`    | addition  |
+| `-`    | subtraktion |
+| `*`	   | multiplikation |
+| `/`	   | division |
+| `**`   | upphöjt till |
 
 Lägg till två `print()`-rader till i din kod där den ena är en räkneuppgift för Python.
 
 **main.py**
 ```python
-print(f'Hello {world}")
+print(f"Hello {world}")
 print(f"Welcome to {python}")
 print(f"{python} is very good at {sums}")
 print(230 * 5782 ** 2 / 23781)
 ```
 
-**Testa:** Kör din kod. Räknade Python rätt på uppgiften? Skojar bara! Python gör de svåra uträkningarna så slipper du.
+🧪 **Testa:** Kör din kod. Räknade Python rätt på uppgiften? Skojar bara! Python gör de svåra uträkningarna så slipper du.
 
 >Den japanska datalogen Emma Haruka Iwao använde en dator för räkna ut värdet på pi (π) med 31 biljoner siffror. Svaret är så långt att det skulle ta över 300 000 år bara att säga det!
 
-Pröva att ändra uträkningen som Python gör till något krångligare!
+:pencil2: Pröva att ändra uträkningen som Python gör till något krångligare!
 
 Du kan också använda parenteser om du vill ändra prioritetsordningen för uträkningen:
 
 ```print( (2 + 4) * (5 + 3) )
 ```
 
-**Testa:** Kör din kod och låt Python räkna ut svaret åt dig.
+🧪 **Testa:** Kör din kod och låt Python räkna ut svaret åt dig.
 
-**Leta fel:** Kontrollera att din uträkning har vänster- och högerparenteser på rätt plats. Om du använder extra parenteser för att ändra ordningen, kontrollera att du har matchande vänster- och högerparenteser.
+🤔 **Leta fel:** Kontrollera att din uträkning har vänster- och högerparenteser på rätt plats. Om du använder extra parenteser för att ändra ordningen, kontrollera att du har matchande vänster- och högerparenteser.
 
 Om du ber Python att göra en riktigt stor uträkning kan det hända att svaret tar flera rader i terminalfönstret.
 
@@ -154,7 +154,7 @@ Raden `from datetime import *` överst i fliken `main.py` hämtar ett bibliotek 
 
 >One of the great things about Python is all the libraries of code that are available to use. A Python library allows you to easily use code that other people have written. There are libraries for drawing charts and graphs, making art, doing calculations, and lots more.
 
-Lägg till en rad i din kod som skriver lite mer text och emoji-variablerna `calendar` och `clock`.
+✏️ Lägg till en rad i din kod som skriver lite mer text och emoji-variablerna `calendar` och `clock`.
 
 Hämta aktuellt datum och aktuell tid med funktionen `now()` i **datetime**-biblioteket.
 
@@ -167,9 +167,9 @@ print(f"The {calendar} {clock} is {datetime.now()}") #Print with emoji
 
 **Tips:** du behöver inte mata in kommentarerna; de är till för att du ska förstå koden. Det räcker att skriva det som står före `#`.
 
-**Testa:** kör din kod några gånger för att se att tiden uppdateras.
+🧪 **Testa:** kör din kod några gånger för att se att tiden uppdateras.
 
-**Leta fel:** Kolla att du har en punkt (.) mellan `datetime` och `now`. Kolla noga att skiljetecknen är rätt.
+🤔 **Leta fel:** Kolla att du har en punkt (.) mellan `datetime` och `now`. Kolla noga att skiljetecknen är rätt.
 
 💾 **Spara** ditt projekt!
 
@@ -182,7 +182,7 @@ In Python you call a function() to perfom an action. You have already used the p
 
 You can define a new function to group code together so that you can name it and reuse it.
 
-Functions need to be defined before you can call them. Look for the comment near the top of the main.py tab that says #Put function definitions under here.
+✏️ Functions need to be defined before you can call them. Look for the comment near the top of the main.py tab that says #Put function definitions under here.
 
 Define a new function called roll_dice() that uses the randint() function, from the random library, to generate a random ‘integer’ (whole number) from 1 to 6 and output it to the screen.
 
@@ -199,9 +199,9 @@ The lines under `def roll_dice():` are indented. To do this, use the Tab charact
 
 **Tips:** The underscore `_` is used to between words in variable and function names in Python to make them easier to read. You can’t use a space.
 
-**Testa:** If you ‘Run’ your code now, it won’t roll a dice. That’s because you have defined the `roll_dice()` function, but not called it yet.
+🧪 **Testa:** If you ‘Run’ your code now, it won’t roll a dice. That’s because you have defined the `roll_dice()` function, but not called it yet.
 
-To use a function, you need to call it in the code. Go to the end of your code and add a new line to call the `roll_dice()` function:
+✏️ To use a function, you need to call it in the code. Go to the end of your code and add a new line to call the `roll_dice()` function:
 
 **main.py**
 ```python
@@ -210,11 +210,11 @@ print(f"The {calendar} {clock} is {datetime.now()}")
 roll_dice() #Call the roll dice function
 ```
 
-**Test:** Run your project several times to see the random dice roll each time.
+🧪 **Test:** Run your project several times to see the random dice roll each time.
 
-**Debug:** Make sure you have an underscore _ between roll and dice to make the function name. Make sure you have a colon : at the end of the line.
+🤔 **Debug:** Make sure you have an underscore _ between roll and dice to make the function name. Make sure you have a colon : at the end of the line.
 
-**Debug:** Check that the lines under `def roll_dice()` are indented. It’s really common to get this wrong in Python, so make sure to check.
+🤔 **Debug:** Check that the lines under `def roll_dice()` are indented. It’s really common to get this wrong in Python, so make sure to check.
 
 ![image](https://user-images.githubusercontent.com/4598641/221656767-bfb7b85f-cb00-4915-8712-e22f5f6918b9.png)
 
@@ -223,14 +223,14 @@ roll_dice() #Call the roll dice function
 The fire variable stores a 🔥 emoji. The code `print(fire * 3)` outputs three fire emoji ‘🔥🔥🔥’. You need to output the correct number of emoji to match the number rolled.
 
 <details>
-  <summary>🔥🤔 What would happen if you use `print(fire * randint(1, 6))`?</summary>
+  <summary>🔥🤔 What would happen if you use print(fire * randint(1, 6))?</summary>
   
   You would get a new random number that is usually different from your first random number.
 </details>
 
 Hmm, how can you make sure you use the same random number?
 
-Change your code to save the value returned by `randint()` in a variable called `roll` and then use that variable to print out the number rolled with the matching number of 🔥 emoji.
+✏️ Change your code to save the value returned by `randint()` in a variable called `roll` and then use that variable to print out the number rolled with the matching number of 🔥 emoji.
 
 **main.py**
 ```python
@@ -247,15 +247,15 @@ You can use star or heart instead of fire if you prefer.
 
 The symbol `*` means multiply so `fire * roll` multiples the text in the fire variable (‘🔥’) by the number contained in the roll variable.
 
-**Testa:** Test your project a few times. Make sure you understand how the code works.
+🧪 **Testa:** Test your project a few times. Make sure you understand how the code works.
 
 **Tips:** Variables are useful when you need to use the same value multiple times in your code. Giving variables a sensible name also makes your code easier to understand.
 
-:pencil2:Upgrade your dice so that the user can choose the maximum number.
+✏️ Upgrade your dice so that the user can choose the maximum number.
 
 >Lots of games use many-sided dice. In the physical world, dice are made from regular geometric shapes. Common dice include D6, D12, and D20. On a computer, you can generate a random number to make a fair dice with any number of sides.
 
-The `input()` function asks the user a question and then returns their answer.
+✏️ The `input()` function asks the user a question and then returns their answer.
 
 Add code to ask the user for the biggest number on their dice and then save the result in a variable called `max` and print the number chosen into the output area:
 
@@ -288,7 +288,7 @@ def roll_dice():
   print(fire * roll)
 ```  
 
-**Test:** Run your project. When the program reaches the input line, it will wait for you to enter a response before continuing. Try it again with a different input number.
+🧪 **Test:** Run your project. When the program reaches the input line, it will wait for you to enter a response before continuing. Try it again with a different input number.
 
 💾 **Spara** ditt projekt!
 
