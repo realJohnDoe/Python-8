@@ -98,7 +98,7 @@ print(f"Welcome to {python}") # Lägg till den här raden
 
 ![image](https://user-images.githubusercontent.com/4598641/220739775-da61c759-eae4-42cd-9f96-5b13c3f7ce3b.png)
 
-🤔**Leta fel:** Kontrollera noga parenteser, citattecken och stavning. Python är väldigt petigt.
+🤔 **Leta fel:** Kontrollera noga parenteser, citattecken och stavning. Python är väldigt petigt.
 
 💾 Om du har ett konto på repl.it, kan du klicka på Remix och spara en egen kopia av projektet i din repl.it.
 
