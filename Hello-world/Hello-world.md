@@ -135,7 +135,8 @@ print(230 * 5782 ** 2 / 23781)
 
 Du kan också använda parenteser om du vill ändra prioritetsordningen för uträkningen:
 
-```print( (2 + 4) * (5 + 3) )
+```python
+print( (2 + 4) * (5 + 3) )
 ```
 
 🧪 **Testa:** Kör din kod och låt Python räkna ut svaret åt dig.
