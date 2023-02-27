@@ -175,6 +175,7 @@ print(f"The {calendar} {clock} is {datetime.now()}") #Print with emoji
 
 # Kasta en tärning
 Python can generate random numbers to make digital dice.
+
 ![image](https://user-images.githubusercontent.com/4598641/221656170-ab488718-ae5d-4ac4-bb4f-c1aff8ca1229.png)
 
 In Python you call a function() to perfom an action. You have already used the print() function to output text.
