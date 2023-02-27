@@ -31,7 +31,6 @@ Det är en tradition att skriva ett program som säger "Hej världen" när man l
 
 ![image](https://user-images.githubusercontent.com/4598641/221660115-f42a80e8-3f73-4bf3-ba6b-e6508cff90b0.png)
 
-
 :pencil2: Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: https://trinket.io/python/cb3c5d8930
 
 ![image](https://user-images.githubusercontent.com/4598641/219971993-cc7b2b07-d871-4bff-b6e3-6b234e0b1d43.png)
@@ -153,7 +152,7 @@ För att gå ur helskärmsläge, klicka på ... FIXAS eller Esc-knappen på tang
 
 Raden `from datetime import *` överst i fliken `main.py` hämtar ett bibliotek med användbara funktioner för att hämta datum och tid.
 
->One of the great things about Python is all the libraries of code that are available to use. A Python library allows you to easily use code that other people have written. There are libraries for drawing charts and graphs, making art, doing calculations, and lots more.
+>En av de bästa sakerna med Python är alla kodbibliotek som man kan använda. Ett Pythonbibliotek låter dig lätt använda kod som andra har skrivit. Det finns bibliotek för att rita diagram och grafer, göra konst, göra uträkningar och mycket annat.
 
 ✏️ Lägg till en rad i din kod som skriver lite mer text och emoji-variablerna `calendar` och `clock`.
 
@@ -161,7 +160,7 @@ Hämta aktuellt datum och aktuell tid med funktionen `now()` i **datetime**-bibl
 
 **main.py**
 ```
-print(f"{python} is very good at {sums}")
+print(f"{python} är mycket bra på {sums}")
 print(230 * 5782 ** 2 / 23781) #Print the result of the sum
 print(f"The {calendar} {clock} is {datetime.now()}") #Print with emoji
 ```
@@ -175,17 +174,17 @@ print(f"The {calendar} {clock} is {datetime.now()}") #Print with emoji
 💾 **Spara** ditt projekt!
 
 # Kasta en tärning
-Python can generate random numbers to make digital dice.
+Python kan generera slumptal som man kan ha till en digital tärning.
 
 ![image](https://user-images.githubusercontent.com/4598641/221656170-ab488718-ae5d-4ac4-bb4f-c1aff8ca1229.png)
 
-In Python you call a function() to perfom an action. You have already used the print() function to output text.
+I Python **kallar du på**, anropar, en **funktion** för att göra något. Du har redan använt funktionen `print()` för att skriva ut text.
 
-You can define a new function to group code together so that you can name it and reuse it.
+Du kan **definiera** en ny funktion för att gruppera ihop kod &ndash; du ger koden ett namn och kan sen använda den flera gånger.
 
-✏️ Functions need to be defined before you can call them. Look for the comment near the top of the main.py tab that says #Put function definitions under here.
+✏️ Funktioner måste definieras innan du kan anropa dem. Leta upp kommentaren (#) högt upp i fliken main.py med texten "# Definiera funktioner här nedanför"
 
-Define a new function called roll_dice() that uses the randint() function, from the random library, to generate a random ‘integer’ (whole number) from 1 to 6 and output it to the screen.
+Definiera en ny funktion som heter `roll_dice()` som använder funktionen `randint()` från biblioteket `random` för att generera ett slumpmässigt heltal mellan 1 och 6 och skriva ut talet på skärmen. *int* är en förkortning av *integer*, som betyder heltal på engelska
 
 **main.py**
 ```python
@@ -196,9 +195,9 @@ def roll_dice(): #Don't forget the colon at the end of this line
   print(f"You rolled a {randint(1, 6)}")
 ```
 
-The lines under `def roll_dice():` are indented. To do this, use the Tab character on your keyboard (usually above CAPSLOCK on the keyboard). Indenting code tells Python that the indented lines are part of the function.
+Raderna under `def roll_dice():` är indragna. För att göra indrag kan du använda Tab-tangenten på tangentbordet; den finns oftast ovanför Caps Lock till vänster. Indraget talar om för Python att raderna med indrag hör till funktionen.
 
-**Tips:** The underscore `_` is used to between words in variable and function names in Python to make them easier to read. You can’t use a space.
+**Tips:** Understrykningen `_` används mellan ord i variabler och funktionsnamn i Python för att göra dem mer lättlästa. Man kan inte ha mellanslag i variabel- och funktionsnamn.
 
 🧪 **Testa:** If you ‘Run’ your code now, it won’t roll a dice. That’s because you have defined the `roll_dice()` function, but not called it yet.
 
