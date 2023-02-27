@@ -29,7 +29,11 @@ Du kan testa ett färdigt projekt här: TODO
 
 Det är en tradition att skriva ett program som säger "Hej världen" när man lär sig ett nytt programspråk.
 
+![image](https://user-images.githubusercontent.com/4598641/221660115-f42a80e8-3f73-4bf3-ba6b-e6508cff90b0.png)
+
+
 :pencil2: Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: https://trinket.io/python/cb3c5d8930
+
 ![image](https://user-images.githubusercontent.com/4598641/219971993-cc7b2b07-d871-4bff-b6e3-6b234e0b1d43.png)
 
 Raden `#!/bin/python3` berättar för repl.it att du använder Python 3, senaste versionen av Python.
@@ -52,7 +56,7 @@ Rader som börjar med `#` är kommentarer. De förklarar koden för människor o
 
 ![image](https://user-images.githubusercontent.com/4598641/220738163-1e3ba089-ba30-4492-9fe9-23cc645a244d.png)
 
-> Leta fel: om du får en felutskrift, kontrollera din kod noga. I exemplet här under, fattas citattecknen runt hej och Python förstår då inte vad som menas. Du kan också vara misstänksam när den oranga understrykningen visas.
+> **Leta fel:** om du får en felutskrift, kontrollera din kod noga. I exemplet här under, fattas citattecknen runt hej och Python förstår då inte vad som menas. Du kan också vara extra misstänksam när den oranga understrykningen visas.
 
 ![image](https://user-images.githubusercontent.com/4598641/220738431-406b3a27-805b-4fcc-82d7-e4e0ba9f5d9b.png)
 
@@ -61,11 +65,11 @@ I Python används variabler för att spara text eller tal. Variabler gör det l�
 Vi har förberett några variabler som innehåller emoji-tecken.
 
 :pencil2:
->I repl.it kan du klicka till vänster på fliken `emoji.py`. Hitta variabeln *world*, som innehåller texten ‘🌍🌍🌍’.<br>
->Du kan skriva ut mer än en sak i taget genom att lägga till det innanför citattecknen. Lägg till mellanslag där det behövs.
->Klicka på fliken `main.py` för att komma tillbaks till din kod.<br>
->Ändra din kod så att den också skriver ut variabeln *world*.
->Lägg till ett **f** före citattecknet så vet Python att du vill använda variabler i din sträng.
+- I repl.it kan du klicka till vänster på fliken `emoji.py`. Hitta variabeln *world*, som innehåller texten ‘🌍🌍🌍’.<br>
+- Du kan skriva ut mer än en sak i taget genom att lägga till det innanför citattecknen. Lägg till mellanslag där det behövs.
+- Klicka på fliken `main.py` för att komma tillbaks till din kod.<br>
+- Ändra din kod så att den också skriver ut variabeln *world*.
+- Lägg till ett **f** före citattecknet så vet Python att du vill använda variabler i din sträng.
 
 **main.py**
 
@@ -74,27 +78,29 @@ Vi har förberett några variabler som innehåller emoji-tecken.
 print(f"Hej {world}")
 ```
 
-Tips: Hej är en textsträng. Klamrarna runt {world} betyder att vi vill skriva ut variabelns värde, ’🌍🌍🌍’.
+**Tips:** Hej är en textsträng. Klamrarna runt {world} betyder att vi vill skriva ut variabelns värde, ’🌍🌍🌍’.
 ![image](https://user-images.githubusercontent.com/4598641/220739447-a48012ec-df89-4ee7-9db6-526bfb291139.png)
 
 ![image](https://user-images.githubusercontent.com/4598641/220739616-55e9dca1-4bf7-420a-95da-0fd2f12d8116.png)
 
 :pencil2:
-Lägg till en ny rad för att skriva ut en till text och emoji:
+Lägg till en ny rad för att skriva mer text och emoji:
 
 **main.py**
+```python
+print('Hello', world)
+print('Welcome to', python)
+```
 
-![image](https://user-images.githubusercontent.com/4598641/221403615-05239dfc-f84e-4dbb-bb03-f2e88f2d9006.png)
+**Tips:** Koden du behöver skriva in är markerad. Koden utan markering hjälper dig att hitta var den nya koden ska hamna.
 
-Tips: Koden du behöver skriva in är markerad. Koden utan markering hjälper dig att hitta var den nya koden ska hamna.
-
-Testa: Klicka på Run.
+**Testa:** Klicka på Run.
 
 ![image](https://user-images.githubusercontent.com/4598641/220739775-da61c759-eae4-42cd-9f96-5b13c3f7ce3b.png)
 
-Felsök: Kontrollera noga parenteser, citattecken och stavning. Python är väldigt petigt.
+**Leta fel:** Kontrollera noga parenteser, citattecken och stavning. Python är väldigt petigt.
 
-Om du har ett konto på repl.it, kan du klicka på Remix och spara en egen kopia av projektet i din repl.it.
+💾 Om du har ett konto på repl.it, kan du klicka på Remix och spara en egen kopia av projektet i din repl.it.
 
 # Summor och datum
 
@@ -121,7 +127,7 @@ print(f"{python} is very good at {sums}")
 print(230 * 5782 ** 2 / 23781)
 ```
 
-Testa: Kör din kod. Räknade Python rätt på uppgiften? Skojar! Python gör de svåra uträkningarna så slipper du.
+**Testa:** Kör din kod. Räknade Python rätt på uppgiften? Skojar bara! Python gör de svåra uträkningarna så slipper du.
 
 >Den japanska datalogen Emma Haruka Iwao använde en dator för räkna ut värdet på pi (π) med 31 biljoner siffror. Svaret är så långt att det skulle ta över 300 000 år bara att säga det!
 
@@ -132,13 +138,13 @@ Du kan också använda parenteser om du vill ändra prioritetsordningen för utr
 ```print( (2 + 4) * (5 + 3) )
 ```
 
-Testa: Kör din kod och låt Python räkna ut svaret åt dig.
+**Testa:** Kör din kod och låt Python räkna ut svaret åt dig.
 
-Felsök: Kontrollera att din uträkning har vänster- och högerparenteser på rätt plats. Om du använder extra parenteser för att ändra ordningen, kontrollera att du har matchande vänster- och högerparenteser.
+**Leta fel:** Kontrollera att din uträkning har vänster- och högerparenteser på rätt plats. Om du använder extra parenteser för att ändra ordningen, kontrollera att du har matchande vänster- och högerparenteser.
 
 Om du ber Python att göra en riktigt stor uträkning kan det hända att svaret tar flera rader i terminalfönstret.
 
-Tips: Klicka på pilarna uppe till höger för att se terminalfönstret i helskärmslägge.
+**Tips:** Klicka på pilarna uppe till höger för att se terminalfönstret i helskärmslägge.
 
 ![image](https://user-images.githubusercontent.com/4598641/221425982-34cc44ef-02fe-4d99-ba27-1787921c3b3d.png)
 
@@ -159,11 +165,11 @@ print(230 * 5782 ** 2 / 23781) #Print the result of the sum
 print(f"The {calendar} {clock} is {datetime.now()}") #Print with emoji
 ```
 
-Tips: du behöver inte mata in kommentarerna; de är till för att du ska förstå koden. Det räcker att skriva det som står före `#`.
+**Tips:** du behöver inte mata in kommentarerna; de är till för att du ska förstå koden. Det räcker att skriva det som står före `#`.
 
-Testa: kör din kod några gånger för att se att tiden uppdateras.
+**Testa:** kör din kod några gånger för att se att tiden uppdateras.
 
-Felsök: Kolla att du har en punkt (.) mellan `datetime` och `now`. Kolla noga att skiljetecknen är rätt.
+**Leta fel:** Kolla att du har en punkt (.) mellan `datetime` och `now`. Kolla noga att skiljetecknen är rätt.
 
 💾 **Spara** ditt projekt!
 
@@ -180,7 +186,6 @@ Functions need to be defined before you can call them. Look for the comment near
 Define a new function called roll_dice() that uses the randint() function, from the random library, to generate a random ‘integer’ (whole number) from 1 to 6 and output it to the screen.
 
 **main.py**
-
 ```python
 #Put function definitions under here
 
@@ -191,9 +196,9 @@ def roll_dice(): #Don't forget the colon at the end of this line
 
 The lines under def roll_dice(): are indented. To do this, use the Tab character on your keyboard (usually above CAPSLOCK on the keyboard). Indenting code tells Python that the indented lines are part of the function.
 
-Tip: The underscore `_` is used to between words in variable and function names in Python to make them easier to read. You can’t use a space.
+**Tips:** The underscore `_` is used to between words in variable and function names in Python to make them easier to read. You can’t use a space.
 
-Test: If you ‘Run’ your code now, it won’t roll a dice. That’s because you have defined the roll_dice() function, but not called it yet.
+**Testa:** If you ‘Run’ your code now, it won’t roll a dice. That’s because you have defined the roll_dice() function, but not called it yet.
 
 To use a function, you need to call it in the code. Go to the end of your code and add a new line to call the roll_dice() function:
 
@@ -218,7 +223,7 @@ Uses of random numbers include cryptography, data science, and adding variety in
 The fire variable stores a 🔥 emoji. The code print(fire * 3) outputs three fire emoji ‘🔥🔥🔥’. You need to output the correct number of emoji to match the number rolled.
 
 <details>
-  <summary>What would happen if you use `print(fire * randint(1, 6))`?</summary>
+  <summary>🔥🤔 What would happen if you use `print(fire * randint(1, 6))`?</summary>
   
   You would get a new random number that is usually different from your first random number.
 </details>
@@ -242,15 +247,13 @@ You can use star or heart instead of fire if you prefer.
 
 The symbol * means multiply so fire * roll multiples the text in the fire variable (‘🔥’) by the number contained in the roll variable.
 
+**Testa:** Test your project a few times. Make sure you understand how the code works.
 
-Test: Test your project a few times. Make sure you understand how the code works.
-
-Tip: Variables are useful when you need to use the same value multiple times in your code. Giving variables a sensible name also makes your code easier to understand.
+**Tips:** Variables are useful when you need to use the same value multiple times in your code. Giving variables a sensible name also makes your code easier to understand.
 
 Upgrade your dice so that the user can choose the maximum number.
 
 Lots of games use many-sided dice. In the physical world, dice are made from regular geometric shapes. Common dice include D6, D12, and D20. On a computer, you can generate a random number to make a fair dice with any number of sides.
-
 
 The input() function asks the user a question and then returns their answer.
 
@@ -271,7 +274,6 @@ def roll_dice():
 
 To print an apostrophe ' in a word like That's, put a backslash \ before it so Python knows it’s part of the text.
 
-
 Change your roll variable code to use max as the maximum value for randint when it generates a random number.
 
 When you get input from the user, Python treats it as text. But, randint needs an ‘integer’ (a positive whole number). The int function turns the user input into an integer.
@@ -288,7 +290,7 @@ def roll_dice():
   print(fire * roll)
 ```  
 
-Test: Run your project. When the program reaches the input line, it will wait for you to enter a response before continuing. Try it again with a different input number.
+**Test:** Run your project. When the program reaches the input line, it will wait for you to enter a response before continuing. Try it again with a different input number.
 
 💾 **Spara** ditt projekt!
 
