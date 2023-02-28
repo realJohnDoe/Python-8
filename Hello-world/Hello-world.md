@@ -323,8 +323,46 @@ Du kan lägga till fler emoji-variabler i `emoji.py`. [Använd den här listan m
 # Kunskapsquiz
 
 # Levla upp ditt projekt
+Lägg till mer i ditt projekt. Det finns flera emoji att välja bland.
+
+![image](https://user-images.githubusercontent.com/4598641/221965063-6e7cf08d-814e-413e-82ca-701908bfa9ab.png)
+
+Du kan:
+- Använda `print` med olika text och emoji.
+- Använda `input` för att läsa in värden från användaren och spara dem som variabler och sen göra uträkningar med variablerna
+- Skriva fler funktioner för att dela upp din kod
+- Använda `#` för att kommentera koden
+
+Klicka på fliken `emoji.py` för att se emoji-variablerna du kan använda. Klicka tillbaks till fliken `main.py` för att lägga till mer kod.
+
+Här är ett exempel på en funktion som frågar om hobby:
+**main.py**
+```python
+#Put code to run under here
+def hobbies():
+  hobby = input('What do you like?')
+  print(f"That sounds {fun}")
+  print(f"You could make a {python} project about {hobby}")
+```
+
+**Tips:** Don’t forget you will need to call your function as well as define it.
+
+You can use `input` to make your project wait for the user to tap Enter at any point in this project.
+
+**main.py**
+```python
+roll_dice()
+
+input() #Wait for the user to tap Enter
+
+hobbies()
+```
+
+💾 **Spara** ditt projekt!
 
 # Nästa steg
+
+FIXA
 
 
 # Källor
