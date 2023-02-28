@@ -294,6 +294,32 @@ def roll_dice():
 
 # Påbörja en mening
 
+Skriv ut fler meningar med ditt projekt.
+
+![image](https://user-images.githubusercontent.com/4598641/221963087-1528815a-192f-44bd-9823-f544900070a9.png)
+
+Lägg till fler rader till din kod. Här är några förslag på början till meningar:
+
+**main.py**
+```python
+print(f"I {heart} ...")
+print(f"... makes me {happy}")
+print(f"I'd like to make ... with {python}")
+```
+
+**Tips:** lägg till mellanslag där det behövs.
+
+>Den gula hjärt-emojin används ofta för att visa vänskap och lycka.
+
+:pencil2:
+Vilket meddelande skulle du skicka till en kompis för att pigga upp dem? Vilken emoji skulle du välja?
+
+Klicka på fliken `emoji.py` tab i repl.it och se vilka emoji-variabler du kan använda. Klicka dig tillbaks till fliken `main.py` för att lägga till i din kod.
+
+Du kan lägga till fler emoji-variabler i `emoji.py`. [Använd den här listan med emoji](https://unicode.org/emoji/charts/full-emoji-list.html) för att hitta de du vill ha.
+
+💾 **Spara** ditt projekt!
+
 # Kunskapsquiz
 
 # Levla upp ditt projekt
