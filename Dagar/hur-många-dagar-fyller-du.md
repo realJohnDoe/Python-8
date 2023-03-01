@@ -35,11 +35,11 @@ return dagnr
 Provkör din kod
 ```python
 # Är det skottår i år?
-print("2021? ja, skottår" if skottdag(2021) == 1 else "2021? nej, inte skottår")
+print("2023? ja, skottår" if skottdag(2023) == 1 else "2023? nej, inte skottår")
 # Testa din funktion dagnummer_på_året med några exempel du är säker på
 # Glöm inte att klicka på pilen för att uppdatera
 print(dagnummer_på_året(2023, 1, 1)) # bör vara 1
-print(dagnummer_på_året(2023, 3, 1)) # bör vara 91 
+print(dagnummer_på_året(2023, 2, 1)) # bör vara 32 
 print(dagnummer_på_året(2023, 12, 31)) # bör vara 365
 ```
 
