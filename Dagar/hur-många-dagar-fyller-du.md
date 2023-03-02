@@ -1,12 +1,102 @@
-# Hur många dagar fyller du idag?
+# Hur många dagar fyller du?
+
 Har du fyllt 5000 dagar? Vilket datum fyller eller fyllde du 5555 dagar?
 
 **Uppgift:** Gör ett program som räknar ut hur många dagar det är mellan två datum. Använd det för att räkna ut hur många **dagar** du fyller idag!
 
-Idé: låt programmet räkna ut hur många dagar det har gått sen ett visst startdatum, t.ex. 1 januari 2000, som vi kan ge dagnumret 1. Hur kan du använda den informationen för att räkna ut hur många dagar du fyller idag?
+**Idé:** vi låter programmet räkna ut hur många dagar det har gått sen ett visst startdatum, t.ex. 1 januari 2000. Den dagen kallar vi dag 1.
+Hur kan du använda den informationen för att räkna ut hur många dagar du fyller idag?
+
+![image](https://user-images.githubusercontent.com/4598641/222534676-a6a5c5ce-12de-4a9d-be65-2ee80d426993.png)
 
 ## STEG 1
-Testkör först koden i de två rutorna nedanför. Gör sen klart där det står "# ATT FIXA"
+Vi börjar med hur det ska se ut när vi kör programmet.
+- Programmet ska fråga efter ett startdatum, alltså år, månad, dag. Det kan t.ex. vara användarens födelsedatum
+- Sen ska det fråga efter ett slutdatum, alltså år, månad, dag. Det kan t.ex. vara dagens datum
+- Programmet ska skriva `Det är 5432 dagar mellan datumen` (t.ex.) och sen avsluta
+
+✏️ Mata in den här koden i ett nytt Pythonprojekt i repl.it.
+
+**main.py**
+```python
+### Skriv vanliga funktioner här under
+def dagnummer(år, månad, dag):
+  return 0
+  
+#### Skriv testfunktioner här under
+def testa():
+  print("Vi testar")
+  
+### Skriv kod som pratar med användaren här under
+def fråga_datum(rubrik):
+  print(rubrik)
+  år = int(input('År, fyra siffror: '))
+  månad = int(input('Månad, 1--12: '))
+  dag = int(input('Dag, 1--31: '))
+  return (år, månad, dag)
+
+def fråga_och_svara():
+  print('Hur många dagar är det?')
+  (från_år, från_månad, från_dag) = fråga_datum('Från vilket datum?')
+  (till_år, till_månad, till_dag) = fråga_datum('Till vilket datum?')
+  
+  dagar = dagnummer(till_år, till_månad, till_dag) - dagnummer(från_år, från_månad, från_dag)
+  
+  print(f"Det är {dagar} dagar mellan datumen")
+
+### Här börjar appen köra
+fråga_och_svara()
+```
+
+✏️ Testa koden med gröna knappen Run i repl.it. Vad tror du att resultatet kommer att bli?
+
+## STEG 2
+
+OK, nu har vi en idé hur det kan se ut. Nu behövs det kod för att räkna dagar. 
+Funktionen `dagnummer` är ett skelett som behöver fyllas i.
+
+Det finns flera sätt att göra det på. Vi gör det i små steg.
+
+När man skriver en app kan man testa den på olika sätt. Ett sätt är att mata in olika värden i terminalfönstret. Ibland är det lättare och snabbare att skriva testkod. Det ska vi göra nu.
+
+✏️ Ändra appen så att det längst ner blir så här. Du kan stänga av frågorna så länge så här och anropa funktionen `testa` istället:
+
+```
+### Här börjar appen köra
+testa()
+#fråga_och_svara()
+```
+
+Vad händer om du kör appen nu?
+
+## STEG 3
+Vi vill att funktionen `dagnummer` ska ge oss antalet dagar från den 1 januari 2000, som vi kan kalla dag 1.
+
+Lägg till ett test i funktionen `testa()`:
+```python
+#### Skriv testkod här under
+def testa():
+  print("Vi testar")
+  d = dagnummer(2000, 1, 1)
+  if d != 1: print(f"Dagnumret blev {d}")
+```
+✏️ Vad tror du resultatet blir? Kör koden i repl.it. Blev det som du tänkte dig?
+
+Lägg till ett testfall längst ner i `testa()`:
+```python
+#### Skriv testkod här under
+def testa():
+  print("Vi testar")
+  d = dagnummer(2000, 1, 1)
+  if d != 1: print(f"Dagnumret blev {d}")
+  d = dagnummer(2000, 1, 31)
+  if d != 31: print(f"Dagnumret blev {d}")
+  print("Slut på tester")
+```
+✏️ Vad tror du resultatet blir nu? Kör koden i repl.it. Blev det som du tänkte dig?
+
+Finns det ett enkelt sätt att ändra funktionen `dagnummer` så att våra tester fungerar?[^1]
+
 
 ```python
 # Först behöver vi veta om det är skottår
@@ -85,3 +175,7 @@ från_dag = int(input("Från dag, 1 till 31: "))
 Kan du göra så att koden klarar datum på 1900-talet också? Idag klarar den inte ens generationen av millennials :)
 
 Ändra koden i rutorna ovanför och glöm inte att klicka på pilen till vänster för att köra när du ändrat.
+
+
+# Hjälp på traven
+[¹]: `return dag` istället för `return 0`
