@@ -10,10 +10,13 @@ Hur kan du använda den informationen för att räkna ut hur många dagar du fyl
 ![image](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)
 
 ## STEG 1: Prata med användaren
+<img src=https://user-images.githubusercontent.com/4598641/222922745-103d7a53-2f51-4ac9-9191-0282fa095f6e.png width="400px">
+
 Vi börjar med hur det ska se ut när vi kör appen.
 1. Appen ska fråga efter ett startdatum, alltså år, månad, dag. Det kan t.ex. vara användarens födelsedatum
 1. Sen ska det fråga efter ett slutdatum, alltså år, månad, dag. Det kan t.ex. vara dagens datum
 1. Appen ska skriva `Det är 5432 dagar mellan datumen` (t.ex.) och sen avsluta
+
 
 ✏️ Mata in den här koden i ett nytt Pythonprojekt i repl.it.
 
@@ -23,7 +26,7 @@ Vi börjar med hur det ska se ut när vi kör appen.
 def dagnummer(år, månad, dag):
   return 1
   
-#### Skriv testfunktioner här under
+### Skriv testfunktioner här under
 def testa():
   print("Vi testar")
   print("Slut på tester")
@@ -77,7 +80,7 @@ Vi vill att funktionen `dagnummer` ska ge oss antalet dagar från den 1 januari 
 
 ✏️ Lägg till ett test i funktionen `testa()`. Det ska kolla om den 1 januari 2000 är dag 1.
 ```python
-#### Skriv testkod här under
+### Skriv testkod här under
 def testa():
   print("Vi testar")
   d = dagnummer(2000, 1, 1) #nyrad
@@ -88,7 +91,7 @@ def testa():
 
 ✏️ Lägg till ett testfall längst ner i `testa()`. Det ska kolla om den 31 januari 2000 är dag 31.
 ```python
-#### Skriv testkod här under
+### Skriv testkod här under
 def testa():
   print("Vi testar")
   d = dagnummer(2000, 1, 1)
@@ -235,12 +238,9 @@ Då kan vi lätt ändra i `dagnummer_på_året` så att februari räknas rätt:
 ```python3
 def dagnummer_på_året(år, månad, dag): # år med fyra siffror, månad 1 till 12, dag 1 till 31
   dagnr = dag
-  if månad > 1: 
-    dagnr += 31 # plussa på antalet dagar i januari 
-  if månad > 2:
-    dagnr += 28 + skottdag(år) #ändrad
-  if månad > 3: 
-    dagnr += 31 # antalet dagar i mars
+  if månad > 1: dagnr += 31 # plussa på antalet dagar i januari 
+  if månad > 2: dagnr += 28 + skottdag(år) #ändrad
+  if månad > 3: dagnr += 31 # antalet dagar i mars
 ```
 
 Du behöver skriva in funktionen `skottdag()` någonstans före `dagnummer_på_året()`. Så här kan den se ut:
@@ -249,12 +249,9 @@ Du behöver skriva in funktionen `skottdag()` någonstans före `dagnummer_på_�
 ```python3
 def skottdag(år): # 1 om skottår, annars 0
 # "%" ger resten vid division och kallas "modulo" eller bara "mod"
-  if år % 400 == 0:
-    return 1
-  if år % 100 == 0:
-    return 0
-  if år % 4 == 0:
-    return 1
+  if år % 400 == 0: return 1
+  if år % 100 == 0: return 0
+  if år % 4 == 0: return 1
   return 0
 ```
 
