@@ -2,18 +2,18 @@
 
 Har du fyllt 5000 dagar? Vilket datum fyller eller fyllde du 5555 dagar?
 
-**Uppgift:** Gör ett program som räknar ut hur många dagar det är mellan två datum. Använd det för att räkna ut hur många **dagar** du fyller idag!
+**Uppgift:** Gör en app som räknar ut hur många dagar det är mellan två datum. Använd det för att räkna ut hur många **dagar** du fyller idag!
 
-**Idé:** vi låter programmet räkna ut hur många dagar det har gått sen ett visst startdatum, t.ex. 1 januari 2000. Den dagen kallar vi dag nummer 1.
+**Idé:** vi låter appen räkna ut hur många dagar det har gått sen ett visst startdatum, t.ex. 1 januari 2000. Den dagen kallar vi dag nummer 1.
 Hur kan du använda den informationen för att räkna ut hur många dagar du fyller idag?
 
 ![image](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)
 
 ## STEG 1: Prata med användaren
-Vi börjar med hur det ska se ut när vi kör programmet.
-- Programmet ska fråga efter ett startdatum, alltså år, månad, dag. Det kan t.ex. vara användarens födelsedatum
+Vi börjar med hur det ska se ut när vi kör appen.
+- Appen ska fråga efter ett startdatum, alltså år, månad, dag. Det kan t.ex. vara användarens födelsedatum
 - Sen ska det fråga efter ett slutdatum, alltså år, månad, dag. Det kan t.ex. vara dagens datum
-- Programmet ska skriva `Det är 5432 dagar mellan datumen` (t.ex.) och sen avsluta
+- Appen ska skriva `Det är 5432 dagar mellan datumen` (t.ex.) och sen avsluta
 
 ✏️ Mata in den här koden i ett nytt Pythonprojekt i repl.it.
 
@@ -129,7 +129,7 @@ def dagnummer_på_året(år, månad, dag): # år med fyra siffror, månad 1 till
   if månad > 3: 
     dagnr += 31 # antalet dagar i mars
   # ATT FIXA: ta hand om resten av månaderna med "if"
-return dagnr
+  return dagnr
 
 def dagnummer(år, månad, dag):
   return dagnummer_på_året(år, månad, dag)
@@ -199,7 +199,7 @@ def dagnummer(år, månad, dag):
 
 ## STEG 4: Testa användarupplevelsen
 
-Ändra så att vi kan testa programmet som användare nu.
+Ändra så att vi kan testa appen som vanlig användare nu.
 
 **main.py**
 ```
@@ -208,9 +208,69 @@ testa()
 fråga_och_svara()
 ```
 
-Försök svara på frågan när du fyller 5555 dagar eller någon annan fråga du tycker är intressant.
+Kan du använda din app för att svara på frågan när du fyller 5555 dagar?
 
 ## STEG 5: Men skottåren då? &ndash; Extrauppgift
+
+Normalt är vart fjärde år skottår. Då har vi en skottdag den 29 februari att räkna med.
+
+Om du har följt beskrivningen så har vi ett par testfall som vi får rätta till.
+- Den 28 februari 2000 har dagnummer 59 &ndash; det stämmer fortfarande 🙂
+- Den 29 februari 2000 har dagnummer 60
+- Den 1 mars 2000 har dagnummer 61
+- Den 31 december 2000 har dagnummer 366
+
+✏️ Rätta till testfallen. Vad kommer att hända när du kör? Testkör.
+
+Koden i `dagnummer_på_året()` behöver ta hänsyn till de 29 dagarna i februari.
+
+Vi kan lägga till en funktion som heter `skottdag(år)` som ger svaret 0 eller 1 beroende på om det är skottår. Då kan vi lätt ändra i dagnummer_på_året så här:
+
+```python3
+def dagnummer_på_året(år, månad, dag): # år med fyra siffror, månad 1 till 12, dag 1
+  dagnr = dag
+  if månad > 1: 
+    dagnr += 31 # plussa på antalet dagar i januari 
+  if månad > 2:
+    dagnr += 28 + skottdag(år) #ändrad
+  if månad > 3: 
+    dagnr += 31 # antalet dagar i mars
+```
+
+Du behöver skriva in funktionen `skottdag()` någonstans före `dagnummer_på_året()`. Så här kan den se ut:
+```python3
+def skottdag(år): # 1 om skottår, annars 0
+# "%" ger resten vid division och kallas "modulo" eller bara "mod"
+  if år % 400 == 0:
+    return 1
+  if år % 100 == 0:
+    return 0
+  if år % 4 == 0:
+    return 1
+  return 0
+```
+
+✏️ Vilka tester tror du kommer att fungera nu? Testkör!
+
+
+### Räkna rätt på antalet dagar
+
+I slutet av funktionen `dagnummer` har vi en uträkning som alltid räknar med 365 dagar per år: `365 * (år - 2000)`. Det stämmer inte när vi ska räkna skottår.
+
+**main.py**
+```python
+def dagnummer(år, månad, dag):
+  return dagnummer_på_året(år, månad, dag) + 365 * (år - 2000)
+```
+
+Vi gör en ny funktion som heter `dagar_före(år)`. Där ska vi göra uträkningen.
+
+**main.py**
+```python
+def dagar_före(år):
+  return dagnummer_på_året(år, månad, dag) + 365 * (år - 2000) #här
+```
+
 
 ---
 
