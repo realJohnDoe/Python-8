@@ -214,7 +214,7 @@ Kan du använda din app för att svara på frågan när du fyller 5555 dagar?
 
 Normalt är vart fjärde år skottår. Då har vi en skottdag den 29 februari att räkna med.
 
-Om du har följt beskrivningen så har vi ett par testfall som vi får rätta till.
+Om du har följt beskrivningen så har vi ett par testfall att rätta till.
 - Den 28 februari 2000 har dagnummer 59 &ndash; det stämmer fortfarande 🙂
 - Den 29 februari 2000 har dagnummer 60
 - Den 1 mars 2000 har dagnummer 61
@@ -238,6 +238,7 @@ def dagnummer_på_året(år, månad, dag): # år med fyra siffror, månad 1 till
 ```
 
 Du behöver skriva in funktionen `skottdag()` någonstans före `dagnummer_på_året()`. Så här kan den se ut:
+>Regeln är att år som är jämnt delbara med 4 eller 400 är skottår. År som »bara« är jämna 100-tal räknas inte som skottår, t.ex. år 2100.
 ```python3
 def skottdag(år): # 1 om skottår, annars 0
 # "%" ger resten vid division och kallas "modulo" eller bara "mod"
@@ -263,8 +264,9 @@ def dagnummer(år, månad, dag):
   return dagnummer_på_året(år, månad, dag) + 365 * (år - 2000)
 ```
 
-Vi gör en ny funktion som heter `dagar_före(år)`. Där ska vi göra uträkningen.
+Vi gör en ny funktion som heter `dagar_före(år)`. Där ska vi räkna med skottdagarna också.
 
+✏️ 
 **main.py**
 ```python
 def dagar_före(år):
