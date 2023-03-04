@@ -308,6 +308,29 @@ def dagar_före(år): # hur många dagar från 1 januari 2000 till 31 december �
 
 ✏️ Hur många dagar fyller du idag, räknat med skottår?
 
+## Testa en förenkling
+
+✏️ Hur bra blir resultatet om vi gör en mycket enklare `dagar_före(år)`?
+
+Vi hade den här varianten:
+
+**main.py**
+```python
+def dagar_före(år):
+  return 365 * (år - 2000)
+```
+
+Hur blir det om vi räknar åren som 365.2425 dagar istället?
+>365 + 1/4 - 1/100 + 1/400 = 365.2425 &ndash; se regeln för skottår en bit upp
+Koden kan då bli så här:
+
+**main.py**
+```python
+def dagar_före(år):
+  return int(365.2425 * (år - 2000)) # ändrad uträkning
+```
+
+___
 
 # Hjälp på traven
 [^1]: `return dag` istället för `return 0`
