@@ -26,6 +26,7 @@ def dagnummer(år, månad, dag):
 #### Skriv testfunktioner här under
 def testa():
   print("Vi testar")
+  print("Slut på tester")
   
 ### Skriv kod som pratar med användaren här under
 def fråga_datum(rubrik):
@@ -79,8 +80,9 @@ Vi vill att funktionen `dagnummer` ska ge oss antalet dagar från den 1 januari 
 #### Skriv testkod här under
 def testa():
   print("Vi testar")
-  d = dagnummer(2000, 1, 1)
-  if d != 1: print(f"Dagnumret blev fel: {d}")
+  d = dagnummer(2000, 1, 1) #nyrad
+  if d != 1: print(f"Dagnumret blev fel: {d}") #nyrad
+  print("Slut på tester")
 ```
 ✏️ Vad tror du resultatet blir? Kör koden i repl.it. Blev det som du tänkte dig?
 
@@ -91,8 +93,8 @@ def testa():
   print("Vi testar")
   d = dagnummer(2000, 1, 1)
   if d != 1: print(f"Dagnumret blev fel: {d}")
-  d = dagnummer(2000, 1, 31)
-  if d != 31: print(f"Dagnumret blev fel: {d}")
+  d = dagnummer(2000, 1, 31) #nyrad
+  if d != 31: print(f"Dagnumret blev fel: {d}") #nyrad
   print("Slut på tester")
 ```
 
@@ -109,7 +111,7 @@ def testa():
   # ... (som innan)
   d = dagnummer(2000, 1, 31)
   if d != 31: print(f"Dagnumret blev fel: {d}")
-  d = dagnummer(2000, 2, 28)
+  d = dagnummer(2000, 2, 28) #nyrad
   if d != 59: print(f"Dagnumret blev fel: {d}") #nyrad
   print("Slut på tester") #nyrad
 ```
@@ -117,7 +119,7 @@ def testa():
 För att komma vidare behöver vi en funktion som kan räkna ut vilken dag på året det är.
 Här är början till en sådan funktion. 
 
-✏️ Skriv in den högst upp. **Glöm inte att ändra så att funktionen `dagnummer` anropar vår nya funktion.**
+✏️ Skriv in funktionen högst upp. **Glöm inte att ändra så att funktionen `dagnummer` anropar vår nya funktion.**
 
 **main.py**
 ```python
@@ -151,8 +153,8 @@ def testa():
   d = dagnummer(2000, 12, 31) #nyrad
   if d != 365: print(f"Dagnumret blev fel: {d}") #nyrad
   print("Slut på tester")
-  
 ```
+
 ✏️ Vad tror du kommer att hända? Testkör. Blev det som du tänkt?
 
 ✏️ Skriv klart koden för `dagnummer_på_året` genom att lägga till regler för `månad > 4` och så vidare till `månad > 11`. Testkör din kod ofta och lägg till fler testfall i funktionen `testa()`. Testfallen kan vara av typen
@@ -166,6 +168,7 @@ def testa():
 ```
 
 Nu ska funktionen `dagnummer_på_året` fungera. Alla testfallen ska ge rätt svar.
+- Om ett testfall inte ger rätt svar kan testfallet eller koden vara fel, eller i värsta fall båda :)
 
 ## STEG 3. Hantera olika år
 
