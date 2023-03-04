@@ -2,7 +2,7 @@
 
 Har du fyllt 5000 dagar? Vilket datum fyller eller fyllde du 5555 dagar?
 
-**Uppgift:** Gör en app som räknar ut hur många dagar det är mellan två datum. Använd det för att räkna ut hur många **dagar** du fyller idag!
+**Uppgift:** Gör en app som räknar ut hur många dagar det är mellan två datum. Använd den för att räkna ut hur många **dagar** du fyller idag!
 
 **Idé:** vi låter appen räkna ut hur många dagar det har gått sen ett visst startdatum, t.ex. 1 januari 2000. Den dagen kallar vi dag nummer 1.
 Hur kan du använda den informationen för att räkna ut hur många dagar du fyller idag?
