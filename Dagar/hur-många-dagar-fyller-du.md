@@ -11,9 +11,9 @@ Hur kan du använda den informationen för att räkna ut hur många dagar du fyl
 
 ## STEG 1: Prata med användaren
 Vi börjar med hur det ska se ut när vi kör appen.
-- Appen ska fråga efter ett startdatum, alltså år, månad, dag. Det kan t.ex. vara användarens födelsedatum
-- Sen ska det fråga efter ett slutdatum, alltså år, månad, dag. Det kan t.ex. vara dagens datum
-- Appen ska skriva `Det är 5432 dagar mellan datumen` (t.ex.) och sen avsluta
+1. Appen ska fråga efter ett startdatum, alltså år, månad, dag. Det kan t.ex. vara användarens födelsedatum
+1. Sen ska det fråga efter ett slutdatum, alltså år, månad, dag. Det kan t.ex. vara dagens datum
+1. Appen ska skriva `Det är 5432 dagar mellan datumen` (t.ex.) och sen avsluta
 
 ✏️ Mata in den här koden i ett nytt Pythonprojekt i repl.it.
 
