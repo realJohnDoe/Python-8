@@ -130,12 +130,9 @@ Här är början till en sådan funktion.
 # Hur många dagar in på året är vi?
 def dagnummer_på_året(år, månad, dag): # år med fyra siffror, månad 1 till 12, dag 1 till 31
   dagnr = dag
-  if månad > 1: 
-    dagnr += 31 # plussa på antalet dagar i januari 
-  if månad > 2:
-    dagnr += 28 # vi struntar i skottår så länge
-  if månad > 3: 
-    dagnr += 31 # antalet dagar i mars
+  if månad > 1: dagnr += 31 # plussa på antalet dagar i januari 
+  if månad > 2: dagnr += 28 # vi struntar i skottår så länge
+  if månad > 3: dagnr += 31 # antalet dagar i mars
   # ATT FIXA: ta hand om resten av månaderna med "if"
   return dagnr
 
@@ -195,7 +192,7 @@ Det kan vi lösa genom att lägga till de dagarna i `dagnummer`.
 
 Exempel:
 * Om året är 2001, ska vi lägga till 365 dagar
-* Om året är 2002, ska vi lägga till 2 * 365 dagar
+* Om året är 2002, ska vi lägga till 365 * 2 dagar
 
 **main.py**
 ```python
