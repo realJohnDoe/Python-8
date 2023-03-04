@@ -257,80 +257,56 @@ def skottdag(år): # 1 om skottår, annars 0
 ### Räkna rätt på antalet dagar
 
 I slutet av funktionen `dagnummer` har vi en uträkning som alltid räknar med 365 dagar per år: `365 * (år - 2000)`. Det stämmer inte när vi ska räkna skottår.
+Innan vi gör om den uträkningen så flyttar vi den till en egen funktion som vi kallar `dagar_före(år)`.
+
+✏️ Lägg den här funktionen någonstans ovanför funktionen `dagnummer()`.
+
+**main.py**
+```python
+def dagar_före(år): # ny funktion
+  return 365 * (år - 2000)
+```
+
+✏️ Ändra funktionen `dagnummer` så att den använder `dagar_före`.
 
 **main.py**
 ```python
 def dagnummer(år, månad, dag):
-  return dagnummer_på_året(år, månad, dag) + 365 * (år - 2000)
+  return dagnummer_på_året(år, månad, dag) + dagar_före(år)
 ```
 
-Vi gör en ny funktion som heter `dagar_före(år)`. Där ska vi räkna med skottdagarna också.
+Om du testkör ska det fungera likadant som innan. Vi har bara flyttat ut beräkningen.
 
-✏️ 
+## Nästan klara!
+Nu ska vi göra klart `dagar_före` så att skottåren/skottdagarna räknas rätt.
+
+`dagar_före(2000)` ska ge svaret 0
+`dagar_före(2001)` ska ge svaret 366
+`dagar_före(2002)` ska ge svaret 366 + 365 = 731
+
+✏️ Du kan lägga till testfall som beskriver detta om du vill. T.ex. så här:
+
+**main.py**
+
+```python
+def testa():
+  # ... (som innan)
+  d = dagar_före(2001)
+  if d != 366: print(f"Dagar före blev fel: {d}") 
+```
+
+✏️ Ändra `dagar_före` så här:
+
 **main.py**
 ```python
-def dagar_före(år):
-  return dagnummer_på_året(år, månad, dag) + 365 * (år - 2000) #här
-```
-
-
----
-
-### INTE KLART
-
-Provkör din kod
-```python
-# Är det skottår i år?
-print("2023? ja, skottår" if skottdag(2023) == 1 else "2023? nej, inte skottår")
-# Testa din funktion dagnummer_på_året med några exempel du är säker på
-# Glöm inte att klicka på pilen för att uppdatera
-print(dagnummer_på_året(2023, 1, 1)) # bör vara 1
-print(dagnummer_på_året(2023, 2, 1)) # bör vara 32 
-print(dagnummer_på_året(2023, 12, 31)) # bör vara 365
-```
-
-## STEG 2
-Säg att det är den 1 maj 2023 idag.
-För att räkna ut hur många dagar det har gått sen 1 januari 2000 är det praktiskt att ha en funktion som ger oss antalet dagar för åren
-2000, 2001, ... till och med 2022. Vi kallar den funktionen antal_dagar_före.
-
-Sen kan vi använda funktionen dagnummer_på_året för år 2023 för att få fram ett exakt svar.
-
-Testkör först de två rutorna. Gör sen klart funktionen antal_dagar_före. Här är en början:
-
-```python
-def antal_dagar_före(år):
-  # Hur många dagar hade åren från 2000 ända fram till 31 december det givna året?
-  dagar = 365 * (år - 2000)
-  # ATT FIXA: Gör klart så att skottår räknas rätt! Använd funktionen skottdag t.ex. 
+def dagar_före(år): # hur många dagar från 1 januari 2000 till 31 december år - 1
+  dagar = 0
+  for å in range(2000, år):
+    dagar += 365 + skottdag(å)
   return dagar
 ```
 
-### Testa din funktion här! 
-```python
-print(antal_dagar_före(2000))
-print(antal_dagar_före(2001))
-print(antal_dagar_före(2002))
-print(antal_dagar_före(2021))
-```
-
-## STEG 3
-Gör nu färdigt programmet genom att 1) läsa in två olika datum från och till, 2) beräkna skillnaden i dagnummer mellan datumen och 3) skriva ut svaret.
-
-Hur många dagar är du?
-
-```python
-från_år = int(input("Från år: "))
-från_månad = int(input("Från månad, 1 till 12: "))
-från_dag = int(input("Från dag, 1 till 31: "))
-
-# ATT FIXA: Gör klart enligt tipsen för steg 3 och skriv ut antalet dagar mellan de två datumen
-```
-
-## STEG 4
-Kan du göra så att koden klarar datum på 1900-talet också? Idag klarar den inte ens generationen av millennials :)
-
-Ändra koden i rutorna ovanför och glöm inte att klicka på pilen till vänster för att köra när du ändrat.
+✏️ Hur många dagar fyller du idag, räknat med skottår?
 
 
 # Hjälp på traven
