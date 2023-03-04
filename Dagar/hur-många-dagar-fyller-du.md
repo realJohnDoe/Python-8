@@ -63,7 +63,7 @@ Det finns flera sätt att göra det på. Vi gör det i små steg genom att testa
 
 När man skriver en app kan man testa den på olika sätt. 
 - Ett sätt är att mata in olika värden i terminalfönstret varje gång och kolla att det blir rätt.
-- Ibland är det lättare och snabbare att skriva testkod. Det ska vi göra nu. Testkoden talar om för oss och för andra vad vi förväntar oss ska hända.
+- Ibland är det lättare och snabbare att skriva testkod. Det ska vi göra nu. Testkoden är vårt eget facit, vad vi förväntar oss ska hända. Det är också ett bra sätt att redovisa för andra hur vi tänkte.
 
 ✏️ Ändra appen så att det längst ner blir så här. Du kan stänga av frågorna till användaren och istället anropa funktionen `testa`. Då slipper du mata in olika datum hela tiden när du testar.
 
