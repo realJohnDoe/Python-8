@@ -1,3 +1,12 @@
+[Första koden](#första-koden) &bull;
+[Funktionen update()](#funktionen-update) &bull;
+[Lägga till en ädelsten](#lägga-till-en-ädelsten) &bull;
+[Kollision och random()](#kollision-och-random) &bull;
+[Räkna poäng](#räkna-poäng) &bull;
+[Mus och händelser](#mus-och-händelser) &bull;
+[Game Over](#game-over) &bull;
+[Utmaningar](#utmaningar)
+
 # Första koden
 
 Öppna startprojektet här i repl.it: XXXLÄNK
@@ -240,6 +249,11 @@ def draw():
 pgzrun.go() # Must be last line
 ```
 
+# Kollision och random()
+# Räkna poäng
+# Mus och händelser
+# Game Over
+# Utmaningar
 ___
 
 # Källor/Sources
