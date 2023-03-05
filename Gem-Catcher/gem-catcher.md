@@ -21,8 +21,8 @@ HEIGHT = 600
 pgzrun.go() # Must be last line
 ```
 
-The first line, import pgzrun, loads the Pygame Zero module, and the last line, pgzrun.go(), is a function that starts Pygame Zero. 
-In the middle we have WIDTH = 800 and HEIGHT = 600 which sets the width and height of the game window.
+The first line, `import pgzrun`, loads the Pygame Zero module, and the last line, `pgzrun.go()`, is a function that starts Pygame Zero. 
+In the middle we have `WIDTH = 800` and `HEIGHT = 600` which sets the width and height of the game window.
 
 # Skådespelaren
 Now that wasn't very interesting, so let us add in a spaceship. 
