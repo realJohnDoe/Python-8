@@ -249,6 +249,82 @@ pgzrun.go() # Must be last line
 ```
 
 # Kollision och random()
+
+## Känna av en kollision
+
+We also want the gem to go back to the top if it touches the spaceship. 
+If you had done Scratch before, you might remember the if touching sprite command. 
+In Pygame Zero, we'll use `if gem.colliderect(ship):` or `if ship.colliderect(gem):` &ndash; both works the same.
+
+```python
+if gem.colliderect(ship):
+    gem.y = 0
+```
+eller
+
+```python
+if ship.colliderect(gem):
+    gem.y = 0
+```
+**Testa det i din kod!**
+
+## Slumptal med `random()`
+It's not vey interesting to have the gem fall from the same spot everytime. 
+In Introduction to Python, you learned to use the random module.
+We'll use it here to randomize the x position of the gem.
+
+Before we can use the random module, we'll need to import it.
+
+```python
+import random
+```
+
+To assign a random x position, we use
+
+```python
+gem.x = random.randint(20, WIDTH - 20)
+```
+The `random.randint(20, WIDTH - 20)` function will provide a random number between 20 to WIDTH - 20. This should be added whenever we return the gem to the top of the screen.
+
+Your program should look like this now.
+
+
+```python
+import pgzrun
+
+WIDTH = 800
+HEIGHT = 600
+
+ship = Actor('playership1_blue')
+ship.x = WIDTH / 2 - 30
+ship.y = HEIGHT - 50
+
+gem = Actor('gemgreen')
+gem.x = WIDTH / 2 - 50
+gem.y = 0
+
+def update():
+    if keyboard.left:
+        ship.x -= 5
+    if keyboard.right:
+        ship.x += 5
+
+    gem.y += 4
+    if gem.y > HEIGHT:
+        gem.y = 0
+    if gem.colliderect(ship):
+        gem.x = random.randint(20, WIDTH - 20)
+        gem.y = 0
+
+def draw():
+    screen.fill((80, 0, 70))
+    gem.draw()
+    ship.draw()
+
+pgzrun.go() # Must be last line
+```
+
+
 # Räkna poäng
 # Mus och händelser
 # Game Over
