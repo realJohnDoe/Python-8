@@ -324,8 +324,121 @@ def draw():
 pgzrun.go() # Must be last line
 ```
 
-
 # Räkna poäng
+
+## En variabel som räknar poäng
+
+We can track the score easily using a variable. '
+Let's add a variable named score and give it the value of 0 at the start of the program.
+
+```python
+score = 0
+```
+Now everytime the spaceship catches the gem, we'll increase score by 1.
+
+```python
+if gem.colliderect(ship):
+    gem.x = random.randint(20, WIDTH - 20)
+    gem.y = 0
+    score += 1
+```
+
+If you try out this program, you'll get an error:
+
+```python
+UnboundLocalError: local variable 'score' referenced before assignment
+```
+
+That's because the score variable is declared outside of the update() function, but we are trying to write it from inside the update() function.
+
+In Python, we can read variables that are outside a function (these are called global variables),
+but cannot write to them unless we declare them as global inside the function.
+
+```python
+global score
+```
+
+After this change, your `update()` function should now look like this:
+```python
+def update():
+    global score
+    
+    if keyboard.left:
+        ship.x -= 5
+    if keyboard.right:
+        ship.x += 5
+
+    gem.y += 4
+    if gem.y > HEIGHT:
+        gem.y = 0
+    if gem.colliderect(ship):
+        gem.x = random.randint(20, WIDTH - 20)
+        gem.y = 0
+        score += 1
+```
+
+## Visa poäng
+
+To display the score, we will use the `screen.draw.text()` function.
+
+```python
+screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
+```
+The parameters are:
+
+`f"Score: {score}"` : This is the string that we want to draw.
+
+`(15, 10)` : This is the position to draw; x=15 and y=10.
+
+`color=(255, 255, 255)` : This is the color of the text, in this case, it is white
+
+`fontsize=30` : The size of the font.
+
+Like all the other drawing functions, we'll need to put this inside the `draw()` function. After this is done, your program should look like this:
+
+```python
+import pgzrun
+
+WIDTH = 800
+HEIGHT = 600
+
+ship = Actor('playership1_blue')
+ship.x = WIDTH / 2 - 30
+ship.y = HEIGHT - 50
+
+gem = Actor('gemgreen')
+gem.x = WIDTH / 2 - 50
+gem.y = 0
+
+def update():
+    global score
+    
+    if keyboard.left:
+        ship.x -= 5
+    if keyboard.right:
+        ship.x += 5
+
+    gem.y += 4
+    if gem.y > HEIGHT:
+        gem.y = 0
+    if gem.colliderect(ship):
+        gem.x = random.randint(20, WIDTH - 20)
+        gem.y = 0
+        score += 1
+
+def draw():
+    screen.fill((80, 0, 70))
+    gem.draw()
+    ship.draw()
+    screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
+
+pgzrun.go() # Must be last line
+```
+
+
+
+
+
 # Mus och händelser
 # Game Over
 # Utmaningar
