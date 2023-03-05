@@ -435,11 +435,10 @@ def draw():
 pgzrun.go() # Must be last line
 ```
 
-
-
-
-
 # Mus och händelser
+
+XXX: Fortsätt från https://aposteriori.trinket.io/game-development-with-pygame-zero#/gem-catcher/mouse-and-events
+
 # Game Over
 # Utmaningar
 ___
