@@ -409,6 +409,7 @@ ship.y = HEIGHT - 50
 gem = Actor('gemgreen')
 gem.x = WIDTH / 2 - 50
 gem.y = 0
+score = 0
 
 def update():
     global score
@@ -437,11 +438,200 @@ pgzrun.go() # Must be last line
 
 # Mus och händelser
 
-FIXA:Fortsätt från https://aposteriori.trinket.io/game-development-with-pygame-zero#/gem-catcher/mouse-and-events
+## Mouse Controls
+We can also modify our game to make it work with the mouse. 
+Like Scratch, Pygame Zero is events based. 
+This means that when certain events occurs (eg. a mouse button is pressed), Pygame Zero will run the corresponding function (eg. `on_mouse_down`).
+
+To detect mouse movement, we can use the `on_mouse_move(pos, rel, buttons)` function. Try adding this to your game:
+
+```
+def on_mouse_move(pos, rel, buttons):
+    ship.x = pos[0]
+```
+
+The purpose of the three parameters are:
+
+`pos` : This provides the position of the mouse. You can get the x position using pos[0] and the y position using pos[1].
+
+`rel` : This provides the change in position since the last mouse move. rel[0] is the change in x position and rel[1] the change in y position.
+
+`buttons` : This provides a list of mouse buttons that are pressed. For example, if you want to check if the left button is pressed:
+
+```python
+def on_mouse_move(pos, rel, buttons):
+    if mouse.LEFT in buttons:
+        print('left click')
+```
+**This is just an example. Don't add it to your game**
+
+## Other Events
+Besides mouse move, there are also other functions that will be run by Pygame Zero when their corresponding events occurs. They are...
+
+`on_mouse_down(pos, buttons)` : Run when a mouse button is pressed.
+
+`on_mouse_up(pos, buttons)` : Run when a mouse button is released.
+
+Parameters:
+- `pos` : This provides the position of the mouse. You can get the x position using pos[0] and the y position using pos[1].
+- `buttons` : This provides a list of mouse buttons that are pressed.
+
+`on_key_down(key, mod, unicode)` : Run when a keyboard key is pressed.
+
+`on_key_up(key, mod)` : Run when a keyboard key is release.
+
+Parameters:
+- key : An integer indicating the key that was pressed. See the Pygame Zero website for a full list of keys.
+- mod : A bitmask of modifier keys that were depressed. You can check them as follows:
+
+```python
+def on_key_down(key, mod, unicode):
+    if mod & keymods.LSHIFT:
+        print('Left shift button pressed')
+```
+
+`unicode` : Where relevant, the character that was typed. You can check it like this:
+```python
+def on_key_down(key, mod, unicode):
+    if unicode == 'e':
+        print('e button pressed')
+```
+
 
 # Game Over
+## Gör spelet svårare
+Right now the game is too easy.
+Not to brag, but I can score over 300 without breaking a sweat.
+Let's make it harder by making the gem fall faster the higher your score is.
+
+Look for this line:
+
+```python
+gem.y += 4
+```
+and change it to this:
+```python
+gem.y += 4 + score / 5
+```
+This will increase the falling speed as your score goes up. When your score is zero, the gem will fall at speed 4. When your score is 10, the gem will fall at speed 6 (4 + 10 / 5).
+
+
+## Game Over
+It's not much fun to play a game that you cannot lose. 
+So let's add in a game over condition. 
+If the gem touches the bottom of the screen, we'll end the game.
+
+First, add in a new variable called `game_over` and set it to `False`.
+
+```python
+game_over = False
+```
+Inside the `update()` function, look for these lines:
+```python
+if gem.y > HEIGHT:
+    gem.x = random.randint(20, WIDTH - 20)
+    gem.y = 0
+```
+and change them to these:
+```python
+if gem.y > HEIGHT:
+    game_over = True
+```
+This will set the `game_over` variable to `True` if the gem touches the bottom of the screen.
+
+You will also need to add global `game_over` to the top of the `update()` function.
+Do you remember why? If you can't, refer back to the keeping score page.
+
+Inside the `draw()` function, change these lines:
+```python
+screen.fill((80, 0, 70))
+gem.draw()
+ship.draw()
+screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
+```
+into these
+```python
+screen.fill((80, 0, 70))
+if game_over:
+    screen.draw.text("Game Over", (360, 300), color=(255, 255, 255), fontsize=60)
+    screen.draw.text(f"Final Score: {score}", (360, 350), color=(255, 255, 255), fontsize=60)
+else:
+    gem.draw()
+    ship.draw()
+    screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
+```
+This will make it draw the game over text when the game_over variable is True, otherwise it will draw the gem and the ship as before.
+
+Your final program should look like this:
+```python
+import pgzrun
+
+WIDTH = 800
+HEIGHT = 600
+
+ship = Actor('playership1_blue')
+ship.x = WIDTH / 2 - 30
+ship.y = HEIGHT - 50
+
+gem = Actor('gemgreen')
+gem.x = WIDTH / 2 - 50
+gem.y = 0
+
+score = 0
+game_over = False
+
+def on_mouse_move(pos, rel, buttons):
+    ship.x = pos[0]
+    
+def update():
+    global score, game_over
+    
+    if keyboard.left:
+        ship.x -= 5
+    if keyboard.right:
+        ship.x += 5
+
+    gem.y += 4
+    if gem.y > HEIGHT:
+        gem.y = 0
+    if gem.colliderect(ship):
+        gem.x = random.randint(20, WIDTH - 20)
+        gem.y = 0
+        score += 1
+
+def draw():
+    screen.fill((80, 0, 70))
+    gem.draw()
+    ship.draw()
+    if game_over:
+        screen.draw.text("Game Over", (360, 300), color=(255, 255, 255), fontsize=60)
+        screen.draw.text(f"Final Score: {score}", (360, 350), color=(255, 255, 255), fontsize=60)
+    else:
+        gem.draw()
+        ship.draw()
+        screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
+
+pgzrun.go() # Must be last line
+```
+
 # Utmaningar
-___
+
+Here are some challenges that you can try to make the game better.
+
+## Challenge 1. Three Lives
+Modify the game so that you have 3 lives. The game should only end when all 3 lives are used up.
+
+## Challenge 2. Different Gems
+The media pack comes with a few different color gems. Make the gem color change randomly each time it falls from the top.
+
+## Challenge 3. Ship Selection
+The media pack comes with a few different types of spaceships. Use input to ask the user which spaceship they want, and let them play the game using the ship they chose.
+
+## Challenge 4. Multiple Gems
+Right now, we only have one gem falling at a time. Modify the game to allow multiple gems to fall simultaneously.
+
+## Challenge 5. Multi-Player
+Add in a second player and compete to see who can get the higher score!
 
 # Källor/Sources
 
