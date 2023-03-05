@@ -11,18 +11,18 @@
 
 Öppna startprojektet här i repl.it: FIXA:LÄNK
 
-This is the structure of a Pygame Zero program ...
+Skelettet för ett Pygame Zero-program ser ut så här:
 ```python
 import pgzrun
 
 WIDTH = 800
 HEIGHT = 600
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
-The first line, `import pgzrun`, loads the Pygame Zero module, and the last line, `pgzrun.go()`, is a function that starts Pygame Zero. 
-In the middle we have `WIDTH = 800` and `HEIGHT = 600` which sets the width and height of the game window.
+Den första raden, `import pgzrun`, hämtar Pygame Zero-modulen och den sista raden, `pgzrun.go()`, är funktionen som startar Pygame Zero. 
+I mitten har vi `WIDTH = 800` och `HEIGHT = 600` som sätter spelfönstrets bredd och höjd.
 
 # Skådespelaren
 Now that wasn't very interesting, so let us add in a spaceship. 
@@ -53,7 +53,7 @@ ship.y = HEIGHT - 50
 def draw():
     ship.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 This is what each line does:
@@ -95,7 +95,7 @@ def update():
 def draw():
     ship.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 This is what we added ...
@@ -148,7 +148,7 @@ def draw():
     screen.fill((80, 0, 70))
     ship.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 # Lägga till en ädelsten
@@ -197,7 +197,7 @@ def draw():
     gem.draw()
     ship.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 ## Flytta ädelstenen
@@ -245,7 +245,7 @@ def draw():
     gem.draw()
     ship.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 # Kollision och random()
@@ -321,7 +321,7 @@ def draw():
     gem.draw()
     ship.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 # Räkna poäng
@@ -433,7 +433,7 @@ def draw():
     ship.draw()
     screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 # Mus och händelser
@@ -611,7 +611,7 @@ def draw():
         ship.draw()
         screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 # Utmaningar
