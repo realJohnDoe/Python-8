@@ -9,7 +9,7 @@
 
 # Första koden
 
-Öppna startprojektet här i repl.it: XXXLÄNK
+Öppna startprojektet här i repl.it: FIXA:LÄNK
 
 This is the structure of a Pygame Zero program ...
 ```python
@@ -437,7 +437,7 @@ pgzrun.go() # Must be last line
 
 # Mus och händelser
 
-XXX: Fortsätt från https://aposteriori.trinket.io/game-development-with-pygame-zero#/gem-catcher/mouse-and-events
+FIXA:Fortsätt från https://aposteriori.trinket.io/game-development-with-pygame-zero#/gem-catcher/mouse-and-events
 
 # Game Over
 # Utmaningar
