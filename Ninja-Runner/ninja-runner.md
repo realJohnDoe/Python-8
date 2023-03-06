@@ -59,7 +59,7 @@ WIDTH=800
 HEIGHT=600
 
 def draw():
-  screen.draw.filled_rect(Rect(0,0,800,400), (163, 232, 254))
+  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
 
 pgzrun.go() # Must be last line
 ```
@@ -68,7 +68,7 @@ This is what the new lines do...
 
 `def draw():` : This is the draw function that Pygame Zero will run regularly. Anything that draws to the screen should be inside this function.
 
-`screen.draw.filled_rect(Rect(0,0,800,400), (163, 232, 254)` : This draws a rectangle on the screen, starting from 0,0 (top left corner) and with a width of 800 and a height of 400. The color consists of 163 red, 232 green, and 254 blue.
+`screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254)` : This draws a rectangle on the screen, starting from 0,0 (top left corner) and with a width of 800 and a height of 400. The color consists of 163 red, 232 green, and 254 blue.
 
 **Try: Experiment with different colors and see what you get. Remember that each component of the color must be in the range from 0 to 255.**
 
@@ -82,14 +82,14 @@ WIDTH=800
 HEIGHT=600
 
 def draw():
-  screen.draw.filled_rect(Rect(0,0,800,400), (163, 232, 254))
-  screen.draw.filled_rect(Rect(0,400,800,200), (88, 242, 152))
+  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
+  screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
 
 pgzrun.go() # Must be last line
 ```
 Here's what the new line does...
 
-`screen.draw.filled_rect(Rect(0,400,800,200), (88, 242, 152))` : This time, we'll start the rectangle at 0,400. This means x=0 and y=400. The screen is 600 pixels tall, and the previous rectangle was 400 pixels tall, so we only need this rectangle to be 200 pixels tall.
+`screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))` : This time, we'll start the rectangle at 0,400. This means x=0 and y=400. The screen is 600 pixels tall, and the previous rectangle was 400 pixels tall, so we only need this rectangle to be 200 pixels tall.
 
 Once completed, run your program. Your screen should look like this...
 
@@ -128,8 +128,8 @@ WIDTH=800
 HEIGHT=600
 
 def draw():
-  screen.draw.filled_rect(Rect(0,0,800,400), (163, 232, 254))
-  screen.draw.filled_rect(Rect(0,400,800,200), (88, 242, 152))
+  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
+  screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
 
 pgzrun.go() # Must be last line
 ```
@@ -177,8 +177,8 @@ run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__
 runner.images = run_images
 
 def draw():
-  screen.draw.filled_rect(Rect(0,0,800,400), (163, 232, 254))
-  screen.draw.filled_rect(Rect(0,400,800,200), (88, 242, 152))
+  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
+  screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
   runner.draw()
 
 pgzrun.go() # Must be last line
@@ -198,7 +198,7 @@ You can adjust the position of the ninja using runner.x and runner.y. Try the fo
 
 ```python
 runner.x = 100
-runner.y = 400
+runner.y = HEIGHT - 200
 ```
 Try: Adjust the position of the ninja by changing runner.x and runner.y until you have her at the position you want.
 
@@ -262,9 +262,9 @@ Gravity will change our velocity. Under the runner.y += velocity_y line, let's a
 Now our ninja falls straight down! We haven't tell our ninja when to stop falling yet! Let's add that in next...
 
 ```python
-if runner.y > 400:
+if runner.y > HEIGHT - 200:
   velocity_y = 0
-  runner.y = 400
+  runner.y = HEIGHT - 200
 ```
 Here we are treating `y = 400` as the "ground", and if the ninja is at a y position that's greater than 400, we will set her velocity_y to 0 and her y position to 400. This will prevent her from falling through the ground.
 
@@ -295,13 +295,13 @@ def update():
 
   runner.y += velocity_y
   velocity_y += gravity
-  if runner.y > 400:
+  if runner.y > HEIGHT - 200:
     velocity_y = 0
-    runner.y = 400
+    runner.y = HEIGHT - 200
 
 def draw():
-  screen.draw.filled_rect(Rect(0,0,800,400), (163, 232, 254))
-  screen.draw.filled_rect(Rect(0,400,800,200), (88, 242, 152))
+  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
+  screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
   runner.draw()
 
 pgzrun.go() # Must be last line
