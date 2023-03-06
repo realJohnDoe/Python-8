@@ -118,11 +118,9 @@ Om du testade programmet så här långt, fick du något knasigt i den här stil
 Det är för att koden talar om för Pygame Zero att uppdatera skeppets position och rita det på skärmen, men vi bad aldrig om att sudda ut det som redan var ritat på skärmen.
 
 För att sudda skärmen, fyller vi hela skärmen med en färg. Det gör vi i `draw()`-funktionen så här:
-
 ```python
 screen.fill((80, 0, 70))
 ```
-
 Det som står inom parenteser, `(80, 0, 70)`, kallas i Python för *tuple*; det fungerar som en lista med värden som inte går att ändra och talar om vilken färgblandning vi vill ha. Det första talet (80) är för färgen rött, det andra (0) för grönt och det tredje (70) är för blått. Det största värdet man kan ha för någon färgkomponent är 255 och det minsta värdet är 0. **Testa olika värden och se vad du får!**
 
 I Chrome kan du öppna en färgväljare genom att trycka tangentkombinationen ctrl+shift+I och sedan klicka på en av de små kvadratikonerna som du kan se i fliken Styles. Se bilden!
@@ -255,9 +253,9 @@ pgzrun.go() # Måste vara sista raden
 
 ## Känna av en kollision
 
-We also want the gem to go back to the top if it touches the spaceship. 
-If you had done Scratch before, you might remember the if touching sprite command. 
-In Pygame Zero, we'll use `if gem.colliderect(ship):` or `if ship.colliderect(gem):` &ndash; both works the same.
+Vi vill också att ädelstenen ska flytta högst upp om den rör rymdskeppet. Om du har använt Scratch tidigare, kanske du har använt blocket "rör vid sprajt".
+
+I PygameZero använder vi antingen `if gem.colliderect(ship):` eller `if ship.colliderect(gem):` &ndash; båda fungerar likadant.
 
 ```python
 if gem.colliderect(ship):
@@ -272,26 +270,22 @@ if ship.colliderect(gem):
 **Testa det i din kod!**
 
 ## Slumptal med `random()`
-It's not vey interesting to have the gem fall from the same spot everytime. 
-In Introduction to Python, you learned to use the random module.
-We'll use it here to randomize the x position of the gem.
+Det är inte så spännande av låta ädelstenen falla från samma ställe varje gång.
+I tidigare Python-projekt har du förmodligen redan använt modulen `random` för slumptal.
+Här ska vi använda den för att slumpa fram ädelstenens x-position.
 
-Before we can use the random module, we'll need to import it.
-
+Innan vi kan använda modulen, behöver vi importera den.
 ```python
 import random
 ```
 
-To assign a random x position, we use
-
+För att ge ädelstenen en slumpmässig x-position använder vi
 ```python
 gem.x = random.randint(20, WIDTH - 20)
 ```
-The `random.randint(20, WIDTH - 20)` function will provide a random number between 20 to WIDTH - 20. This should be added whenever we return the gem to the top of the screen.
+Anropet `random.randint(20, WIDTH - 20)` ger ett slumptal mellan 20 och WIDTH - 20. Det här behövs varje gång ädelstenen ska börja om högst upp på skärmen.
 
-Your program should look like this now.
-
-
+Nu bör din kod se ut så här:
 ```python
 import pgzrun
 
@@ -331,13 +325,13 @@ pgzrun.go() # Måste vara sista raden
 
 ## En variabel som räknar poäng
 
-We can track the score easily using a variable. '
-Let's add a variable named score and give it the value of 0 at the start of the program.
+Vi kan lätt hålla reda på poängen med en variabel.
+Lägg till en variabel som heter `score` (poäng går också bra) och sätt den till 0 i början av programmet.
 
 ```python
 score = 0
 ```
-Now everytime the spaceship catches the gem, we'll increase score by 1.
+Nu ökar vi `score` med 1 varje gång rymdskeppet fångar ädelstenen.
 
 ```python
 if gem.colliderect(ship):
@@ -346,22 +340,21 @@ if gem.colliderect(ship):
     score += 1
 ```
 
-If you try out this program, you'll get an error:
+Om du testkör programmet nu, får du ett fel:
 
 ```python
 UnboundLocalError: local variable 'score' referenced before assignment
 ```
 
-That's because the score variable is declared outside of the update() function, but we are trying to write it from inside the update() function.
+Det är för att variabeln `score` är deklarerad utanför funktionen `update()`, men vi försöker ändra värdet inne i funktionen `update()`.
 
-In Python, we can read variables that are outside a function (these are called global variables),
-but cannot write to them unless we declare them as global inside the function.
+I Python kan vi *läsa* variabler som finns utanför funktionen &ndash; de kallas globala variabler. Men vi kan inte skriva (ändra) dem om vi inte har deklarerat dem som `global` inuti funktionen.
 
 ```python
 global score
 ```
 
-After this change, your `update()` function should now look like this:
+Efter den ändringen, bör din `update()`-funktion se ut så här:
 ```python
 def update():
     global score
@@ -382,23 +375,22 @@ def update():
 
 ## Visa poäng
 
-To display the score, we will use the `screen.draw.text()` function.
+För att visa poängen använder vi funktionen `screen.draw.text()`.
 
 ```python
 screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
 ```
-The parameters are:
+Parametrarna är så här:
 
-`f"Score: {score}"` : This is the string that we want to draw.
+`f"Score: {score}"` : Detta är texten (strängen) vi vill skriva.
 
-`(15, 10)` : This is the position to draw; x=15 and y=10.
+`(15, 10)` : Detta är koordinaterna där vi vill skriva: x=15 och y=10.
 
-`color=(255, 255, 255)` : This is the color of the text, in this case, it is white
+`color=(255, 255, 255)` : Detta är textens färg, vitt i det här fallet.
 
-`fontsize=30` : The size of the font.
+`fontsize=30` : Textens storlek.
 
-Like all the other drawing functions, we'll need to put this inside the `draw()` function. After this is done, your program should look like this:
-
+Som med de andra ritfunktionerna, behöver vi lägga detta inuti funktionen `draw()`. När du har gjort det, bör din kod se ut så här:
 ```python
 import pgzrun
 
@@ -441,51 +433,52 @@ pgzrun.go() # Måste vara sista raden
 
 # Mus och händelser
 
-## Mouse Controls
-We can also modify our game to make it work with the mouse. 
-Like Scratch, Pygame Zero is events based. 
-This means that when certain events occurs (eg. a mouse button is pressed), Pygame Zero will run the corresponding function (eg. `on_mouse_down`).
+## Musstyrning
+Vi kan också ändra vårt spel så att det fungerar med mus.
+Precis som Scratch så är Pygame Zero händelsebaserat.
+Det betyder att när en viss händelse inträffar, t.ex. att en musknapp trycks ner, så anropar Pygame Zero motsvarande funktion, t.ex. `on_mouse_down`.
 
-To detect mouse movement, we can use the `on_mouse_move(pos, rel, buttons)` function. Try adding this to your game:
+För att känna av när musen rör sig, kan vi använda funktionen `on_mouse_move(pos, rel, buttons)` function. Pröva att lägga till det här i ditt spel:
 
 ```
 def on_mouse_move(pos, rel, buttons):
     ship.x = pos[0]
 ```
 
-The purpose of the three parameters are:
+Syftet med tre parametrarna är:
 
-`pos` : This provides the position of the mouse. You can get the x position using pos[0] and the y position using pos[1].
+`pos` : Ger muspositionen. Du kan få fram x-koordinaten med `pos[0]` och y-koordinaten med `pos[1]`.
 
-`rel` : This provides the change in position since the last mouse move. rel[0] is the change in x position and rel[1] the change in y position.
+`rel` : Ger förändringen i position sedan senaste gången musen förflyttades. `rel[0]` är ändringen i x-led och `rel[1]` förändringen i y-led.
 
-`buttons` : This provides a list of mouse buttons that are pressed. For example, if you want to check if the left button is pressed:
+`buttons` : Ger en lista med vilka musknappar som är nertryckta. Om du till exempel vill kolla om vänster musknapp är nertryckt:
 
 ```python
 def on_mouse_move(pos, rel, buttons):
     if mouse.LEFT in buttons:
         print('left click')
 ```
-**This is just an example. Don't add it to your game**
+**Detta är bara ett exempel. Lägg inte till det i ditt spel just nu**
 
-## Other Events
-Besides mouse move, there are also other functions that will be run by Pygame Zero when their corresponding events occurs. They are...
+## Andra händelser
 
-`on_mouse_down(pos, buttons)` : Run when a mouse button is pressed.
+Förutom musrörelser, finns det också andra funktioner som PygameZero kör när motsvarande händelse inträffar. De här händelserna finns:
 
-`on_mouse_up(pos, buttons)` : Run when a mouse button is released.
+`on_mouse_down(pos, buttons)` : Körs när en musknapp klickas på.
 
-Parameters:
-- `pos` : This provides the position of the mouse. You can get the x position using pos[0] and the y position using pos[1].
-- `buttons` : This provides a list of mouse buttons that are pressed.
+`on_mouse_up(pos, buttons)` : Körs när man släpper en musknapp.
 
-`on_key_down(key, mod, unicode)` : Run when a keyboard key is pressed.
+Parametrar:
+- `pos` : Ger musens position. x-koordinaten ges av `pos[0]` och y-koordinaten av `pos[1]`.
+- `buttons` : Ger en lista med de musknapper som är nertryckta.
 
-`on_key_up(key, mod)` : Run when a keyboard key is release.
+`on_key_down(key, mod, unicode)` : Körs när en tangent trycks ner på tangentbordet.
 
-Parameters:
-- key : An integer indicating the key that was pressed. See the Pygame Zero website for a full list of keys.
-- mod : A bitmask of modifier keys that were depressed. You can check them as follows:
+`on_key_up(key, mod)` : Körs när man släpper en tangent.
+
+Parametrar:
+- key : Ett heltal som talar om vilken tangent som trycktes ner. Se Pygame Zeros hemsida för en fullständig lista över tangenter.
+- mod : En lista (bitmask) med vilka specialtangenter som trycktes ner. Du kan läsa av dem så här:
 
 ```python
 def on_key_down(key, mod, unicode):
@@ -493,7 +486,7 @@ def on_key_down(key, mod, unicode):
         print('Left shift button pressed')
 ```
 
-`unicode` : Where relevant, the character that was typed. You can check it like this:
+`unicode` : Vilket tecken som skrevs, om något. Du kan läsa av det så här:
 ```python
 def on_key_down(key, mod, unicode):
     if unicode == 'e':
@@ -503,56 +496,55 @@ def on_key_down(key, mod, unicode):
 
 # Game Over
 ## Gör spelet svårare
-Right now the game is too easy.
-Not to brag, but I can score over 300 without breaking a sweat.
-Let's make it harder by making the gem fall faster the higher your score is.
+Just nu är spelet för lätt.
+Utan att skryta kan jag lätt få över 300 poäng utan ansträngning.
+Vi gör det svårare genom att låta ädelstenen falla fortare ju högre poängen är.
 
-Look for this line:
-
+Let upp den här raden:
 ```python
 gem.y += 4
 ```
-and change it to this:
+och ändra den till
 ```python
 gem.y += 4 + score / 5
 ```
-This will increase the falling speed as your score goes up. When your score is zero, the gem will fall at speed 4. When your score is 10, the gem will fall at speed 6 (4 + 10 / 5).
+Detta kommer att öka fallhastigheten när poängen går upp. När du har noll poäng, faller ädelstenen med hastighet 4. När din poäng är 10, kommer ädelstenen att falla med hastigheten 6 (4 + 10 / 5).
 
 
 ## Game Over
-It's not much fun to play a game that you cannot lose. 
-So let's add in a game over condition. 
-If the gem touches the bottom of the screen, we'll end the game.
+Det är inte så värst kul att spela ett spel som man inte kan förlora.
+Vi lägger till ett Game Over-läge.
+Om ädelstenen rör vi skärmens underkant, avslutas spelet.
 
-First, add in a new variable called `game_over` and set it to `False`.
+Lägg först till en ny variabel som heter `game_over` och sätt den till `False`.
 
 ```python
 game_over = False
 ```
-Inside the `update()` function, look for these lines:
+Leta upp de här raderna i funktionen `update()`:
 ```python
 if gem.y > HEIGHT:
     gem.x = random.randint(20, WIDTH - 20)
     gem.y = 0
 ```
-and change them to these:
+och ändra dem till det här:
 ```python
 if gem.y > HEIGHT:
     game_over = True
 ```
-This will set the `game_over` variable to `True` if the gem touches the bottom of the screen.
+Detta sätter variabeln `game_over` till `True` om ädelstenen rör skärmens underkant.
 
-You will also need to add global `game_over` to the top of the `update()` function.
-Do you remember why? If you can't, refer back to the keeping score page.
+Du behöver också lägga till `global game_over` högst upp i funktionen `update()`.
+Minns du varför? Om inte, läs på under avsnittet [Räkna poäng](#räkna-poäng).
 
-Inside the `draw()` function, change these lines:
+Inuti funktionen `draw()` ändrar du de här raderna:
 ```python
 screen.fill((80, 0, 70))
 gem.draw()
 ship.draw()
 screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
 ```
-into these
+Ändra dem till
 ```python
 screen.fill((80, 0, 70))
 if game_over:
@@ -563,9 +555,9 @@ else:
     ship.draw()
     screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
 ```
-This will make it draw the game over text when the game_over variable is True, otherwise it will draw the gem and the ship as before.
+Det gör att Game Over-texten visas när variabeln `game_over` är satt till True; annars kommer ädelstenen och skeppet att ritas som innan.
 
-Your final program should look like this:
+Till slut bör din kod se ut så här:
 ```python
 import pgzrun
 
@@ -619,22 +611,23 @@ pgzrun.go() # Måste vara sista raden
 
 # Utmaningar
 
-Here are some challenges that you can try to make the game better.
+Här är några utmaningar du kan pröva för att göra spelet ännu bättre.
 
-## Challenge 1. Three Lives
-Modify the game so that you have 3 lives. The game should only end when all 3 lives are used up.
+## Utmaning 1. Tre liv
+Ändra spelet så att du har tre liv. Spelet ska sluta när spelaren använt alla tre liven.
 
-## Challenge 2. Different Gems
-The media pack comes with a few different color gems. Make the gem color change randomly each time it falls from the top.
+## Utmaning 2. Olika ädelstenar
+Det finns ädelstenar med flera olika färger i mediefilen (ZIP). Gör så att ädelstenar av olika färg kan dyka upp när den ska börja falla uppifrån
 
-## Challenge 3. Ship Selection
-The media pack comes with a few different types of spaceships. Use input to ask the user which spaceship they want, and let them play the game using the ship they chose.
+## Utmaning 3. Välja skepp
 
-## Challenge 4. Multiple Gems
-Right now, we only have one gem falling at a time. Modify the game to allow multiple gems to fall simultaneously.
+Mediefilen (ZIP) har flera olika slags rymdskepp. Fråga användaren vilket rymdskepp den vill ha när den ska spela.
 
-## Challenge 5. Multi-Player
-Add in a second player and compete to see who can get the higher score!
+## Utmaning 4. Flera ädelstenar
+Just nu är det bara en fallande ädelsten åt gången. Ändra spelet så att flera kan falla samtidigt.
+
+## Utmanming 5. Multi-player
+Lägg till en andra spelare och tävla om vem som får högst poäng!
 
 # Källor/Sources
 
