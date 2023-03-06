@@ -3,7 +3,7 @@
 
 # Infinite Runner
 
-![image](https://user-images.githubusercontent.com/4598641/223217146-4c427d9c-e9bd-4838-9c30-d94ccd2c7806.png)
+![image](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/google-runner.gif)
 
 An Infinite Runner (aka Endless Runner) is a game that never ends. The objective is to last as long as possible, and the longer you last, the higher your score.
 
