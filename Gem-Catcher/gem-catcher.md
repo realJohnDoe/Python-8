@@ -24,21 +24,20 @@ pgzrun.go() # Måste vara sista raden
 Den första raden, `import pgzrun`, hämtar Pygame Zero-modulen och den sista raden, `pgzrun.go()`, är funktionen som startar Pygame Zero. 
 I mitten har vi `WIDTH = 800` och `HEIGHT = 600` som sätter spelfönstrets bredd och höjd.
 
-# Skådespelaren
-Now that wasn't very interesting, so let us add in a spaceship. 
-To do so, we need to first provide an image for the spaceship. 
-You can use any images you want, but to make it easy for you, I have prepared a zip file containing a variety of images.
-[Download it here.](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/image_pack.zip)
+# Figuren (Actor)
+Det var inte så spännande, så vi lägger till ett rymdskepp.
+För att göra det behöver ha en bild för rymdskeppet.
 
-Remember the images folder I told you to create inside your project folder? 
-That's where your spaceship image need to go. Open the zip file, choose a suitable image, and copy it into the images folder. 
-I'm using this image...
+Du kan använda vilka bilder du vill men för att göra livet enklare för dig, är startprojektet i repl.it förberett med en bild.
+Bilden med rymdskeppet behöver ligger i mappen **images** i projektet. 
 
 ![image](https://user-images.githubusercontent.com/4598641/222978313-4661f08c-e673-40be-87be-5fa1d8d06de8.png)
 
-IMPORTANT: Your image filename must only contain lowercase letters, numbers and underscores.
+>Frivilligt: Det finns andra bilder om du vill byta. Ladda ner ZIP-arkivet, packa upp och ladda sen upp önskad bild till ditt projekt.
+>[Här finns ZIP-arkivet med bilder](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/image_pack.zip).
+>**Obs!** Bildens filnamn kan bara innehålla små bokstäver, siffror och understrykning `_`.
 
-Once that is done, you can add the spaceship to your Python program...
+Nu ska du lägga till rymdskeppet till ditt Pythonprogram.
 
 ```python
 import pgzrun
@@ -56,25 +55,25 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-This is what each line does:
+Detta är vad raderna gör:
 
-`ship = Actor('playership1_blue')` : Create a new Actor using the playership1_blue image file. If you are using a different file, you'll need to change this.
+`ship = Actor('playership1_blue')` : Skapar en ny figur (Actor) med utseende enligt filen *playership1_blue*. Om du använder en annan bildfil behöver du ändra namnet här.
 
-`ship.x = WIDTH / 2 - 30` : Set the x position of the ship to 370. Try changing this!
+`ship.x = WIDTH / 2 - 30` : Sätter skeppets x-position till att vara ungefär mitt på x-axeln. Pröva att ändra värdet!
 
-`ship.y = HEIGHT - 50` : Set the y position of the ship to 550. Try changing this!
+`ship.y = HEIGHT - 50` : Sätter skeppets y-position till en bit ovanför undre kanten. Pröva att ändra värdet!
 
-`def draw():` : This is a special function. We don't need to run it ourselves; Pygame Zero will run it for us regularly.
+`def draw():` : Detta är en specialfunktion. Vi behöver inte anropa den själva; Pygamze Zero kör den åt oss när det behövs.
 
-`ship.draw()` : This tells the ship Actor to draw itself on the screen. It needs to be indented under def draw():, so that it will run whenever Pygame Zero run the draw() function.
+`ship.draw()` : Talar om för skeppets Actor att rita sig på skärmen. Koden behöver vara indragen under `def draw():` så att den körs när Pygame Zero anropar funktionen `draw()`.
 
 ![image](https://user-images.githubusercontent.com/4598641/222978372-85be8781-e6fe-414e-9fb1-b7847dfc8b5f.png)
 
 # Funktionen update()
 
-Earlier, we created the `draw()` function. This is a special function that Pygame Zero runs regularly to draw what you see on the screen. Another special function is `update()`. Pygame Zero will regularly run our `update()` function to update the position of the various actors in the game.
+Vi la till funktionen `draw()` innan. Det är en speciell funktion som Pygame Zero kör regelbundet för att rita det du ser på skärmen. En annan speciell funktion är `update()`. Pygame Zero anrop regelbundet vår `update()`-funktion för att uppdatera/rita om de olika figurerna i spelet.
 
-Let's add in the `update()` function and program it to react to keypresses.
+Vi lägger till kod i `update()` så att den kan reagera på tangentnertryckningar, i vårt fall vänster- och högerpil.
 
 ```python
 import pgzrun
@@ -98,7 +97,7 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-This is what we added ...
+Detta la vi till:
 ```python
 def update():
     if keyboard.left:
@@ -106,28 +105,31 @@ def update():
     if keyboard.right:
         ship.x += 5
 ```
-Whenever Pygame Zero runs our `update()` function, we will check if the left key is pressed. 
-If it is, we'll reduce the x position by 5.
-If the right key is pressed, we'll increase the x position by 5.
+Varje gång Pygame Zero kör vår funktion `update()` kontrollerar den om vänsterpilen är nertryckt.
+Om den är det, minskar vi rymdskeppets x-position med 5. Om högerpilen är nertryckt, ökar vi x med 5.
 
-Try out the program! Write it in IDLE and run it using F5 or Run -> Run Module. Did that work the way you expected?
+**Testa** programmet med gröna "Run"-knappen i repl.it. Funkar koden som du väntade dig?
 
-## Clearing Screen
-If you tried the previous program, you should have gotten something funky like this ...
+## Radera skärmen
+Om du testade programmet så här långt, fick du något knasigt i den här stilen:
 
 ![image](https://user-images.githubusercontent.com/4598641/222978681-7aa59c8e-4b41-49ae-8415-e5df0db6b51d.png)
 
-That's because we told Pygame Zero to update the ship's position and draw it to screen, but we didn't tell it to erase what was drawn before!
+Det är för att koden talar om för Pygame Zero att uppdatera skeppets position och rita det på skärmen, men vi bad aldrig om att sudda ut det som redan var ritat på skärmen.
 
-To erase the screen, we'll fill the entire screen with a single color. We'll do this in the `draw()` function, using
+För att sudda skärmen, fyller vi hela skärmen med en färg. Det gör vi i `draw()`-funktionen så här:
 
 ```python
 screen.fill((80, 0, 70))
 ```
 
-The `(80, 0, 70)` is a tuple (a tuple is like a list, but it cannot be changed) representing the color. The first number (80) is for red, the second number (0) is for green, and the last number (70) is for blue. The largest allowable value for each color is 255 and the smallest is 0. **Try different numbers and see what color you get!**
+Det som står inom parenteser, `(80, 0, 70)`, kallas i Python för *tuple*; det fungerar som en lista med värden som inte går att ändra och talar om vilken färgblandning vi vill ha. Det första talet (80) är för färgen rött, det andra (0) för grönt och det tredje (70) är för blått. Det största värdet man kan ha för någon färgkomponent är 255 och det minsta värdet är 0. **Testa olika värden och se vad du får!**
 
-Your progam should now look like this: 
+I Chrome kan du öppna en färgväljare genom att trycka tangentkombinationen ctrl+shift+I och sedan klicka på en av de små kvadratikonerna som du kan se i fliken Styles. Se bilden!
+
+![image](https://user-images.githubusercontent.com/4598641/223195080-7bda1b3d-89e9-479a-bebe-936a332b1408.png)
+
+Nu ska ditt program se ut så här:
 ```
 import pgzrun
 
@@ -153,24 +155,23 @@ pgzrun.go() # Måste vara sista raden
 
 # Lägga till en ädelsten
 
-The game won't be called "Gem Catcher" without a gem! We can add in a gem the same way we added the spaceship.
-
-First, add a gem image to the **images** folder. I'm using this one:
+Spelet kan ju inte heta *Gem Catcher* om det inte finns en ädelsten! Det finns redan en i startprojektet i mappen *images*.
 
 ![image](https://user-images.githubusercontent.com/4598641/222978860-59fdc056-ee3c-4d15-bca8-09b80051d3c9.png)
 
-Next, add a new gem **Actor**
+Lägg nu till en ny *Actor* som representerar ädelstenen:
 ```python
 gem = Actor('gemgreen')
 gem.x = WIDTH / 2 - 50
 gem.y = 0
 ```
-Setting x this way will place it roughly in the middle horizontally, while setting y to 0 will place it at the top. Don't forget to also draw the gem in the draw() function.
+Det här värdet på x placerar den ungefär i mitten horisontellt. Att sätta y till 0 placerar den högst upp i fönstret. Glöm inte att också rita ädelstenen i funktionen `draw()`.
 
 ```python
 gem.draw()
 ```
-Your program should now look like this:
+
+Din kod ska nu se ut så här:
 
 ```python
 import pgzrun
@@ -201,20 +202,22 @@ pgzrun.go() # Måste vara sista raden
 ```
 
 ## Flytta ädelstenen
-Previously, we have written code in the `update()` function to make the ship move by changing its x position when the left or right key is pressed. For the gem, we'll make it move continuously downwards by changing the y position.
+Tidigare skrev vi kod i funktionen `update()` för att få skeppet att ändra x-position när vi trycker på vänster- eller högerpil.
+
+Vi låter ädelstenen åka nerför skärmen genom att ändra y-positionen för den.
 
 ```python
 gem.y += 4
 ```
 
-We also want the gem to return to the top when it reaches the bottom. To do that, we'll set the y position to 0 (top), when it exceeds HEIGHT (bottom most position).
+Vi vill också att ädelstenen ska återgå till toppen av fönstret när den nått nedre kanten. För att göra det, sätter vi y-positionen till 0 (topp) när den är större än HEIGHT (underkanten).
 
 ```python
 if gem.y > HEIGHT:
     gem.y = 0
 ```
 
-Add that into your program!
+Lägg till det i din kod!
 
 ```python
 import pgzrun
