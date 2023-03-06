@@ -578,11 +578,17 @@ Here are some challenges to make the game better.
 ### Challenge 1. Gliding Ninja
 Can you change the ninja image to a gliding ninja whenever she jumps? If you are using a different character, most of them will have a jumping image that you can use.
 
-![image](https://user-images.githubusercontent.com/4598641/223225118-2a41748c-1d2f-47e7-b44a-8237d1a66b5e.png)
+![image](https://user-images.githubusercontent.com/4598641/223225545-64334e74-b6e3-4511-8f25-8128512012d8.png)
+![image](https://user-images.githubusercontent.com/4598641/223225411-f124b452-0956-44a9-bbe2-1e9936c87552.png)
+![image](https://user-images.githubusercontent.com/4598641/223225445-7663895c-45e2-4237-95c4-7dfaef60d46f.png)
+
 
 ### Challenge 2. Different obstacles
 The only obstacle we have now is the cactus. Can you make the program randomly select a different type of obstacle each time?
-![image](https://user-images.githubusercontent.com/4598641/223225167-498b5c2c-7e50-40be-a7b3-caecfc3198b0.png)
+
+![image](https://user-images.githubusercontent.com/4598641/223225610-600aa71d-9f7d-4d51-bc0d-745b8442470b.png)
+![image](https://user-images.githubusercontent.com/4598641/223225631-7523def5-ca93-4bb9-a7d1-df6ad8b6e06c.png)
+![image](https://user-images.githubusercontent.com/4598641/223225654-7930549a-1186-4d7e-8ae7-572e8670cd5d.png)
 
 ### Challenge 3. Spacing out
 In the current game, the obstacles always appear at the same distance away from each other. Can you randomize this, so that sometimes the obstacles will be closer and at other times further apart.
