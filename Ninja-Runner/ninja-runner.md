@@ -1,6 +1,6 @@
-[Infinite Runner](#infinite-runner) &bull;
+**Navigering:** [Infinite Runner](#infinite-runner) &bull;
 [Bakgrund](#bakgrund) &bull;
-[Ninja](#ninja) &bull;
+[Ninjan](#ninjan) &bull;
 [Hoppa](#hoppa) &bull;
 [Hinder](#hinder) &bull;
 [Poängräkning](#poängräkning) &bull;
