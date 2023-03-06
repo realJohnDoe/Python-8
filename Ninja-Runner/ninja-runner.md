@@ -548,8 +548,8 @@ def update():
     game_over = True
 
 def draw():
-  screen.draw.filled_rect(Rect(0,0,800,400), (163, 232, 254))
-  screen.draw.filled_rect(Rect(0,400,800,200), (88, 242, 152))
+  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
+  screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
   if game_over:
     screen.draw.text('Game Over', centerx=WIDTH/2, centery=HEIGHT - 330, color=(255, 255, 255), fontsize=60)
     screen.draw.text(f"Score: {score}", centerx=WIDTH/2, centery=330, color=(255, 255, 255), fontsize=60)
