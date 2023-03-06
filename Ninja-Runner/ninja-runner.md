@@ -37,7 +37,7 @@ import pgzrun
 WIDTH=800
 HEIGHT=600
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 Click File, Save As... then select the ninja_runner folder you have previously created. Give your program a filename (eg. ninja_runner.py) then click Save.
 
@@ -61,7 +61,7 @@ HEIGHT=600
 def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 This is what the new lines do...
@@ -85,7 +85,7 @@ def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
   screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 Here's what the new line does...
 
@@ -131,7 +131,7 @@ def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
   screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 Save and run it, just to make sure that everything is done correctly.
@@ -181,7 +181,7 @@ def draw():
   screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
   runner.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 That should display your ninja on screen, but it's not running yet! Add in the update function like this...
@@ -304,7 +304,7 @@ def draw():
   screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
   runner.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 # Hinder
@@ -406,7 +406,7 @@ def draw():
   for actor in obstacles:
     actor.draw()
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 # Poängräkning
@@ -559,7 +559,7 @@ def draw():
       actor.draw()
     screen.draw.text(f"Score: {score}", (15, 10), color=(0, 0, 0), fontsize=30)
 
-pgzrun.go() # Must be last line
+pgzrun.go() # Måste vara sista raden
 ```
 
 # Utmaningar och buggar
