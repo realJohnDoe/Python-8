@@ -12,25 +12,24 @@
 
 ![image](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/google-runner.gif)
 
-An Infinite Runner (aka Endless Runner) is a game that never ends. The objective is to last as long as possible, and the longer you last, the higher your score.
+Ett spel av typen Infinite/Endless Runner tar aldrig slut. Målet är att överleva så långt som möjligt och ju längre, desto högre poäng får du.
 
-To make our Infinite Runner, we will be making use of what we have learned from the previous gem catcher game, and adding in...
-
-- Draw
-- Animation
-- Physics
-- List of Actors
+För att göra vårt spel ska vi använda vad vi lärt oss från spelet Gem Catcher och lägga till
+- ritning
+- animering
+- fysik
+- listor med figurer (aktörer).
 
 ## Nytt projekt
-Börja med göra en egen kopia av startprojekt i repl.it: FIXA:LÄNK
+Börja med göra en egen kopia av startprojektet i repl.it: FIXA:LÄNK
 
 # Bakgrund
-## First Step
-Same as before, we start programming our game by...
+## Första steget
+Precis som i Gem Catcher börjar vi koda vårt spel genom att
 
-Importing Pygame Zero
-Setting the window's width and height
-Running pgzrun.go()
+- importera Pygame Zero
+- sätta grafikfönstrets bredd och höjd
+- anropa `pgzrun.go()`
 ```python
 import pgzrun
 
@@ -39,19 +38,19 @@ HEIGHT=600
 
 pgzrun.go() # Måste vara sista raden
 ```
-Click File, Save As... then select the ninja_runner folder you have previously created. Give your program a filename (eg. ninja_runner.py) then click Save.
+Spara ditt projekt i din egen repl.it.
 
-## Draw
-We can draw different shapes using the functions under screen.draw. We have previously used screen.draw.text(), but there are many more functions, such as...
+## Rita
+Vi kan rika olika figurer med hjälp av funktionerna i `screen.draw`. Vi har tidigare använt `screen.draw.text()` men det finns många fler funktioner, som till exempel
 
 - `screen.draw.line()`
 - `screen.draw.circle()`
 - `screen.draw.filled_circle()`
 - `screen.draw.rect()`
 - `screen.draw.filled_rect()`
-To learn more about these function, you can refer to the Pygame Zero documentations here.
+För att lära mer om de funktionerna kan du läsa i [dokumentationen för Pygame Zero](https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen).
 
-For now, we'll just be using `screen.draw.filled_rect()`. This draws a rectangle to the screen, so we'll need to add it to the draw() function.
+För tillfället ska vi bara använda `screen.draw.filled_rect()`. Den ritar en rektangel på skärmen, så vi behöver lägga till anropet i funktionen `draw()`.
 ```python
 import pgzrun
 
@@ -64,16 +63,16 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-This is what the new lines do...
+Det här gör de nya raderna:
 
-`def draw():` : This is the draw function that Pygame Zero will run regularly. Anything that draws to the screen should be inside this function.
+`def draw():` : Det här är ritfunktionen som Pygame Zero kör med jämna mellanrum. Allt som ritar på skärmen ska vara inuti den här funktionen.
 
-`screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254)` : This draws a rectangle on the screen, starting from 0,0 (top left corner) and with a width of 800 and a height of 400. The color consists of 163 red, 232 green, and 254 blue.
+`screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254)` : Detta ritar en rektangel på skärmen med övre vänstra hörnet (0, 0), en bredd på WIDTH (800) och en höjd på HEIGHT - 200 (400). Färgen är en blandning av 163 delar röd, 232 grön och 254 blå.
 
-**Try: Experiment with different colors and see what you get. Remember that each component of the color must be in the range from 0 to 255.**
+**Testa att experimentera med olika färger och se vad du får. Kom ihåg att varje färgkomponent ska vara mellan 0 och 255.**
 
-## Ground
-The previous step drew in the sky. Now let's add a second rectangle to draw the ground.
+## Marken
+Steget innan ritade himlen. Vi lägger till en andra rektangel för att rita marken.
 
 ```python
 import pgzrun
@@ -87,18 +86,18 @@ def draw():
 
 pgzrun.go() # Måste vara sista raden
 ```
-Here's what the new line does...
+Det här gör den nya raden:
 
-`screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))` : This time, we'll start the rectangle at 0,400. This means x=0 and y=400. The screen is 600 pixels tall, and the previous rectangle was 400 pixels tall, so we only need this rectangle to be 200 pixels tall.
+`screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))` : Den här gången börjar rektangeln 200 pixlar ovanför underkanten, alltså x=0 and y=400, om du inte ändrat på WIDTH och HEIGHT vilket du kan vilja göra. Vi har räknat med att marken behöver 200 pixlar.
 
-Once completed, run your program. Your screen should look like this...
+Mata in detta och kör din kod. Din skärm bör se ut så här:
 
 ![image](https://user-images.githubusercontent.com/4598641/223218919-66ee7ecf-043f-4c08-a775-074ff487bb3c.png)
 
 # Ninjan
 
 ## Animering
-In Scratch, you can make your sprites animate by changing its costumes. In Pygame Zero, we do the same by changing the images. One way to do this is...
+I Scratch kan du animera dina sprajtar genom att ändra klädseln. I Pygame Zero gör vi det genom att byta bild. Ett sätt att göra det på är så här:
 
 ```python
 def update():
@@ -110,15 +109,9 @@ def update():
       runner.image == 'run__000'
 ```
 
-This checks what is the current image and switches to the next one. It works, but it's a lot more troublesome than Scratch. To help with this, we can use the Pygame Zero Helper module.
+Detta kollar vad den aktuella bilden är och byter till nästa. Det fungerar men är mer besvärligt än i Scratch. Som hjälp kan vi använda modulen [Pygame Zero Helper](https://www.aposteriori.com.sg/pygame-zero-helper), som redan är med i startprojektet.
 
-## Pygame Zero Helper
-
-First, download it from here.
-
-Next, open up the downloaded zip file and copy the pgzhelper.py file that's inside. Paste it into your ninja_runner folder.
-
-Finally, we need to load the pgyhelper.py module. Add from pgzhelper import * to your Python game file. It should now look like this...
+## Modulen Pygame Zero Helper
 
 ```python
 import pgzrun
@@ -134,20 +127,18 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-Save and run it, just to make sure that everything is done correctly.
+Sparar och kör din kod för att se att allt fungerar som det ska.
 
 ## Ninjabilder
-Before we can start programming our ninja, we need to put the ninja images in the images folder.
+Det finns redan ett antal ninjabilder förberedda i startprojektet. De ligger i mappen *images*.
 
 ![image](https://user-images.githubusercontent.com/4598641/223219964-a4109c3b-04be-4793-a600-dba2c386f297.png)
 
-Go to the image_pack that you have downloaded previously, and look for the ninja folder. Inside, you can find many run images, ranging from run__000 to run__009. Copy all of the run images from the ninja folder and paste them into your own images folder.
-
-**Options: There are many other sets of running images that you can use. Try dino, knight, or zombies.**
+**Andra sätt: Det finns flera uppsättningar av bilder med springande figurer du kan använda. Testa 'dino', 'knight' eller 'zombies'.**
 
 ## Programmera ninjan
 
-We'll add in the ninja into our game using...
+Vi lägger till ninjan i vårt spel så här:
 
 ```python
 runner = Actor('run__000')
@@ -155,7 +146,7 @@ run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__
 runner.images = run_images
 ```
 
-This is what each line does...
+Det här gör de olika raderna:
 
 `runner = Actor('run__000')` : This creates a new Actor using the first run image. It's the same as what we have done in our gem catcher game.
 
