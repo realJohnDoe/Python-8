@@ -404,17 +404,17 @@ pgzrun.go() # Måste vara sista raden
 
 ## Poängen
 
-Just like in the gem catcher program, we'll use a variable named score to keep track of our score.
+Precis som i Gem Catcher, använder vi en variabel `score` för att hållra reda på vår poängställning.
 
 ```python
 score = 0
 ```
-We'll increase our score each time the obstacle disappears off the left side of the screen. Inside update(), let's change this...
+Vi ökar poängen varje gång ett hinder försvinner ut åt vänster. Ändra det här inuti `update()`, från
 ```python
   for actor in obstacles:
     actor.x -= 8
 ```
-...into this...
+... till detta: .
 ```python
   for actor in obstacles:
     actor.x -= 8
@@ -422,57 +422,56 @@ We'll increase our score each time the obstacle disappears off the left side of 
       obstacles.remove(actor)
       score += 1
 ```
-This is what each line means...
+Detta är vad raderna betyder:
 
-`if actor.x < -50` : When the x position is less than -50, the actor is most probably outside of the screen. So we will...
+`if actor.x < -50` : När x-koordinaten är mindre än &ndash;50 är figuren förmodligen utanför skärmen. Då kommer vi att ...
 
-`obstacles.remove(actor)` : Remove the actor from the obstacles list...
+`obstacles.remove(actor)` : ta bort figuren från listan `obstacles` och sen
 
-`score += 1` : ...and increase score by 1. Remember to declare score as a global!.
+`score += 1` : öka poängen med 1. Kom ihåg att deklarera `score` som global variabel!
 
-## Drawing Obstacles and Score
-The obstacles won't appear on screen if we don't draw it inside the `draw()` function. So let's add in...
-
+## Rita hinder och skriva ut poängen
+Hindren ritas inte om vi glömmer att göra det i `draw()`. Så vi lägger till detta:
 ```python
 for actor in obstacles:
   actor.draw()
 ```
-This will go through the list of obstacles and draw each one.
+Det går igenom listan med hinder och ritar dem ett i taget.
 
-We should also display the score on screen using...
+Vi behöver också visa poängen på skärmen så här:
 
 ```python
 screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
 ```
-Feel free to change the color, position, or fontsize.
-
+Ändra gärna färg, placering eller teckenstorleken.
 
 
 # Game Over
-Right now, the game does nothing even if our ninja crashes into the cactus. Let's add in a game over condition. If the ninja touches any of the obstacles, we'll end the game.
+Just nu gör spelet inget även om vår ninja krockar med kaktusen. Vi lägger till ett game over-läge. Om ninjan rör något av hindren så avslutar vi spelet.
 
-First, we'll add in a variable called `game_over` and set it to `False` at the start.
+Först lägger vi till en variabel `game_over` och sätter den till `False` i början.
 
 ```python
 game_over = False
 ```
-Inside the update() function, we'll detect if our runner collided with any of the obstacles. If she did, we'll set game_over to True.
+Inuti funktionen `update()` ska vi upptäckte om vår ninja har krockat med något av hindren. Om hon gjorde det så sätter vi `game_over` till `True`.
 
 ```python
 if runner.collidelist(obstacles) != -1:
   game_over = True
 ```
-Important: Remember to declare game_over as a global in the update() function.
+**Viktigt: kom ihåg att deklarera `game_over` som global i funktionen `update()`.
 
-The runner.collidelist(obstacles) checks if the runner collided with any of the actors in the obstacles list. If she didn't, the collidelist function will give us the value -1.
+Frågan `runner.collidelist(obstacles)` kollar om ninjan har krockat med något av hindren i listan `obstacles`.
+Om hon inte gjorde det, ger funktionen `collidelist` värdet &ndash;1.
 
-Next, we'll need to draw the game over text inside draw() by changing this...
+Sen behöver vi skriva texten "Game over" inuti `draw()` genom att ändra från
 ```python
   runner.draw()
   for actor in obstacles:
     actor.draw()
   screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
-...into this...
+.. till
 ```python
 if game_over:
   screen.draw.text('Game Over', centerx=WIDTH/2, centery=HEIGHT - 330, color=(255, 255, 255), fontsize=60)
@@ -484,7 +483,7 @@ else:
   screen.draw.text(f"Score: {score}", (15, 10), color=(0, 0, 0), fontsize=30)
 ```
 
-Your final game should look like this...
+Ditt spel bör se ut så här till slut:
 
 ```python
 import pgzrun
