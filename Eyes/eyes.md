@@ -82,6 +82,43 @@ def draw():
     screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}\ndistance: {str(distance)}", (0, 0)) #ändrad
 ```
 
+# Så här ser slutversionen ut, utan trig-funktioner
+
+```python
+import pgzrun
+import pygame
+import math
+
+def update():
+    pass
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_eye(eye_x, eye_y):
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+
+        distance_x = mouse_x - eye_x
+        distance_y = mouse_y - eye_y
+        distance = math.sqrt(distance_x**2 + distance_y**2)
+        if distance < 30:
+            pupil_x = eye_x + distance_x
+            pupil_y = eye_y + distance_y
+        else:
+            pupil_x = eye_x + 30 * distance_x / distance
+            pupil_y = eye_y + 30 * distance_y / distance
+
+        screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255))
+        screen.draw.filled_circle((pupil_x, pupil_y), 15, color=(0, 0, 100))
+
+    draw_eye(200, 200)
+    draw_eye(330, 200)
+
+WIDTH = 530
+HEIGHT = 400
+pgzrun.go()
+```
+
 # Källor
 
 Originalprojekt: https://simplegametutorials.github.io/pygamezero/eyes/
