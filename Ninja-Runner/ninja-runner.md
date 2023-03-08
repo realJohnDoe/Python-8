@@ -175,49 +175,48 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-That should display your ninja on screen, but it's not running yet! Add in the update function like this...
+Det ska få ninjan att synas på skärmen, men den springer inte än! Lägg till det i `update`-funktionen så här:
 
 ```python
 def update():
   runner.next_image()
 ```
-This tells Pygame Zero to switch to the next image everytime it updates. With this, you should now have a running ninja!
+Detta talar om för Pygame Zero att byta till nästa bild varje gång den uppdaterar. Med detta ska du nu ha en springande ninja!
 
 ### Justera placeringen
 
-You can adjust the position of the ninja using runner.x and runner.y. Try the following...
+Du kan justera ninjas placering med `runner.x` och `runner.y`. Pröva detta:
 
 ```python
 runner.x = 100
 runner.y = HEIGHT - 200
 ```
-Try: Adjust the position of the ninja by changing runner.x and runner.y until you have her at the position you want.
-
+**Pröva att justera ninjans position genom att ändra `runner.x` och `runner.y` tills hon är där du vill.**
 
 # Hoppa
 
 ## Fysik
 
-Which of these look more realistic?
+Vilken av de här ser mest realistisk ut?
 
 ![image](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/jump.gif)
 
-In real life, objects are affected by gravity. To make our ninja jump realistically, we'll need to simulate the effects of gravity in our game.
+I verkliga livet påverkas föremål av gravitationen. För att få vår ninja att hoppa realistiskt, behöver vi simulera gravitationens effekter i vårt spel.
 
-Let's start by adding in a variable for velocity_y and gravity.
+Vi börjar med att lägga till variabler för `velocity_y` och `gravity`, alltså hastigheten i y-led och gravitationen.
 
 ```python
 velocity_y = 0
 gravity = 1
 ```
 
-Explanation for each line...
+Förklaring av kodraderna:
 
-`velocity_y = 0` : This represents how fast our ninja should be moving in the up/down direction. It starts at zero, as our ninja isn't jumping yet.
+`velocity_y = 0` : Håller reda på hur snabbt ninjan ska röra sig uppåt eller neråt. Hastigheten börjar med 0 eftersom ninjan inte hoppar än.
 
-`gravity = 1` : Gravity will change our velocity. We can change this later and see its effects, but leave it at 1 for now.
+`gravity = 1` : Gravitationen påverkar hastigheten. Vi kan ändra detta senare och se effekten av det, men just nu låter vi värdet vara 1. 
 
-Next, in update() we are going to change the velocity when the up arrow is pressed.
+I `update()` ska vi sen ändra hastigheten när uppåtpilen trycks ner.
 
 ```python
 def update():
@@ -229,38 +228,39 @@ def update():
 
   runner.y += velocity_y
 ```
-This is what each line does...
 
-`global velocity_y` : We need to use global if we change a variable that comes from outside of a function.
+Det här gör raderna:
 
-`if keyboard.up:` : When the up arrow is pressed...
+`global velocity_y` : Vi behöver använda `global` om vi ändrar på en variabel som finns utanför funktionen.
 
-`velocity_y = -15` : Set the up/down velocity to -15. A negative number means it's going upwards.
+`if keyboard.up:` : När tangenten med uppåtpil trycks ner &ldots;
 
-`runner.y += velocity_y` : Change our ninja's position using the velocity. The += means to add velocity_y to runner.y.
+`velocity_y = -15` : Sätt hastigheten upp/ner till &ndash;15. Ett negativt värde betyder att den rör sig uppåt.
+
+`runner.y += velocity_y` :  Ändra vår ninjas position baserat på hastigheten. Operatorn `+=` betyder att vi ökar `runner.y` med värdet i `velocity_y`.
 
 # Tips
 ```python
-a += 1      # This line is the same as...
-a = a + 1   # ...this line.
+a += 1      # Den här raden gör samma sak som ...
+a = a + 1   # ... den här raden.
 ```
 
-Try it out! If you programmed it correctly, the ninja should fly up into the sky when you press up. That's because we haven't added gravity yet!
+Testa det! Om du programmerat rätt, bör ninjan flyga upp i himlen när du trycker uppåtpil. Det är för att vi inte har lagt till någon gravitation än!
 
-## Gravity
-Gravity will change our velocity. Under the runner.y += velocity_y line, let's add it in velocity_y += gravity.
+## Gravitation
+Graviationen ändrar ninjans hastighet. 
+Under raden `runner.y += velocity_y` lägger vi till gravitionen med `velocity_y += gravity`.
 
-Now our ninja falls straight down! We haven't tell our ninja when to stop falling yet! Let's add that in next...
+Nu ramlar vår ninja rakt ner! Vi har inte talat om för ninjan när den ska sluta falla! Vi lägger till det nu:
 
 ```python
 if runner.y > HEIGHT - 200:
   velocity_y = 0
   runner.y = HEIGHT - 200
 ```
-Here we are treating `y = 400` as the "ground", and if the ninja is at a y position that's greater than 400, we will set her velocity_y to 0 and her y position to 400. This will prevent her from falling through the ground.
+Här bestämmer vi att `HEIGHT - 200` är där marken börjar och om ninjan är på en y-koordinat som är större än `HEIGHT - 200` så sätter vi hennes `velocity_y` till 0 och y-koordinaten till `HEIGHT - 200`. Detta hindrar att hon faller igenom marken.
 
-Your program should now look like this...
-
+Ditt program bör nu se ut så här:
 ```python
 import pgzrun
 from pgzhelper import *
@@ -272,7 +272,7 @@ runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
 runner.images = run_images
 runner.x = 100
-runner.y = 400
+runner.y = HEIGHT - 200
 
 velocity_y = 0
 gravity = 1
