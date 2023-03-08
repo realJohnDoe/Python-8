@@ -62,6 +62,25 @@ pgzrun.go()
 
 ![image](https://user-images.githubusercontent.com/4598641/223817639-1363643f-481d-44e3-979b-d0b48eb0c9da.png)
 
+# Räkna ut avståndet mellan muspekaren och ögat
+The distance in a straight line is calculated using the Pythagorean theorem.
+
+The square root of the distance on the X axis squared plus the distance on the Y axis squared is the distance in a straight line.
+
+The math module is imported so that math.sqrt can be used.
+
+```python
+import math #lägg detta överst
+
+def draw():
+    # Ändra i draw. Behåll oförändrade rader!
+
+    distance = math.sqrt(distance_x**2 + distance_y**2) #ändra den här raden
+
+    # etc.
+
+    screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}\ndistance: {str(distance)}", (0, 0)) #ändrad
+```
 
 # Källor
 
