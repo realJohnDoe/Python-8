@@ -301,22 +301,23 @@ pgzrun.go() # Måste vara sista raden
 # Hinder
 ## En lista med figurer
 
-In our gem catcher game, we only have a single gem at a time and it returns to the top everytime we catch it. In our ninja runner game, we are going to have multiple obstacles appear on screen at the same time. To do so, we are going to make use of **lists**.
+I vårt Gem Catcher-spel har vi bara en ädelsten i taget och den flyttar sig till toppen av skärmen varje gång vi fångar den.
+I vårt ninjaspel kommer vi att flera hinder på skärmen samtidigt.
+För att klara det behöver vi använda **listor**.
 
 ![image](https://user-images.githubusercontent.com/4598641/223222660-26ee39e0-5420-47ba-8ef9-d4cb855636fe.png)
 
-First, let's add an empty list called obstacles and a integer variable `obstacles_timeout`
+Först skapar vi en tom lista som heter `obstacles` och en heltalsvariabel `obstacles_timeout`.
 
 ```python
 obstacles = []
 obstacles_timeout = 0
 ```
-Now in our `update()` function, we are going to increase out timeout by 1 each time.
-
+I vår funktion `update()` ska vi räkna upp `timeout` med 1 varje gång.
 ```python
 obstacles_timeout += 1
 ```
-Next, if the timeout is greater than 50, we'll add in an obstacle and reset the timeout to zero.
+Och om `timeout` är större än 50 lägger vi till ett hinder och sätter `timeout` till 0.
 
 ```python
 if obstacles_timeout > 50:
@@ -327,25 +328,24 @@ if obstacles_timeout > 50:
   obstacles_timeout = 0
 ```
 
-The only thing new here is `obstacles.append(actor)`. This adds `actor` to the `obstacles` list.
+Det enda nya här är `obstacles.append(actor)`. Det lägger till figuren `actor` i hinderlistan, `obstacles`.
 
-**IMPORTANT: You'll need to move the cactus image into your images folder first! If you decide to use a different image, change the image name accordingly.**
+**VIKTIGT: Du behöver ha bilden med kaktusen i mappen images. Om du vill använda en annan bild, glöm inte att byta bildnamnet i koden också.**
 
-Now to make the obstacles move across the screen...
-
+För att få hindren att röra sig över skärmen:
 ```python
 for actor in obstacles:
   actor.x -= 8
 ```
-This will go through the entire obstacles list and reduce the *x* position for obstacle. Reducing x will make the obstacle move to the left.
+Detta går igenom hela listan `obstacles` och minskar x-koordinaten för varje hinder. Att minska *x* gör att hindret rör sig åt vänster.
 
-Finally, we need to draw the obstacles on screen. In the `draw()` function, add...
-
+Till slut behöver vi rita hindren på skärmen. Lägg till det här i `draw()`-funktionen:
 ```python
 for actor in obstacles:
   actor.draw()
 ```
-Your program should now look like this...
+
+Nu ska ditt program se ut ungefär så här:
 
 ```python
 import pgzrun
@@ -386,9 +386,9 @@ def update():
 
   runner.y += velocity_y
   velocity_y += gravity
-  if runner.y > 400:
+  if runner.y > HEIGHT - 200:
     velocity_y = 0
-    runner.y = 400
+    runner.y = HEIGHT - 200
 
 def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
