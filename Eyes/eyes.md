@@ -5,7 +5,7 @@
 Ögonen följer muspekaren.
 
 # Rita ett öga
-The eye is drawn with a white circle and a smaller dark blue circle for the pupil.
+Ögat ritas med en vit cirkel och en lite mindre mörkblå cirkel för pupillen.
 
 Koden så här långt:
 ```python
@@ -24,13 +24,12 @@ pgzrun.go()
 ![image](https://user-images.githubusercontent.com/4598641/223816876-1da49223-c7af-46d5-836c-9b1216eb52d4.png)
 
 # Räkna ut avståndet mellan muspekaren och ögat
-The distance between the center of the eye and the mouse cursor is displayed.
+Avståndet mellan ögats mitt och muspekaren visas.
+Ögats x- och y-koordinater återanvänder vi från när vi ritar ögat och därför sparar vi koordinaterna i variabler.
 
-The X and Y positions of the eye are reused from drawing the eye, so variables are made for them.
+Vi importerar modulen `pygame` för att kunna använda funktionen `pygame.mouse.get_pos.
 
-The pygame module is imported so that pygame.mouse.get_pos can be used.
-
-An empty update function is created so that the draw function will update on every frame.
+Funktionen `update()` är tom så länge. Funktionen `draw()` ritar om skärmen vid varje uppdatering.
 
 Koden så här långt &ndash; nya rader är markerade:
 ```python
@@ -63,11 +62,11 @@ pgzrun.go()
 ![image](https://user-images.githubusercontent.com/4598641/223817639-1363643f-481d-44e3-979b-d0b48eb0c9da.png)
 
 # Räkna ut avståndet mellan muspekaren och ögat
-The distance in a straight line is calculated using the Pythagorean theorem.
+Avståndet kan vi räkna ut med Pythagoras sats. Se figuren.
 
-The square root of the distance on the X axis squared plus the distance on the Y axis squared is the distance in a straight line.
+Avståndet i pixlar är roten ur (antalet pixlar i X-led i kvadrat + antalet pixlar i Y-led i kvadrat).
 
-The math module is imported so that math.sqrt can be used.
+Vi importerar mattemodulen `math` för att räkna roten ur med `math.sqrt()`.
 
 ```python
 import math #lägg detta överst
@@ -82,7 +81,48 @@ def draw():
     screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}\ndistance: {str(distance)}", (0, 0)) #ändrad
 ```
 
-# Så här ser slutversionen ut, utan trig-funktioner
+# Rörlig pupill
+
+Vi vill att pupillen ska följa muspekaren.
+
+Om muspekaren är innanför ögat är det lätt. Då kan vi sätta pupillen till muspekarens koordinater.
+Hur vet vi att muspekaren är i ögat? Eftersom vi räknat ut avståndet från ögats centrum till muspekaren så kan vi använda ögats radie som en gräns, till exempel 30 pixlar.
+
+Då kan koden för `draw()` se ut så här:
+
+```python
+# behåll resten av koden
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_eye(eye_x, eye_y):
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+
+        distance_x = mouse_x - eye_x
+        distance_y = mouse_y - eye_y
+        distance = math.sqrt(distance_x**2 + distance_y**2) # Pythagoras
+        pupil_x = eye_x + distance_x
+        pupil_y = eye_y + distance_y
+
+        screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255))
+        screen.draw.filled_circle((pupil_x, pupil_y), 15, color=(0, 0, 100))
+
+# behåll resten av koden
+```
+
+Om muspekaren är mer än 30 pixlar från ögats centrum, placerar vi pupillen i kanten av ögat.
+
+BILDILLUSTRATION HÄR: likformig triangel innanför ögat som skalas proportionellt i X- och Y-led med avståndsfaktorn. Då hamnar pupillen alltid innanför cirkeln.
+
+**Kodexempel här**
+
+# Maximala avståndet pupillen kan röra sig
+**Kodexempel här**
+
+# Två ögon
+The code is made into a function which takes an eye's X and Y positions.
+**Kodexempel här**
 
 ```python
 import pgzrun
@@ -100,7 +140,7 @@ def draw():
 
         distance_x = mouse_x - eye_x
         distance_y = mouse_y - eye_y
-        distance = math.sqrt(distance_x**2 + distance_y**2)
+        distance = math.sqrt(distance_x**2 + distance_y**2) # Pythagoras
         if distance < 30:
             pupil_x = eye_x + distance_x
             pupil_y = eye_y + distance_y
