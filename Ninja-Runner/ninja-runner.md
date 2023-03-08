@@ -554,34 +554,34 @@ pgzrun.go() # Måste vara sista raden
 
 # Utmaningar och buggar
 ## Fixa buggar!
-It is common for programs to have bugs. I've deliberately left a few bugs in our ninja runner game. Have you spotted any? Try fixing them!
+Det är vanligt att program har buggar. Jag har avsiktligt lämnat kvar ett par buggar i vårt ninjaspel. Har du hittat några än? Pröva att rätta dem!
 
-Bug Fix 1. Game Over Score
-Play the game, let your ninja touch a cactus, then watch the score carefully after game over... Did you see the score continue to increase? That happens because after game over, we are still adding cactuses to the obstacles list. Can you fix this?
+### Buggfix 1. Game Over-poäng
+Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren efter game over ... Såg du att poängen fortsatte öka? Det händer eftersom vi fortsätter lägga till kaktusar i hinderlistan efter game over. Kan du fixa det?
 
-Bug Fix 2. Multi-Jumps
-Try quickly pressing the jump button multiple times. Did your ninja jump out of the screen? Our ninja should only be able to jump when she is on the ground, and not when she is in the air. Can you fix this?
+### Bug Fix 2. Multihopp
+Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ovanför det som syns på skärmen? Ninjan ska bara kunna hoppa när hon är på marken och inte i luften. Kan du fixa det?
 
-## Challenges!
-Here are some challenges to make the game better.
+## Utmaningar!
+Här är några utmaningar för att göra spelet bättre.
 
-### Challenge 1. Gliding Ninja
-Can you change the ninja image to a gliding ninja whenever she jumps? If you are using a different character, most of them will have a jumping image that you can use.
+### Utmaning 1. Glidande ninja
+Kan du ändra ninjabilden till en glidande ninja när hon hoppar? Om du använder en annan figur så har de flesta en liknande bild med hopp som du kan använda:
 
 ![image](https://user-images.githubusercontent.com/4598641/223225545-64334e74-b6e3-4511-8f25-8128512012d8.png)
 ![image](https://user-images.githubusercontent.com/4598641/223225411-f124b452-0956-44a9-bbe2-1e9936c87552.png)
 ![image](https://user-images.githubusercontent.com/4598641/223225445-7663895c-45e2-4237-95c4-7dfaef60d46f.png)
 
 
-### Challenge 2. Different obstacles
-The only obstacle we have now is the cactus. Can you make the program randomly select a different type of obstacle each time?
+### Utmaning 2. Olika hinder
+Det enda hindret just nu är kaktusen. Kan du göra så att programmet väljer bland olika slags hinder varje gång?
 
 ![image](https://user-images.githubusercontent.com/4598641/223225610-600aa71d-9f7d-4d51-bc0d-745b8442470b.png)
 ![image](https://user-images.githubusercontent.com/4598641/223225631-7523def5-ca93-4bb9-a7d1-df6ad8b6e06c.png)
 ![image](https://user-images.githubusercontent.com/4598641/223225654-7930549a-1186-4d7e-8ae7-572e8670cd5d.png)
 
-### Challenge 3. Spacing out
-In the current game, the obstacles always appear at the same distance away from each other. Can you randomize this, so that sometimes the obstacles will be closer and at other times further apart.
+### Utmaning 3. Varierande mellanrum
+Som spelet är nu dyker hindren alltid upp på samma avstånd från varann. Kan du slumpa till det så att hindren ibland är närmare och ibland längre från varann?
 
 # Källor
 Projektet är en översättning och anpassning till repl.it av originalet på https://aposteriori.trinket.io/game-development-with-pygame-zero#/ninja-runner/infinite-runner
