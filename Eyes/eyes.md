@@ -2,15 +2,17 @@
 
 ![image](https://user-images.githubusercontent.com/4598641/223815678-2c97174e-578c-4df4-9f8a-d8764f0b2424.png)
 
-Ögonen följer muspekaren.
+Vi vill göra en animering där ögonen följer muspekaren.
 
 # Rita ett öga
-Ögat ritas med en vit cirkel och en lite mindre mörkblå cirkel för pupillen.
+Ögat ritas med en vit cirkel och en lite mindre, mörkblå cirkel för pupillen.
+
+![image](https://user-images.githubusercontent.com/4598641/223816876-1da49223-c7af-46d5-836c-9b1216eb52d4.png)
 
 Koden så här långt:
 ```python
 import pgzrun
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 530, 400
 
 def draw():
     screen.fill((0, 0, 0))
@@ -20,17 +22,16 @@ def draw():
 
 pgzrun.go() # måste vara sist
 ```
+✏️ Starta ett nytt projekt i repl.it och mata in koden där. Testkör!
 
-![image](https://user-images.githubusercontent.com/4598641/223816876-1da49223-c7af-46d5-836c-9b1216eb52d4.png)
+<img src=https://user-images.githubusercontent.com/4598641/224134063-e4416cb9-86ed-4d39-a0b3-5321a16c5dd1.png width="400px">
 
 # Räkna ut avståndet mellan muspekaren och ögat
 Vi lägger till kod så att avståndet mellan ögats mitt och muspekaren visas, räknat i pixlar.
 
-Ögats x- och y-koordinater återanvänder vi från när vi ritar ögat och därför sparar vi koordinaterna i variabler.
-
-Vi importerar modulen `pygame` för att kunna använda funktionen `pygame.mouse.get_pos`.
-
-Funktionen `update()` är tom så länge. Funktionen `draw()` ritar om skärmen vid varje uppdatering.
+- Ögats x- och y-koordinater återanvänder vi från när vi ritar ögat och därför sparar vi koordinaterna i variabler.
+- Vi importerar modulen `pygame` för att kunna använda funktionen `pygame.mouse.get_pos`.
+- Funktionen `update()` är tom så länge. Funktionen `draw()` ritar om skärmen vid varje uppdatering.
 
 Koden så här långt &ndash; nya rader är markerade:
 ```python
@@ -58,15 +59,18 @@ def draw():
 
 pgzrun.go() # måste vara sist
 ```
+✏️ Mata in och testkör koden!
 
 ![image](https://user-images.githubusercontent.com/4598641/223817639-1363643f-481d-44e3-979b-d0b48eb0c9da.png)
 
 # Räkna ut avståndet mellan muspekaren och ögat
-Avståndet kan vi räkna ut med Pythagoras sats. Se figuren.
+Avståndet, `distance`, kan vi räkna ut med Pythagoras sats. Se figuren.
+
+![image](https://user-images.githubusercontent.com/4598641/224125785-ee2eedc9-2155-4508-9fc2-d8518bfdfe32.png)
 
 Avståndet i pixlar är roten ur (antalet pixlar i X-led i kvadrat + antalet pixlar i Y-led i kvadrat).
-
-Vi importerar mattemodulen `math` för att räkna roten ur med `math.sqrt()`.
+- Operatorn `**2` är upphöjt till 2, alltså kvadraten
+- Vi importerar mattemodulen `math` för att räkna roten ur med `math.sqrt()`.
 
 ```python
 import math #lägg detta överst
@@ -81,13 +85,16 @@ def draw():
     screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}\ndistance: {str(distance)}", (0, 0)) #ändrad
 ```
 
+:pencil2: Mata in och testkör koden!
+
+
 # Rörlig pupill
 
 Vi vill att pupillen ska följa muspekaren.
 
 Om muspekaren är innanför ögat är det lätt. Då kan vi sätta pupillen till muspekarens koordinater.
 
-Då kan koden för `draw()` se ut så här. Den övriga koden är oförändrad.
+Då kan koden för `draw()` se ut så här. Den övriga koden är samma som innan.
 
 ```python
 # behåll resten av koden
@@ -110,11 +117,11 @@ def draw():
 
 # behåll resten av koden
 ```
-Testa koden. Fungerar den bra när muspekaren är innanför ögats cirkel?
+:pencil2: Testa koden. Fungerar den bra när muspekaren är innanför ögats cirkel?
 
 # Pupillen ska inte smita när muspekaren är utanför ögat
 
-Hur vet vi att muspekaren är i ögat? Eftersom vi räknat ut avståndet från ögats centrum till muspekaren så kan vi använda ögats radie som en gräns, till exempel 30 pixlar. Vi ska ju plats att rita pupillen också.
+🤔 Hur vet vi att muspekaren är i ögat? Eftersom vi räknat ut avståndet från ögats centrum till muspekaren så kan vi använda ögats radie som en gräns, till exempel 30 pixlar. Vi ska ju plats att rita pupillen också.
 
 Om muspekaren är mer än 30 pixlar från ögats centrum, placerar vi pupillen i kanten av ögat. Se bilden.
 
@@ -154,6 +161,7 @@ def draw():
 
 # behåll resten av koden
 ```
+:pencil2: Testa koden. Fungerar den bra när muspekaren är innanför ögats cirkel?
 
 # Två ögon
 Vi vill ha två ögon som följer muspekaren. Därför behöver vi återanvända samma kod.
