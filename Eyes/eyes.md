@@ -212,6 +212,7 @@ pgzrun.go()
 Kan du göra det ännu mer spännande?
 
 * Kan du få ögonen att byta färg, försvinna eller röra sig?
+* Kan du lägga in någon annan slags figur och få ögonen att följa den figuren istället för muspekaren?
 
 
 # Källor
