@@ -22,7 +22,7 @@ def draw():
 
 pgzrun.go() # måste vara sist
 ```
-✏️ Starta ett nytt projekt i repl.it och mata in koden där. Testkör!
+✏️ **Starta ett nytt projekt** i repl.it och mata in koden där. Testkör!
 
 <img src=https://user-images.githubusercontent.com/4598641/224134063-e4416cb9-86ed-4d39-a0b3-5321a16c5dd1.png width="400px">
 
@@ -59,9 +59,10 @@ def draw():
 
 pgzrun.go() # måste vara sist
 ```
-✏️ Mata in och testkör koden!
+✏️ **Mata in** och testkör koden!
 
 ![image](https://user-images.githubusercontent.com/4598641/223817639-1363643f-481d-44e3-979b-d0b48eb0c9da.png)
+
 
 # Räkna ut avståndet mellan muspekaren och ögat
 Avståndet, `distance`, kan vi räkna ut med Pythagoras sats. Se figuren.
@@ -85,7 +86,7 @@ def draw():
     screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}\ndistance: {str(distance)}", (0, 0)) #ändrad
 ```
 
-:pencil2: Mata in och testkör koden!
+:pencil2: **Mata in** och testkör koden!
 
 
 # Rörlig pupill
@@ -117,7 +118,7 @@ def draw():
 
 # behåll resten av koden
 ```
-:pencil2: Testa koden. Fungerar den bra när muspekaren är innanför ögats cirkel?
+:pencil2: **Uppdatera och testa** din kod. Fungerar den bra när muspekaren är innanför ögats cirkel?
 
 # Pupillen ska inte smita när muspekaren är utanför ögat
 
@@ -128,8 +129,8 @@ Om muspekaren är mer än 30 pixlar från ögats centrum, placerar vi pupillen i
 ![image](https://user-images.githubusercontent.com/4598641/224125785-ee2eedc9-2155-4508-9fc2-d8518bfdfe32.png)
 
 - Den streckade triangeln har hypotenusan 30 pixlar och den är likformig med den större triangeln med muspekaren i ena hörnet.
-- Proportionen mellan den större och den streckade triangeln är `distance / 30` när muspekaren är utanför ögat.
-- Vi får därför skala `distance_x` och `distance_y` med den skalfaktorn.
+- Proportionen mellan den större och den streckade triangeln är `30 / distance` när muspekaren är utanför ögat.
+- Vi får därför skala `distance_x` och `distance_y` med den skalfaktorn när vi ska räkna ut pupillens x- och y-koordinater.
 - Då kommer vi att kunna rita pupillen så att den alltid hamnar innanför ögats cirkel.
 
 Så här kan `draw()` se ut nu:
@@ -161,12 +162,11 @@ def draw():
 
 # behåll resten av koden
 ```
-:pencil2: Testa koden. Fungerar den bra när muspekaren är innanför ögats cirkel?
+:pencil2: **Testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
 
 # Två ögon
-Vi vill ha två ögon som följer muspekaren. Därför behöver vi återanvända samma kod.
-
-Vi lägger koden i funktion som har ögats x- och y-koordinat som indata (parametrar).
+Vi vill ha två ögon som följer muspekaren. Vi kan återanvända samma kod. Därför lägger vi ögats kod
+i funktionen `draw_eye` som har ögats x- och y-koordinat som indata (parametrar).
 
 Så här kan koden se ut nu:
 
@@ -206,6 +206,13 @@ def draw():
 
 pgzrun.go()
 ```
+:pencil2: **Testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
+
+# Utmaningar
+Kan du göra det ännu mer spännande?
+
+* Kan du få ögonen att byta färg, försvinna eller röra sig?
+
 
 # Källor
 
