@@ -24,7 +24,7 @@ pgzrun.go() # måste vara sist
 ```
 ✏️ **Starta ett nytt projekt** i repl.it och mata in koden där. Testkör!
 
-<img src=https://user-images.githubusercontent.com/4598641/224134063-e4416cb9-86ed-4d39-a0b3-5321a16c5dd1.png width="400px">
+<img src=https://user-images.githubusercontent.com/4598641/224134063-e4416cb9-86ed-4d39-a0b3-5321a16c5dd1.png width="500px">
 
 # Räkna ut avståndet mellan muspekaren och ögat
 Vi lägger till kod så att avståndet mellan ögats mitt och muspekaren visas, räknat i pixlar.
