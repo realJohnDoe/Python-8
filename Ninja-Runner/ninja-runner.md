@@ -404,7 +404,7 @@ pgzrun.go() # Måste vara sista raden
 
 ## Poängen
 
-Precis som i Gem Catcher, använder vi en variabel `score` för att hållra reda på vår poängställning.
+Precis som i Gem Catcher, använder vi en variabel `score` för att hålla reda på vår poängställning.
 
 ```python
 score = 0
