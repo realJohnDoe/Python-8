@@ -111,13 +111,16 @@ This is a simple gravity formula:
 - Acceleration is change in **velocity**.
 - Velocity is change in **position**.
 
-To represent this we need to track a variable `bird.vy`, which is the bird’s velocity in the y direction. This is a new variable that we are defining, not something that Pygame Zero provides for us.
+To represent this we need to track a variable `bird.vy`, which is the bird’s velocity in the y direction. 
+This is a new variable that we are defining, not something that Pygame Zero provides for us.
 
 - Gravity means constant acceleration downwards: `GRAVITY` is greater than 0.
 - Acceleration is change in velocity: `GRAVITY` gets added to `bird.vy`
 - Velocity is change in position: `bird.vy` gets added to `bird.y`
 
-Note that the bird does not move horizontally! Its x position stays at 75 through the whole game. We simulate movement by moving the pipes towards it. This looks as though it’s a moving camera following the bird. So there’s no need for a `vx` variable in this game.
+Note that the bird does not move horizontally! Its x position stays at 75 through the whole game.
+We simulate movement by moving the pipes towards it. This looks as though it’s a moving camera following the bird. 
+So there’s no need for a `vx` variable in this game.
 
 The next section makes the bird flap its wings:
 ```python
@@ -174,7 +177,7 @@ def on_key_down():
         bird.vy = FLAP_VELOCITY
 ```
 
-Here, if the bird is not dead, we set its vy to a negative number: in Pygame Zero this means it starts moving upwards.
+Here, if the bird is not dead, we set its `vy` to a negative number: in Pygame Zero this means it starts moving upwards.
 
 You should be able to find a lot of parallels between the Python code and this Scratch code:
 
