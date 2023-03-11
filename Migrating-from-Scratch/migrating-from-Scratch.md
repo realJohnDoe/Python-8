@@ -4,9 +4,9 @@
 
 This tutorial will compare an implementation of Flappy Bird written in Scratch with one written in Pygame Zero. The Scratch and Pygame Zero programs are similar to a remarkable extent.
 
-The Pygame Zero version can be found in Pygame Zero repository.
+The [Pygame Zero version](https://github.com/lordmauve/pgzero/blob/stable/examples/flappybird/flappybird.py) can be found in Pygame Zero repository.
 
-You can also download the Scratch 1.4 version and Scratch 3 version from the repository.
+You can also download the Scratch 1.4 version and [Scratch 3 version](https://github.com/lordmauve/pgzero/raw/master/examples/flappybird/Flappy%20Bird.sb3) from the repository.
 
 The Pygame Zero version includes scoring logic, which is omitted in the code examples on this page to make it a closer comparison.
 
