@@ -187,6 +187,26 @@ Many of the concepts available in Scratch can be translated directly into Pygame
 
 Here are some comparisons:
 
+| In Scratch |	In Pygame Zero|
+| --- | --- |
+| change y by 1 (up)	| bird.y &ndash;= 1|
+| change y by -1 (down) |	bird.y += 1 |
+| set costume to <name>	| bird.image = 'name'| 
+| if dead = 0| 	if not bird.dead:| 
+| set dead to 0	| bird.dead = False| 
+| if touching Top?	| if bird.colliderect(pipe_top)| 
+| When Flag clicked… forever | 	Put code into the update() function. | 
+| When [any] key pressed	| def on_key_down():| 
+| pick random a to b	| import random to load the random module, then random.randint(a, b)| 
+| (0, 0) is the centre of the stage	| (0, 0) is the top-left of the window| 
+
+In some cases, the code is simpler in Python because it can be organised in a way that helps it make sense when you read it.
+
+The power of Pygame Zero’s actors also makes the coordinate manipulation easier. 
+We used the anchor position to position the pipes, and we were able to see if a pipe was off-screen by checking
+`pipe_top.right < 0` rather than `if x position < -240`.
+
+
 
 # Källor
 https://pygame-zero.readthedocs.io/en/stable/from-scratch.html
