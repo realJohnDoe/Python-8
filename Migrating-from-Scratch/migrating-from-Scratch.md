@@ -1,33 +1,31 @@
-# Migrating from Scratch
+# Flytta över från Scratch
 >Detta är en svensk översättning av Daniel Popes guide, https://pygame-zero.readthedocs.io/en/stable/from-scratch.html
 
+Den här handledningen jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
 
-This tutorial will compare an implementation of Flappy Bird written in Scratch with one written in Pygame Zero. The Scratch and Pygame Zero programs are similar to a remarkable extent.
+[Versionen för Pygame Zero](https://github.com/lordmauve/pgzero/blob/stable/examples/flappybird/flappybird.py) finns med i Pygame Zero-projektet.
 
-The [Pygame Zero version](https://github.com/lordmauve/pgzero/blob/stable/examples/flappybird/flappybird.py) can be found in Pygame Zero repository.
+Du kan också ladda ner versionen för Scratch 1.4 och [versionen för Scratch 3](https://github.com/lordmauve/pgzero/raw/master/examples/flappybird/Flappy%20Bird.sb3) från den här länken.
 
-You can also download the Scratch 1.4 version and [Scratch 3 version](https://github.com/lordmauve/pgzero/raw/master/examples/flappybird/Flappy%20Bird.sb3) from the repository.
+Versionen för Pygame Zero innehåller logik för poängräkning som vi utelämnar i kodexemplenm på den här sidan för att ge en mer rättvis jämförelse.
 
-The Pygame Zero version includes scoring logic, which is omitted in the code examples on this page to make it a closer comparison.
+Pythonkoden som visas här är omflyttad för att göra exemplen tydligare.
 
-The Python code shown below is re-arranged for clarity within the examples.
-
-# The stage
-Here’s how the stage is laid out in our Scratch program:
+# Scenen
+Så här ser scenen ut i vårt Scratchprogram:
 
 <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-stage.png" />
 
-There are just three objects, aside from the background: the bird, and the top and bottom pipes.
+Det finns bara tre objekt förutom bakgrunden: fågeln och det övre och undre röret.
 
-This corresponds to the Pygame Zero code setting these objects up as `Actors`:
-
+Detta motsvarar Pygame Zero-koden för att sätta upp de här objekten som aktörer, `Actor`:
 ```python
 bird = Actor('bird1', (75, 200))
 pipe_top = Actor('top', anchor=('left', 'bottom'))
 pipe_bottom = Actor('bottom', anchor=('left', 'top'))
 ```
 
-In Pygame Zero we also have to ensure we draw these objects. In principle this gives a little more flexibility about how to draw the scene:
+I Pygame Zero ska vi också tänka på att rita de här objekten. I princip ger det oss lite mer flexibilitet hur vi vill rita scenen:
 
 ```python
 def draw():
@@ -37,20 +35,19 @@ def draw():
     bird.draw()
 ```
 
-# Pipe movement
-The pipes move at a constant rate irrespective of the bird. When they move off the left-hand side of the screen, they loop around to the right, and their vertical position moves at random.
+# Att förflytta rören
+Rören åker med konstant fart oberoende av fågeln. När de försvinner ut till vänster på scenen dyker de upp igen till höger och den vertikala placeringen ändras slumpmässigt.
 
-In Scratch this can be achieved by creating two different scripts for the top and bottom pipe.
+I Scratch kan vi uppnå det genom att skapa två olika skript för det övre och undre röret.
 
 <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-top-start.png" alt="_images/flappybird-top-start.png"/> <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-bottom-start.png" alt="_images/flappybird-bottom-start.png"/>
 
-To summarise what’s happening here:
+För att summera vad som händer här:
+- Villkort `x position < -240` är sant när ett rör försvinner ut till vänster på skärmen och det är det som signalen att återställa rören.
+- Variabeln `pipe_height` används för att samordna de två rören. Eftersom avståndet mellan de två rören ska vara samma hela tiden kan vi inte välja höjderna slumpmässigt. Därför har ena röret den här logiken men inte det andra. 
+- `set y position to pipe height +/- 230` placerar ett rör så att det är ovanför `pipe_height` och det andra nedanför `pipe_height`.
 
-- The condition `x position < -240` is true when a pipe is off the left-hand side of the screen, and this is the trigger to reset the pipes.
-- The `pipe_height` variable is used to coordinate the two pipes. Because the gap between them should remain the same, we can’t pick both heights randomly. Therefore one of the scripts has this logic and the other doesn’t.
-- The `set y position to pipe height +/- 230` sets one pipe to be above `pipe_height` and the other pipe below `pipe_height`.
-
-This code becomes much simpler in Pygame Zero. We could write a single function that updates both pipes. In fact I split it a different way to make it clear that the reset actions go together:
+Den här koden blir mycket enklare i Pygame Zero. We kan skriva en enda funktion som uppdaterar båda rören. I själva verket har jag delat upp det på ett annat sätt för att belysa hur koden för att återställa rören hänger ihop, alltså `reset_pipes()`:
 
 ```python
 import random
@@ -72,11 +69,11 @@ def update_pipes():
         reset_pipes()
 ```
 
-A small difference here is that I can extract values that I want to re-use as “constants”, spelled in UPPERCASE. This lets me change them in one place when I want to tune the game. For example, in the code above, I could widen or narrow the gap between the two pipes simply by changing `GAP`.
+En liten skillnad här är att jag kan bryta ut de värden jag vill återanvända som **konstanter**, skrivna med STORA BOKSTÄVER. Det låter mig ändra dem på ett ställe när jag vill finjustera spelet. I koden här uppe t.ex. kan jag göra gapet bredare eller smalare mellan de två rören genom att bara ändra `GAP`.
 
-The biggest thing that differs is that there is no `forever` loop in Python code. This is the big difference between Scratch and most text-based programming languages: you must update the game by one animation step and then return. Returning gives Pygame Zero a chance to do things like processing input or redrawing the screen. Loop forever and the game would just sit there, so any loops need to finish quickly.
+Den största skillnaden är att det inte finns någon `för alltid`-loop i Pythonkod. Det är den stora skillnaden mellan Scratch och de flesta textbaserade programspråk: du måste uppdatera spelet med ett animeringssteg och sen gör `return`. När du gör `return` från din kod har Pygame Zero möjlighet att hantera indata (tangentbord, mus) eller att rita om skärmen. Om du kör en oändlig loop (för alltid) kommer spelet att hänga sig så dina loopar behöver blir klara snabbt.
 
-Pygame Zero calls an `update()` function when it wants you to update the animation by one step, so we just need to a call to `update_walls()`:
+Pygame Zero anropar funktionen `update()` när den vill att du ska animeringen ett steg, så vi behöver bara anropa funktionen `update_walls()`:
 
 ```python
 def update():
