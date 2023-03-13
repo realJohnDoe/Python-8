@@ -14,7 +14,7 @@ Pythonkoden som visas här är omflyttad för att göra exemplen tydligare.
 # Scenen
 Så här ser scenen ut i vårt Scratchprogram:
 
-<img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-stage.png" />
+<img src="https://user-images.githubusercontent.com/4598641/224773342-ab7eb415-b908-42d0-8de4-9b2241e5146b.png" width="400px"/>
 
 Det finns bara tre objekt förutom bakgrunden: fågeln och det övre och undre röret.
 
