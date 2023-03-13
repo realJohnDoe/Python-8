@@ -47,7 +47,7 @@ För att summera vad som händer här:
 - Variabeln `pipe_height` används för att samordna de två rören. Eftersom avståndet mellan de två rören ska vara samma hela tiden kan vi inte välja höjderna slumpmässigt. Därför har ena röret den här logiken men inte det andra. 
 - `set y position to pipe height +/- 230` placerar ett rör så att det är ovanför `pipe_height` och det andra nedanför `pipe_height`.
 
-Den här koden blir mycket enklare i Pygame Zero. We kan skriva en enda funktion som uppdaterar båda rören. I själva verket har jag delat upp det på ett annat sätt för att belysa hur koden för att återställa rören hänger ihop, alltså `reset_pipes()`:
+Den här koden blir mycket enklare i Pygame Zero. Vi kan skriva en enda funktion som uppdaterar båda rören. I själva verket har jag delat upp det på ett annat sätt för att belysa hur koden för att återställa rören hänger ihop, alltså `reset_pipes()`:
 
 ```python
 import random
@@ -81,12 +81,12 @@ def update():
 ```
 
 
-# The Bird
+# Fågeln
 
-The patterns described above for how Scratch logic translates to Python code also apply for the bird logic. Let’s look at the Python code first this time.
+Mönstren vi beskrev tidigare hur Scratchlogiken översätts till Python gäller också för fågelns kod. Den här gången tittar vi först på Pythonkoden.
 
-The code to update the bird is organised into a function called `update_bird()`.
-The first thing this function contains is some code to move the bird according to gravity:
+Koden för att uppdatera fågeln samlar vi funktionen `update_bird()`.
+Det första i den här funktionen lite kod för att flytta fågeln enligt tyngdlagen (gravitationen):
 
 ```python
 GRAVITY = 0.3
@@ -102,11 +102,10 @@ def update_bird():
     bird.x = 75
 ```
 
-This is a simple gravity formula:
-
-- Gravity means constant **acceleration downwards**.
-- Acceleration is change in **velocity**.
-- Velocity is change in **position**.
+Detta är en enkel gravitationsformel:
+- Gravitation betyder konstant **acceleration neråt**.
+- Acceleration är förändringen i **hastighet**.
+- Hastighet är förändringen i **läge**.
 
 To represent this we need to track a variable `bird.vy`, which is the bird’s velocity in the y direction. 
 This is a new variable that we are defining, not something that Pygame Zero provides for us.
