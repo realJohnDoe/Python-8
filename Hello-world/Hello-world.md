@@ -272,7 +272,7 @@ Lägg till kod för att
 
 **main.py**
 ```python
-# Definitionera funktioner här nedanför
+# Definiera funktioner här nedanför
 
 def roll_dice():
   print(f"{python} kan kasta {dice}")
@@ -289,7 +289,7 @@ När du får input from användaren behandlar Python det som text. Men funktione
 Funktionen `int` omvandlar användarens input till ett heltal.
 
 ```python
-# Lägg funktioner här nedanför
+# Definiera funktioner här nedanför
 
 def roll_dice():
   print(f"{python} kan kasta {dice}")
@@ -351,7 +351,7 @@ Klicka på fliken `emoji.py` för att se emoji-variablerna du kan använda. Klic
 Här är ett exempel på en funktion som frågar om hobby:
 **main.py**
 ```python
-# Skriv koden här nedanför
+# Definiera funktioner här nedanför
 def hobbies():
   hobby = input('Vad gillar du?')
   print(f"Det låter {fun}")
