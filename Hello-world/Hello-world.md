@@ -7,7 +7,6 @@
 - [Påbörja en mening](#påbörja-en-mening)
 - [Kunskapsquiz](#kunskapsquiz)
 - [Levla upp ditt projekt](#levla-upp-ditt-projekt)
-- [Nästa steg](#nästa-steg)
 
 # Inledning
 Detta är projekt 1 av 6 i kursen *Introduction to Python: Variables, functions, and loops* från Raspberry Pi Foundation[^1].
@@ -373,10 +372,6 @@ hobbies()
 ```
 
 💾 **Spara** ditt projekt!
-
-# Nästa steg
-
-FIXA
 
 
 # Källor
