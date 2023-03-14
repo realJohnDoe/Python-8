@@ -31,7 +31,8 @@ Det är en tradition att skriva ett program som säger "Hej världen" när man l
 
 ![image](https://user-images.githubusercontent.com/4598641/221660115-f42a80e8-3f73-4bf3-ba6b-e6508cff90b0.png)
 
-:pencil2: Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: https://trinket.io/python/cb3c5d8930
+:pencil2: Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: 
+https://replit.com/@RobertStorlind/Hello-Starter
 
 ![image](https://user-images.githubusercontent.com/4598641/219971993-cc7b2b07-d871-4bff-b6e3-6b234e0b1d43.png)
 
