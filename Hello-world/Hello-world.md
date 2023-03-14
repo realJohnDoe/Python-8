@@ -260,44 +260,49 @@ Symbolen `*` betyder multiplikation så `fire * roll` multiplicerar texten i eld
 **Tips:** Variabler är bra när du behöver samma värde flera gånger i din kod. Att ge variabler bra namn gör också din kod lättare att förstå.
 >Att sätta bra namn på saker är en av de svåraste sakerna när man programmerar.
 
-✏️ Upgrade your dice so that the user can choose the maximum number.
+✏️ Uppgradera din tärning så att användaren kan välja det högsta värdet (antalet sidor).
 
->Lots of games use many-sided dice. In the physical world, dice are made from regular geometric shapes. Common dice include D6, D12, and D20. On a computer, you can generate a random number to make a fair dice with any number of sides.
+>Många spel använder tärningar med många sidor. I verkligheten består tärningar av regelbundna geometriska figurer. Vanliga tärning är D6, D12 och D20. På datorn kan du generera slumptal som motsvarar en tärning med vilket antal sidor som helst.
 
-✏️ The `input()` function asks the user a question and then returns their answer.
+✏️ Funktionen `input()` frågar användare och skickar sen tillbaks svaret.
 
-Add code to ask the user for the biggest number on their dice and then save the result in a variable called `max` and print the number chosen into the output area:
+Lägg till kod för att 
+1. fråga användaren om största talet på hens tärning och 
+2. spara sen resultatet i varabeln `max` och 
+3. skriv ut det i terminalfönstret:
 
 **main.py**
 ```python
-#Put function definitions under here
+# Definitionera funktioner här nedanför
 
 def roll_dice():
-  print(f"{python} can make a {dice}")
-  max = input('How many sides?:') #Wait for input from the user
-  print(f"That's a D{max}") #Use the number the user entered
+  print(f"{python} kan kasta {dice}")
+  max = input('Hur många sidor?:') # Vänta på inmatning från användaren
+  print(f"Det är en D{max}") # Använd värdet som matades in
   roll = randint(1, 6)
-  print(f"You rolled a {roll}")
+  print(f"Du kastade {roll}")
   print(fire * roll)
 ```
 
-Change your `roll` variable code to use `max` as the maximum value for `randint` when it generates a random number.
+Ändra din `roll`-variabel så att koden använder `max` som största värdet i `randint` när vi genererar ett slumptal.
 
-When you get input from the user, Python treats it as text. But, `randint` needs an ‘integer’ (a positive whole number). The `int` function turns the user input into an integer.
+När du får input from användaren behandlar Python det som text. Men funktionen `randint` behöver ett heltal (integer). 
+Funktionen `int` omvandlar användarens input till ett heltal.
 
 ```python
-#Put function definitions under here
+# Lägg funktioner här nedanför
 
 def roll_dice():
-  print(f"{python} can make a {dice}")
-  max = input('How many sides?:') #Wait for input from the user
-  print(f"That's a D{max}") #Use the number the user entered
-  roll = randint(1, int(max)) #randint needs max to be an 'integer'
-  print(f"You rolled a {roll}")
+  print(f"{python} kan kasta {dice}")
+  max = input('Hur många sidor?:') # Vänta på inmatning från användaren
+  print(f"Det är en D{max}") # Använd värdet som matades in
+  roll = randint(1, int(max)) # randint behöver ett heltal max
+  print(f"Du kastade {roll}")
   print(fire * roll)
 ```  
 
-🧪 **Test:** Run your project. When the program reaches the input line, it will wait for you to enter a response before continuing. Try it again with a different input number.
+🧪 **Testa:** Kör ditt projekt. När programmet når raden med input, kommer det att använda på att du matar in ett svar innan det fortsätter.
+Försök igen med ett annat tal.
 
 💾 **Spara** ditt projekt!
 
@@ -311,9 +316,9 @@ Lägg till fler rader till din kod. Här är några förslag på början till me
 
 **main.py**
 ```python
-print(f"I {heart} ...")
-print(f"... makes me {happy}")
-print(f"I'd like to make ... with {python}")
+print(f"Jag {heart} ...")
+print(f"... gör mig {happy}")
+print(f"Jag skulle vilja göra ... med {python}")
 ```
 
 **Tips:** lägg till mellanslag där det behövs.
@@ -321,7 +326,7 @@ print(f"I'd like to make ... with {python}")
 >Den gula hjärt-emojin används ofta för att visa vänskap och lycka.
 
 :pencil2:
-Vilket meddelande skulle du skicka till en kompis för att pigga upp dem? Vilken emoji skulle du välja?
+Vilket meddelande skulle du skicka till en kompis för att pigga upp? Vilken emoji skulle du välja?
 
 Klicka på fliken `emoji.py` tab i repl.it och se vilka emoji-variabler du kan använda. Klicka dig tillbaks till fliken `main.py` för att lägga till i din kod.
 
@@ -347,22 +352,22 @@ Klicka på fliken `emoji.py` för att se emoji-variablerna du kan använda. Klic
 Här är ett exempel på en funktion som frågar om hobby:
 **main.py**
 ```python
-#Put code to run under here
+# Skriv koden här nedanför
 def hobbies():
-  hobby = input('What do you like?')
-  print(f"That sounds {fun}")
-  print(f"You could make a {python} project about {hobby}")
+  hobby = input('Vad gillar du?')
+  print(f"Det låter {fun}")
+  print(f"Du kan göra ett {python}-projekt om {hobby}")
 ```
 
-**Tips:** Don’t forget you will need to call your function as well as define it.
+**Tips:** Kom ihåg att du behöver anropa en funktion som du har definierat.
 
-You can use `input` to make your project wait for the user to tap Enter at any point in this project.
+Du kan använda `input` för att ditt projekt ska vänta tills du trycker på Enter innan det fortsätter köra.
 
 **main.py**
 ```python
 roll_dice()
 
-input() #Wait for the user to tap Enter
+input() # Vänta på att användaren trycker på Enter
 
 hobbies()
 ```
