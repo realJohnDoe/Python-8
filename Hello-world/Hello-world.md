@@ -72,7 +72,7 @@ Vi har förberett några variabler som innehåller emoji-tecken.
 - Du kan skriva ut mer än en sak i taget genom att lägga till det innanför citattecknen. Lägg till mellanslag där det behövs.
 - Klicka på fliken `main.py` för att komma tillbaks till din kod.<br>
 - Ändra din kod så att den också skriver ut variabeln *world*.
-- Lägg till ett **f** före citattecknet så vet Python att du vill använda variabler i din sträng.
+- Lägg till ett **f** före citattecknet så kan du enkelt använda variabler och text i din sträng.
 
 **main.py**
 
