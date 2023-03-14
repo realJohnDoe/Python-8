@@ -22,17 +22,21 @@ Du kommer att:
 - Spara text och tal i **variabler**
 - Använda **funktioner** för att dela upp din kod i mindre bitar
 
-## Testa!
-Du kan testa ett färdigt projekt här: TODO
-
 # Säg hej
 
 Det är en tradition att skriva ett program som säger "Hej världen" när man lär sig ett nytt programspråk.
 
-![image](https://user-images.githubusercontent.com/4598641/221660115-f42a80e8-3f73-4bf3-ba6b-e6508cff90b0.png)
+![image](https://user-images.githubusercontent.com/4598641/220739775-da61c759-eae4-42cd-9f96-5b13c3f7ce3b.png)
 
-:pencil2: Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: 
+:pencil2: Se till att du är inloggad i repl.it.
+
+Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: 
 https://replit.com/@RobertStorlind/Hello-Starter
+
+Spara en egen kopia av startprojektet med knappen
+![image](https://user-images.githubusercontent.com/4598641/225108391-32f24ead-3eb1-4ffb-ad3a-9c18ce5849bb.png)
+
+---
 
 ![image](https://user-images.githubusercontent.com/4598641/219971993-cc7b2b07-d871-4bff-b6e3-6b234e0b1d43.png)
 
@@ -105,7 +109,8 @@ print(f"Welcome to {python}") # Lägg till den här raden
 # Summor och datum
 
 Python är bra på tal och datum.
-![image](https://user-images.githubusercontent.com/4598641/221425501-a8fa5bed-d694-4529-a28b-8ad465316482.png)
+
+![image](https://user-images.githubusercontent.com/4598641/225109246-7ddecc59-4ac9-4b3d-91a8-9f393704e4f3.png)
 
 I Python använder du matematiska symboler för uträkningar:
 
@@ -145,11 +150,13 @@ print( (2 + 4) * (5 + 3) )
 
 Om du ber Python att göra en riktigt stor uträkning kan det hända att svaret tar flera rader i terminalfönstret.
 
-**Tips:** Klicka på pilarna uppe till höger för att se terminalfönstret i helskärmslägge.
+**Tips:** Klicka på de tre prickarna uppe till höger för att få fram menyn. Där kan du välja Maximize för att få ett stort terminalfönster.
 
-![image](https://user-images.githubusercontent.com/4598641/221425982-34cc44ef-02fe-4d99-ba27-1787921c3b3d.png)
+![image](https://user-images.githubusercontent.com/4598641/225109587-2e6252e3-7762-4564-901f-f1fc582312db.png)
 
-För att gå ur helskärmsläge, klicka på ... FIXAS eller Esc-knappen på tangentbordet.
+För att gå ur helskärmsläge, välj Restore i menyn med tre prickar.
+
+![image](https://user-images.githubusercontent.com/4598641/225109859-abe76664-aed9-48fe-b74e-6180e5ea99d7.png)
 
 Raden `from datetime import *` överst i fliken `main.py` hämtar ett bibliotek med användbara funktioner för att hämta datum och tid.
 
