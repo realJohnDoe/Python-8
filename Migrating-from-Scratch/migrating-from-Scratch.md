@@ -107,18 +107,17 @@ Detta är en enkel gravitationsformel:
 - Acceleration är förändringen i **hastighet**.
 - Hastighet är förändringen i **läge**.
 
-To represent this we need to track a variable `bird.vy`, which is the bird’s velocity in the y direction. 
-This is a new variable that we are defining, not something that Pygame Zero provides for us.
+För att hålla reda på detta behöver vi en variabel `bird.vy` som är fågelns hastighet i y-led. Det här är en ny variabel som vi själva definierar, inget som Pygame Zero sköter åt oss.
 
-- Gravity means constant acceleration downwards: `GRAVITY` is greater than 0.
-- Acceleration is change in velocity: `GRAVITY` gets added to `bird.vy`
-- Velocity is change in position: `bird.vy` gets added to `bird.y`
+- Tyngdkraften betyder konstant acceleration nedåt: `GRAVITY`är större än 0.
+- Acceleration är förändring i hastighet: `GRAVITY` läggs till fågelns hastighet `bird.vy`
+- Hastighet är förändring i position: `bird.vy` läggs till `bird.y`. Vi ökar alltså fågelns y-position med hastigheten i det ögonblicket
 
-Note that the bird does not move horizontally! Its x position stays at 75 through the whole game.
-We simulate movement by moving the pipes towards it. This looks as though it’s a moving camera following the bird. 
-So there’s no need for a `vx` variable in this game.
+Tänk på att fågeln inte rör sig horisontellt! x-koordinaten är 75 under hela matchen.
+Vi simulerar rörelse genom att flytta rören mot fågeln.
+Det ser ut som om det är en rörlig kamera som följer fågeln. Så det finns inget behov av en `vx`-variabel i det här spelet.
 
-The next section makes the bird flap its wings:
+Nästa avsnitt får fågeln att flaxa med vingarna:
 ```python
 if not bird.dead:
     if bird.vy < -3:
@@ -127,23 +126,23 @@ if not bird.dead:
         bird.image = 'bird1'
 ```
 
-This checks if the bird is moving upwards or downwards. 
-We show the `bird2` image if it is moving upwards fast and the `bird1` image otherwise.
-(&ndash;3 was picked by trial and error to make this look convincing).
+Detta kontrollerar om fågeln rör sig uppåt eller neråt. 
+Vi visar `bird2`-bilden om den rör sig snabbt uppåt och `bird1`-bilden annars.
+&ndash;3 prövade vi oss fram till för att få detta att se övertygande ut.
 
-The next section checks if the bird has collided with a wall:
-
+Nästa avsnitt kontrollerar om fågeln har krockat med en vägg:
 ```python
 if bird.colliderect(pipe_top) or bird.colliderect(pipe_bottom):
     bird.dead = True
     bird.image = 'birddead'
 ```
 
-If so we set `bird.dead` to `True`.
-This is a boolean value meaning it is either `True` or `False`.
-We can use this to easily check if the bird is alive. If it isn’t alive it won’t respond to player input.
+Om så är fallet sätter vi `bird.dead` till `True`.
+Detta är ett booleskt värde, ett sanningsvärde som är antingen True eller False. 
+Vi kan använda det för att enkelt kontrollera om fågeln är vid liv.
+Om den inte är levande kommer den inte att svara på spelarens input.
 
-And the final section checks if the bird has fallen off the bottom (or the top) of the game screen. If so it resets the bird:
+Och det sista avsnittet kontrollerar om fågeln har fallit ner från botten eller toppen av spelskärmen. Om så är fallet återställer den fågeln:
 
 ```python
 if not 0 < bird.y < 720:
@@ -153,9 +152,11 @@ if not 0 < bird.y < 720:
     reset_pipes()
 ```
 
-What’s `reset_pipes()` doing there? Because I’d organised my pipes code to be a separate function, I can just call it whenever I want to reset my walls. In this case it makes it a better game because it gives the player a chance to react when the bird moves back to its start position.
+Vad gör `reset_pipes()`?
+Eftersom jag hade gjort koden för röret som en separat funktion, kan jag lätt anropa den när jag vill återställa väggarna.
+I det här fallet gör det spelet bättre eftersom spelaren får en chans att reagera när fågeln flyttar tillbaka till sin startposition.
 
-Again, this needs to be called every frame, so we add it to `update()`:
+Vi behöver anropa det här varje gång bilde uppdateras, så vi lägger till det i `update()`:
 
 ```python
 def update():
@@ -163,7 +164,9 @@ def update():
    update_bird()
 ```
 
-The final part of the bird logic is that it has to respond to player control. When we press a key, the bird flaps upwards. Pygame Zero will call an `on_key_down()` function &ndash; if you’ve defined one &ndash; whenever a key is pressed:
+Den sista delen av fågellogiken är att den måste svara på spelarkontroll.
+När vi trycker på en tangent flaxar fågeln uppåt. 
+Pygame Zero kommer att anropa funktionen `on_key_down()` när en knapp trycks ner, om du har definierat en funktion med det namnet.
 
 ```python
 FLAP_VELOCITY = -6.5
@@ -173,15 +176,14 @@ def on_key_down():
         bird.vy = FLAP_VELOCITY
 ```
 
-Here, if the bird is not dead, we set its `vy` to a negative number: in Pygame Zero this means it starts moving upwards.
+Om fågeln inte är död, sätter vi den `vy` (hastigheten) till ett negativt tal: i Pygame Zero betyder det att den börjar röra sig uppåt.
 
-You should be able to find a lot of parallels between the Python code and this Scratch code:
+Du kan nog hitta många paralleller mellan Python-koden och den här Scratch-koden:
 
 <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-bird-start.png"/> <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-bird-space.png"/>
 
-The biggest differences between Scratch and Pygame Zero are these:
-
-- You cannot loop forever in Pygame Zero &ndash; just update for one frame and then return.
+De största skillnaderna mellan Scratch och Pygame Zero är dessa:
+- Du kan inte loopa för evigt i Pygame Zero &ndash; du uppdaterar för en bildruta i taget.
 - The coordinates are different. In Pygame Zero, the top left of the screen is (x, y = (0, 0). The x direction goes from left to right as before, but y goes down the screen! This is why `GRAVITY` is a positive number and `FLAP_VELOCITY` is a negative number in Python.
 - `bird.dead` is a bool, so I can write code like `if not bird.dead` instead of `dead = 0` as in Scratch.
 
