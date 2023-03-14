@@ -169,8 +169,8 @@ Hämta aktuellt datum och aktuell tid med funktionen `now()` i **datetime**-bibl
 **main.py**
 ```
 print(f"{python} är mycket bra på {sums}")
-print(230 * 5782 ** 2 / 23781) #Print the result of the sum
-print(f"The {calendar} {clock} is {datetime.now()}") #Print with emoji
+print(230 * 5782 ** 2 / 23781) # Skriv resultatet av uträkningen
+print(f"{calendar} {clock} är {datetime.now()}") # Skriv med emoji
 ```
 
 **Tips:** du behöver inte mata in kommentarerna; de är till för att du ska förstå koden. Det räcker att skriva det som står före `#`.
@@ -196,68 +196,69 @@ Definiera en ny funktion som heter `roll_dice()` som använder funktionen `randi
 
 **main.py**
 ```python
-#Put function definitions under here
+# Definiera funktioner här nedanför
 
-def roll_dice(): #Don't forget the colon at the end of this line
-  printf("{python} can make a {dice}")
-  print(f"You rolled a {randint(1, 6)}")
+def roll_dice(): # Glöm inte kolon i slutet av den här raden
+  printf("{python} kan göra en {dice}")
+  print(f"Du rullade {randint(1, 6)}")
 ```
 
 Raderna under `def roll_dice():` är indragna. För att göra indrag kan du använda Tab-tangenten på tangentbordet; den finns oftast ovanför Caps Lock till vänster. Indraget talar om för Python att raderna med indrag hör till funktionen.
 
 **Tips:** Understrykningen `_` används mellan ord i variabler och funktionsnamn i Python för att göra dem mer lättlästa. Man kan inte ha mellanslag i variabel- och funktionsnamn.
 
-🧪 **Testa:** If you ‘Run’ your code now, it won’t roll a dice. That’s because you have defined the `roll_dice()` function, but not called it yet.
+🧪 **Testa:** Om kör du din kod nu med Run, kommer den inte att rulla någon tärning. Det är för att du har definierat funktionen `roll_dice()` men inte anropat den än.
 
-✏️ To use a function, you need to call it in the code. Go to the end of your code and add a new line to call the `roll_dice()` function:
+✏️ FÖr att använda en funktion behöver du anropa den i koden. Gå till slutet av din kod och lägg till ett anrop till funktionen `roll_dice()`.
 
 **main.py**
 ```python
-print(f"The {calendar} {clock} is {datetime.now()}")
+print(f"{calendar} {clock} är {datetime.now()}")
 
-roll_dice() #Call the roll dice function
+roll_dice() # Anropa funktionen
 ```
 
-🧪 **Test:** Run your project several times to see the random dice roll each time.
+🧪 **Testa:** Kör ditt projekt flera gånger för att se det slumpmässiga tärningskastet varje gång.
 
-🤔 **Debug:** Make sure you have an underscore _ between roll and dice to make the function name. Make sure you have a colon : at the end of the line.
+🤔 **Leta fel:** Kolla att du har en understrykning `_` mellan `roll` och `dice` i funktionsnamnet. Kolla att du har ett kolon (:) i slutet på raden.
 
-🤔 **Debug:** Check that the lines under `def roll_dice()` are indented. It’s really common to get this wrong in Python, so make sure to check.
+🤔 **Leta fel:** Kolla att raderna under `def roll_dice()` är indragna. Det är lätt att det blir fel i Python, så kolla noga.
 
 ![image](https://user-images.githubusercontent.com/4598641/221656767-bfb7b85f-cb00-4915-8712-e22f5f6918b9.png)
 
->Uses of random numbers include cryptography, data science, and adding variety into games and computer art. Computers generate random numbers using an algorithm. For numbers that are really random, you need an unpredictable input from the real world.
+>Slumptal har vi nytta av inom kryptografi, datavetenskap och för att göra spel och datorkonst mer omväxlande. Datorer genererar slumptal med en algoritm. För att få äkta slumptal behövs en oförutsägbar källa från omgivningen utanför datorn.
 
-The fire variable stores a 🔥 emoji. The code `print(fire * 3)` outputs three fire emoji ‘🔥🔥🔥’. You need to output the correct number of emoji to match the number rolled.
+Variabeln `fire` innehåller emojin 🔥. Koden `print(fire * 3)` skriver ut tre eld-emoji: ’🔥🔥🔥’. Du behöver skriva ut samma antal emoji som tärningskastet.
 
 <details>
-  <summary>🔥🤔 What would happen if you use print(fire * randint(1, 6))?</summary>
+  <summary>🔥🤔 Vad händer om du skriver `print(fire * randint(1, 6))`?</summary>
   
-  You would get a new random number that is usually different from your first random number.
+  Då får du ett nytt slumptal som oftast inte är samma som det första du fick.
 </details>
 
-Hmm, how can you make sure you use the same random number?
+Hmm, hur kan du göra så att du använder samma slumptal?
 
-✏️ Change your code to save the value returned by `randint()` in a variable called `roll` and then use that variable to print out the number rolled with the matching number of 🔥 emoji.
+✏️ Ändra din kod så att den sparar värdet från `randint()` i variabeln `roll` och sen använder den variabeln för att skriva ut tärningskastet med rätt antal 🔥-emoji.
 
 **main.py**
 ```python
-#Put function definitions under here
+# Definiera funktioner här nedanför
 
 def roll_dice():
-  print(f"{python} can make a {dice}")
-  roll = randint(1, 6) #Generate a random number between 1 and 6
-  print(f"You rolled a {roll}") #Print the value of the roll variable
-  print(fire * roll) #Repeat the fire emoji to match the dice roll
+  print(f"{python} kan kasta {dice}")
+  roll = randint(1, 6) # Generera ett slumptal mellan 1 och 6
+  print(f"Du kastade {roll}") # Skriv ut variabelns värde
+  print(fire * roll) # Upprepa eld-emojin så det stämmer med tärningskastet
 ```
 
-You can use star or heart instead of fire if you prefer.
+Du kan använda en stjärna eller ett hjärta istället för eld om du så vill.
 
-The symbol `*` means multiply so `fire * roll` multiples the text in the fire variable (‘🔥’) by the number contained in the roll variable.
+Symbolen `*` betyder multiplikation så `fire * roll` multiplicerar texten i eld-variabeln (’🔥’) med talet i variabeln `roll`.
 
-🧪 **Testa:** Test your project a few times. Make sure you understand how the code works.
+🧪 **Testa:** Testa ditt projekt några gånger. Övertyga dig om hur koden fungerar.
 
-**Tips:** Variables are useful when you need to use the same value multiple times in your code. Giving variables a sensible name also makes your code easier to understand.
+**Tips:** Variabler är bra när du behöver samma värde flera gånger i din kod. Att ge variabler bra namn gör också din kod lättare att förstå.
+>Att sätta bra namn på saker är en av de svåraste sakerna när man programmerar.
 
 ✏️ Upgrade your dice so that the user can choose the maximum number.
 
