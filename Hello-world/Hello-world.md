@@ -198,7 +198,7 @@ Definiera en ny funktion som heter `roll_dice()` som använder funktionen `randi
 # Definiera funktioner här nedanför
 
 def roll_dice(): # Glöm inte kolon i slutet av den här raden
-  printf("{python} kan göra en {dice}")
+  printf("{python} kan kasta {dice}")
   print(f"Du rullade {randint(1, 6)}")
 ```
 
