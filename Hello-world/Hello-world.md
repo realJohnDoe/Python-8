@@ -9,7 +9,7 @@
 - [Levla upp ditt projekt](#levla-upp-ditt-projekt)
 
 # Inledning
-Detta är projekt 1 av 6 i kursen *Introduction to Python: Variables, functions, and loops* från Raspberry Pi Foundation[^1].
+Detta är projekt nr 1 ur kursen *Introduction to Python: Variables, functions, and loops* från Raspberry Pi Foundation[^1].
 
 ## Detta kommer du att göra
 Ta reda på vad programmeringsspråket Python kan göra, genom att koda ett interaktivt projekt som använder emoji.
