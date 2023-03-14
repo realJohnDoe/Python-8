@@ -183,7 +183,7 @@ print(f"{calendar} {clock} är {datetime.now()}") # Skriv med emoji
 # Kasta en tärning
 Python kan generera slumptal som man kan ha till en digital tärning.
 
-![image](https://user-images.githubusercontent.com/4598641/221656170-ab488718-ae5d-4ac4-bb4f-c1aff8ca1229.png)
+![image](https://user-images.githubusercontent.com/4598641/225118079-4ccafd48-d670-46b2-bbcb-72d69cbbe417.png)
 
 I Python **kallar du på**, anropar, en **funktion** för att göra något. Du har redan använt funktionen `print()` för att skriva ut text.
 
@@ -208,7 +208,7 @@ Raderna under `def roll_dice():` är indragna. För att göra indrag kan du anv�
 
 🧪 **Testa:** Om kör du din kod nu med Run, kommer den inte att rulla någon tärning. Det är för att du har definierat funktionen `roll_dice()` men inte anropat den än.
 
-✏️ FÖr att använda en funktion behöver du anropa den i koden. Gå till slutet av din kod och lägg till ett anrop till funktionen `roll_dice()`.
+✏️ För att använda en funktion behöver du anropa den i koden. Gå till slutet av din kod och lägg till ett anrop till funktionen `roll_dice()`.
 
 **main.py**
 ```python
