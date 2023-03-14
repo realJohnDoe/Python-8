@@ -91,8 +91,8 @@ Lägg till en ny rad för att skriva mer text och emoji:
 
 **main.py**
 ```python
-print(f"Hello {world}")
-print(f"Welcome to {python}") # Lägg till den här raden
+print(f"Hej {world}")
+print(f"Välkommen till {python}") # Lägg till den här raden
 ```
 
 **Tips:** Koden du behöver skriva in är markerad. Koden utan markering hjälper dig att hitta var den nya koden ska hamna.
@@ -103,7 +103,7 @@ print(f"Welcome to {python}") # Lägg till den här raden
 
 🤔 **Leta fel:** Kontrollera noga parenteser, citattecken och stavning. Python är väldigt petigt.
 
-💾 Om du har ett konto på repl.it, kan du klicka på Remix och spara en egen kopia av projektet i din repl.it.
+💾 Om du har ett konto på repl.it, kan du klicka på Fork och spara en egen kopia av projektet i din repl.it.
 
 # Summor och datum
 
@@ -125,9 +125,9 @@ Lägg till två `print()`-rader till i din kod där den ena är en räkneuppgift
 
 **main.py**
 ```python
-print(f"Hello {world}")
-print(f"Welcome to {python}")
-print(f"{python} is very good at {sums}")
+print(f"Hej {world}")
+print(f"Välkommen till {python}")
+print(f"{python} är bra på {sums}")
 print(230 * 5782 ** 2 / 23781)
 ```
 
