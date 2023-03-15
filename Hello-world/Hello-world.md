@@ -223,7 +223,7 @@ roll_dice() # Anropa funktionen
 
 🤔 **Leta fel:** Kolla att raderna under `def roll_dice()` är indragna. Det är lätt att det blir fel i Python, så kolla noga.
 
-![image](https://user-images.githubusercontent.com/4598641/221656767-bfb7b85f-cb00-4915-8712-e22f5f6918b9.png)
+![image](https://user-images.githubusercontent.com/4598641/225387845-a9b9934f-5b99-4fd1-a48b-f197f8c280b3.png)
 
 >Slumptal har vi nytta av inom kryptografi, datavetenskap och för att göra spel och datorkonst mer omväxlande. Datorer genererar slumptal med en algoritm. För att få äkta slumptal behövs en oförutsägbar källa från omgivningen utanför datorn.
 
