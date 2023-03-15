@@ -33,7 +33,7 @@ Bilden med rymdskeppet behöver ligger i mappen **images** i projektet.
 ![image](https://user-images.githubusercontent.com/4598641/222978313-4661f08c-e673-40be-87be-5fa1d8d06de8.png)
 
 >Frivilligt: Det finns andra bilder om du vill byta. Ladda ner ZIP-arkivet, packa upp och ladda sen upp önskad bild till ditt projekt.
->[Här finns ZIP-arkivet med bilder](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/image_pack.zip).
+>Här finns ZIP-arkivet med bilder: https://www.aposteriori.com.sg/wp-content/uploads/2020/02/image_pack.zip.
 >**Obs!** Bildens filnamn kan bara innehålla små bokstäver, siffror och understrykning `_`.
 
 Nu ska du lägga till rymdskeppet till ditt Pythonprogram.
