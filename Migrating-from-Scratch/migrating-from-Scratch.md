@@ -4,7 +4,7 @@
 Den här handledningen jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
 
 - Här finns projektet i Scratch 3: https://scratch.mit.edu/projects/820017699
-- Här finns versionen i repl.it: https://replit.com/@RobertStorlind/flappy-bird-pope **FIXA:SKALNING AV GRAFIKELEMENTEN**
+- Här finns versionen i repl.it: https://replit.com/@RobertStorlind/flappy-bird-pope
 
 >Versionen för Pygame Zero (https://github.com/lordmauve/pgzero/blob/stable/examples/flappybird/flappybird.py) finns med i Pygame Zero-projektet.
 
