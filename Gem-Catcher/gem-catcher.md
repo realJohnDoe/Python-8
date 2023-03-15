@@ -9,7 +9,7 @@
 
 # Första koden
 
-Öppna startprojektet här i repl.it: https://replit.com/@RobertStorlind/gem-catcher-starter
+✏️ Öppna startprojektet här i repl.it: https://replit.com/@RobertStorlind/gem-catcher-starter
 
 Skelettet för ett Pygame Zero-program ser ut så här:
 ```python
@@ -32,17 +32,16 @@ Bilden med rymdskeppet behöver ligger i mappen **images** i projektet.
 
 ![image](https://user-images.githubusercontent.com/4598641/222978313-4661f08c-e673-40be-87be-5fa1d8d06de8.png)
 
->Frivilligt: Det finns andra bilder om du vill byta. Ladda ner ZIP-arkivet, packa upp och ladda sen upp önskad bild till ditt projekt.
+>**Frivilligt:** Det finns andra bilder om du vill byta. Ladda ner ZIP-arkivet, packa upp och ladda sen upp önskad bild till ditt projekt.
 >Här finns ZIP-arkivet med bilder: https://www.aposteriori.com.sg/wp-content/uploads/2020/02/image_pack.zip.
 >**Obs!** Bildens filnamn kan bara innehålla små bokstäver, siffror och understrykning `_`.
 
-Nu ska du lägga till rymdskeppet till ditt Pythonprogram.
+✏️ Nu ska du lägga till rymdskeppet till ditt Pythonprogram.
 
 ```python
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -72,13 +71,12 @@ Detta är vad raderna gör:
 
 Vi la till funktionen `draw()` innan. Det är en speciell funktion som Pygame Zero kör regelbundet för att rita det du ser på skärmen. En annan speciell funktion är `update()`. Pygame Zero anrop regelbundet vår `update()`-funktion för att uppdatera/rita om de olika figurerna i spelet.
 
-Vi lägger till kod i `update()` så att den kan reagera på tangentnertryckningar, i vårt fall vänster- och högerpil.
+✏️ Vi lägger till kod i `update()` så att den kan reagera på tangentnertryckningar, i vårt fall vänster- och högerpil.
 
 ```python
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -110,19 +108,21 @@ Om den är det, minskar vi rymdskeppets x-position med 5. Om högerpilen är ner
 **Testa** programmet med gröna "Run"-knappen i repl.it. Funkar koden som du väntade dig?
 
 ## Radera skärmen
+
 Om du testade programmet så här långt, fick du något knasigt i den här stilen:
 
 ![image](https://user-images.githubusercontent.com/4598641/222978681-7aa59c8e-4b41-49ae-8415-e5df0db6b51d.png)
 
 Det är för att koden talar om för Pygame Zero att uppdatera skeppets position och rita det på skärmen, men vi bad aldrig om att sudda ut det som redan var ritat på skärmen.
 
-För att sudda skärmen, fyller vi hela skärmen med en färg. Det gör vi i `draw()`-funktionen så här:
+✏️För att sudda skärmen, fyller vi hela skärmen med en färg. Det gör vi i `draw()`-funktionen så här:
 ```python
 screen.fill((80, 0, 70))
 ```
 Det som står inom parenteser, `(80, 0, 70)`, kallas i Python för *tuple*; det fungerar som en lista med värden som inte går att ändra och talar om vilken färgblandning vi vill ha. Det första talet (80) är för färgen rött, det andra (0) för grönt och det tredje (70) är för blått. Det största värdet man kan ha för någon färgkomponent är 255 och det minsta värdet är 0. **Testa olika värden och se vad du får!**
 
-I Chrome kan du öppna en färgväljare genom att trycka tangentkombinationen ctrl+shift+I och sedan klicka på en av de små kvadratikonerna som du kan se i fliken Styles. Se bilden!
+>**Frivilligt:**
+>I Chrome kan du öppna en färgväljare genom att trycka tangentkombinationen ctrl+shift+I och sedan klicka på en av de små kvadratikonerna som du kan se i fliken Styles. Se bilden!
 
 ![image](https://user-images.githubusercontent.com/4598641/223195080-7bda1b3d-89e9-479a-bebe-936a332b1408.png)
 
@@ -130,8 +130,7 @@ Nu ska ditt program se ut så här:
 ```
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -156,7 +155,7 @@ Spelet kan ju inte heta *Gem Catcher* om det inte finns en ädelsten! Det finns 
 
 ![image](https://user-images.githubusercontent.com/4598641/222978860-59fdc056-ee3c-4d15-bca8-09b80051d3c9.png)
 
-Lägg nu till en ny *Actor* som representerar ädelstenen:
+✏️ Lägg nu till en ny *Actor* som representerar ädelstenen:
 ```python
 gem = Actor('gemgreen')
 gem.x = WIDTH / 2 - 50
@@ -173,8 +172,7 @@ Din kod ska nu se ut så här:
 ```python
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -214,13 +212,12 @@ if gem.y > HEIGHT:
     gem.y = 0
 ```
 
-Lägg till det i din kod!
+✏️ Lägg till det i din kod!
 
 ```python
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -266,19 +263,20 @@ eller
 if ship.colliderect(gem):
     gem.y = 0
 ```
-**Testa det i din kod!**
+**✏️ Testa det i din kod!**
 
 ## Slumptal med `random()`
+
 Det är inte så spännande av låta ädelstenen falla från samma ställe varje gång.
 I tidigare Python-projekt har du förmodligen redan använt modulen `random` för slumptal.
 Här ska vi använda den för att slumpa fram ädelstenens x-position.
 
-Innan vi kan använda modulen, behöver vi importera den.
+✏️ Innan vi kan använda modulen, behöver vi importera den.
 ```python
 import random
 ```
 
-För att ge ädelstenen en slumpmässig x-position använder vi
+✏️ För att ge ädelstenen en slumpmässig x-position använder vi
 ```python
 gem.x = random.randint(20, WIDTH - 20)
 ```
@@ -288,8 +286,7 @@ Nu bör din kod se ut så här:
 ```python
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -325,12 +322,13 @@ pgzrun.go() # Måste vara sista raden
 ## En variabel som räknar poäng
 
 Vi kan lätt hålla reda på poängen med en variabel.
-Lägg till en variabel som heter `score` (poäng går också bra) och sätt den till 0 i början av programmet.
+
+✏️ Lägg till en variabel som heter `score` (poäng går också bra) och sätt den till 0 i början av programmet.
 
 ```python
 score = 0
 ```
-Nu ökar vi `score` med 1 varje gång rymdskeppet fångar ädelstenen.
+✏️ Nu ökar vi `score` med 1 varje gång rymdskeppet fångar ädelstenen.
 
 ```python
 if gem.colliderect(ship):
@@ -347,7 +345,7 @@ UnboundLocalError: local variable 'score' referenced before assignment
 
 Det är för att variabeln `score` är deklarerad utanför funktionen `update()`, men vi försöker ändra värdet inne i funktionen `update()`.
 
-I Python kan vi *läsa* variabler som finns utanför funktionen &ndash; de kallas globala variabler. Men vi kan inte skriva (ändra) dem om vi inte har deklarerat dem som `global` inuti funktionen.
+✏️ I Python kan vi *läsa* variabler som finns utanför funktionen &ndash; de kallas globala variabler. Men vi kan inte skriva (ändra) dem om vi inte har deklarerat dem som `global` inuti funktionen.
 
 ```python
 global score
@@ -374,7 +372,7 @@ def update():
 
 ## Visa poäng
 
-För att visa poängen använder vi funktionen `screen.draw.text()`.
+✏️ För att visa poängen använder vi funktionen `screen.draw.text()`.
 
 ```python
 screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30)
@@ -393,8 +391,7 @@ Som med de andra ritfunktionerna, behöver vi lägga detta inuti funktionen `dra
 ```python
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -437,7 +434,7 @@ Vi kan också ändra vårt spel så att det fungerar med mus.
 Precis som Scratch så är Pygame Zero händelsebaserat.
 Det betyder att när en viss händelse inträffar, t.ex. att en musknapp trycks ner, så anropar Pygame Zero motsvarande funktion, t.ex. `on_mouse_down`.
 
-För att känna av när musen rör sig, kan vi använda funktionen `on_mouse_move(pos, rel, buttons)` function. Pröva att lägga till det här i ditt spel:
+✏️ För att känna av när musen rör sig, kan vi använda funktionen `on_mouse_move(pos, rel, buttons)` function. Pröva att lägga till det här i ditt spel:
 
 ```
 def on_mouse_move(pos, rel, buttons):
@@ -499,7 +496,7 @@ Just nu är spelet för lätt.
 Utan att skryta kan jag lätt få över 300 poäng utan ansträngning.
 Vi gör det svårare genom att låta ädelstenen falla fortare ju högre poängen är.
 
-Let upp den här raden:
+✏️ Leta upp den här raden:
 ```python
 gem.y += 4
 ```
@@ -515,7 +512,7 @@ Det är inte så värst kul att spela ett spel som man inte kan förlora.
 Vi lägger till ett Game Over-läge.
 Om ädelstenen rör vi skärmens underkant, avslutas spelet.
 
-Lägg först till en ny variabel som heter `game_over` och sätt den till `False`.
+✏️ Lägg först till en ny variabel som heter `game_over` och sätt den till `False`.
 
 ```python
 game_over = False
@@ -560,8 +557,7 @@ Till slut bör din kod se ut så här:
 ```python
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
