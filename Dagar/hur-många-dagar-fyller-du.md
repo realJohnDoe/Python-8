@@ -14,7 +14,7 @@ Hur kan du använda den informationen för att räkna ut hur många dagar du fyl
 
 Vi börjar med hur det ska se ut när vi kör appen.
 1. Appen ska fråga efter ett startdatum, alltså år, månad, dag. Det kan t.ex. vara användarens födelsedatum
-1. Sen ska det fråga efter ett slutdatum, alltså år, månad, dag. Det kan t.ex. vara dagens datum
+1. Sen ska den fråga efter ett slutdatum, alltså år, månad, dag. Det kan t.ex. vara dagens datum
 1. Appen ska skriva `Det är 5432 dagar mellan datumen` (t.ex.) och sen avsluta
 
 
