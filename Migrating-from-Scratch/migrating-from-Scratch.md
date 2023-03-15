@@ -1,5 +1,5 @@
 # Att flytta över från Scratch
->Detta är en svensk översättning av Daniel Popes guide, https://pygame-zero.readthedocs.io/en/stable/from-scratch.html, lätt uppdaterad.
+>Detta är en svensk översättning av Daniel Popes guide, https://pygame-zero.readthedocs.io/en/stable/from-scratch.html, lätt bearbetad.
 
 Den här handledningen **jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero**. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
 
