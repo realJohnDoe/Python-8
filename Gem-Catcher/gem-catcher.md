@@ -9,7 +9,9 @@
 
 # Första koden
 
-✏️ Öppna startprojektet här i repl.it: https://replit.com/@RobertStorlind/gem-catcher-starter
+✏️ Se till att vara inloggad i repl.it. Öppna startprojektet här i repl.it: https://replit.com/@RobertStorlind/gem-catcher-starter
+
+Spara en egen kopia med knappen **Fork**.
 
 Skelettet för ett Pygame Zero-program ser ut så här:
 ```python
