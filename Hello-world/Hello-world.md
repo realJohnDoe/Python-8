@@ -309,7 +309,7 @@ Försök igen med ett annat tal.
 
 Skriv ut fler meningar med ditt projekt.
 
-![image](https://user-images.githubusercontent.com/4598641/221963087-1528815a-192f-44bd-9823-f544900070a9.png)
+![image](https://user-images.githubusercontent.com/4598641/225389001-3c003bd6-08b0-47b9-8442-ec4b1f38f854.png)
 
 Lägg till fler rader till din kod. Här är några förslag på början till meningar:
 
