@@ -21,7 +21,8 @@ För att göra vårt spel ska vi använda vad vi lärt oss från spelet Gem Catc
 - listor med figurer (aktörer).
 
 ## Nytt projekt
-Börja med göra en egen kopia av startprojektet i repl.it: FIXA:LÄNK
+✏️ Se till att du är inloggad i repl.it. Öppna startprojektet i repl.it: https://replit.com/@RobertStorlind/ninja-runner-starter.
+Använd knappen **Fork** för att spara en kopia.
 
 # Bakgrund
 ## Första steget
@@ -33,8 +34,7 @@ Precis som i Gem Catcher börjar vi koda vårt spel genom att
 ```python
 import pgzrun
 
-WIDTH=800
-HEIGHT=600
+WIDTH, HEIGHT = 800, 600
 
 pgzrun.go() # Måste vara sista raden
 ```
@@ -54,8 +54,7 @@ För tillfället ska vi bara använda `screen.draw.filled_rect()`. Den ritar en 
 ```python
 import pgzrun
 
-WIDTH=800
-HEIGHT=600
+WIDTH, HEIGHT = 800, 600
 
 def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
@@ -77,8 +76,7 @@ Steget innan ritade himlen. Vi lägger till en andra rektangel för att rita mar
 ```python
 import pgzrun
 
-WIDTH=800
-HEIGHT=600
+WIDTH, HEIGHT = 800, 600
 
 def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
@@ -117,8 +115,7 @@ Detta kollar vad den aktuella bilden är och byter till nästa. Det fungerar men
 import pgzrun
 from pgzhelper import *
 
-WIDTH=800
-HEIGHT=600
+WIDTH, HEIGHT = 800, 600
 
 def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
@@ -160,8 +157,7 @@ We'll also need to add runner.draw() into the draw() function. Once completed, y
 import pgzrun
 from pgzhelper import *
 
-WIDTH=800
-HEIGHT=600
+WIDTH, HEIGHT = 800, 600
 
 runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
@@ -265,8 +261,7 @@ Ditt program bör nu se ut så här:
 import pgzrun
 from pgzhelper import *
 
-WIDTH=800
-HEIGHT=600
+WIDTH, HEIGHT = 800, 600
 
 runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
@@ -351,8 +346,7 @@ Nu ska ditt program se ut ungefär så här:
 import pgzrun
 from pgzhelper import *
 
-WIDTH=800
-HEIGHT=600
+WIDTH, HEIGHT = 800, 600
 
 runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
@@ -489,8 +483,7 @@ Ditt spel bör se ut så här till slut:
 import pgzrun
 from pgzhelper import *
 
-WIDTH=800
-HEIGHT=600
+WIDTH, HEIGHT = 800, 600
 
 runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
