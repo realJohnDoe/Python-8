@@ -1,13 +1,13 @@
 # Att flytta över från Scratch
->Detta är en svensk översättning av Daniel Popes guide, https://pygame-zero.readthedocs.io/en/stable/from-scratch.html
+>Detta är en svensk översättning av Daniel Popes guide, https://pygame-zero.readthedocs.io/en/stable/from-scratch.html, lätt uppdaterad.
 
 Den här handledningen jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
 
-[Versionen för Pygame Zero](https://github.com/lordmauve/pgzero/blob/stable/examples/flappybird/flappybird.py) finns med i Pygame Zero-projektet.
+Versionen för Pygame Zero (https://github.com/lordmauve/pgzero/blob/stable/examples/flappybird/flappybird.py) finns med i Pygame Zero-projektet.
 
-Du kan också ladda ner versionen för Scratch 1.4 och [versionen för Scratch 3](https://github.com/lordmauve/pgzero/raw/master/examples/flappybird/Flappy%20Bird.sb3) från den här länken.
+Du kan också ladda ner versionen för Scratch 1.4 och versionen för Scratch 3 (https://github.com/lordmauve/pgzero/raw/master/examples/flappybird/Flappy%20Bird.sb3) om du vill provköra.
 
-Versionen för Pygame Zero innehåller logik för poängräkning som vi utelämnar i kodexemplenm på den här sidan för att ge en mer rättvis jämförelse.
+Versionen för Pygame Zero innehåller logik för poängräkning som vi utelämnar i kodexemplen på den här sidan för att ge en mer rättvis jämförelse.
 
 Pythonkoden som visas här är omflyttad för att göra exemplen tydligare.
 
@@ -16,9 +16,9 @@ Så här ser scenen ut i vårt Scratchprogram:
 
 <img src="https://user-images.githubusercontent.com/4598641/224773342-ab7eb415-b908-42d0-8de4-9b2241e5146b.png" width="400px"/>
 
-Det finns bara tre objekt förutom bakgrunden: fågeln och det övre och undre röret.
+Det finns bara tre föremål förutom bakgrunden: fågeln och det övre och undre röret.
 
-Detta motsvarar Pygame Zero-koden för att sätta upp de här objekten som aktörer, `Actor`:
+Motsvarande kod i Pygame Zero för att sätta upp de här objekten som aktörer, `Actor`, ser ut så här:
 ```python
 bird = Actor('bird1', (75, 200))
 pipe_top = Actor('top', anchor=('left', 'bottom'))
@@ -43,11 +43,12 @@ I Scratch kan vi uppnå det genom att skapa två olika skript för det övre och
 <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-top-start.png" alt="_images/flappybird-top-start.png"/> <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-bottom-start.png" alt="_images/flappybird-bottom-start.png"/>
 
 För att summera vad som händer här:
-- Villkort `x position < -240` är sant när ett rör försvinner ut till vänster på skärmen och det är det som signalen att återställa rören.
+- Villkoret `x position < -240` är sant när ett rör försvinner ut till vänster på skärmen och det är det som ger signalen att återställa rören.
 - Variabeln `pipe_height` används för att samordna de två rören. Eftersom avståndet mellan de två rören ska vara samma hela tiden kan vi inte välja höjderna slumpmässigt. Därför har ena röret den här logiken men inte det andra. 
 - `set y position to pipe height +/- 230` placerar ett rör så att det är ovanför `pipe_height` och det andra nedanför `pipe_height`.
 
-Den här koden blir mycket enklare i Pygame Zero. Vi kan skriva en enda funktion som uppdaterar båda rören. I själva verket har jag delat upp det på ett annat sätt för att belysa hur koden för att återställa rören hänger ihop, alltså `reset_pipes()`:
+Den här koden blir mycket enklare i Pygame Zero. Vi kan skriva en enda funktion som uppdaterar båda rören.
+I själva verket har jag delat upp det på ett annat sätt för att belysa hur koden för att återställa rören hänger ihop, alltså `reset_pipes()`:
 
 ```python
 import random
@@ -71,7 +72,10 @@ def update_pipes():
 
 En liten skillnad här är att jag kan bryta ut de värden jag vill återanvända som **konstanter**, skrivna med STORA BOKSTÄVER. Det låter mig ändra dem på ett ställe när jag vill finjustera spelet. I koden här uppe t.ex. kan jag göra gapet bredare eller smalare mellan de två rören genom att bara ändra `GAP`.
 
-Den största skillnaden är att det inte finns någon `för alltid`-loop i Pythonkod. Det är den stora skillnaden mellan Scratch och de flesta textbaserade programspråk: du måste uppdatera spelet med ett animeringssteg och sen gör `return`. När du gör `return` från din kod har Pygame Zero möjlighet att hantera indata (tangentbord, mus) eller att rita om skärmen. Om du kör en oändlig loop (för alltid) kommer spelet att hänga sig så dina loopar behöver blir klara snabbt.
+Den största skillnaden är att det inte finns någon `för alltid`-loop i Pythonkod. 
+Det är den stora skillnaden mellan Scratch och de flesta textbaserade programspråk: du måste uppdatera spelet med ett animeringssteg och sen göra `return`.
+När du gör `return` från din kod har Pygame Zero möjlighet att hantera indata (tangentbord, mus) eller att rita om skärmen.
+Om du kör en oändlig loop (för alltid) kommer spelet att hänga sig, så dina loopar behöver blir klara snabbt.
 
 Pygame Zero anropar funktionen `update()` när den vill att du ska animeringen ett steg, så vi behöver bara anropa funktionen `update_walls()`:
 
@@ -83,15 +87,16 @@ def update():
 
 # Fågeln
 
-Mönstren vi beskrev tidigare hur Scratchlogiken översätts till Python gäller också för fågelns kod. Den här gången tittar vi först på Pythonkoden.
+Mönstren vi beskrev tidigare hur Scratchlogiken översätts till Python gäller också för fågelns kod.
+Den här gången tittar vi först på Pythonkoden.
 
 Koden för att uppdatera fågeln samlar vi funktionen `update_bird()`.
-Det första i den här funktionen lite kod för att flytta fågeln enligt tyngdlagen (gravitationen):
+Det första i den här funktionen är lite kod för att flytta fågeln enligt tyngdlagen, gravitationen:
 
 ```python
 GRAVITY = 0.3
 
-# Initial state of the bird
+# Fågelns status från början
 bird.dead = False
 bird.vy = 0
 
@@ -107,7 +112,8 @@ Detta är en enkel gravitationsformel:
 - Acceleration är förändringen i **hastighet**.
 - Hastighet är förändringen i **läge**.
 
-För att hålla reda på detta behöver vi en variabel `bird.vy` som är fågelns hastighet i y-led. Det här är en ny variabel som vi själva definierar, inget som Pygame Zero sköter åt oss.
+För att hålla reda på detta behöver vi en variabel `bird.vy` som är fågelns hastighet (velocity) i y-led.
+Det här är en ny variabel som vi själva definierar, inget som Pygame Zero sköter åt oss.
 
 - Tyngdkraften betyder konstant acceleration nedåt: `GRAVITY`är större än 0.
 - Acceleration är förändring i hastighet: `GRAVITY` läggs till fågelns hastighet `bird.vy`
@@ -142,7 +148,8 @@ Detta är ett booleskt värde, ett sanningsvärde som är antingen True eller Fa
 Vi kan använda det för att enkelt kontrollera om fågeln är vid liv.
 Om den inte är levande kommer den inte att svara på spelarens input.
 
-Och det sista avsnittet kontrollerar om fågeln har fallit ner från botten eller toppen av spelskärmen. Om så är fallet återställer den fågeln:
+Och det sista avsnittet kontrollerar om fågeln har fallit ner från botten eller toppen av spelskärmen. 
+Om så är fallet återställer vi fågeln:
 
 ```python
 if not 0 < bird.y < 720:
@@ -184,33 +191,32 @@ Du kan nog hitta många paralleller mellan Python-koden och den här Scratch-kod
 
 De största skillnaderna mellan Scratch och Pygame Zero är dessa:
 - Du kan inte loopa för evigt i Pygame Zero &ndash; du uppdaterar för en bildruta i taget.
-- The coordinates are different. In Pygame Zero, the top left of the screen is (x, y = (0, 0). The x direction goes from left to right as before, but y goes down the screen! This is why `GRAVITY` is a positive number and `FLAP_VELOCITY` is a negative number in Python.
-- `bird.dead` is a bool, so I can write code like `if not bird.dead` instead of `dead = 0` as in Scratch.
+- Koordinatsystemen är olika. I Pygame Zero är skärmens övre vänstra hörn (x, y) = (0, 0). x-axeln går från vänster till höger som innan men y-axeln går nerför skärmen. Det är därför som `GRAVITY` har ett positivt värde och `FLAP_VELOCITY` ett negativt värde i Python-koden.
+- `bird.dead` är en logisk variabel så jag kan skriva kod som `if not bird.dead` istället för `dead = 0` som i Scratch.
 
-# Summary
-Many of the concepts available in Scratch can be translated directly into Pygame Zero.
+# Sammanfattning
+Många av begreppen i Scratch kan översättas direkt till Pygame Zero.
 
-Here are some comparisons:
+Här är några jämförelser:
 
-| In Scratch |	In Pygame Zero|
+| I Scratch |	I Pygame Zero|
 | --- | --- |
-| change y by 1 (up)	| bird.y &ndash;= 1|
-| change y by -1 (down) |	bird.y += 1 |
-| set costume to <name>	| bird.image = 'name'| 
-| if dead = 0| 	if not bird.dead:| 
-| set dead to 0	| bird.dead = False| 
-| if touching Top?	| if bird.colliderect(pipe_top)| 
-| When Flag clicked… forever | 	Put code into the update() function. | 
-| When [any] key pressed	| def on_key_down():| 
-| pick random a to b	| import random to load the random module, then random.randint(a, b)| 
-| (0, 0) is the centre of the stage	| (0, 0) is the top-left of the window| 
+| ändra y med 1 (upp)	| `bird.y &ndash;= 1` |
+| ändra y med &ndash;1 (ner) |	`bird.y += 1` |
+| sätt klädsel till <namn>	| `bird.image = 'name'` | 
+| om dead = 0 | 	`if not bird.dead:`| 
+| sätt dead till 0	| `bird.dead = False`| 
+| om rör vid Top	| `if bird.colliderect(pipe_top)`| 
+| när grön flagga klickas på ... för alltid | Lägg koden i funktionen `update()` | 
+| När någon tangent trycks ner	| `def on_key_down():`| 
+| Välj slumpmässigt a till b	| `import random` för att ladda biblioteket random, sen `random.randint(a, b)` | 
+| (0, 0) är mitt på scenen	| (0, 0) är övre vänstra hörnet i fönstret| 
 
-In some cases, the code is simpler in Python because it can be organised in a way that helps it make sense when you read it.
+Ibland är koden enklare i Python eftersom den kan läggas upp på ett sätt som gör den lättläst.
 
-The power of Pygame Zero’s actors also makes the coordinate manipulation easier. 
-We used the anchor position to position the pipes, and we were able to see if a pipe was off-screen by checking
-`pipe_top.right < 0` rather than `if x position < -240`.
-
+Fördelarna med Pygame Zeros aktörer (Actor) gör det också lättare att jobba med koordinater.
+Det var lätt att kontrollera om ett rör försvann ut från skärmen genom att ställa frågan
+`pipe_top.right < 0` istället för `if x position < -240`.
 
 
 # Källor
