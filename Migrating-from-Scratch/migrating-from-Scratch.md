@@ -204,7 +204,7 @@ Här är några jämförelser:
 
 | I Scratch |	I Pygame Zero|
 | --- | --- |
-| ändra y med 1 (upp)	| `bird.y &ndash;= 1` |
+| ändra y med 1 (upp)	| `bird.y -= 1` |
 | ändra y med &ndash;1 (ner) |	`bird.y += 1` |
 | sätt klädsel till <namn>	| `bird.image = 'name'` | 
 | om dead = 0 | 	`if not bird.dead:`| 
