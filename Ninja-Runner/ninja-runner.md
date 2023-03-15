@@ -107,7 +107,9 @@ def update():
       runner.image == 'run__000'
 ```
 
-Detta kollar vad den aktuella bilden är och byter till nästa. Det fungerar men är mer besvärligt än i Scratch. Som hjälp kan vi använda modulen [Pygame Zero Helper](https://www.aposteriori.com.sg/pygame-zero-helper), som redan är med i startprojektet.
+Detta kollar vad den aktuella bilden är och byter till nästa. Det fungerar men är mer besvärligt än i Scratch. Som hjälp kan vi använda modulen [Pygame Zero Helper](https://www.aposteriori.com.sg/pygame-zero-helper), som redan är med i startprojektet. Det är den som heter *pgzhelper.py* i listan med filer. Din egen kod lägger du alltid i *main.py*.
+
+![image](https://user-images.githubusercontent.com/4598641/225400386-96e08db6-2009-4729-a895-1b209d094c0a.png)
 
 ## Modulen Pygame Zero Helper
 
