@@ -4,7 +4,7 @@
 Den här handledningen jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
 
 - Här finns projektet i Scratch 3: https://scratch.mit.edu/projects/820017699
-- Här finns versionen i repl.it: https://replit.com/@RobertStorlind/flappy-bird-pope FIXA:SKALNING AV GRAFIKELEMENTEN
+- Här finns versionen i repl.it: https://replit.com/@RobertStorlind/flappy-bird-pope **FIXA:SKALNING AV GRAFIKELEMENTEN**
 
 >Versionen för Pygame Zero (https://github.com/lordmauve/pgzero/blob/stable/examples/flappybird/flappybird.py) finns med i Pygame Zero-projektet.
 
@@ -80,11 +80,11 @@ Det är den stora skillnaden mellan Scratch och de flesta textbaserade programsp
 När du gör `return` från din kod har Pygame Zero möjlighet att hantera indata (tangentbord, mus) eller att rita om skärmen.
 Om du kör en oändlig loop (för alltid) kommer spelet att hänga sig, så dina loopar behöver blir klara snabbt.
 
-Pygame Zero anropar funktionen `update()` när den vill att du ska animeringen ett steg, så vi behöver bara anropa funktionen `update_walls()`:
+Pygame Zero anropar funktionen `update()` när den vill att du ska animera ett steg, så vi behöver bara anropa funktionen `update_pipes()`:
 
 ```python
 def update():
-   update_walls()
+   update_pipes()
 ```
 
 
@@ -166,11 +166,11 @@ Vad gör `reset_pipes()`?
 Eftersom jag hade gjort koden för röret som en separat funktion, kan jag lätt anropa den när jag vill återställa väggarna.
 I det här fallet gör det spelet bättre eftersom spelaren får en chans att reagera när fågeln flyttar tillbaka till sin startposition.
 
-Vi behöver anropa det här varje gång bilde uppdateras, så vi lägger till det i `update()`:
+Vi behöver anropa det här varje gång bilden uppdateras, så vi lägger till det i `update()`:
 
 ```python
 def update():
-   update_walls()
+   update_pipes()
    update_bird()
 ```
 
