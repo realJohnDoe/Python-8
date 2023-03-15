@@ -28,12 +28,6 @@ https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md
 
 https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md
 
-## ⭐⭐⭐ Hur många dagar fyller du?
-
-[![](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)](https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md)
-
-https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md
-
 ## ⭐⭐⭐ Att flytta över från Scratch: Flappy Bird
 [![](https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-top-start.png)](https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md)
 
@@ -44,6 +38,12 @@ https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migra
 ## ⭐⭐⭐ Fifteen
 
 ## ⭐⭐⭐ Flowers
+
+## ⭐⭐⭐ Hur många dagar fyller du?
+
+[![](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)](https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md)
+
+https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md
 
 ## ⭐⭐⭐ Life
 
