@@ -9,14 +9,13 @@
 
 # Första koden
 
-Öppna startprojektet här i repl.it: FIXA:LÄNK
+Öppna startprojektet här i repl.it: https://replit.com/@RobertStorlind/gem-catcher-starter
 
 Skelettet för ett Pygame Zero-program ser ut så här:
 ```python
 import pgzrun
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH, HEIGHT = 800, 600
 
 pgzrun.go() # Måste vara sista raden
 ```
