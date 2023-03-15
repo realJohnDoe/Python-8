@@ -27,12 +27,11 @@ Det är en tradition att skriva ett program som säger "Hej världen" när man l
 
 ![image](https://user-images.githubusercontent.com/4598641/220739775-da61c759-eae4-42cd-9f96-5b13c3f7ce3b.png)
 
-:pencil2: Se till att du är inloggad i repl.it.
-
-Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: 
+:pencil2: 
+- Se till att du är inloggad i repl.it.
+- Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: 
 https://replit.com/@RobertStorlind/Hello-Starter
-
-Spara en egen kopia av startprojektet med knappen
+- Spara en egen kopia av startprojektet med knappen
 ![image](https://user-images.githubusercontent.com/4598641/225108391-32f24ead-3eb1-4ffb-ad3a-9c18ce5849bb.png)
 
 ---
@@ -46,10 +45,11 @@ I Python används `print()` för att skriva ut text (ord eller siffror) på skä
 
 Rader som börjar med `#` är kommentarer. De förklarar koden för människor och ignoreras av Python.
 
-:pencil2:
-- Hitta kodraden `# Skriv koden som ska köras här nedanför`<br>
-- Klicka på raden under. Det blinkande strecket `|` är markören och visar var du skriver just nu.<br>
-- Mata in koden för att skriva **hej**<br>
+:pencil2: Hitta kodraden `# Skriv koden som ska köras här nedanför`<br>
+
+Klicka på raden under. Det blinkande strecket `|` är markören och visar var du skriver just nu.<br>
+
+Mata in koden för att skriva **hej**<br>
 
 **main.py**
  
@@ -121,7 +121,7 @@ I Python använder du matematiska symboler för uträkningar:
 | `/`	   | division |
 | `**`   | upphöjt till |
 
-Lägg till två `print()`-rader till i din kod där den ena är en räkneuppgift för Python.
+✏️ Lägg till två `print()`-rader till i din kod där den ena är en räkneuppgift för Python.
 
 **main.py**
 ```python
@@ -263,7 +263,7 @@ Symbolen `*` betyder multiplikation så `fire * roll` multiplicerar texten i eld
 
 >Många spel använder tärningar med många sidor. I verkligheten består tärningar av regelbundna geometriska figurer. Vanliga tärning är D6, D12 och D20. På datorn kan du generera slumptal som motsvarar en tärning med vilket antal sidor som helst.
 
-✏️ Funktionen `input()` frågar användare och skickar sen tillbaks svaret.
+✏️ Funktionen `input()` frågar användaren och skickar sen tillbaks svaret.
 
 Lägg till kod för att 
 1. fråga användaren om största talet på hens tärning och 
@@ -283,9 +283,9 @@ def roll_dice():
   print(fire * roll)
 ```
 
-Ändra din `roll`-variabel så att koden använder `max` som största värdet i `randint` när vi genererar ett slumptal.
+✏️ Ändra din `roll`-variabel så att koden använder `max` som största värdet i `randint` när vi genererar ett slumptal.
 
-När du får input from användaren behandlar Python det som text. Men funktionen `randint` behöver ett heltal (integer). 
+När du får input från användaren behandlar Python det som text. Men funktionen `randint` behöver ett heltal (integer). 
 Funktionen `int` omvandlar användarens input till ett heltal.
 
 ```python
@@ -311,7 +311,7 @@ Skriv ut fler meningar med ditt projekt.
 
 ![image](https://user-images.githubusercontent.com/4598641/225389001-3c003bd6-08b0-47b9-8442-ec4b1f38f854.png)
 
-Lägg till fler rader till din kod. Här är några förslag på början till meningar:
+✏️ Lägg till fler rader till din kod. Här är några förslag på början till meningar:
 
 **main.py**
 ```python
@@ -327,13 +327,11 @@ print(f"Jag skulle vilja göra ... med {python}")
 :pencil2:
 Vilket meddelande skulle du skicka till en kompis för att pigga upp? Vilken emoji skulle du välja?
 
-Klicka på fliken `emoji.py` tab i repl.it och se vilka emoji-variabler du kan använda. Klicka dig tillbaks till fliken `main.py` för att lägga till i din kod.
+✏️ Klicka på fliken `emoji.py` tab i repl.it och se vilka emoji-variabler du kan använda. Klicka dig tillbaks till fliken `main.py` för att lägga till i din kod.
 
 Du kan lägga till fler emoji-variabler i `emoji.py`. [Använd den här listan med emoji](https://unicode.org/emoji/charts/full-emoji-list.html) för att hitta de du vill ha.
 
 💾 **Spara** ditt projekt!
-
-# Kunskapsquiz
 
 # Levla upp ditt projekt
 Lägg till mer i ditt projekt. Det finns flera emoji att välja bland.
@@ -346,7 +344,7 @@ Du kan:
 - Skriva fler funktioner för att dela upp din kod
 - Använda `#` för att kommentera koden
 
-Klicka på fliken `emoji.py` för att se emoji-variablerna du kan använda. Klicka tillbaks till fliken `main.py` för att lägga till mer kod.
+✏️ Klicka på fliken `emoji.py` för att se emoji-variablerna du kan använda. Klicka tillbaks till fliken `main.py` för att lägga till mer kod.
 
 Här är ett exempel på en funktion som frågar om hobby:
 **main.py**
@@ -373,7 +371,5 @@ hobbies()
 
 💾 **Spara** ditt projekt!
 
-
-# Källor
 
 [^1]: This is a Swedish translation of the Raspberry Pi Foundation project https://projects.raspberrypi.org/en/projects/hello-world, with minor adaptations.
