@@ -3,13 +3,13 @@
 
 Den här handledningen jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
 
-Här finns den direkt i Scratch: https://scratch.mit.edu/projects/820017699/
+- Här finns den projektet i Scratch 3: https://scratch.mit.edu/projects/820017699
+- Här finns versionen i repl.it: 
 
 
 >Versionen för Pygame Zero (https://github.com/lordmauve/pgzero/blob/stable/examples/flappybird/flappybird.py) finns med i Pygame Zero-projektet.
 
 >Du kan också ladda ner versionen för Scratch 1.4 och versionen för Scratch 3 (https://github.com/lordmauve/pgzero/raw/master/examples/flappybird/Flappy%20Bird.sb3) om du vill provköra.
-
 
 Versionen för Pygame Zero innehåller logik för poängräkning som vi utelämnar i kodexemplen på den här sidan för att ge en mer rättvis jämförelse.
 
