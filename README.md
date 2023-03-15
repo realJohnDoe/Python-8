@@ -38,3 +38,17 @@ https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md
 [![](https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-top-start.png)](https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md)
 
 https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md
+
+## ⭐⭐⭐ Blocks
+
+## ⭐⭐⭐ Fifteen
+
+## ⭐⭐⭐ Flowers
+
+## ⭐⭐⭐ Life
+
+## ⭐⭐⭐ Repeat
+
+## ⭐⭐⭐ Snake
+
+## ⭐⭐⭐ Sokoban
