@@ -338,7 +338,7 @@ Du kan lägga till fler emoji-variabler i `emoji.py`. [Använd den här listan m
 # Levla upp ditt projekt
 Lägg till mer i ditt projekt. Det finns flera emoji att välja bland.
 
-![image](https://user-images.githubusercontent.com/4598641/221965063-6e7cf08d-814e-413e-82ca-701908bfa9ab.png)
+![image](https://user-images.githubusercontent.com/4598641/225390177-601162f1-a327-4841-b830-357d60449947.png)
 
 Du kan:
 - Använda `print` med olika text och emoji.
@@ -366,7 +366,7 @@ Du kan använda `input` för att ditt projekt ska vänta tills du trycker på En
 ```python
 roll_dice()
 
-input() # Vänta på att användaren trycker på Enter
+input("Tryck på Enter ") # Vänta på att användaren trycker på Enter
 
 hobbies()
 ```
