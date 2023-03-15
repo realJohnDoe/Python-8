@@ -211,8 +211,8 @@ Här är några jämförelser:
 | sätt dead till 0	| `bird.dead = False`| 
 | om rör vid Top	| `if bird.colliderect(pipe_top)`| 
 | när grön flagga klickas på ... för alltid | Lägg koden i funktionen `update()` | 
-| När någon tangent trycks ner	| `def on_key_down():`| 
-| Välj slumpmässigt a till b	| `import random` för att ladda biblioteket random, sen `random.randint(a, b)` | 
+| när någon tangent trycks ner	| `def on_key_down():`| 
+| välj slumpmässigt a till b	| `import random` för att ladda biblioteket random, sen `random.randint(a, b)` | 
 | (0, 0) är mitt på scenen	| (0, 0) är övre vänstra hörnet i fönstret| 
 
 Ibland är koden enklare i Python eftersom den kan läggas upp på ett sätt som gör den lättläst.
