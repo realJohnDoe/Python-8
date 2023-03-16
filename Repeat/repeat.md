@@ -5,11 +5,11 @@
 ![image](https://user-images.githubusercontent.com/4598641/225698865-f394ffdb-6b0c-4731-8763-915c93b7b965.png)
 
 # Regler
-Se när en nummersekvens blinkar.
+Se när en talsekvens blinkar.
 
 Upprepa sekvensen med sifferknapparna.
 
-Om du lyckas upprepa sekvensen läggs ett nytt nummer till och sekvensen blinkar igen.
+Om du lyckas upprepa sekvensen läggs ett nytt tal till och sekvensen blinkar igen.
 
 # Kodning
 
@@ -224,7 +224,7 @@ def on_key_down(key):
 
 ## Rita första kvadraten
 
-Den första rutan är ritad med en mörkröd ruta och ett vitt nummer.
+Den första rutan är ritad med en mörkröd ruta och en vit siffra.
 
 XXXX
 
@@ -256,7 +256,7 @@ Den aktuella sekvenspositionen återanvänds för att blinka varje ruta i sekven
 
 Timern används för att flytta fram den aktuella sekvenspositionen.
 
-För närvarande ritas kvadraten som motsvarar numret vid den aktuella sekvenspositionen med sin färg, medan de andra rutorna är ritade i svart.
+För närvarande ritas kvadraten som motsvarar siffran vid den aktuella sekvenspositionen med sin färg, medan de andra rutorna är ritade i svart.
 
 Testsekvensen från tidigare används igen.
 
