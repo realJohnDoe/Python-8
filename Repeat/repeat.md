@@ -43,7 +43,7 @@ Detta blir fel när den aktuella positionen är längre än längden på sekvens
 import pgzrun
 
 sequence = [4, 3, 1, 2, 2, 3] # Tillfälligt
-current = 0
+current = 0 #nyrad
 
 def on_key_down(key):
     global current # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
@@ -65,20 +65,20 @@ def draw():
     screen.fill((0, 0, 0))
 
     screen.draw.text(', '.join(map(str, sequence)), (0, 0))
-    screen.draw.text(f"{current + 1}/{len(sequence)}", (0, 20))
-    screen.draw.text(f"sequence[current]: {sequence[current]}", (0, 40))
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (0, 20)) #nyrad
+    screen.draw.text(f"sequence[current]: {sequence[current]}", (0, 40)) #nyrad
 
 pgzrun.go() # Ska alltid vara sist i programmet (längst ner)
 ```
 
-✏️ Uppdatera din kod så att den blir som här och testkör den. Du måste inte mata in kommentarerna &ndash; de förklarar vad koden gör.
+✏️ Uppdatera din kod så att den blir som här ovanför och testkör den. Du måste inte mata in kommentarerna &ndash; de förklarar vad koden gör.
 Klicka i terminalfönstret. Sedan kan du trycka på siffertangenterna 1 till 4 för att testa.
 
 ![image](https://user-images.githubusercontent.com/4598641/225703318-26fb8e5b-9d98-4a9d-b740-fc220f938125.png)
 
 ## Återställ aktuell position
 
-När den aktuella positionen överskrider sekvenslängden återställs den till 0.
+När den aktuella positionen överskrider sekvenslängden återställs vi den till 0.
 
 ✏️ Uppdatera koden i on_key_down() och testkör igen.
 
@@ -91,11 +91,11 @@ def on_key_down(key):
 
         if number == sequence[current]:
             current += 1
-            if current == len(sequence):
-                current = 0
+            if current == len(sequence): #nyrad
+                current = 0 #nyrad
 ```
 
-## Lägg till ett nytt tal att komma ihåg i sekvensen
+## Lägg till nästa tal att komma ihåg i sekvensen
 
 När den aktuella positionen återställs läggs ett slumptal mellan 1 och 4 till i sekvensen.
 
@@ -111,9 +111,12 @@ def on_key_down(key):
                 current = 0
                 sequence.append(random.randint(1, 4))
 ```
+✏️ Uppdatera och testkör koden.
 
-📝 Så här ser hela koden ut nu XXXX
+<details>
+    <summary>📝 Så här ser hela koden ut nu XXXX</summary>
 
+</details>
 
 ## Startsekvens med ett enda tal
 
@@ -122,7 +125,7 @@ Nu skapar vi en riktig sekvens, till en början med ett enda slumptal.
 Eftersom koden för att lägga till ett slumptal till sekvensen återanvänds, gör vi den till en funktion, `add_to_sequence()`.
 
 ```python
-sequence = [] # Lägg detta före funktionerna
+sequence = [] # Lägg detta högt upp vid de andra variablerna
 
 def add_to_sequence():
     sequence.append(random.randint(1, 4))
@@ -136,11 +139,13 @@ def on_key_down(key):
 
             if current == len(sequence):
                 current = 0
-                add_to_sequence() # lägg till detta
+                add_to_sequence() #nyrad
 ```
+
 ✏️ Uppdatera koden och testkör den.
 
-Så här bör koden se ut nu:
+<details>
+    <summary>Så här bör koden se ut nu:</summary>
 
 ```python
 import pgzrun
@@ -183,7 +188,8 @@ def draw():
     
 pgzrun.go()
 ```
-
+</details>
+    
 ## Återställa spelet
 
 Vi skapar en funktion som ställer in spelets startläge.
