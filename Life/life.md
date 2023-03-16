@@ -15,11 +15,11 @@ Alla andra celler dör eller förblir döda.
 Skapa en första uppsättning med celler, tryck på valfri tangent för att gå framåt i tiden och observera.
 
 ## Kontroller
-**Vänsterklick**	Gör cellen levande
+**🖱️ Vänsterklick**	Gör cellen levande
 
-**Högerklick**	Gör cellen död
+**🖱️ Högerklick**	Gör cellen död
 
-**Vilken tangent som helst**	Gå ett steg framåt i tiden
+**⌨️ Vilken tangent som helst**	Gå ett steg framåt i tiden
 
 # Översikt
 Cellerna i rutnätet lagras som booleska värden: Sant för levande, Falskt för döda.
@@ -36,6 +36,7 @@ När det nya rutnätet är klart ersätts det nuvarande rutnätet med det nya ru
 En cell ritas som en kvadrat.
 
 ✏️ Logga in i repl.it och klona startprojektet https://replit.com/@RobertStorlind/life-starter
+
 Mata in koden och testkör!
 
 ```python
@@ -91,6 +92,7 @@ pgzrun.go()
 Vi ritar alla raderna.
 
 ✏️ Uppdatera funktionen och testkör din kod.
+
 >Glöm inte att dra in raderna under `for y`.
 
 ```python
@@ -354,7 +356,7 @@ def on_key_down():
 
 
 ## Ändra rutnät baserat på grannar
-Koden för att hitta antalet levande grannar en cell har flyttas hit.
+Koden för att hitta antalet levande grannar en cell har flyttats hit.
 
 En cell i det nya rutnätet är vid liv om den har 3 grannar, eller så är den levande i det gamla rutnätet och har 2 grannar.
 
