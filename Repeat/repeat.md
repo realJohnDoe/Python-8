@@ -1,5 +1,7 @@
 # Repeat
 
+En handledning för Python och Pygame Zero 1.2
+
 ![image](https://user-images.githubusercontent.com/4598641/225698865-f394ffdb-6b0c-4731-8763-915c93b7b965.png)
 
 # Regler
