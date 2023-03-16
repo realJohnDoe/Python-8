@@ -70,6 +70,10 @@ pgzrun.go() # Ska alltid vara sist i programmet (längst ner)
 ```
 
 ✏️ Uppdatera din kod så att den blir som här och testkör den. Du måste inte mata in kommentarerna &ndash; de förklarar vad koden gör.
+Klicka i terminalfönstret. Sedan kan du trycka på siffertangenterna 1 till 4 för att testa.
+
+![image](https://user-images.githubusercontent.com/4598641/225703318-26fb8e5b-9d98-4a9d-b740-fc220f938125.png)
+
 
 # Källor
 Översatt till svenska och anpassad till repl.it baserat på https://simplegametutorials.github.io/pygamezero/repeat/
