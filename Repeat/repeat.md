@@ -232,19 +232,85 @@ def on_key_down(key):
 
 Den första rutan är ritad med en mörkröd ruta och en vit siffra.
 
-XXXX
+```python
+def draw():
+    screen.fill((0, 0, 0))
+
+    square_size = 50 #nyrad
+
+    screen.draw.filled_rect( #nyrad
+        Rect(0, 0, square_size, square_size), #nyrad
+        color=(50, 0, 0) #nyrad
+    ) #nyrad
+    screen.draw.text('1', (19, 18)) #nyrad
+
+    screen.draw.text(str(current + 1) + '/' + str(len(sequence)), (20, 60)) #uppdatera
+    screen.draw.text('sequence[current]: ' + str(sequence[current]), (20, 100)) #uppdatera
+    screen.draw.text(', '.join(map(str, sequence)), (20, 140)) #uppdatera
+```
+
+![image](https://user-images.githubusercontent.com/4598641/225725617-e4af967f-5de4-4edd-9293-2ba5268b2215.png)
 
 ## Rita alla rutor
 Resten av rutorna är ritade på liknande sätt.
 
-XXXX
+```python
+def draw():
+    screen.fill((0, 0, 0))
+
+    square_size = 50
+
+    screen.draw.filled_rect(
+        Rect(0, 0, square_size, square_size),
+        color=(50, 0, 0)
+    )
+    screen.draw.text('1', (19, 18))
+
+    # Lägg till nya rader
+    screen.draw.filled_rect(
+        Rect(square_size, 0, square_size, square_size),
+        color=(0, 50, 0)
+    )
+    screen.draw.text('2', (square_size + 21, 18))
+
+    screen.draw.filled_rect(
+        Rect(square_size * 2, 0, square_size, square_size),
+        color=(0, 0, 50)
+    )
+    screen.draw.text('3', (square_size * 2 + 21, 18))
+
+    screen.draw.filled_rect(
+        Rect(square_size * 3, 0, square_size, square_size),
+        color=(50, 50, 0)
+    )
+    screen.draw.text('4', (square_size * 3 + 21, 18))
+
+    # etc.
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/225706773-2c9ffb3d-555c-4df1-b3f4-35a19c6e385e.png)
 
-## Förenkla kod
-Koden för att rita varje ruta är likadan, vi gör den till en funktion som vi kan använda flera gånger.
+## Förenkla koden
+Koden för att rita varje ruta är likadan. Vi gör den till en funktion som vi kan använda flera gånger.
+```python3
+def draw():
+    screen.fill((0, 0, 0))
 
-XXXX
+    def draw_square(number, color): #ändra
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size), #ändra
+            color=color #ändra
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18)) #ändra
+
+    draw_square(1, (50, 0, 0)) #nyrad
+    draw_square(2, (0, 50, 0)) #nyrad 
+    draw_square(3, (0, 0, 50)) #nyrad
+    draw_square(4, (50, 50, 0)) #nyrad
+
+    # etc.
+```
 
 ## Timer
 Siffrorna blinkar varje sekund.
@@ -255,7 +321,24 @@ När timern är på eller över 1 återställs den till 0.
 
 Till en början skriver vi 'tick' varje gång siffrorna blinkar.
 
-XXXX
+```python3
+def reset():
+    # etc.
+    global timer
+
+    # etc.
+    timer = 0
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 1:
+        timer = 0
+        # Temporary
+        print('tick')
+```
+✏️ Uppdatera och testkör koden.
 
 ## Blinkande rutor
 Den aktuella sekvenspositionen återanvänds för att blinka varje ruta i sekvensen.
@@ -268,14 +351,70 @@ Testsekvensen från tidigare används igen.
 
 Detta kommer bli fel när `current` är större än längden av `sequence`.
 
-XXXX
+```python3
+def reset():
+    # etc.
+
+    sequence = [4, 3, 1, 2, 2, 3] # Tillfälligt
+
+def update(dt):
+    global timer
+    global current #nyrad
+
+    timer += dt
+    if timer >= 1:
+        timer = 0
+        current += 1 #nyrad
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color):
+        if number == sequence[current]: #nyrad
+            square_color = color #nyrad
+        else: #nyrad
+            square_color = (0, 0, 0) #nyrad
+
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size),
+            color=square_color #ändra
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18))
+
+    # etc.
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/225707453-d0919991-6a40-4803-b883-5e25e8a65d25.png)
 
 ## Blinkande färg
 Vi ger rutorna varsin färg.
 
-XXXX
+```python3
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color, color_flashing): #uppdatera
+
+        if number == sequence[current]:
+            square_color = color_flashing #uppdatera
+        else:
+            square_color = color #uppdatera
+
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size),
+            color=square_color
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18))
+
+    draw_square(1, (50, 0, 0), (255, 0, 0)) #uppdatera
+    draw_square(2, (0, 50, 0), (0, 255, 0)) #uppdatera
+    draw_square(3, (0, 0, 50), (0, 0, 255)) #uppdatera
+    draw_square(4, (50, 50, 0), (255, 255, 0)) #uppdatera
+
+    # etc.
+```
 
 https://simplegametutorials.github.io/pygamezero/repeat/7.png
 
@@ -288,7 +427,67 @@ Koden för att läsa av tangentbordet körs bara när tillståndet är `repeat`.
 
 När sekvensen väl har angetts, ändras tillståndet tillbaka till `watch`.
 
-XXXX
+```python3
+def reset():
+    global state
+
+    # etc.
+
+    state = 'watch' # 'watch', 'repeat'
+
+def update(dt):
+    global timer
+    global current
+    global state
+
+    if state == 'watch': #nyrad
+        timer += dt
+        if timer >= 1:
+            timer = 0
+            current += 1
+            if current == len(sequence): #nyrad
+                state = 'repeat' #nyrad
+                current = 0 #nyrad
+
+def on_key_down(key):
+    global current
+    global state #nyrad
+
+    if state == 'repeat': #nyrad
+        if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
+
+            if key == keys.K_1:
+                number = 1
+            elif key == keys.K_2:
+                number = 2
+            elif key == keys.K_3:
+                number = 3
+            elif key == keys.K_4:
+                number = 4
+
+            if number == sequence[current]:
+                current += 1
+                if current == len(sequence):
+                    current = 0
+                    add_to_sequence()
+                    state = 'watch' #nyrad
+            else:
+                reset()
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color, color_flashing):
+
+        if state == 'watch' and number == sequence[current]: #ändra
+            square_color = color_flashing
+        else:
+            square_color = color
+
+    # etc.
+
+    screen.draw.text('state: ' + state, (20, 180)) #nyrad
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/225708386-2c6b9be1-c195-4ef3-98a5-a2300828e5b5.png)
 
@@ -299,20 +498,88 @@ Från början är variabeln False. Den sätts till True när timern tickar. Näs
 
 Timergränsen ändras till att ticka dubbelt så snabbt.
 
-XXXX
+```python3
+def reset():
+    # etc.
+    global flashing #nyrad
+
+    # etc.
+    flashing = False #nyrad
+
+def update(dt):
+    global timer
+    global current
+    global state
+    global flashing #nyrad
+
+    if state == 'watch':
+        timer += dt
+        if timer >= 0.5: #ändra
+            timer = 0
+            flashing = not flashing #nyrad
+            if not flashing: #nyrad
+                current += 1
+                if current == len(sequence):
+                    state = 'repeat'
+                    current = 0
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color, color_flashing):
+
+        if state == 'watch' and flashing and number == sequence[current]: #ändra
+            square_color = color_flashing
+        else:
+            square_color = color
+
+    # etc.
+
+    screen.draw.text('flashing: ' + str(flashing), (20, 220)) #ändra
+```
+
 
 ## Game over-läge
 
 Om du trycker på fel tangent sätts tillståndet till `gameover`, istället för att återställa spelet meddetsamma. 
 När en tangent trycks ned i "gameover"-tillståndet återställs spelet.
 
-XXXX
+```python
+def on_key_down(key):
+    global current
+    global state
 
+    if state == 'repeat':
+        if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
+            # etc.
+
+            if number == sequence[current]:
+                # etc.
+            else:
+                state = 'gameover' nyrad
+    elif state == 'gameover': nyrad
+        reset()
+```        
+       
 ## Visa text baserat på tillstånd
 Den aktuella sekvenspositionen och längden på sekvensen visas bara när vi är i "upprepa"-läget. 
 Ett game over-meddelande visas om spelet är i "gameover"-läget.
 
-XXXX
+```python
+def draw():
+    # etc.
+
+    if state == 'repeat': #nyrad
+        screen.draw.text(str(current + 1) + '/' + str(len(sequence)), (20, 60))
+    elif state == 'gameover': #nyrad
+        screen.draw.text('Game over!', (20, 60)) #nyrad
+
+    #borttagen: screen.draw.text('sequence[current]: ' + str(sequence[current]), (20, 100))
+    #borttagen: screen.draw.text(', '.join(map(str, sequence)), (20, 140))
+    #borttagen: screen.draw.text('state: ' + state, (20, 180))
+    #borttagen: screen.draw.text('flashing: ' + str(flashing), (20, 220))
+```
+
 
 ![image](https://user-images.githubusercontent.com/4598641/225709496-d75bd7ca-c901-420c-9c7d-a381dec241bb.png)
 
