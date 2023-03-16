@@ -409,6 +409,8 @@ def update():
     elif pygame.mouse.get_pressed()[2]: #nyrad
         grid[selected_y][selected_x] = False #nyrad
 ```
+# Tips
+Det finns intressanta mönster att testa med: se t.ex. https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns
 
 # Källor
 Efter originalet på https://simplegametutorials.github.io/pygamezero/life/
