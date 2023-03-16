@@ -1,6 +1,6 @@
 # Repeat
 
-En handledning för Python och Pygame Zero 1.2
+### En handledning för Python och Pygame Zero 1.2
 
 ![image](https://user-images.githubusercontent.com/4598641/225698865-f394ffdb-6b0c-4731-8763-915c93b7b965.png)
 
@@ -14,7 +14,7 @@ Om du lyckas upprepa sekvensen läggs ett nytt nummer till och sekvensen blinkar
 # Kodning
 
 ## Sekvens
-Sekvenslistan skapas. Till en början innehåller den en testsekvens med siffror mellan 1 och 4.
+Vi skapar sekvenslistan. Till en början innehåller den en testsekvens med siffror mellan 1 och 4.
 
 ```python
 import pgzrun
@@ -35,7 +35,7 @@ pgzrun.go() # Ska alltid vara sist i programmet (längst ner)
 ## Nuvarande position i sekvensen
 Den aktuella sekvenspositionen börjar vid 1.
 
-Om siffran i sekvensen vid den aktuella positionen trycks in, läggs 1 till den aktuella positionen.
+Om spelaren trycker på knappen som motsvarar siffran i sekvensen vid den aktuella positionen, ökar vi positionen med 1.
 
 Detta blir fel när den aktuella positionen är längre än längden på sekvenslistan.
 
@@ -99,7 +99,7 @@ def on_key_down(key):
 
 När den aktuella positionen återställs läggs ett slumptal mellan 1 och 4 till i sekvensen.
 
-Vi behöver importera random så att `random.randint` kan användas för att få slumptal.
+Vi behöver importera random så att vi kan få slumptal från `random.randint`.
 
 ```python
 import random # Lägg till högst upp bland importerna
@@ -112,11 +112,15 @@ def on_key_down(key):
                 sequence.append(random.randint(1, 4))
 ```
 
+📝 Så här ser hela koden ut nu XXXX
+
+
 ## Startsekvens med ett enda tal
 
 Nu skapar vi en riktig sekvens, till en början med ett enda slumptal.
 
-Eftersom koden för att lägga till ett slumptal till sekvensen återanvänds görs den till en funktion.
+Eftersom koden för att lägga till ett slumptal till sekvensen återanvänds, gör vi den till en funktion, `add_to_sequence()`.
+
 ```python
 sequence = [] # Lägg detta före funktionerna
 
@@ -180,7 +184,6 @@ def draw():
 pgzrun.go()
 ```
 
-
 ## Återställa spelet
 
 Vi skapar en funktion som ställer in spelets startläge.
@@ -216,7 +219,8 @@ def on_key_down(key):
         else: #nyrad
             reset() #nyrad
 ```
-✏️ Uppdatera din kod och testkör
+✏️ Uppdatera din kod och testkör.
+
 
 ## Rita första kvadraten
 
