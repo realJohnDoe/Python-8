@@ -119,12 +119,111 @@ Cellstorleken behövs för att beräkna detta, så den flyttas till att vara en 
 
 Vi skriver det värdet på skärmen för att testa.
 
-Vi importerar modulen pygame så att pygame.mouse.get_pos kan användas.
+Vi importerar modulen pygame så att `pygame.mouse.get_pos` kan användas för att läsa av muspekarens koordinater.
 
-Matematikmodulen importerar vi så att vi kan använda  math.floor.
+Matematikmodulen importerar vi så att vi kan använda `math.floor` för att avrunda ett tal neråt till närmast mindre heltal.
 
+```python
 XXXX
+```
+![image](https://user-images.githubusercontent.com/4598641/225734422-569de346-61f2-4246-905c-1838b95ff534.png)
 
+## Begränsar vald cell till rutnät
+`min` används för att ge den valda positionen ett maximalt värde, så att den inte kommer att vara utanför rutnätet även om musen är utanför rutnätet.
+
+Rutnätets bredd/höjd i celler återanvänds från att rita cellerna, så variabler görs för dem.
+
+```python
+xxxx
+```
+
+## Markera celler
+Cellen (rutan) under muspekaren är inställd på markeringsfärgen.
+
+```python
+XXXX
+```
+
+![image](https://user-images.githubusercontent.com/4598641/225734958-fe8dfa7b-59c6-422c-9ba2-0561436c5add.png)
+
+
+## Skapar rutnätet
+Ett rutnät skapas för att lagra cellerna.
+
+Varje cell representeras av ett booleskt värde: Sant för levande, Falskt för döda.
+
+Om cellen är levande används den levande färgen för att rita cellen.
+
+För att testa detta ställs vissa celler manuellt in på att leva.
+```python
+XXXX
+```
+
+![image](https://user-images.githubusercontent.com/4598641/225735062-e17dd79f-3542-40fd-a9f5-58c797f89297.png)
+
+
+## Ställ in cellerna att leva med vänster musknapp
+Om vänster musknapp är nedtryckt är den valda cellen inställd på att leva.
+
+```python
+XXXX
+```
+![image](https://user-images.githubusercontent.com/4598641/225735163-0a7b10dd-a3f4-4756-8673-713fe5a6eb05.png)
+
+
+
+## Räkna dina grannar
+Att uppdatera rutnätet efter ett steg kräver att man vet hur många levande grannar varje cell har.
+
+Just nu kommer högerklick på en cell att skriva ut hur många levande grannar den har.
+
+```python
+XXXX
+```
+
+```bash
+Finding neighbors of grid[10][10]
+ Checking grid[9][9]
+ Checking grid[9][10]
+ Checking grid[9][11]
+  Neighbor found
+ Checking grid[10][9]
+ Checking grid[10][11]
+ Checking grid[11][9]
+ Checking grid[11][10]
+  Neighbor found
+ Checking grid[11][11]
+Total neighbors: 2
+```
+
+## Ändra rutnät vid knapptryckning
+När en tangent trycks, skapas ett nytt rutnät och det gamla rutnätet ersätts av det nya rutnätet.
+
+Till en början kommer alla celler i det nya rutnätet att vara levande.
+```python
+XXXX
+```
+
+![image](https://user-images.githubusercontent.com/4598641/225735624-4f103937-7ed2-4efd-978d-ac6ffde64ccd.png)
+
+
+## Ändra rutnät baserat på grannar
+Koden för att hitta antalet levande grannar en cell har flyttas hit.
+
+En cell i det nya rutnätet är vid liv om den har 3 grannar, eller så är den levande i det gamla rutnätet och har 2 grannar.
+
+```python
+XXXX
+```
+
+![image](https://user-images.githubusercontent.com/4598641/225735719-0d1f5745-9252-449f-9d62-60f076b37e3c.png)
+
+## Döda celler med högerklick
+När en cell högerklickas blir den död.
+
+```python
+XXXX
+```
 
 
 # Källor
