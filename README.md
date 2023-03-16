@@ -53,6 +53,11 @@ https://github.com/coderdojolund/Python-8/blob/main/Life/life.md
 
 ## ⭐⭐⭐ Repeat
 
+[![](https://user-images.githubusercontent.com/4598641/225746247-eb970a66-98e9-4352-85c4-eed3690745fb.png)](https://github.com/coderdojolund/Python-8/blob/main/Repeat/repeat.md)
+
+https://github.com/coderdojolund/Python-8/blob/main/Repeat/repeat.md
+
+
 ## ⭐⭐⭐ Snake
 
 ## ⭐⭐⭐ Sokoban
