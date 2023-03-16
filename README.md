@@ -47,6 +47,10 @@ https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md
 
 ## ⭐⭐⭐ Life
 
+[![](https://user-images.githubusercontent.com/4598641/225745694-931e3ac9-aa8e-4931-bf60-b673bd7f5536.png)](https://github.com/coderdojolund/Python-8/blob/main/Life/life.md) 
+
+https://github.com/coderdojolund/Python-8/blob/main/Life/life.md
+
 ## ⭐⭐⭐ Repeat
 
 ## ⭐⭐⭐ Snake
