@@ -297,12 +297,14 @@ XXXX
 
 ## Game over-läge
 
-Om du trycker på fel tangent sätts tillståndet till `gameover`, istället för att återställa spelet meddetsamma. När en tangent trycks ned i "gameover"-tillståndet återställs spelet.
+Om du trycker på fel tangent sätts tillståndet till `gameover`, istället för att återställa spelet meddetsamma. 
+När en tangent trycks ned i "gameover"-tillståndet återställs spelet.
 
 XXXX
 
 ## Visa text baserat på tillstånd
-Den aktuella sekvenspositionen och längden på sekvensen visas bara när är i "upprepa"-läget, och ett game over-meddelande visas om spelet är i "gameover"-läget.
+Den aktuella sekvenspositionen och längden på sekvensen visas bara när vi är i "upprepa"-läget. 
+Ett game over-meddelande visas om spelet är i "gameover"-läget.
 
 XXXX
 
