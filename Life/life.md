@@ -16,7 +16,9 @@ Skapa en första uppsättning med celler, tryck på valfri tangent för att gå 
 
 ## Kontroller
 **Vänsterklick**	Gör cellen levande
+
 **Högerklick**	Gör cellen död
+
 **Vilken tangent som helst**	Gå ett steg framåt i tiden
 
 # Översikt
