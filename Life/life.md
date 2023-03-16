@@ -35,6 +35,9 @@ När det nya rutnätet är klart ersätts det nuvarande rutnätet med det nya ru
 
 En cell ritas som en kvadrat.
 
+✏️ Logga in i repl.it och klona startprojektet https://replit.com/@RobertStorlind/life-starter
+Mata in koden och testkör!
+
 ```python
 import pgzrun
 
@@ -57,6 +60,8 @@ pgzrun.go()
 
 ## Rita en rad med celler
 En rad med celler ritas, med en pixel mellan varje cell.
+
+✏️ Mata in koden och testkör!
 
 ```python
 import pgzrun
@@ -124,6 +129,8 @@ Vi importerar modulen pygame så att `pygame.mouse.get_pos` kan användas för a
 
 Matematikmodulen importerar vi så att vi kan använda `math.floor` för att avrunda ett tal neråt till närmast mindre heltal.
 
+✏️ Mata in koden och testkör!
+
 ```python
 import pgzrun
 import pygame
@@ -165,6 +172,8 @@ pgzrun.go()
 
 Rutnätets bredd/höjd i celler återanvänds från att rita cellerna, så vi sparar bredden och höjden i variabler.
 
+✏️ Mata in koden och testkör!
+
 ```python
 grid_x_count = 70
 grid_y_count = 50
@@ -185,6 +194,8 @@ def draw():
 
 ## Markera celler
 Cellen (rutan) under muspekaren är inställd på markeringsfärgen.
+
+✏️ Mata in koden och testkör!
 
 ```python
 def draw():
@@ -219,6 +230,9 @@ Varje cell representeras av ett booleskt värde: Sant för levande, Falskt för 
 Om cellen är levande används den levande färgen för att rita cellen.
 
 För att testa detta ställs vissa celler manuellt in på att leva.
+
+✏️ Mata in koden och testkör!
+
 ```python
 # etc.
 
@@ -256,6 +270,8 @@ def draw():
 ## Gör celler levande med vänster musknapp
 Om vänster musknapp är nedtryckt är den valda cellen inställd på att leva.
 
+✏️ Mata in koden och testkör!
+
 ```python
 def update():
     # etc.
@@ -271,6 +287,8 @@ def update():
 Att uppdatera rutnätet efter ett steg kräver att man vet hur många levande grannar varje cell har.
 
 Just nu kommer högerklick på en cell att skriva ut hur många levande grannar den har.
+
+✏️ Mata in koden och testkör!
 
 ```python
 # Tillfälligt
@@ -316,6 +334,9 @@ Total neighbors: 2
 När en tangent trycks, skapas ett nytt rutnät och det gamla rutnätet ersätts av det nya rutnätet.
 
 Till en början kommer alla celler i det nya rutnätet att vara levande.
+
+✏️ Mata in koden och testkör!
+
 ```python
 def on_key_down():
     global grid
@@ -336,6 +357,8 @@ def on_key_down():
 Koden för att hitta antalet levande grannar en cell har flyttas hit.
 
 En cell i det nya rutnätet är vid liv om den har 3 grannar, eller så är den levande i det gamla rutnätet och har 2 grannar.
+
+✏️ Mata in koden och testkör!
 
 ```python
 def on_key_down():
@@ -373,6 +396,8 @@ def on_key_down():
 ## Döda celler med högerklick
 När en cell högerklickas dör den.
 
+✏️ Mata in koden och testkör!
+
 ```python
 def update():
     # etc.
@@ -382,7 +407,6 @@ def update():
     elif pygame.mouse.get_pressed()[2]: #nyrad
         grid[selected_y][selected_x] = False #nyrad
 ```
-
 
 # Källor
 Efter originalet på https://simplegametutorials.github.io/pygamezero/life/
