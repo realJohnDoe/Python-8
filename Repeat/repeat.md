@@ -37,7 +37,7 @@ Den aktuella sekvenspositionen börjar vid 1.
 
 Om spelaren trycker på knappen som motsvarar siffran i sekvensen vid den aktuella positionen, ökar vi positionen med 1.
 
-Detta blir fel när den aktuella positionen är längre än längden på sekvenslistan.
+Detta blir fel när den aktuella positionen är större än längden på sekvenslistan.
 
 ```python
 import pgzrun
