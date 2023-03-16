@@ -110,19 +110,20 @@ def draw():
 
 Cellpositionen som muspekaren är över lagras.
 
-Detta beräknas genom att ta muspositionen och dividera den med cellstorleken och lägga detta nummer på golvet.
+Detta beräknas genom att ta muspositionen och dividera den med cellstorleken och avrunda neråt.
 
-Till exempel, om musen är i position 17 på X-axeln och cellstorleken är 5, dividering 17 med 5 ger 3,4, golvbeläggning 3,4 ger 3, vilket betyder att musen är över cellen med ett index på 3 på X-axeln .
+Exempel: om musen har x-koordinat 17 och cellstorleken är 5, dividerar vi 17 med 5 vilket ger 3,4. Vi avrundar neråt och får 3.
+Det betyder att musen är över cellen med ett index på 3 på X-axeln .
 
-Cellstorleken behövs för att beräkna detta, så den flyttas till att vara global.
+Cellstorleken behövs för att beräkna detta, så den flyttas till att vara en global variabel.
 
-För närvarande ritas denna position till skärmen som text.
+Vi skriver det värdet på skärmen för att testa.
 
-pygame - modulen importeras så att pygame.mouse.get_pos kan användas.
+Vi importerar modulen pygame så att pygame.mouse.get_pos kan användas.
 
-Matematikmodulen är importerad så att math.floor kan användas.
+Matematikmodulen importerar vi så att vi kan använda  math.floor.
 
-
+XXXX
 
 
 
