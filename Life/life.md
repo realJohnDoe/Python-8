@@ -11,8 +11,7 @@ Det finns ett rutnät av celler, där varje enskild cell antingen är levande el
 Efter varje tidssteg gäller att:
 - Levande celler med exakt två eller tre levande grannar lever vidare. 😅
 - Döda celler med exakt tre levande grannar blir levande. 👶
-
-Alla andra celler dör eller förblir döda. ☠️
+- Alla andra celler dör eller förblir döda. ☠️
 
 Skapa en första uppsättning med celler, tryck på valfri tangent för att gå framåt i tiden och observera.
 
