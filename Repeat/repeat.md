@@ -248,7 +248,7 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 
 ## Rita första rutan
 
-Den första rutan är ritad med en mörkröd ruta och en vit siffra.
+Den första rutan är mörkröd med en vit siffra.
 
 ```python
 def draw():
@@ -270,7 +270,7 @@ def draw():
 ![image](https://user-images.githubusercontent.com/4598641/225725617-e4af967f-5de4-4edd-9293-2ba5268b2215.png)
 
 ## Rita alla rutor
-Resten av rutorna är ritade på liknande sätt.
+Resten av rutorna kan vi rita på liknande sätt.
 
 ```python
 def draw():
@@ -309,8 +309,11 @@ def draw():
 ![image](https://user-images.githubusercontent.com/4598641/225706773-2c9ffb3d-555c-4df1-b3f4-35a19c6e385e.png)
 
 ## Förenkla koden
-Koden för att rita varje ruta är likadan. Vi gör den till en funktion som vi kan använda flera gånger.
-```python3
+Koden för att rita varje ruta är likadan. Vi flyttar den koden funktionen `draw_square()` som vi kan använda flera gånger.
+
+✏️ Byt ut funktionen `draw()` så att den blir så här. Testkör!
+
+```python
 def draw():
     screen.fill((0, 0, 0))
 
@@ -333,20 +336,24 @@ def draw():
 ## Timer
 Siffrorna blinkar varje sekund.
 
-En timervariabel börjar vid 0 och ökar med `dt` för varje bildruta.
+En timervariabel börjar vid 0 och ökar med `dt` för varje bildruta. 
+>Variabeln `dt` talar om hur länge sen det var vi körde `update()` senast.
 
 När timern är på eller över 1 återställs den till 0.
 
 Till en början skriver vi 'tick' varje gång siffrorna blinkar.
 
 ```python3
+timer = 0 # lägg till uppe bland variablerna
+
 def reset():
     # etc.
-    global timer
+    global timer # lägg till
 
     # etc.
-    timer = 0
+    timer = 0 #lägg till
 
+# Lägg till den här funktionen
 def update(dt):
     global timer
 
@@ -354,7 +361,7 @@ def update(dt):
     if timer >= 1:
         timer = 0
         # Temporary
-        print('tick')
+        print("tick")
 ```
 ✏️ Uppdatera och testkör koden.
 
@@ -368,6 +375,8 @@ För närvarande ritas kvadraten som motsvarar siffran vid den aktuella sekvensp
 Testsekvensen från tidigare används igen.
 
 Detta kommer bli fel när `current` är större än längden av `sequence`.
+
+✏️ Uppdatera och testkör koden.
 
 ```python3
 def reset():
@@ -437,26 +446,26 @@ def draw():
 https://simplegametutorials.github.io/pygamezero/repeat/7.png
 
 ## Titta och upprepa
-En variabel skapas som indikerar om rutorna blinkar, `watch`, eller om spelaren matar in siffror, `repeat`.
+Vi skapar en variabel som håller reda på om rutorna blinkar, `watch`, eller om spelaren matar in siffror, `repeat`.
 
 Tillståndet börjar som `watch` och ändras till `repeat` efter att den blinkande sekvensen har avslutats.
 
 Koden för att läsa av tangentbordet körs bara när tillståndet är `repeat`.
 
-När sekvensen väl har angetts, ändras tillståndet tillbaka till `watch`.
+När spelaren har matat in rätt sekvens, ändras tillståndet tillbaka till `watch`.
 
-```python3
+```python
+state = 'watch' # lägg till uppe bland variablerna
+
+# etc.
+
 def reset():
     global state
-
     # etc.
-
     state = 'watch' # 'watch', 'repeat'
 
 def update(dt):
-    global timer
-    global current
-    global state
+    global timer, current, state
 
     if state == 'watch': #nyrad
         timer += dt
@@ -510,13 +519,15 @@ def draw():
 ![image](https://user-images.githubusercontent.com/4598641/225708386-2c6b9be1-c195-4ef3-98a5-a2300828e5b5.png)
 
 ## Tillfälligt blinkande
-En boolesk variabel (False/True) används för att indikera om den markerade färgen ska ställas in eller inte.
+En boolesk variabel (False/True) används för att hålla reda på om den markerade färgen ska ställas in eller inte.
 
 Från början är variabeln False. Den sätts till True när timern tickar. Nästa gång timern tickar sätts den till False, och så vidare.
 
 Timergränsen ändras till att ticka dubbelt så snabbt.
 
 ```python3
+flashing = False # lägg till uppe bland variablerna
+
 def reset():
     # etc.
     global flashing #nyrad
@@ -553,7 +564,7 @@ def draw():
 
     # etc.
 
-    screen.draw.text('flashing: ' + str(flashing), (20, 220)) #ändra
+    screen.draw.text(f"flashing: {flashing}", (20, 220)) #OKLART VAR DENNA SKA VARA
 ```
 
 
