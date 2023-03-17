@@ -591,17 +591,17 @@ def on_key_down(key):
 ```        
        
 ## Visa text baserat på tillstånd
-Den aktuella sekvenspositionen och längden på sekvensen visas bara när vi är i "upprepa"-läget. 
-Ett game over-meddelande visas om spelet är i "gameover"-läget.
+Den aktuella sekvenspositionen och längden på sekvensen visas bara när vi är i *upprepa*-läget. 
+Ett game over-meddelande visas om spelet är i *gameover*-läget.
 
 ```python
 def draw():
     # etc.
 
     if state == 'repeat': #nyrad
-        screen.draw.text(str(current + 1) + '/' + str(len(sequence)), (20, 60))
+        screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 60))
     elif state == 'gameover': #nyrad
-        screen.draw.text('Game over!', (20, 60)) #nyrad
+        screen.draw.text("Game over!", (20, 60)) #nyrad
 
     #borttagen: screen.draw.text('sequence[current]: ' + str(sequence[current]), (20, 100))
     #borttagen: screen.draw.text(', '.join(map(str, sequence)), (20, 140))
