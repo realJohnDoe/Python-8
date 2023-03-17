@@ -4,8 +4,8 @@
 
 ![image](https://user-images.githubusercontent.com/4598641/225698865-f394ffdb-6b0c-4731-8763-915c93b7b965.png)
 
-# Regler
-Se när en talsekvens blinkar.
+# Regler för minnesspelet Repeat
+Se på när en talsekvens blinkar och försök att komma ihåg ordningen på siffrorna.
 
 Upprepa sekvensen med sifferknapparna.
 
