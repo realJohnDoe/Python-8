@@ -89,6 +89,15 @@ pgzrun.go()
 
 ![image](https://user-images.githubusercontent.com/4598641/225729839-7b0261e5-a2cc-4995-b1b2-d4db4d796737.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 ## Rita alla celler
 
 Vi ritar alla raderna.
@@ -116,6 +125,15 @@ def draw():
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/225730301-6313d4de-4505-417b-8dd3-6c138d1b2ea7.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 ## Markera celler
 
@@ -196,6 +214,15 @@ def draw():
             # etc.
 ```
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 ## Markera celler
 Cellen (rutan) under muspekaren är inställd på markeringsfärgen.
 
@@ -225,6 +252,15 @@ def draw():
 
 ![image](https://user-images.githubusercontent.com/4598641/225734958-fe8dfa7b-59c6-422c-9ba2-0561436c5add.png)
 
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 ## Skapa rutnätet
 Ett rutnät skapas för att lagra cellerna.
@@ -270,6 +306,15 @@ def draw():
 
 ![image](https://user-images.githubusercontent.com/4598641/225735062-e17dd79f-3542-40fd-a9f5-58c797f89297.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 
 ## Gör celler levande med vänster musknapp
 Om vänster musknapp är nedtryckt är den valda cellen inställd på att leva.
@@ -285,6 +330,14 @@ def update():
 ```
 ![image](https://user-images.githubusercontent.com/4598641/225735163-0a7b10dd-a3f4-4756-8673-713fe5a6eb05.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 
 ## Räkna dina grannar
@@ -334,6 +387,15 @@ Finding neighbors of grid[10][10]
 Total neighbors: 2
 ```
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 ## Uppdatera rutnätet vid knapptryckning
 När en tangent trycks, skapas ett nytt rutnät och det gamla rutnätet ersätts av det nya rutnätet.
 
@@ -355,6 +417,15 @@ def on_key_down():
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/225735624-4f103937-7ed2-4efd-978d-ac6ffde64ccd.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 
 ## Ändra rutnät baserat på grannar
@@ -397,6 +468,15 @@ def on_key_down():
 
 ![image](https://user-images.githubusercontent.com/4598641/225735719-0d1f5745-9252-449f-9d62-60f076b37e3c.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 ## Döda celler med högerklick
 När en cell högerklickas dör den.
 
@@ -411,6 +491,16 @@ def update():
     elif pygame.mouse.get_pressed()[2]: #nyrad
         grid[selected_y][selected_x] = False #nyrad
 ```
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 # Tips
 Det finns intressanta mönster att testa med: se t.ex. https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns
 
