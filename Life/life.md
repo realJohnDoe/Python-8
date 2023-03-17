@@ -1,7 +1,7 @@
 # Game of Life
 ## En handledning för Python och Pygame Zero 1.2
 
-Game of Life uppfanns av John Conway år 1970. Det är ett spel utan spelare &ndash; allt är bestämt när man valt startuppställningen.
+Game of Life uppfanns av John Conway år 1970. Det är ett spel utan spelare &ndash; allt är bestämt när du valt startuppställningen.
 
 ![image](https://user-images.githubusercontent.com/4598641/225728407-f0313924-90f3-4f7e-83ce-43a6303881e7.png)
 
@@ -19,7 +19,7 @@ Skapa en första uppsättning med celler, tryck på valfri tangent för att gå 
 ## Kontroller
 **🖱️ Vänsterklick**	Gör cellen levande
 
-**🖱️ Högerklick**	Gör cellen död
+**🖱️ Högerklick**	Döda cellen
 
 **⌨️ Vilken tangent som helst**	Gå ett steg framåt i tiden
 
@@ -37,13 +37,14 @@ När det nya rutnätet är klart ersätts det nuvarande rutnätet med det nya ru
 
 En cell ritas som en kvadrat.
 
-✏️ Logga in i repl.it och klona startprojektet https://replit.com/@RobertStorlind/life-starter
+✏️ Logga in i repl.it. Klona startprojektet https://replit.com/@RobertStorlind/life-starter så att du får en egen kopia
 
 Mata in koden och testkör!
 
 ```python
 import pgzrun
 
+# Funktioner här nedanför
 def draw():
     screen.fill((255, 255, 255)) # vit färg
 
@@ -55,6 +56,7 @@ def draw():
         color=(220, 220, 220)
     )
 
+# Kod för att starta appen
 pgzrun.go()
 ```
 
@@ -64,12 +66,13 @@ pgzrun.go()
 ## Rita en rad med celler
 En rad med celler ritas, med en pixel mellan varje cell.
 
-✏️ Mata in koden och testkör!
+✏️ Mata in koden och testkör! Du behöver uppdatera funktionen `draw()`
+>Tänk på att dra in koden som ritar när du lägger till `for`.
 
 ```python
 import pgzrun
 
-def draw ():
+def draw():
     screen.fill (( 255 , 255 , 255 ))
 
     for x in range(70): #nyrad
@@ -102,7 +105,7 @@ import abc
 
 Vi ritar alla raderna.
 
-✏️ Uppdatera funktionen och testkör din kod.
+✏️ Uppdatera funktionen `draw()` och testkör din kod.
 
 >Glöm inte att dra in raderna under `for y`.
 
@@ -137,7 +140,7 @@ import abc
 
 ## Markera celler
 
-Cellpositionen som muspekaren är över lagras.
+Cellpositionen som muspekaren är över sparar vi i två variabler. Det är x- och y-koordinaterna för cellen.
 
 Detta beräknas genom att ta muspositionen och dividera den med cellstorleken och avrunda neråt.
 
@@ -151,16 +154,16 @@ Vi importerar modulen pygame så att `pygame.mouse.get_pos` kan användas för a
 
 Matematikmodulen importerar vi så att vi kan använda `math.floor` för att avrunda ett tal neråt till närmast mindre heltal.
 
-✏️ Mata in koden och testkör!
+✏️ Mata in koden och testkör! Vad händer om du har muspekaren utanför rutnätet med celler?
 
 ```python
 import pgzrun
-import pygame
-import math
+import pygame #nyrad
+import math #nyrad
 
-cell_size = 5
+cell_size = 5 #flyttad från draw
 
-def update():
+def update(): # Pygame anropar denna när något händer
     global selected_x
     global selected_y
 
@@ -190,15 +193,14 @@ pgzrun.go()
 ![image](https://user-images.githubusercontent.com/4598641/225734422-569de346-61f2-4246-905c-1838b95ff534.png)
 
 ## Begränsa vald cell till rutnätet
-`min` används för att ge den valda positionen ett maximalt värde, så att den inte kommer att vara utanför rutnätet även om musen är utanför rutnätet.
+`min` används för att ge den valda positionen ett maximalt värde, så att den inte kommer att vara utanför rutnätet även om muspekaren är utanför rutnätet.
 
-Rutnätets bredd/höjd i celler återanvänds från att rita cellerna, så vi sparar bredden och höjden i variabler.
+Rutnätets bredd/höjd i celler återanvänds från att när vi ritar cellerna, så vi sparar bredden och höjden i variabler.
 
-✏️ Mata in koden och testkör!
+✏️ Mata in koden och testkör! Vad händer nu om muspekaren är utanför rutnätet med celler?
 
 ```python
-grid_x_count = 70
-grid_y_count = 50
+grid_x_count, grid_y_count = 70, 50
 
 def update():
     # etc.
@@ -226,7 +228,7 @@ import abc
 ## Markera celler
 Cellen (rutan) under muspekaren är inställd på markeringsfärgen.
 
-✏️ Mata in koden och testkör!
+✏️ Mata in koden och testkör! Testa med olika markeringsfärger om du vill.
 
 ```python
 def draw():
@@ -252,6 +254,7 @@ def draw():
 
 ![image](https://user-images.githubusercontent.com/4598641/225734958-fe8dfa7b-59c6-422c-9ba2-0561436c5add.png)
 
+>Vad betyder `color=color` på sista raden i `screen.draw.filled_rect`?
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -265,7 +268,7 @@ import abc
 ## Skapa rutnätet
 Ett rutnät skapas för att lagra cellerna.
 
-Varje cell representeras av ett booleskt värde: Sant för levande, Falskt för död.
+Varje cell representeras av ett booleskt (logiskt) värde &ndash; Sant för levande, Falskt för död.
 
 Om cellen är levande används den levande färgen för att rita cellen.
 
@@ -276,16 +279,8 @@ För att testa detta ställs vissa celler manuellt in på att leva.
 ```python
 # etc.
 
+# Lägg till bland globala variabler
 grid = []
-
-for y in range(grid_y_count):
-    grid.append([])
-    for x in range(grid_x_count):
-        grid[y].append(False)
-
-# Temporary
-grid[0][0] = True
-grid[0][1] = True
 
 def draw():
     screen.fill((255, 255, 255))
@@ -302,6 +297,18 @@ def draw():
                 color = (220, 220, 220)
 
             # etc.
+            
+# Lägg till under kod för att starta appen
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(False)
+
+# Tillfälligt
+grid[0][0] = True
+grid[0][1] = True
+
+pgzrun.go() # alltid sist
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/225735062-e17dd79f-3542-40fd-a9f5-58c797f89297.png)
@@ -341,11 +348,11 @@ import abc
 
 
 ## Räkna dina grannar
-Att uppdatera rutnätet efter ett steg kräver att man vet hur många levande grannar varje cell har.
+Att uppdatera rutnätet efter ett tidssteg kräver att man vet hur många levande grannar varje cell har.
 
-Just nu kommer högerklick på en cell att skriva ut hur många levande grannar den har.
+Just nu låter vi högerklick på en cell att skriva ut hur många levande grannar den har.
 
-✏️ Mata in koden och testkör!
+✏️ Mata in koden och testkör! Ser du utskriften i det svarta konsolfönstret?
 
 ```python
 # Tillfälligt
@@ -353,7 +360,7 @@ def on_mouse_down(pos, button):
     if button == mouse.RIGHT:
         neighbor_count = 0
 
-        print(f"Finding neighbors of grid[{selected_y)}][{selected_x}]")
+        print(f"Finding neighbors of grid[{selected_y}][{selected_x}]")
 
         for dy in range(-1, 2):
             for dx in range(-1, 2):
@@ -401,7 +408,8 @@ När en tangent trycks, skapas ett nytt rutnät och det gamla rutnätet ersätts
 
 Till en början kommer alla celler i det nya rutnätet att vara levande.
 
-✏️ Mata in koden och testkör!
+✏️ Lägg till funktionen och testkör!
+>Glöm inte att klicka i appfönstret innan du trycker på någon knapp för att testa.
 
 ```python
 def on_key_down():
@@ -431,9 +439,9 @@ import abc
 ## Ändra rutnät baserat på grannar
 Koden för att hitta antalet levande grannar en cell har flyttats hit.
 
-En cell i det nya rutnätet är vid liv om den har 3 grannar, eller så är den levande i det gamla rutnätet och har 2 grannar.
+En cell i det nya rutnätet är vid liv om den har tre grannar, eller så är den levande i det gamla rutnätet och har två grannar.
 
-✏️ Mata in koden och testkör!
+✏️ Uppdatera funktionerna i koden och testkör!
 
 ```python
 def on_key_down():
