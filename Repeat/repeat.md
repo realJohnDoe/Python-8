@@ -615,7 +615,9 @@ def draw():
 
 ![image](https://user-images.githubusercontent.com/4598641/225709496-d75bd7ca-c901-420c-9c7d-a381dec241bb.png)
 
-
+# Utmaningar
+## High Score
+Lägg till en variabel för High Score. Visa den på skärmen
 
 # Källor
 Översatt till svenska och anpassad till repl.it baserat på https://simplegametutorials.github.io/pygamezero/repeat/
