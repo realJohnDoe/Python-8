@@ -30,7 +30,10 @@ pgzrun.go() # Ska alltid vara sist i programmet (längst ner)
 
 ![image](https://user-images.githubusercontent.com/4598641/225699441-a8ba2e0d-516c-42e0-8bbf-c062e783aee5.png)
 
-✏️ Mata in och testkör koden i ett nytt projekt i repl.it.
+✏️ Se till att du är inloggad i repl.it. Öppna startprojektet i repl.it: https://replit.com/@RobertStorlind/repeat-starter
+
+Klicka på Fork för att spara en egen kopia. ![image](https://user-images.githubusercontent.com/4598641/225977081-1f9710c5-58cb-4b25-adb9-0f435fd6a1ed.png)
+
 
 ## Nuvarande position i sekvensen
 Den aktuella sekvenspositionen börjar vid 1.
@@ -74,13 +77,15 @@ pgzrun.go() # Ska alltid vara sist i programmet (längst ner)
 ✏️ Uppdatera din kod så att den blir som här ovanför och testkör den. Du måste inte mata in kommentarerna &ndash; de förklarar vad koden gör.
 Klicka i terminalfönstret. Sedan kan du trycka på siffertangenterna 1 till 4 för att testa.
 
+Klicka i terminalfönstret. Skriv sen 4 3 1 2 2 3 och se hur skärmen uppdateras. Vad händer om du fortsätter trycka fler siffror?
+
 ![image](https://user-images.githubusercontent.com/4598641/225703318-26fb8e5b-9d98-4a9d-b740-fc220f938125.png)
 
 ## Återställ aktuell position
 
 När den aktuella positionen överskrider sekvenslängden återställs vi den till 0.
 
-✏️ Uppdatera koden i on_key_down() och testkör igen.
+✏️ Uppdatera koden i `on_key_down()` och testkör igen.
 
 ```python
 def on_key_down(key):
@@ -109,9 +114,10 @@ def on_key_down(key):
     # etc.
             if current == len(sequence):
                 current = 0
-                sequence.append(random.randint(1, 4))
+                sequence.append(random.randint(1, 4)) #nyrad
 ```
-✏️ Uppdatera och testkör koden.
+✏️ Uppdatera och testkör koden. 
+>Du ser facit överst på skärmen och en ny siffra läggs till varje gång du matat in alla siffrorna i sekvensen.
 
 <details>
     <summary>📝 Så här ser hela koden ut nu XXXX</summary>
@@ -125,12 +131,11 @@ Nu skapar vi en riktig sekvens, till en början med ett enda slumptal.
 Eftersom koden för att lägga till ett slumptal till sekvensen återanvänds, gör vi den till en funktion, `add_to_sequence()`.
 
 ```python
-sequence = [] # Lägg detta högt upp vid de andra variablerna
+sequence = [] # Ändra detta högst upp
 
+# Lägg till funktionen
 def add_to_sequence():
     sequence.append(random.randint(1, 4))
-
-add_to_sequence()
 
 # etc.
 
@@ -139,10 +144,14 @@ def on_key_down(key):
 
             if current == len(sequence):
                 current = 0
-                add_to_sequence() #nyrad
+                add_to_sequence() # ersätt raden som var här
+
+add_to_sequence() # lägg till som näst sista rad
+pgzrun.go()
 ```
 
-✏️ Uppdatera koden och testkör den.
+✏️ Uppdatera koden och testkör den genom att mata in siffror. 
+>Glöm inte att klicka i terminalfönstret
 
 <details>
     <summary>Så här bör koden se ut nu:</summary>
@@ -151,42 +160,45 @@ def on_key_down(key):
 import pgzrun
 import random
 
-sequence = []
+# Variabler här nedanför
+sequence = []  # Tillfälligt
+current = 0  #nyrad
 
+# Funktioner här nedanför
 def add_to_sequence():
     sequence.append(random.randint(1, 4))
-
-add_to_sequence()
-
-current = 0
-
+  
 def on_key_down(key):
-    global current
+  global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
-    if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
-        if key == keys.K_1:
-            number = 1
-        elif key == keys.K_2:
-            number = 2
-        elif key == keys.K_3:
-            number = 3
-        elif key == keys.K_4:
-            number = 4
+  if key in (keys.K_1, keys.K_2, keys.K_3,
+             keys.K_4):  # siffertangenterna 1, 2, 3, 4
+    if key == keys.K_1:
+      number = 1
+    elif key == keys.K_2:
+      number = 2
+    elif key == keys.K_3:
+      number = 3
+    elif key == keys.K_4:
+      number = 4
 
-        if number == sequence[current]:
-            current += 1
-            if current == len(sequence):
-                current = 0
-                add_to_sequence()
+    if number == sequence[current]:
+      current += 1
+      if current == len(sequence):  #nyrad
+        current = 0  #nyrad
+        add_to_sequence() # ändra
 
 def draw():
-    screen.fill((0, 0, 0))
+  screen.fill((0, 0, 0))
 
-    screen.draw.text(', '.join(map(str, sequence)), (0, 0))
-    screen.draw.text(f"{current + 1}/{len(sequence)}", (0, 20))
-    screen.draw.text(f"sequence[current]: {sequence[current]}", (0, 40))
-    
-pgzrun.go()
+  screen.draw.text(', '.join(map(str, sequence)), (0, 0))
+  screen.draw.text(f"{current + 1}/{len(sequence)}", (0, 20))  #nyrad
+  screen.draw.text(f"sequence[current]: {sequence[current]}", (0, 40))  #nyrad
+
+# Kod för att starta vår app
+
+add_to_sequence() # skapa första hemliga talet
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```
 </details>
     
@@ -194,7 +206,7 @@ pgzrun.go()
 
 Vi skapar en funktion som ställer in spelets startläge.
 
-Denna funktion anropas innan spelet börjar och när en felaktig siffertangent trycks ned.
+Denna funktion ska vi anropa innan spelet börjar och också när en felaktig siffertangent trycks ned.
 
 ```python
 def add_to_sequence():
@@ -224,11 +236,17 @@ def on_key_down(key):
                 add_to_sequence()
         else: #nyrad
             reset() #nyrad
+# etc.
+
+# Kod för att starta vår app
+reset() # ändra
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
+
 ```
 ✏️ Uppdatera din kod och testkör.
 
 
-## Rita första kvadraten
+## Rita första rutan
 
 Den första rutan är ritad med en mörkröd ruta och en vit siffra.
 
@@ -244,9 +262,9 @@ def draw():
     ) #nyrad
     screen.draw.text('1', (19, 18)) #nyrad
 
-    screen.draw.text(str(current + 1) + '/' + str(len(sequence)), (20, 60)) #uppdatera
-    screen.draw.text('sequence[current]: ' + str(sequence[current]), (20, 100)) #uppdatera
-    screen.draw.text(', '.join(map(str, sequence)), (20, 140)) #uppdatera
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60)) #ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  #ändra
+    screen.draw.text(f"sequence[current]: {sequence[current]}", (20, 140))  #ändra
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/225725617-e4af967f-5de4-4edd-9293-2ba5268b2215.png)
