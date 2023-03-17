@@ -27,9 +27,9 @@ Cellerna i rutnätet lagras som booleska värden: Sant för levande, Falskt för
 
 ![image](https://user-images.githubusercontent.com/4598641/225729047-0f4814bc-6527-47b8-b600-dbbf810dd06b.png)
 
-När tiden går framåt skapas ett nytt rutnät. Om cellerna i detta nya rutnät är levande eller döda baseras på det nuvarande rutnätet.
+När tiden går framåt skapas ett nytt rutnät. Om en cell i detta nya rutnät är levande eller död beror på hur grannskapet ser ut i det nuvarande rutnätet.
 
-När det nya rutnätet är klart ersätts det nuvarande rutnätet med det nya rutnätet.
+När det nya rutnätet är klart ersätts det nuvarande rutnätet med det nya rutnätet. Vi behöver inte det gamla rutnätet längre.
 
 # Kodning
 ## Rita en cell
