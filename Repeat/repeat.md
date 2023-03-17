@@ -103,6 +103,15 @@ def on_key_down(key):
                 current = 0 #nyrad
 ```
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 ## Lägg till nästa tal att komma ihåg i sekvensen
 
 När den aktuella positionen återställs läggs ett slumptal mellan 1 och 4 till i sekvensen.
@@ -123,7 +132,11 @@ def on_key_down(key):
 >Du ser facit överst på skärmen och en ny siffra läggs till varje gång du matat in alla siffrorna i sekvensen.
 
 <details>
-    <summary>📝 Så här ser hela koden ut nu XXXX</summary>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
 
 </details>
 
@@ -157,7 +170,7 @@ pgzrun.go()
 >Glöm inte att klicka i terminalfönstret
 
 <details>
-    <summary>Så här bör koden se ut nu:</summary>
+    <summary>Så här kan koden se ut nu:</summary>
 
 ```python
 import pgzrun
@@ -249,6 +262,16 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ✏️ Uppdatera din kod och testkör.
 
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
+
 ## Rita första rutan
 
 Den första rutan är mörkröd med en vit siffra.
@@ -271,6 +294,15 @@ def draw():
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/225725617-e4af967f-5de4-4edd-9293-2ba5268b2215.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 ## Rita alla rutor
 Resten av rutorna kan vi rita på liknande sätt.
@@ -311,6 +343,15 @@ def draw():
 
 ![image](https://user-images.githubusercontent.com/4598641/225706773-2c9ffb3d-555c-4df1-b3f4-35a19c6e385e.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 ## Förenkla koden
 Koden för att rita varje ruta är likadan. Vi flyttar den koden funktionen `draw_square()` som vi kan använda flera gånger.
 
@@ -335,6 +376,15 @@ def draw():
 
     # etc.
 ```
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 ## Timer
 Siffrorna blinkar varje sekund.
@@ -367,6 +417,15 @@ def update(dt): # anropas 60 gånger i sekunden av Pygame
         print("tick")
 ```
 ✏️ Uppdatera och testkör koden.
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 ## Blinkande rutor
 Den aktuella sekvenspositionen återanvänds för att blinka varje ruta i sekvensen.
@@ -417,6 +476,15 @@ def draw():
 
 ![image](https://user-images.githubusercontent.com/4598641/225707453-d0919991-6a40-4803-b883-5e25e8a65d25.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 ## Blinkande färg
 Vi ger rutorna varsin färg.
 
@@ -447,6 +515,15 @@ def draw():
 ```
 
 https://simplegametutorials.github.io/pygamezero/repeat/7.png
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 ## Titta och upprepa
 Vi skapar en variabel som håller reda på om rutorna blinkar, `watch`, eller om spelaren matar in siffror, `repeat`.
@@ -521,6 +598,15 @@ def draw():
 
 ![image](https://user-images.githubusercontent.com/4598641/225708386-2c6b9be1-c195-4ef3-98a5-a2300828e5b5.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 ## Tillfälligt blinkande
 En boolesk variabel (False/True) används för att hålla reda på om den markerade färgen ska ställas in eller inte.
 
@@ -570,6 +656,15 @@ def draw():
     screen.draw.text(f"flashing: {flashing}", (20, 220)) #OKLART VAR DENNA SKA VARA
 ```
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
 
 ## Game over-läge
 
@@ -592,8 +687,18 @@ def on_key_down(key):
     elif state == 'gameover': nyrad
         reset()
 ```        
-       
-## Visa text baserat på tillstånd
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
+
+## Visa text baserat på vilket läge vi är i
+
 Den aktuella sekvenspositionen och längden på sekvensen visas bara när vi är i *upprepa*-läget. 
 Ett game over-meddelande visas om spelet är i *gameover*-läget.
 
@@ -614,6 +719,15 @@ def draw():
 
 
 ![image](https://user-images.githubusercontent.com/4598641/225709496-d75bd7ca-c901-420c-9c7d-a381dec241bb.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import abc
+```    
+
+</details>
 
 # Utmaningar
 ## High Score
