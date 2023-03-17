@@ -13,7 +13,7 @@ Efter varje tidssteg gäller att:
 - Döda celler med exakt tre levande grannar blir levande. 👶
 - Alla andra celler dör eller förblir döda. ☠️
 
-Skapa en första uppsättning med celler, tryck på valfri tangent för att gå framåt i tiden och observera.
+Vi vill kunna skapa en första uppsättning med celler, trycka på en tangent för att gå ett steg framåt i tiden och se vad som händer.
 
 ## Kontroller
 **🖱️ Vänsterklick**	Gör cellen levande
