@@ -19,12 +19,15 @@ Vi skapar sekvenslistan. Till en början innehåller den en testsekvens med siff
 ```python
 import pgzrun
 
+# Variabler här nedanför
 sequence = [4, 3, 1, 2, 2, 3] # Tillfälligt
 
-def draw():
+# Funktioner här nedanför
+def draw(): # ritar om skärmen 60 gånger i sekunden
     screen.fill((0, 0, 0))
     screen.draw.text(', '.join(map(str, sequence)), (0, 0))
 
+# Kod för att starta vår app här nedanför
 pgzrun.go() # Ska alltid vara sist i programmet (längst ner)
 ```
 
@@ -48,7 +51,7 @@ import pgzrun
 sequence = [4, 3, 1, 2, 2, 3] # Tillfälligt
 current = 0 #nyrad
 
-def on_key_down(key):
+def on_key_down(key): # Pygame Zero anropar denna när skärmen behöver ritas om
     global current # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
     
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4): # siffertangenterna 1, 2, 3, 4
@@ -354,7 +357,7 @@ def reset():
     timer = 0 #lägg till
 
 # Lägg till den här funktionen
-def update(dt):
+def update(dt): # anropas 60 gånger i sekunden av Pygame
     global timer
 
     timer += dt
