@@ -23,7 +23,7 @@ import pgzrun
 sequence = [4, 3, 1, 2, 2, 3] # Tillfälligt
 
 # Funktioner här nedanför
-def draw(): # ritar om skärmen 60 gånger i sekunden
+def draw(): # ritar om skärmen
     screen.fill((0, 0, 0))
     screen.draw.text(', '.join(map(str, sequence)), (0, 0))
 
@@ -51,7 +51,7 @@ import pgzrun
 sequence = [4, 3, 1, 2, 2, 3] # Tillfälligt
 current = 0 #nyrad
 
-def on_key_down(key): # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key): # Pygame Zero anropar denna när något händer
     global current # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
     
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4): # siffertangenterna 1, 2, 3, 4
@@ -113,7 +113,7 @@ sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
 current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -176,7 +176,7 @@ sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
 current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -254,7 +254,7 @@ current = 0  # nyrad
 def add_to_sequence():
     sequence.append(random.randint(1, 4))
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -359,7 +359,7 @@ def reset():  # nyrad
     current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -450,7 +450,7 @@ def reset():  # nyrad
     current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -564,7 +564,7 @@ def reset():  # nyrad
     current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -681,7 +681,7 @@ def reset():  # nyrad
     current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -803,7 +803,7 @@ def update(dt):  # anropas 60 gånger i sekunden av Pygame
         print("tick")
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -939,7 +939,7 @@ def update(dt):  # anropas 60 gånger i sekunden av Pygame
         timer = 0
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -1063,7 +1063,7 @@ def update(dt):  # anropas 60 gånger i sekunden av Pygame
         timer = 0
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
     if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
@@ -1236,7 +1236,7 @@ def update(dt):  # anropas 60 gånger i sekunden av Pygame
                 current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current, state
 
     if state == 'repeat':  # nyrad
@@ -1391,7 +1391,7 @@ def update(dt):  # anropas 60 gånger i sekunden av Pygame
                     current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current, state
 
     if state == 'repeat':  # nyrad
@@ -1536,7 +1536,7 @@ def update(dt):  # anropas 60 gånger i sekunden av Pygame
                     current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current, state
 
     if state == 'repeat':
@@ -1677,7 +1677,7 @@ def update(dt):  # anropas 60 gånger i sekunden av Pygame
                     current = 0  # nyrad
 
 
-def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+def on_key_down(key):  # Pygame Zero anropar denna när något händer
     global current, state
 
     if state == 'repeat':
