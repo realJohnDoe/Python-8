@@ -769,7 +769,88 @@ def update(dt): # anropas 60 gånger i sekunden av Pygame
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+timer = 0
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence, current, timer
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+    timer = 0
+
+
+def update(dt):  # anropas 60 gånger i sekunden av Pygame
+    global timer
+
+    timer += dt
+    if timer >= 1:
+        timer = 0
+        # Temporary
+        print("tick")
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
+
+    if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
+        if key == keys.K_1:
+            number = 1
+        elif key == keys.K_2:
+            number = 2
+        elif key == keys.K_3:
+            number = 3
+        elif key == keys.K_4:
+            number = 4
+
+        if number == sequence[current]:
+            current += 1
+            if current == len(sequence):  # nyrad
+                current = 0  # nyrad
+                add_to_sequence()
+        else:
+            reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color):  # ändra
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0,
+                 square_size, square_size),  # ändra
+            color=color  # ändra
+        )
+        screen.draw.text(str(number), (square_size *
+                         (number - 1) + 21, 18))  # ändra
+
+    draw_square(1, (50, 0, 0))  # nyrad
+    draw_square(2, (0, 50, 0))  # nyrad
+    draw_square(3, (0, 0, 50))  # nyrad
+    draw_square(4, (50, 50, 0))  # nyrad
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
@@ -785,7 +866,7 @@ Testsekvensen från tidigare används igen.
 
 Detta kommer bli fel när `current` är större än längden av `sequence`.
 
-✏️ Uppdatera och testkör koden.
+✏️ Uppdatera och testkör koden. En ruta i taget ska ha färgmarkering.
 
 ```python3
 def reset():
@@ -794,8 +875,7 @@ def reset():
     sequence = [4, 3, 1, 2, 2, 3] # Tillfälligt
 
 def update(dt):
-    global timer
-    global current #nyrad
+    global timer, current #ändra
 
     timer += dt
     if timer >= 1:
@@ -827,7 +907,91 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+timer = 0
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence, current, timer
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+    timer = 0
+
+# Lägg till den här funktionen
+
+
+def update(dt):  # anropas 60 gånger i sekunden av Pygame
+    global timer, current
+
+    timer += dt
+    if timer >= 1:
+        timer = 0
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
+
+    if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
+        if key == keys.K_1:
+            number = 1
+        elif key == keys.K_2:
+            number = 2
+        elif key == keys.K_3:
+            number = 3
+        elif key == keys.K_4:
+            number = 4
+
+        if number == sequence[current]:
+            current += 1
+            if current == len(sequence):  # nyrad
+                current = 0  # nyrad
+                add_to_sequence()
+        else:
+            reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color):
+        if number == sequence[current]:  # nyrad
+            square_color = color  # nyrad
+        else:  # nyrad
+            square_color = (0, 0, 0)  # nyrad
+
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size),
+            color=square_color  # ändra
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18))
+
+    draw_square(1, (50, 0, 0))  # nyrad
+    draw_square(2, (0, 50, 0))  # nyrad
+    draw_square(3, (0, 0, 50))  # nyrad
+    draw_square(4, (50, 50, 0))  # nyrad
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
@@ -867,12 +1031,97 @@ https://simplegametutorials.github.io/pygamezero/repeat/7.png
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+timer = 0
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence, current, timer
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+    timer = 0
+
+# Lägg till den här funktionen
+
+
+def update(dt):  # anropas 60 gånger i sekunden av Pygame
+    global timer, current
+
+    timer += dt
+    if timer >= 1:
+        timer = 0
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
+
+    if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
+        if key == keys.K_1:
+            number = 1
+        elif key == keys.K_2:
+            number = 2
+        elif key == keys.K_3:
+            number = 3
+        elif key == keys.K_4:
+            number = 4
+
+        if number == sequence[current]:
+            current += 1
+            if current == len(sequence):  # nyrad
+                current = 0  # nyrad
+                add_to_sequence()
+        else:
+            reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color, color_flashing):  # uppdatera
+
+        if number == sequence[current]:
+            square_color = color_flashing  # uppdatera
+        else:
+            square_color = color  # uppdatera
+
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size),
+            color=square_color
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18))
+
+    draw_square(1, (50, 0, 0), (255, 0, 0))  # uppdatera
+    draw_square(2, (0, 50, 0), (0, 255, 0))  # uppdatera
+    draw_square(3, (0, 0, 50), (0, 0, 255))  # uppdatera
+    draw_square(4, (50, 50, 0), (255, 255, 0))  # uppdatera
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
 
-## Titta och upprepa
+## Se och upprepa
 Vi skapar en variabel som håller reda på om rutorna blinkar, `watch`, eller om spelaren matar in siffror, `repeat`.
 
 Tillståndet börjar som `watch` och ändras till `repeat` efter att den blinkande sekvensen har avslutats.
@@ -904,8 +1153,7 @@ def update(dt):
                 current = 0 #nyrad
 
 def on_key_down(key):
-    global current
-    global state #nyrad
+    global current, state #ändra
 
     if state == 'repeat': #nyrad
         if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
@@ -949,7 +1197,102 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+timer = 0
+state = 'watch'
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence, current, timer, state
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+    timer = 0
+    state = 'watch'
+
+# Lägg till den här funktionen
+
+
+def update(dt):  # anropas 60 gånger i sekunden av Pygame
+    global timer, current, state
+
+    if state == 'watch':  # nyrad
+        timer += dt
+        if timer >= 1:
+            timer = 0
+            current += 1
+            if current == len(sequence):  # nyrad
+                state = 'repeat'  # nyrad
+                current = 0  # nyrad
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current, state
+
+    if state == 'repeat':  # nyrad
+        if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
+
+            if key == keys.K_1:
+                number = 1
+            elif key == keys.K_2:
+                number = 2
+            elif key == keys.K_3:
+                number = 3
+            elif key == keys.K_4:
+                number = 4
+
+            if number == sequence[current]:
+                current += 1
+                if current == len(sequence):
+                    current = 0
+                    add_to_sequence()
+                    state = 'watch'  # nyrad
+            else:
+                reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color, color_flashing):  # uppdatera
+        if state == 'watch' and number == sequence[current]:  # ändra
+            square_color = color_flashing
+        else:
+            square_color = color
+
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size),
+            color=square_color
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18))
+
+    draw_square(1, (50, 0, 0), (255, 0, 0))  # uppdatera
+    draw_square(2, (0, 50, 0), (0, 255, 0))  # uppdatera
+    draw_square(3, (0, 0, 50), (0, 0, 255))  # uppdatera
+    draw_square(4, (50, 50, 0), (255, 255, 0))  # uppdatera
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+    screen.draw.text('state: ' + state, (20, 180))  # nyrad
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
@@ -961,7 +1304,7 @@ Från början är variabeln False. Den sätts till True när timern tickar. Näs
 
 Timergränsen ändras till att ticka dubbelt så snabbt.
 
-```python3
+```python
 flashing = False # lägg till uppe bland variablerna
 
 def reset():
@@ -972,10 +1315,7 @@ def reset():
     flashing = False #nyrad
 
 def update(dt):
-    global timer
-    global current
-    global state
-    global flashing #nyrad
+    global timer, current, state, flashing
 
     if state == 'watch':
         timer += dt
@@ -1000,14 +1340,116 @@ def draw():
 
     # etc.
 
-    screen.draw.text(f"flashing: {flashing}", (20, 220)) #OKLART VAR DENNA SKA VARA
+    screen.draw.text('state: ' + state, (20, 180))
+    screen.draw.text(f"flashing: {flashing}", (20, 220)) # nyrad
 ```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+timer = 0
+state = 'watch'
+flashing = False
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence, current, timer, state, flashing
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+    timer = 0
+    state = 'watch'
+    flashing = False
+
+# Lägg till den här funktionen
+
+
+def update(dt):  # anropas 60 gånger i sekunden av Pygame
+    global timer, current, state, flashing
+
+    if state == 'watch':  # nyrad
+        timer += dt
+        if timer >= 0.5:
+            timer = 0
+            flashing = not flashing
+            if not flashing:
+                current += 1
+                if current == len(sequence):  # nyrad
+                    state = 'repeat'  # nyrad
+                    current = 0  # nyrad
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current, state
+
+    if state == 'repeat':  # nyrad
+        if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
+
+            if key == keys.K_1:
+                number = 1
+            elif key == keys.K_2:
+                number = 2
+            elif key == keys.K_3:
+                number = 3
+            elif key == keys.K_4:
+                number = 4
+
+            if number == sequence[current]:
+                current += 1
+                if current == len(sequence):
+                    current = 0
+                    add_to_sequence()
+                    state = 'watch'  # nyrad
+            else:
+                reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color, color_flashing):  # uppdatera
+        # ändra
+        if state == 'watch' and flashing and number == sequence[current]:
+            square_color = color_flashing
+        else:
+            square_color = color
+
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size),
+            color=square_color
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18))
+
+    draw_square(1, (50, 0, 0), (255, 0, 0))  # uppdatera
+    draw_square(2, (0, 50, 0), (0, 255, 0))  # uppdatera
+    draw_square(3, (0, 0, 50), (0, 0, 255))  # uppdatera
+    draw_square(4, (50, 50, 0), (255, 255, 0))  # uppdatera
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+    screen.draw.text('state: ' + state, (20, 180))  # nyrad
+    screen.draw.text(f"flashing: {flashing}", (20, 220))
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
@@ -1016,30 +1458,145 @@ import abc
 ## Game over-läge
 
 Om du trycker på fel tangent sätts tillståndet till `gameover`, istället för att återställa spelet meddetsamma. 
+
 När en tangent trycks ned i "gameover"-tillståndet återställs spelet.
 
 ```python
 def on_key_down(key):
-    global current
-    global state
+    global current, state
 
     if state == 'repeat':
         if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
-            # etc.
+
+            if key == keys.K_1:
+                number = 1
+            elif key == keys.K_2:
+                number = 2
+            elif key == keys.K_3:
+                number = 3
+            elif key == keys.K_4:
+                number = 4
 
             if number == sequence[current]:
-                # etc.
-            else:
-                state = 'gameover' nyrad
-    elif state == 'gameover': nyrad
-        reset()
+                current += 1
+                if current == len(sequence):
+                    current = 0
+                    add_to_sequence()
+                    state = 'watch'  # nyrad
+            else: # nyrad
+                state = 'gameover' # nyrad
+        elif state == 'gameover': # ändra indrag
+            reset() # ändra indrag
 ```        
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+timer = 0
+state = 'watch'
+flashing = False
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence, current, timer, state, flashing
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+    timer = 0
+    state = 'watch'
+    flashing = False
+
+# Lägg till den här funktionen
+
+
+def update(dt):  # anropas 60 gånger i sekunden av Pygame
+    global timer, current, state, flashing
+
+    if state == 'watch':  # nyrad
+        timer += dt
+        if timer >= 0.5:
+            timer = 0
+            flashing = not flashing
+            if not flashing:
+                current += 1
+                if current == len(sequence):  # nyrad
+                    state = 'repeat'  # nyrad
+                    current = 0  # nyrad
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current, state
+
+    if state == 'repeat':
+        if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
+
+            if key == keys.K_1:
+                number = 1
+            elif key == keys.K_2:
+                number = 2
+            elif key == keys.K_3:
+                number = 3
+            elif key == keys.K_4:
+                number = 4
+
+            if number == sequence[current]:
+                current += 1
+                if current == len(sequence):
+                    current = 0
+                    add_to_sequence()
+                    state = 'watch'  # nyrad
+            else:
+                state = 'gameover'
+        elif state == 'gameover':  # nyrad
+            reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color, color_flashing):  # uppdatera
+        # ändra
+        if state == 'watch' and flashing and number == sequence[current]:
+            square_color = color_flashing
+        else:
+            square_color = color
+
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size),
+            color=square_color
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18))
+
+    draw_square(1, (50, 0, 0), (255, 0, 0))  # uppdatera
+    draw_square(2, (0, 50, 0), (0, 255, 0))  # uppdatera
+    draw_square(3, (0, 0, 50), (0, 0, 255))  # uppdatera
+    draw_square(4, (50, 50, 0), (255, 255, 0))  # uppdatera
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+    screen.draw.text('state: ' + state, (20, 180))  # nyrad
+    screen.draw.text(f"flashing: {flashing}", (20, 220))
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
@@ -1047,17 +1604,25 @@ import abc
 ## Visa text baserat på vilket läge vi är i
 
 Den aktuella sekvenspositionen och längden på sekvensen visas bara när vi är i *upprepa*-läget. 
+
 Ett game over-meddelande visas om spelet är i *gameover*-läget.
+
+✏️ Uppdatera slutet av funktionen `draw()` så att den blir så här. Ta bort raderna som är markerade med "# borttagen"
 
 ```python
 def draw():
     # etc.
-
-    if state == 'repeat': #nyrad
-        screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 60))
-    elif state == 'gameover': #nyrad
-        screen.draw.text("Game over!", (20, 60)) #nyrad
-
+    
+    draw_square(1, (50, 0, 0), (255, 0, 0))  # uppdatera
+    draw_square(2, (0, 50, 0), (0, 255, 0))  # uppdatera
+    draw_square(3, (0, 0, 50), (0, 0, 255))  # uppdatera
+    draw_square(4, (50, 50, 0), (255, 255, 0))  # uppdatera
+    if state == 'repeat':
+        screen.draw.text(f"{current + 1}/{len(sequence)}",
+                         (20, 60))
+    elif state == 'gameover':
+        screen.draw.text("Game over!", (20, 60))
+    
     #borttagen: screen.draw.text('sequence[current]: ' + str(sequence[current]), (20, 100))
     #borttagen: screen.draw.text(', '.join(map(str, sequence)), (20, 140))
     #borttagen: screen.draw.text('state: ' + state, (20, 180))
@@ -1071,7 +1636,109 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+timer = 0
+state = 'watch'
+flashing = False
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence, current, timer, state, flashing
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+    timer = 0
+    state = 'watch'
+    flashing = False
+
+# Lägg till den här funktionen
+
+
+def update(dt):  # anropas 60 gånger i sekunden av Pygame
+    global timer, current, state, flashing
+
+    if state == 'watch':  # nyrad
+        timer += dt
+        if timer >= 0.5:
+            timer = 0
+            flashing = not flashing
+            if not flashing:
+                current += 1
+                if current == len(sequence):  # nyrad
+                    state = 'repeat'  # nyrad
+                    current = 0  # nyrad
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current, state
+
+    if state == 'repeat':
+        if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):
+
+            if key == keys.K_1:
+                number = 1
+            elif key == keys.K_2:
+                number = 2
+            elif key == keys.K_3:
+                number = 3
+            elif key == keys.K_4:
+                number = 4
+
+            if number == sequence[current]:
+                current += 1
+                if current == len(sequence):
+                    current = 0
+                    add_to_sequence()
+                    state = 'watch'  # nyrad
+            else:
+                state = 'gameover'
+        elif state == 'gameover':  # nyrad
+            reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color, color_flashing):  # uppdatera
+        # ändra
+        if state == 'watch' and flashing and number == sequence[current]:
+            square_color = color_flashing
+        else:
+            square_color = color
+
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0, square_size, square_size),
+            color=square_color
+        )
+        screen.draw.text(str(number), (square_size * (number - 1) + 21, 18))
+
+    draw_square(1, (50, 0, 0), (255, 0, 0))  # uppdatera
+    draw_square(2, (0, 50, 0), (0, 255, 0))  # uppdatera
+    draw_square(3, (0, 0, 50), (0, 0, 255))  # uppdatera
+    draw_square(4, (50, 50, 0), (255, 255, 0))  # uppdatera
+    if state == 'repeat':
+        screen.draw.text(f"{current + 1}/{len(sequence)}",
+                         (20, 60))
+    elif state == 'gameover':
+        screen.draw.text("Game over!", (20, 60))
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
