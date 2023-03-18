@@ -95,10 +95,36 @@ pgzrun.go()
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+
+# Globala variabler här nedanför
+
+# Funktioner här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))  # vit färg
+
+    for x in range(70):
+        cell_size = 5 
+        cell_draw_size = cell_size - 1 
+
+        screen.draw.filled_rect(
+            Rect(
+                (x * cell_size, 0), 
+                (cell_draw_size, cell_draw_size) 
+            ),
+            color=(220, 220, 220)
+        )
+
+# Kod för att starta appen
+
+
+pgzrun.go()  # måste vara sista raden
 ```    
 
 </details>
+
 
 ## Rita alla celler
 
@@ -132,16 +158,41 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+
+# Globala variabler här nedanför
+
+# Funktioner här nedanför
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(50):  
+        for x in range(70):
+            cell_size = 5
+            cell_draw_size = cell_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),  
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=(220, 220, 220)
+            )
+
+# Kod för att starta appen
+
+pgzrun.go()  # måste vara sista raden
 ```    
 
 </details>
 
 ## Markera celler
 
-Cellpositionen som muspekaren är över sparar vi i två variabler. Det är x- och y-koordinaterna för cellen.
+Cellpositionen som muspekaren är över sparar vi i två variabler. 
+Det är x- och y-koordinaterna för cellen.
 
-Detta beräknas genom att ta muspositionen och dividera den med cellstorleken och avrunda neråt.
+Vi räknar ut koordinaterna ta muspositionen och dividera den med cellstorleken och avrunda neråt.
 
 Exempel: om musen har x-koordinat 17 och cellstorleken är 5, dividerar vi 17 med 5 vilket ger 3,4. Vi avrundar neråt och får 3.
 Det betyder att musen är över cellen med ett index på 3 på X-axeln .
@@ -153,18 +204,20 @@ Vi importerar modulen pygame så att `pygame.mouse.get_pos` kan användas för a
 
 Matematikmodulen importerar vi så att vi kan använda `math.floor` för att avrunda ett tal neråt till närmast mindre heltal.
 
-✏️ Mata in koden och testkör! Vad händer om du har muspekaren utanför rutnätet med celler?
+✏️ Uppdatera koden och testkör! Vad händer om du har muspekaren utanför rutnätet med celler?
 
 ```python
 import pgzrun
 import pygame #nyrad
 import math #nyrad
 
-cell_size = 5 #flyttad från draw
+# Globala variabler här nedanför
+cell_size = 5 #nyrad
 
-def update(): # Pygame anropar denna när något händer
-    global selected_x
-    global selected_y
+# Funktioner här nedanför
+
+def update(): #nyfunktion
+    global selected_x, selected_y
 
     mouse_x, mouse_y = pygame.mouse.get_pos()
     selected_x = math.floor(mouse_x / cell_size)
@@ -175,18 +228,26 @@ def draw():
 
     for y in range(50):
         for x in range(70):
-            # Ta bort: cell_size = 5
+            cell_draw_size = cell_size - 1
 
-            # etc.
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=(220, 220, 220)
+            )
 
-    # Tillfälligt
+    # Tillfälligt #nytt
     screen.draw.text(
         f"selected x: {selected_x}, selected y: {selected_y}",
         (0, 0),
         color=(0, 0, 0)
     )
 
-pgzrun.go()
+# Kod för att starta appen
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/225734422-569de346-61f2-4246-905c-1838b95ff534.png)
@@ -196,10 +257,10 @@ pgzrun.go()
 
 Rutnätets bredd/höjd i celler återanvänds från att när vi ritar cellerna, så vi sparar bredden och höjden i variabler.
 
-✏️ Mata in koden och testkör! Vad händer nu om muspekaren är utanför rutnätet med celler?
+✏️ Uppdatera koden och testkör! Vad händer nu om muspekaren är utanför rutnätet med celler?
 
 ```python
-grid_x_count, grid_y_count = 70, 50
+grid_x_count, grid_y_count = 70, 50 #nya globala variabler
 
 def update():
     # etc.
@@ -219,13 +280,54 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
-```    
+import pgzrun
+import pygame
+import math
 
+# Globala variabler här nedanför
+cell_size = 5
+grid_x_count, grid_y_count = 70, 50
+
+# Funktioner här nedanför
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            cell_draw_size = cell_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=(220, 220, 220)
+            )
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x}, selected y: {selected_y}",
+        (0, 0),
+        color=(0, 0, 0)
+    )
+
+# Kod för att starta appen
+
+pgzrun.go()  # måste vara sista raden
+```    
 </details>
 
 ## Markera celler
-Cellen (rutan) under muspekaren är inställd på markeringsfärgen.
+Cellen (rutan) under muspekaren ska markeras med markeringsfärgen.
 
 ✏️ Mata in koden och testkör! Testa med olika markeringsfärger om du vill.
 
@@ -259,9 +361,56 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
-```    
+import pgzrun
+import pygame
+import math
 
+# Globala variabler här nedanför
+cell_size = 5
+grid_x_count, grid_y_count = 70, 50
+
+# Funktioner här nedanför
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            cell_draw_size = cell_size - 1
+
+            if x == selected_x and y == selected_y:
+                color = (0, 255, 255)
+            else:
+                color = (220, 220, 220)
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=color
+            )
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x}, selected y: {selected_y}",
+        (0, 0),
+        color=(0, 0, 0)
+    )
+
+# Kod för att starta appen
+
+pgzrun.go()  # måste vara sista raden
+```    
 </details>
 
 ## Skapa rutnätet
@@ -273,13 +422,13 @@ Om cellen är levande används den levande färgen för att rita cellen.
 
 För att testa detta ställs vissa celler manuellt in på att leva.
 
-✏️ Mata in koden och testkör!
+✏️ Uppdatera koden och testkör! Var är de levande cellerna?
 
 ```python
 # etc.
 
 # Lägg till bland globala variabler
-grid = []
+grid = [] #nyrad
 
 def draw():
     screen.fill((255, 255, 255))
@@ -297,7 +446,7 @@ def draw():
 
             # etc.
             
-# Lägg till under kod för att starta appen
+# Lägg till under "Kod för att starta appen", längst ner
 for y in range(grid_y_count):
     grid.append([])
     for x in range(grid_x_count):
@@ -316,20 +465,84 @@ pgzrun.go() # alltid sist
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import pygame
+import math
+
+# Globala variabler här nedanför
+cell_size = 5
+grid_x_count, grid_y_count = 70, 50
+grid = []
+
+# Funktioner här nedanför
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            cell_draw_size = cell_size - 1
+
+            if x == selected_x and y == selected_y:
+                color = (0, 255, 255)
+            elif grid[y][x]:  # nyrad
+                color = (255, 0, 255)  # nyrad
+            else:
+                color = (220, 220, 220)
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=color
+            )
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x}, selected y: {selected_y}",
+        (0, 0),
+        color=(0, 0, 0)
+    )
+
+# Kod för att starta appen
+
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(False)
+
+# Tillfälligt
+grid[0][0] = True
+grid[0][1] = True
+
+pgzrun.go()  # måste vara sista raden
 ```    
 
 </details>
 
 
 ## Gör celler levande med vänster musknapp
-Om vänster musknapp är nedtryckt är den valda cellen inställd på att leva.
+Om vänster musknapp är nedtryckt ska den valda cellen bli levande.
 
-✏️ Mata in koden och testkör!
+✏️ Lägg till i funktionen `update()` och testkör! Fungerar det att klicka på en cell så den blir levande?
 
 ```python
 def update():
-    # etc.
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
 
     if pygame.mouse.get_pressed()[0]: #nyrad
         grid[selected_y][selected_x] = True #nyrad
@@ -340,18 +553,81 @@ def update():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import pygame
+import math
+
+# Globala variabler här nedanför
+cell_size = 5
+grid_x_count, grid_y_count = 70, 50
+grid = []
+
+# Funktioner här nedanför
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
+
+    if pygame.mouse.get_pressed()[0]:
+        grid[selected_y][selected_x] = True
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            cell_draw_size = cell_size - 1
+
+            if x == selected_x and y == selected_y:
+                color = (0, 255, 255)
+            elif grid[y][x]:
+                color = (255, 0, 255)
+            else:
+                color = (220, 220, 220)
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=color
+            )
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x}, selected y: {selected_y}",
+        (0, 0),
+        color=(0, 0, 0)
+    )
+
+# Kod för att starta appen
+
+
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(False)
+
+# Tillfälligt
+grid[0][0] = True
+grid[0][1] = True
+
+pgzrun.go()  # måste vara sista raden
 ```    
 
 </details>
 
 
 ## Räkna dina grannar
-Att uppdatera rutnätet efter ett tidssteg kräver att man vet hur många levande grannar varje cell har.
+För att uppdatera rutnätet efter ett tidssteg behöver vi veta hur många levande grannar varje cell har.
 
 Just nu låter vi högerklick på en cell att skriva ut hur många levande grannar den har.
 
-✏️ Mata in koden och testkör! Ser du utskriften i det svarta konsolfönstret?
+✏️ Lägg till funktionen `on_mouse_down()` och testkör! Ser du utskriften i det svarta konsolfönstret? Testa att göra två grannceller levande och testa sen högerklick.
 
 ```python
 # Tillfälligt
@@ -361,7 +637,7 @@ def on_mouse_down(pos, button):
 
         print(f"Finding neighbors of grid[{selected_y}][{selected_x}]")
 
-        for dy in range(-1, 2):
+        for dy in range(-1, 2): # dy får värdena -1, 0 och 1, ett i taget
             for dx in range(-1, 2):
 
                 print(f" Checking grid[{selected_y + dy}][{selected_x + dx}]")
@@ -369,7 +645,7 @@ def on_mouse_down(pos, button):
                 if (not (dy == 0 and dx == 0)
                     and 0 <= (selected_y + dy) < grid_y_count
                     and 0 <= (selected_x + dx) < grid_x_count
-                    and grid[selected_y + dy][selected_x + dx]):
+                        and grid[selected_y + dy][selected_x + dx]):
 
                     print('  Neighbor found')
                     neighbor_count += 1
@@ -397,7 +673,96 @@ Total neighbors: 2
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import pygame
+import math
+
+# Globala variabler här nedanför
+cell_size = 5
+grid_x_count, grid_y_count = 70, 50
+grid = []
+
+# Funktioner här nedanför
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
+
+    if pygame.mouse.get_pressed()[0]:
+        grid[selected_y][selected_x] = True
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            cell_draw_size = cell_size - 1
+
+            if x == selected_x and y == selected_y:
+                color = (0, 255, 255)
+            elif grid[y][x]:
+                color = (255, 0, 255)
+            else:
+                color = (220, 220, 220)
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=color
+            )
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x}, selected y: {selected_y}",
+        (0, 0),
+        color=(0, 0, 0)
+    )
+
+# Tillfälligt
+
+
+def on_mouse_down(pos, button):
+    if button == mouse.RIGHT:
+        neighbor_count = 0
+
+        print(f"Finding neighbors of grid[{selected_y}][{selected_x}]")
+
+        for dy in range(-1, 2):
+            for dx in range(-1, 2):
+
+                print(f" Checking grid[{selected_y + dy}][{selected_x + dx}]")
+
+                if (not (dy == 0 and dx == 0)
+                    and 0 <= (selected_y + dy) < grid_y_count
+                    and 0 <= (selected_x + dx) < grid_x_count
+                        and grid[selected_y + dy][selected_x + dx]):
+
+                    print('  Neighbor found')
+                    neighbor_count += 1
+
+        print(f"Total neighbors: {neighbor_count}")
+        print()
+
+# Kod för att starta appen
+
+
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(False)
+
+# Tillfälligt
+grid[0][0] = True
+grid[0][1] = True
+
+pgzrun.go()  # måste vara sista raden
 ```    
 
 </details>
@@ -429,18 +794,122 @@ def on_key_down():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import pygame
+import math
+
+# Globala variabler här nedanför
+cell_size = 5
+grid_x_count, grid_y_count = 70, 50
+grid = []
+
+# Funktioner här nedanför
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
+
+    if pygame.mouse.get_pressed()[0]:
+        grid[selected_y][selected_x] = True
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            cell_draw_size = cell_size - 1
+
+            if x == selected_x and y == selected_y:
+                color = (0, 255, 255)
+            elif grid[y][x]:
+                color = (255, 0, 255)
+            else:
+                color = (220, 220, 220)
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=color
+            )
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x}, selected y: {selected_y}",
+        (0, 0),
+        color=(0, 0, 0)
+    )
+
+# Tillfälligt
+
+
+def on_mouse_down(pos, button):
+    if button == mouse.RIGHT:
+        neighbor_count = 0
+
+        print(f"Finding neighbors of grid[{selected_y}][{selected_x}]")
+
+        for dy in range(-1, 2):
+            for dx in range(-1, 2):
+
+                print(f" Checking grid[{selected_y + dy}][{selected_x + dx}]")
+
+                if (not (dy == 0 and dx == 0)
+                    and 0 <= (selected_y + dy) < grid_y_count
+                    and 0 <= (selected_x + dx) < grid_x_count
+                        and grid[selected_y + dy][selected_x + dx]):
+
+                    print('  Neighbor found')
+                    neighbor_count += 1
+
+        print(f"Total neighbors: {neighbor_count}")
+        print()
+
+
+def on_key_down():
+    global grid
+    next_grid = []
+
+    for y in range(grid_y_count):
+        next_grid.append([])
+        for x in range(grid_x_count):
+            next_grid[y].append(True)
+
+    grid = next_grid
+
+# Kod för att starta appen
+
+
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(False)
+
+# Tillfälligt
+grid[0][0] = True
+grid[0][1] = True
+
+pgzrun.go()  # måste vara sista raden
 ```    
 
 </details>
 
 
-## Ändra rutnät baserat på grannar
+## Uppdatera varje cell baserat på antalet grannar
 Koden för att hitta antalet levande grannar en cell har flyttats hit.
 
-En cell i det nya rutnätet är vid liv om den har tre grannar, eller så är den levande i det gamla rutnätet och har två grannar.
+En cell i det nya rutnätet är vid liv 
+- om den har tre grannar
+- eller om den levde i det gamla rutnätet och hade två grannar.
 
-✏️ Uppdatera funktionerna i koden och testkör!
+✏️ Uppdatera `on_key_down()`, ta bort hela `on_mouse_down` och testkör sen! Klicka så att tre celler på rad är levande. Stega sen framåt med tangentbordet.
+>Glöm inte att klicka i spelfönstret innan du trycker på någon tangent.
 
 ```python
 def on_key_down():
@@ -451,15 +920,14 @@ def on_key_down():
     for y in range(grid_y_count):
         next_grid.append([])
         for x in range(grid_x_count):
-            # Moved
-            neighbor_count = 0
+            neighbor_count = 0  # flyttad
 
             for dy in range(-1, 2):
                 for dx in range(-1, 2):
                     if (not (dy == 0 and dx == 0)
                         and 0 <= (y + dy) < grid_y_count
                         and 0 <= (x + dx) < grid_x_count
-                        and grid[y + dy][x + dx]):
+                            and grid[y + dy][x + dx]):
 
                         neighbor_count += 1
 
@@ -469,7 +937,7 @@ def on_key_down():
             )
 
     grid = next_grid
-
+    
 # Borttaget: def on_mouse_down(pos, button):
 ```
 
@@ -479,7 +947,100 @@ def on_key_down():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import pygame
+import math
+
+# Globala variabler här nedanför
+cell_size = 5
+grid_x_count, grid_y_count = 70, 50
+grid = []
+
+# Funktioner här nedanför
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
+
+    if pygame.mouse.get_pressed()[0]:
+        grid[selected_y][selected_x] = True
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            cell_draw_size = cell_size - 1
+
+            if x == selected_x and y == selected_y:
+                color = (0, 255, 255)
+            elif grid[y][x]:
+                color = (255, 0, 255)
+            else:
+                color = (220, 220, 220)
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=color
+            )
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x}, selected y: {selected_y}",
+        (0, 0),
+        color=(0, 0, 0)
+    )
+
+# Tillfälligt
+
+
+def on_key_down():
+    global grid
+
+    next_grid = []
+
+    for y in range(grid_y_count):
+        next_grid.append([])
+        for x in range(grid_x_count):
+            neighbor_count = 0  # flyttad
+
+            for dy in range(-1, 2):
+                for dx in range(-1, 2):
+                    if (not (dy == 0 and dx == 0)
+                        and 0 <= (y + dy) < grid_y_count
+                        and 0 <= (x + dx) < grid_x_count
+                            and grid[y + dy][x + dx]):
+
+                        neighbor_count += 1
+
+            next_grid[y].append(
+                neighbor_count == 3 or
+                (grid[y][x] and neighbor_count == 2)
+            )
+
+    grid = next_grid
+
+# Kod för att starta appen
+
+
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(False)
+
+# Tillfälligt
+grid[0][0] = True
+grid[0][1] = True
+
+pgzrun.go()  # måste vara sista raden
 ```    
 
 </details>
@@ -487,29 +1048,132 @@ import abc
 ## Döda celler med högerklick
 När en cell högerklickas dör den.
 
-✏️ Mata in koden och testkör!
+✏️ Uppdatera koden i `update()` och testkör!
 
 ```python
 def update():
-    # etc.
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
 
     if pygame.mouse.get_pressed()[0]:
         grid[selected_y][selected_x] = True
-    elif pygame.mouse.get_pressed()[2]: #nyrad
-        grid[selected_y][selected_x] = False #nyrad
+    elif pygame.mouse.get_pressed()[2]:  # nyrad
+        grid[selected_y][selected_x] = False  # nyrad
 ```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import pygame
+import math
+
+# Globala variabler här nedanför
+cell_size = 5
+grid_x_count, grid_y_count = 70, 50
+grid = []
+
+# Funktioner här nedanför
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = min(math.floor(mouse_x / cell_size), grid_x_count - 1)
+    selected_y = min(math.floor(mouse_y / cell_size), grid_y_count - 1)
+
+    if pygame.mouse.get_pressed()[0]:
+        grid[selected_y][selected_x] = True
+    elif pygame.mouse.get_pressed()[2]:  # nyrad
+        grid[selected_y][selected_x] = False  # nyrad
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            cell_draw_size = cell_size - 1
+
+            if x == selected_x and y == selected_y:
+                color = (0, 255, 255)
+            elif grid[y][x]:
+                color = (255, 0, 255)
+            else:
+                color = (220, 220, 220)
+
+            screen.draw.filled_rect(
+                Rect(
+                    (x * cell_size, y * cell_size),
+                    (cell_draw_size, cell_draw_size)
+                ),
+                color=color
+            )
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x}, selected y: {selected_y}",
+        (0, 0),
+        color=(0, 0, 0)
+    )
+
+# Tillfälligt
+
+
+def on_key_down():
+    global grid
+
+    next_grid = []
+
+    for y in range(grid_y_count):
+        next_grid.append([])
+        for x in range(grid_x_count):
+            neighbor_count = 0  # flyttad
+
+            for dy in range(-1, 2):
+                for dx in range(-1, 2):
+                    if (not (dy == 0 and dx == 0)
+                        and 0 <= (y + dy) < grid_y_count
+                        and 0 <= (x + dx) < grid_x_count
+                            and grid[y + dy][x + dx]):
+
+                        neighbor_count += 1
+
+            next_grid[y].append(
+                neighbor_count == 3 or
+                (grid[y][x] and neighbor_count == 2)
+            )
+
+    grid = next_grid
+
+# Kod för att starta appen
+
+
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(False)
+
+# Tillfälligt
+grid[0][0] = True
+grid[0][1] = True
+
+pgzrun.go()  # måste vara sista raden
 ```    
 
 </details>
 
-# Tips
-Det finns intressanta mönster att testa med: se t.ex. https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns
+# Testa intressanta mönster
+Det finns många intressanta mönster att testa med: se t.ex. https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns
+
+🤔 Kan du lägga in kod så att du automatiskt kan få mönstren när du trycker på någon speciell knapp?
+
+✋ Räck upp handen och be att få visa något intressant mönster som du hittat!
 
 # Källor
 Efter originalet på https://simplegametutorials.github.io/pygamezero/life/
