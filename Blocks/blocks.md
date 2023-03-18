@@ -246,8 +246,14 @@ pgzrun.go()  # måste vara sista raden
 ```
 ![image](https://user-images.githubusercontent.com/4598641/226006718-62e1013b-99f3-427b-b095-4cda85184e19.png)
 
-📝 [Så här ser hela koden ut nu](https://github.com/coderdojolund/Python-8/blob/50225b406d141ccea59c1c3596be90937dc17a98/Blocks/blocks.py)
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
 
+```python
+import pgzrun
+```
+
+</details>
 
 ## Hur vi sparar bitarnas utseende
 Varje rotation av en bit är en 4x4-kvadrat av tecken.
@@ -417,6 +423,15 @@ piece_structures = [ # lista med alla bitarna
 ```
 ✏️ Uppdatera din kod med kodblocket här ovanför. Du kan testköra &ndash; det ska då fungera som innan eftersom vi inte gör något med bitarna än. De finns bara i datorns minne.
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 
 ## Lagra biten som faller just nu
 
@@ -432,13 +447,30 @@ piece_type = 0
 piece_rotation = 0
 ```
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Rita biten
 
 Biten ritas genom att loopa genom dess struktur. Om en viss ruta är fylld så ritar vi en fyrkant med den färg som bestäms av blocktypen.
 
 Kod:XXXX
-
 ![image](https://user-images.githubusercontent.com/4598641/226010899-049e0b7e-591d-4d0b-b296-7fb35778e094.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 
 ## Förenkla koden
@@ -446,6 +478,16 @@ Kod:XXXX
 Koden för att rita ett orörligt block och för att rita ett block av den fallande biten är samma. Därför gör vi en funktion för det.
 
 Kod:XXXX
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 
 ## Rotation
 När vi trycker på X, ökas bitens rotationsnummer med 1 och biten roteras medurs.
@@ -460,6 +502,14 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226011415-59b9b18c-2496-4af0-a39c-f854ef940d2e.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Testa bitar
 
@@ -469,6 +519,14 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226011550-d53162ca-1eaf-4674-b2dc-71eefe2fed7d.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Placera nästa bit
 
@@ -478,6 +536,14 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226011946-ae6035af-d12b-4390-bfe8-2a1a3019655b.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 
 ## Flytta biten
@@ -488,6 +554,14 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226012210-eff3bfe9-dcb6-4579-be14-4eb21ec43338.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Timer
 
@@ -502,6 +576,15 @@ För att se hur det fungerar skriver vi just nu ut 'tick' ut varje gång biten f
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Fallande bit
 Timern används för att öka bitens Y-position var 0.5:e sekund.
 
@@ -509,6 +592,14 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226012579-0a5bce97-00a6-4f54-ba96-95cc123f9a4c.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Begränsa rörelsefriheten
 
@@ -526,13 +617,40 @@ Om kontrollfunktionen returnerar True ställs den faktiska positionen/rotationen
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Kolla vänsterkanten
 Om något block inte är tomt och X-positionen är mindre än 0, returnerar funktionen False. Det är när blocket är utanför spelplanens vänstra sida.
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Förenkla koden
 Storleken på varje bit i X- och Y-led återanvänds från att rita bitarna, så vi gör variabler för det.
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Kolla högerkanten
 
@@ -541,12 +659,30 @@ Då returnerar funktionen också False.
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Kolla underkanten
 Om något blocks Y-position är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
 Då returnerar funktionen också False.
 
 
 Kod:XXXX
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Kolla orörliga block
 Om det finns ett orörligt block vid något blocks position, returnerar funktionen också False .
@@ -557,16 +693,43 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226013942-ae181f75-53b1-4b7c-8156-ba22cf2ecc9c.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Förenkla koden
 De beräknade blockpositionerna som ska testas behövs på fler ställen. Vi sparar dem i variabler.
 
 Kod:XXXX
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Släppa ner en bit
 
 När C-tangenten trycks, ökas bitens Y-position med 1 så länge som biten får plats.
 
 Kod:XXXX
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Återställa biten
 
@@ -575,11 +738,29 @@ Vi ska ändra det sen.
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Förenkla koden
 
 Biten sätts till sitt ursprungliga tillstånd på två ställen. Vi gör en funktion för det.
 
 Kod:XXXX
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Håll reda på kommande bitar
 De kommande bitarna lagrar vi som en lista som innehåller numren som representerar bittyper i slumpmässig ordning.
@@ -597,6 +778,15 @@ Kod:XXXX
 [3, 2, 4, 1, 0, 5, 6]
 ```
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Nästa bit från listan
 När en ny bit skapas tar den bort det sista talet från listan och använder det för att bestämma typen av bit.
 
@@ -604,12 +794,30 @@ När listan med blocknummer är tom skapas en ny sådan lista.
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Lägg till orörliga block
 När en bit har landat läggs bitens block till de orörliga blocken.
 
 Bitens block gås igenom och om ett block inte är tomt, sätter vi det orörliga blocket på den positionen till värdet som vi hämtar från biten.
 
 Kod:XXXX
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Ny bit direkt efter släpp
 När en bit släpps ner, sätter vi timern så att den löper ut direkt.
@@ -619,12 +827,30 @@ Timergränsen återanvänds, så vi gör den till en variabel.
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Hitta fyllda rader
 Varje rad av de orörliga blocken loopas igenom. Om ingen av kolumnerna i raden är ett tomt block så är raden fylld.
 
 För att göra det lättare att testa, skrivs de fullständiga radnumren ut just nu.
 
 Kod:XXXX
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Ta bort fyllda rader
 Om raden är fylld, loopar vi igenom raderna ända till näst översta raden.
@@ -636,6 +862,15 @@ Den översta raden kommer då att vara helt tom.
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Game over
 
 Om en nyskapad bit är i en orörlig position är spelet över.
@@ -645,12 +880,30 @@ Den anropas innan spelet börjar och när spelet är över.
 
 Kod:XXXX
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
+
 ## Förskjutning av spelplanen
 Spelplanen ritas 2 block från vänster på skärmen och 5 block från toppen av skärmen.
 
 Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226016663-cb1d5333-1bd0-4943-91e7-8d22d195f2ef.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 ## Rita nästa bit
 
@@ -661,6 +914,14 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226016912-b2e1d0a6-fbf5-41b8-b808-9fdacaea6fb0.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+```
+
+</details>
 
 
 # Källor
