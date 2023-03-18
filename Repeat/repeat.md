@@ -930,8 +930,6 @@ def reset():  # nyrad
     current = 0  # nyrad
     timer = 0
 
-# Lägg till den här funktionen
-
 
 def update(dt):  # anropas 60 gånger i sekunden av Pygame
     global timer, current
@@ -999,6 +997,8 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ## Blinkande färg
 Vi ger rutorna varsin färg.
 
+✏️ Uppdatera koden så här och testkör igen!
+
 ```python3
 def draw():
     screen.fill((0, 0, 0))
@@ -1025,7 +1025,7 @@ def draw():
     # etc.
 ```
 
-https://simplegametutorials.github.io/pygamezero/repeat/7.png
+![image](https://simplegametutorials.github.io/pygamezero/repeat/7.png)
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1053,8 +1053,6 @@ def reset():  # nyrad
     add_to_sequence()  # nyrad
     current = 0  # nyrad
     timer = 0
-
-# Lägg till den här funktionen
 
 
 def update(dt):  # anropas 60 gånger i sekunden av Pygame
@@ -1129,6 +1127,8 @@ Tillståndet börjar som `watch` och ändras till `repeat` efter att den blinkan
 Koden för att läsa av tangentbordet körs bara när tillståndet är `repeat`.
 
 När spelaren har matat in rätt sekvens, ändras tillståndet tillbaka till `watch`.
+
+✏️ Uppdatera koden och testa igen!
 
 ```python
 state = 'watch' # lägg till uppe bland variablerna
@@ -1222,9 +1222,7 @@ def reset():  # nyrad
     timer = 0
     state = 'watch'
 
-# Lägg till den här funktionen
-
-
+    
 def update(dt):  # anropas 60 gånger i sekunden av Pygame
     global timer, current, state
 
@@ -1304,6 +1302,8 @@ Från början är variabeln False. Den sätts till True när timern tickar. Näs
 
 Timergränsen ändras till att ticka dubbelt så snabbt.
 
+✏️ Uppdatera din kod och testa igen!
+
 ```python
 flashing = False # lägg till uppe bland variablerna
 
@@ -1375,9 +1375,7 @@ def reset():  # nyrad
     state = 'watch'
     flashing = False
 
-# Lägg till den här funktionen
-
-
+    
 def update(dt):  # anropas 60 gånger i sekunden av Pygame
     global timer, current, state, flashing
 
@@ -1461,6 +1459,8 @@ Om du trycker på fel tangent sätts tillståndet till `gameover`, istället fö
 
 När en tangent trycks ned i "gameover"-tillståndet återställs spelet.
 
+✏️ Vi är nästan klara! Uppdatera din kod och testkör igen.
+
 ```python
 def on_key_down(key):
     global current, state
@@ -1519,8 +1519,6 @@ def reset():  # nyrad
     timer = 0
     state = 'watch'
     flashing = False
-
-# Lägg till den här funktionen
 
 
 def update(dt):  # anropas 60 gånger i sekunden av Pygame
@@ -1662,8 +1660,6 @@ def reset():  # nyrad
     timer = 0
     state = 'watch'
     flashing = False
-
-# Lägg till den här funktionen
 
 
 def update(dt):  # anropas 60 gånger i sekunden av Pygame
