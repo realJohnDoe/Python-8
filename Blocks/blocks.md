@@ -282,8 +282,6 @@ Varje bit sparas som en lista av de olika rotationerna.
 
 De olika bitarna och deras rotationer sparas som en lång lista.
 
-✏️ Uppdatera din kod med detta. Du kan testköra &ndash; det ska då fungera som innan eftersom vi inte gör något med bitarna än. De finns bara i datorns minne.
-
 ```python
 # Lägg detta bland de globala variablerna, nästan högst upp
 piece_structures = [ # lista med alla bitarna
@@ -417,6 +415,7 @@ piece_structures = [ # lista med alla bitarna
     ],
 ]
 ```
+✏️ Uppdatera din kod med kodblocket här ovanför. Du kan testköra &ndash; det ska då fungera som innan eftersom vi inte gör något med bitarna än. De finns bara i datorns minne.
 
 
 ## Lagra biten som faller just nu
