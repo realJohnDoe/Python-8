@@ -5,19 +5,19 @@
 
 # Regler
 
-Det finns sju typer av bitar. Varje bit innehåller fyra block.
+Det finns sju typer av bitar. Varje bit innehåller fyra rutor.
 
 ![image](https://user-images.githubusercontent.com/4598641/226001342-33230a9a-d8a3-4218-9a37-3cc579827ad0.png)
 
-Bitar faller från toppen av spelområdet. Spelaren kan flytta pjäserna åt vänster och höger och rotera dem. När en bit kommer till vila, faller nästa bit.
+Bitar faller från toppen av spelområdet. Spelaren kan flytta bitar åt vänster och höger och rotera dem. När en bit landar, faller nästa bit.
 
-Typen av nästa pjäs som kommer att falla visas ovanför spelområdet.
+Hur kommande bit ser ut visas ovanför spelområdet som en hjälp till spelaren.
 
 ![image](https://user-images.githubusercontent.com/4598641/226001405-e8e90545-4b84-4dc6-87a5-374f584ade98.png)
 
-När en obruten rad av block bildas, försvinner raden och alla block ovanför flyttas ner en rad.
+När en obruten rad av bitar bildas, försvinner raden och alla rutor ovanför flyttas ner en rad.
 
-Spelet slutar när en pjäs har hamnat i vila och nästa pjäs skulle omedelbart överlappa ett tidigare fallet block.
+Spelet slutar när en bit har hamnat i vila och nästa bit skulle omedelbart överlappa en tidigare nerfallen bit.
 
 ## Kontroller
 
@@ -29,11 +29,12 @@ Spelet slutar när en pjäs har hamnat i vila och nästa pjäs skulle omedelbart
 
 
 # Översikt
-Ett rutnät lagrar de orörliga blocken som redan har fallit.
+Ett rutnät lagrar de orörliga bitarna som redan har fallit.
 
-Tillståndet för ett block kan antingen vara tomt eller fyllt med ett block av en viss färg.
+En ruta är antingen tom eller fylld med en viss färg.
 
-Strängen ' ' (ett mellanslag) betyder ett tomt block, och strängarna 'i' , 'j' , 'l' , 'o' , 's' , 't' och 'z' representerar block med olika färger.
+Tecknet `' '` är ett mellanslag och betyder en tom ruta.
+Tecknen  `'i'`, `'j'`, `'l'`, `'o'`, `'s'`, `'t'` och `'z'` betyder rutor med olika färger.
 
 ![image](https://user-images.githubusercontent.com/4598641/226003821-3a435de3-4843-421e-ab20-477e93bf3fe8.png)
 
@@ -41,17 +42,17 @@ Alla olika typer av bitar lagras med sina roterade varianter.
 
 ![image](https://user-images.githubusercontent.com/4598641/226003959-15932dfd-3435-47dd-b1f2-78b050e562fb.png)
 
-Den fallande pjäsen lagras som ett nummer som representerar vilken typ av pjäs det är, ett nummer som representerar vilken rotationsvariation den befinner sig vid, och siffror som representerar dess X- och Y-position i spelområdet.
+Den fallande biten lagras som ett nummer som representerar vilken typ av bit det är, ett nummer som representerar vilken rotationsvariation den befinner sig vid, och siffror som representerar dess X- och Y-position i spelområdet.
 
-En ny pjäs skapas längst upp på skärmen, såvida den inte skulle överlappa ett inert block, i vilket fall spelet är över.
+En ny bit skapas längst upp på skärmen, såvida den inte skulle överlappa ett inert block, i vilket fall spelet är över.
 
-Spelaren kan flytta pjäsen åt vänster och höger, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelområdet.
+Spelaren kan flytta biten åt vänster och höger, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelområdet.
 
-Efter att en tid har gått flyttas pjäsen nedåt, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelområdet, i vilket fall den har kommit till vila.
+Efter att en tid har gått flyttas biten nedåt, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelområdet, i vilket fall den har kommit till vila.
 
-När en av rotationsknapparna trycks in ändrar pjäsen sin rotationsvariation, såvida inte denna variation skulle överlappa ett inert block eller vara utanför spelområdet.
+När en av rotationsknapparna trycks in ändrar biten sin rotationsvariation, såvida inte denna variation skulle överlappa ett inert block eller vara utanför spelområdet.
 
-När släppknappen trycks in, flyttas pjäsen ner tills nästa position skulle överlappa ett inert block eller vara utanför spelområdet, vid vilken punkt den har kommit till vila.
+När släppknappen trycks in, flyttas biten ner tills nästa position skulle överlappa ett inert block eller vara utanför spelområdet, vid vilken punkt den har kommit till vila.
 
 När en bit kommer till vila, läggs bitarnas block till de inerta blocken, och nästa bit skapas.
 
@@ -85,7 +86,7 @@ Kod:XXXX
 ![image](https://user-images.githubusercontent.com/4598641/226006718-62e1013b-99f3-427b-b095-4cda85184e19.png)
 
 ## Lagring av bitarnas utseende
-Varje rotation av en pjäs är 4x4-rutnät av strängar.
+Varje rotation av en biten är en 4x4-kvadrat av strängar.
 
 ```python
 [
@@ -96,7 +97,7 @@ Varje rotation av en pjäs är 4x4-rutnät av strängar.
 ]
 ```
 
-Varje pjäs lagras som en lista av de olika rotationerna.
+Varje bit lagras som en lista av de olika rotationerna.
 
 ```python
 [
@@ -115,7 +116,7 @@ Varje pjäs lagras som en lista av de olika rotationerna.
 ]
 ```
 
-Alla pjäserna och deras rotationer sparas som en lista.
+Alla bitarna och deras rotationer sparas som en lista.
 
 ```python
 piece_structures = [
@@ -253,13 +254,13 @@ piece_structures = [
 
 ## Lagra det aktuella blocket
 
-Det för närvarande fallande blocket representeras av ett nummer som anger vilken typ det är (som kommer att användas för att indexera listan över pjässtrukturer), och ett nummer som anger vilken rotation den har (som kommer att användas för att indexera listan över rotationer).
+Det för närvarande fallande blocket representeras av ett nummer som anger vilken typ det är (som kommer att användas för att indexera listan över bitstrukturer), och ett nummer som anger vilken rotation den har (som kommer att användas för att indexera listan över rotationer).
 
 Kod:XXXX
 
 ## Rita blocket
 
-Pjäsen ritas genom att slinga genom dess struktur och, om inte blocket är tomt, ritar du en fyrkant med en färg som bestäms av blocktypen.
+Biten ritas genom att slinga genom dess struktur och, om inte blocket är tomt, ritar du en fyrkant med en färg som bestäms av blocktypen.
 
 Kod:XXXX
 
@@ -273,7 +274,7 @@ Koden för att rita ett orörligt block och rita ett block av den fallande biten
 Kod:XXXX
 
 ## Rotation
-När x -tangenten trycks in, ökas pjäsens rotationsnummer med 1, genom att rotera pjäsen medurs.
+När x-tangenten trycks in, ökas bitens rotationsnummer med 1, genom att rotera biten medurs.
 
 Om rotationstalet är större än antalet rotationspositioner minus 1 sätts rotationstalet till 0 (dvs första rotationspositionen).
 
@@ -295,9 +296,9 @@ Kod:XXXX
 ![image](https://user-images.githubusercontent.com/4598641/226011550-d53162ca-1eaf-4674-b2dc-71eefe2fed7d.png)
 
 
-## Placera nästa block
+## Placera nästa bit
 
-Pjäsens position i spelområdet lagras och pjäsen dras på den positionen.
+Bitens position i spelområdet lagras och biten ritas på den positionen.
 
 Kod:XXXX
 
@@ -306,7 +307,7 @@ Kod:XXXX
 
 
 ## Flytta blocket
-Vänster- och högerpilarna subtraherar eller adderar 1 till pjäsens X-koordinat.
+Vänster- och högerpilarna subtraherar eller adderar 1 till bitens X-koordinat.
 
 Kod:XXXX
 
@@ -321,12 +322,12 @@ En timervariabel börjar vid 0 och ökar med dt för varje bildruta.
 
 När timern är på eller över 0,5 återställs den till 0.
 
-För närvarande skrivs 'tick' ut varje gång pjäsen faller.
+För närvarande skrivs 'tick' ut varje gång biten faller.
 
 Kod:XXXX
 
 ## Fallande block
-Timern används för att öka pjäsens Y-position var 0,5 sekund.
+Timern används för att öka bitens Y-position var 0,5 sekund.
 
 Kod:XXXX
 
@@ -335,9 +336,9 @@ Kod:XXXX
 
 ## Begränsa rörelsefriheten
 
-För att förhindra att pjäsen flyttas från vänster eller höger om skärmen när den flyttas eller roteras, kontrolleras vart och ett av dess block för att se om de är inom spelområdet innan pjäsen flyttas eller roteras.
+För att förhindra att biten flyttas från vänster eller höger om skärmen när den flyttas eller roteras, kontrolleras vart och ett av dess block för att se om de är inom spelområdet innan biten flyttas eller roteras.
 
-Eftersom denna kontroll kommer att göras på flera ställen kommer den att skrivas som en funktion. Denna funktion får position och rotation att kontrollera, och returnerar Sant eller Falskt beroende på om pjäsen kan röra sig eller rotera.
+Eftersom denna kontroll kommer att göras på flera ställen kommer den att skrivas som en funktion. Denna funktion får position och rotation att kontrollera, och returnerar Sant eller Falskt beroende på om biten kan röra sig eller rotera.
 
 Till att börja med kommer denna funktion alltid att returnera True , så att flytta och rotera är fortfarande alltid möjligt.
 
@@ -382,19 +383,19 @@ Kod:XXXX
 
 ## Släppa ner ett block
 
-När c- tangenten trycks in, ökas pjäsens Y-position med 1 så länge som blocket får plats.
+När C-tangenten trycks, ökas bitens Y-position med 1 så länge som biten får plats.
 
 Kod:XXXX
 
 ## Återställa blocket
 
-Om timern tickar och pjäsen inte kan röra sig nedåt, återställs pjäsen till sin ursprungliga position och rotation, och (för nu) sin ursprungliga typ.
+Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position och rotation, och (just nu) sin ursprungliga typ.
 
 Kod:XXXX
 
 ## Förenkla koden
 
-Pjäsen sätts till sitt ursprungliga tillstånd på två ställen, så en funktion skapas.
+Biten sätts till sitt ursprungliga tillstånd på två ställen, så en funktion skapas.
 
 Kod:XXXX
 
@@ -414,21 +415,21 @@ Kod:XXXX
 ```
 
 ## Nästa block från sekvensen
-När en ny pjäs skapas tar den bort det sista objektet från sekvensen och använder det för pjästypen.
+När en ny bit skapas tar den bort det sista objektet från sekvensen och använder det för typen av bit.
 
 När sekvensen är tom skapas en ny sekvens.
 
 Kod:XXXX
 
 ## Lägg till orörliga block
-När en pjäs har kommit till vila, läggs pjäsens block till de inerta blocken.
+När en bit har landat läggs bitens till de orörliga blocken.
 
-Pjäsens block slingras igenom, och om ett block inte är tomt, är det inerta blocket i denna position inställt på typen av pjäsens block.
+Bitens block gås igenom och om ett block inte är tomt, är det inerta blocket i denna position inställt på typen av bitens block.
 
 Kod:XXXX
 
-## Ny pjäs direkt efter släpp
-När en pjäs tappas ställs timern omedelbart till gränsen så att lägga till pjäsen till de inerta pjäserna och skapa den nya pjäsen sker direkt istället för att vänta på timern.
+## Ny bit direkt efter släpp
+När en bit tappas ställs timern omedelbart till gränsen så att lägga till biten till de inerta bitarna och den nya biten skapas direkt istället för att vänta på timern.
 
 Timergränsen återanvänds, så den görs till en variabel.
 
@@ -453,9 +454,9 @@ Kod:XXXX
 
 ## Slut på spelet
 
-Om en nyskapad pjäs är i en orörlig position är spelet över.
+Om en nyskapad bit är i en orörlig position är spelet över.
 
-En funktion skapas som ställer in spelets initiala tillstånd.
+En funktion skapas som ställer in spelets startläge.
 
 Denna funktion anropas innan spelet börjar och när spelet är över.
 
