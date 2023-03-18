@@ -246,44 +246,45 @@ pgzrun.go()
 import pgzrun
 import random
 
-# Variabler här nedanför
-sequence = []  # Tillfälligt
-current = 0  #nyrad
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
 
 # Funktioner här nedanför
 def add_to_sequence():
     sequence.append(random.randint(1, 4))
-  
-def on_key_down(key):
-  global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
-  if key in (keys.K_1, keys.K_2, keys.K_3,
-             keys.K_4):  # siffertangenterna 1, 2, 3, 4
-    if key == keys.K_1:
-      number = 1
-    elif key == keys.K_2:
-      number = 2
-    elif key == keys.K_3:
-      number = 3
-    elif key == keys.K_4:
-      number = 4
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
 
-    if number == sequence[current]:
-      current += 1
-      if current == len(sequence):  #nyrad
-        current = 0  #nyrad
-        add_to_sequence() # ändra
+    if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
+        if key == keys.K_1:
+            number = 1
+        elif key == keys.K_2:
+            number = 2
+        elif key == keys.K_3:
+            number = 3
+        elif key == keys.K_4:
+            number = 4
+
+        if number == sequence[current]:
+            current += 1
+            if current == len(sequence):  # nyrad
+                current = 0  # nyrad
+                add_to_sequence()
+
 
 def draw():
-  screen.fill((0, 0, 0))
+    screen.fill((0, 0, 0))
 
-  screen.draw.text(', '.join(map(str, sequence)), (0, 0))
-  screen.draw.text(f"{current + 1}/{len(sequence)}", (0, 20))  #nyrad
-  screen.draw.text(f"sequence[current]: {sequence[current]}", (0, 40))  #nyrad
+    screen.draw.text(', '.join(map(str, sequence)), (0, 0))
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (0, 20))  # nyrad
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (0, 40))  # nyrad
 
-# Kod för att starta vår app
+# Till slut kod för att starta vår app
 
-add_to_sequence() # skapa första hemliga talet
+add_to_sequence()
 pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```
 </details>
