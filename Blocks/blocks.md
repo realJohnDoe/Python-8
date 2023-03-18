@@ -144,11 +144,50 @@ pgzrun.go()  # måste vara sista raden
 
 ## Lagring av orörliga block
 
-Rutnätet för de orörliga blocken skapas och varje block sätts till ett mellanslag, `' '`. Det representerar ett tomt block.
+Rutnätet för de orörliga blocken skapas och varje block sätts till ett mellanslag, `' '`. Det representerar ett tomt block. Variabeln heter `inert`.
 
 Bredden och höjden på rutnätet i block återanvänds från ritning av blocken, så vi gör bredden och höjden till variabler.
 
-Kod:XXXX
+✏️ Uppdatera koden och testkör. Nya och ändrade rader är markerade.
+
+```python
+import pgzrun
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10 #nyrad
+grid_y_count = 18 #nyrad
+
+inert = [] #nyrad
+
+
+# Funktioner (def) här nedanför
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count): #ändrad
+        for x in range(grid_x_count): #ändrad
+            block_size = 20
+            block_draw_size = block_size - 1
+            screen.draw.filled_rect(
+                Rect(
+                    x * block_size, y * block_size,
+                    block_draw_size, block_draw_size
+                ),
+                color=(222, 222, 222)
+            )
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+    for x in range(grid_x_count): #nyrad
+        inert[y].append(' ') #nyrad
+
+pgzrun.go()  # måste vara sista raden
+```
 
 ## Färglägg blocken
 
