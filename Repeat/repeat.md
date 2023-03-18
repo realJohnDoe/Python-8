@@ -107,34 +107,6 @@ def on_key_down(key):
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
-```    
-
-</details>
-
-## Lägg till nästa tal att komma ihåg i sekvensen
-
-När den aktuella positionen återställs läggs ett slumptal mellan 1 och 4 till i sekvensen.
-
-Vi behöver importera random så att vi kan få slumptal från `random.randint`.
-
-```python
-import random # Lägg till högst upp bland importerna
-
-# Uppdatera funktionen
-def on_key_down(key):
-    # etc.
-            if current == len(sequence):
-                current = 0
-                sequence.append(random.randint(1, 4)) #nyrad
-```
-✏️ Uppdatera och testkör koden. 
->Du ser facit överst på skärmen och en ny siffra läggs till varje gång du matat in alla siffrorna i sekvensen.
-
-<details>
-    <summary>📝 Så här kan koden se ut nu</summary>
-
-```python
 import pgzrun
 
 sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
@@ -170,6 +142,33 @@ def draw():
 
 
 pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
+```    
+
+</details>
+
+## Lägg till nästa tal att komma ihåg i sekvensen
+
+När den aktuella positionen återställs läggs ett slumptal mellan 1 och 4 till i sekvensen.
+
+Vi behöver importera random så att vi kan få slumptal från `random.randint`.
+
+```python
+import random # Lägg till högst upp bland importerna
+
+# Uppdatera funktionen
+def on_key_down(key):
+    # etc.
+            if current == len(sequence):
+                current = 0
+                sequence.append(random.randint(1, 4)) #nyrad
+```
+✏️ Uppdatera och testkör koden. 
+>Du ser facit överst på skärmen och en ny siffra läggs till varje gång du matat in alla siffrorna i sekvensen.
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
 ```    
 
 </details>
