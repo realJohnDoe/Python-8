@@ -295,7 +295,7 @@ Kod:XXXX
 
 ## Testa block
 
-För teständamål växlar upp- och nedpilarna genom stycketyperna.
+För att göra det lätt att testa, låter vi upp- och och neråtpil byta mellan olika bitar.
 
 Kod:XXXX
 
@@ -322,18 +322,19 @@ Kod:XXXX
 
 ## Timer
 
-Bitar kommer att falla var 0,5 sekund.
+Bitar kommer att falla med 0.5 s mellanrum.
 
-En timervariabel börjar vid 0 och ökar med dt för varje bildruta.
+En timervariabel börjar vid 0 och ökar med `dt` för varje bildruta.
+>`dt` talar om hur lång tid det har gått sedan vi senast ritade på skärmen.
 
-När timern är på eller över 0,5 återställs den till 0.
+När timern har passerat 0.5, återställs den till 0.
 
-För närvarande skrivs 'tick' ut varje gång biten faller.
+För att se hur det fungerar skriver vi just nu ut 'tick' ut varje gång biten faller.
 
 Kod:XXXX
 
 ## Fallande block
-Timern används för att öka bitens Y-position var 0,5 sekund.
+Timern används för att öka bitens Y-position var 0.5:e sekund.
 
 Kod:XXXX
 
@@ -342,33 +343,38 @@ Kod:XXXX
 
 ## Begränsa rörelsefriheten
 
-För att förhindra att biten flyttas från vänster eller höger om skärmen när den flyttas eller roteras, kontrolleras vart och ett av dess block för att se om de är inom spelplanen innan biten flyttas eller roteras.
+För att förhindra att biten hamnar till vänster eller höger om spelplanen när den flyttas eller roteras, 
+kontrollerar vi vart och ett av dess block för att se om de är inom spelplanen innan biten flyttas eller roteras.
 
-Eftersom denna kontroll kommer att göras på flera ställen kommer den att skrivas som en funktion. Denna funktion får position och rotation att kontrollera, och returnerar Sant eller Falskt beroende på om biten kan röra sig eller rotera.
+Eftersom den här kontrollen kommer att göras på flera ställen, gör vi en funktion med den koden.
+Funktionen ska kontrollera bitens position och rotation och returnera True om biten kan röra sig eller rotera, annars False.
 
-Till att börja med kommer denna funktion alltid att returnera True , så att flytta och rotera är fortfarande alltid möjligt.
+Till att börja med kommer denna funktion alltid att returnera True, så att vi alltid kan flytta och rotera medan vi testar.
 
-Koden ändras från att omedelbart ställa in positioner/rotationer, till att skapa variabler för de ändrade värdena, och om kontrollfunktionen returnerar True ställs den faktiska positionen/rotationen till de ändrade värdena.
+Vi ändrar koden från omedelbart ställa in positioner/rotationer.
+Istället skapar vi variabler för de ändrade värdena.
+Om kontrollfunktionen returnerar True ställs den faktiska positionen/rotationen till de ändrade värdena, annars inte.
 
 Kod:XXXX
 
 ## Kontrollera vänsterkanten
-Om något block inte är tomt och dess X-position är mindre än 0 (dvs. utanför spelplanens vänstra sida), returnerar funktionen False .
+Om något block inte är tomt och X-positionen är mindre än 0, returnerar funktionen False. Det är när blocket är utanför spelplanens vänstra sida.
 
 Kod:XXXX
 
 ## Förenkla koden
-Antalet block som varje bit har på X- och Y-axlarna återanvänds från att rita bitarna, så variabler görs för dem.
+Storleken på varje bit i X- och Y-led återanvänds från att rita bitarna, så vi gör variabler för det.
 
 ## Kontrollera högerkanten
 
-Om något blocks X-position är större än eller lika med spelplanens bredd (dvs. utanför spelplanens högra sida), returnerar funktionen också False .
-
+Om något blocks X-position är större än eller lika med spelplanens bredd hamnar det utanför spelplanens högra sida.
+Då returnerar funktionen också False.
 
 Kod:XXXX
 
 ## Kontrollera underkanten
-Om något blocks Y-position är större än eller lika med höjden på spelplanen (dvs. utanför botten av spelplanen), returnerar funktionen också False .
+Om något blocks Y-position är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
+Då returnerar funktionen också False.
 
 
 Kod:XXXX
@@ -376,14 +382,14 @@ Kod:XXXX
 ## Kontrollera orörliga block
 Om det finns ett orörligt block vid något blocks position, returnerar funktionen också False .
 
-För att testa detta sätts ett orörligt block manuellt.
+För att testa detta lägger vi in ett orörligt block.
 
 Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226013942-ae181f75-53b1-4b7c-8156-ba22cf2ecc9c.png)
 
 ## Förenkla koden
-De beräknade blockpositionerna som ska testas återanvänds, så de lagras i variabler.
+De beräknade blockpositionerna som ska testas behövs på fler ställen. Vi sparar dem i variabler.
 
 Kod:XXXX
 
@@ -395,24 +401,26 @@ Kod:XXXX
 
 ## Återställa blocket
 
-Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position och rotation, och (just nu) sin ursprungliga typ.
+Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position och rotation, och sin ursprungliga typ. 
+Vi ska ändra det sen.
 
 Kod:XXXX
 
 ## Förenkla koden
 
-Biten sätts till sitt ursprungliga tillstånd på två ställen, så en funktion skapas.
+Biten sätts till sitt ursprungliga tillstånd på två ställen. Vi gör en funktion för det.
 
 Kod:XXXX
 
 ## Håll reda på kommande block
-Sekvensen av nästa bitar lagras som en lista som innehåller numren som representerar bittyper i slumpmässig ordning.
+De kommande bitarna lagrar vi som en lista som innehåller numren som representerar bittyper i slumpmässig ordning.
 
-En lista skapas från ett intervall från 0 till en mindre än längden på piece_structures och blandas sedan.
+Vi gör en lista med talen från 0 till `len(piece_structures) - 1`. 
+Sedan slumpar vi ordningen på den listan med `random.shuffle`.
 
-För att testa detta skapas en ny sekvens när s- tangenten trycks ned och sekvensen skrivs ut.
+För att testa, skapar vi  en ny sekvens när S-tangenten trycks ned och skriver ut sekvensen.
 
-Slumpmodulen importeras så att random.shuffle kan användas.
+Slumpmodulen importeras vi så att vi kan använda `random.shuffle`.
 
 Kod:XXXX
 
@@ -420,41 +428,42 @@ Kod:XXXX
 [3, 2, 4, 1, 0, 5, 6]
 ```
 
-## Nästa block från sekvensen
-När en ny bit skapas tar den bort det sista objektet från sekvensen och använder det för typen av bit.
+## Nästa block från listan
+När en ny bit skapas tar den bort det sista talet från listan och använder det för att bestämma typen av bit.
 
-När sekvensen är tom skapas en ny sekvens.
+När listan med blocknummer är tom skapas en ny sådan lista.
 
 Kod:XXXX
 
 ## Lägg till orörliga block
-När en bit har landat läggs bitens till de orörliga blocken.
+När en bit har landat läggs bitens block till de orörliga blocken.
 
-Bitens block gås igenom och om ett block inte är tomt, är det orörliga blocket i denna position inställt på typen av bitens block.
+Bitens block gås igenom och om ett block inte är tomt, sätter vi det orörliga blocket på den positionen till värdet som vi hämtar från biten.
 
 Kod:XXXX
 
 ## Ny bit direkt efter släpp
-När en bit tappas ställs timern omedelbart till gränsen så att lägga till biten till de orörliga bitarna och den nya biten skapas direkt istället för att vänta på timern.
+När en bit släpps ner, sätter vi timern så att den löper ut direkt.
+Då kommer nästa bit att skapas direkt istället för att vänta på timern.
 
-Timergränsen återanvänds, så den görs till en variabel.
+Timergränsen återanvänds, så vi gör den till en variabel.
 
 Kod:XXXX
 
 ## Hitta fyllda rader
-Varje rad av de orörliga blocken loopas igenom, och om ingen av kolumnerna i raden innehåller ett tomt block, är raden fylld.
+Varje rad av de orörliga blocken loopas igenom. Om ingen av kolumnerna i raden är ett tomt block så är raden fylld.
 
-För närvarande skrivs de fullständiga radnumren ut.
+För att göra det lättare att testa, skrivs de fullständiga radnumren ut just nu.
 
 Kod:XXXX
 
 ## Ta bort fyllda rader
-Om raden är komplett, slingras raderna från hela raden till raden tvåa uppifrån.
+Om raden är fylld, loopar vi igenom raderna ända till näst översta raden.
 
-Varje block i raden loopas igenom och ställs in på värdet för blocket ovanför det. Eftersom det inte finns något ovanför den översta raden behöver den inte slingras igenom.
+Varje block i raden loopas igenom och ställs in på värdet för blocket ovanför det.
+Eftersom det inte finns något ovanför den översta raden behöver den inte loopas igenom.
 
-Den översta raden är då inställd på alla tomma block.
-
+Den översta raden kommer då att vara helt tom.
 
 Kod:XXXX
 
@@ -462,9 +471,8 @@ Kod:XXXX
 
 Om en nyskapad bit är i en orörlig position är spelet över.
 
-En funktion skapas som ställer in spelets startläge.
-
-Denna funktion anropas innan spelet börjar och när spelet är över.
+Vi gör en funktion som ställer in spelets startläge.
+Den anropas innan spelet börjar och när spelet är över.
 
 Kod:XXXX
 
@@ -477,7 +485,8 @@ Kod:XXXX
 
 ## Rita nästa block
 
-Den sista biten i sekvensen (dvs nästa bit som faller) dras vid sin första rotationsposition. Den är förskjuten 5 kvarter från vänster och 1 kvarter från toppen.
+Den sista biten i sekvensen, alltså nästa bit som faller, ritas med sin första rotationsstil.
+Den är förskjuten rutor från vänster och en ruta uppifrån.
 
 Kod:XXXX
 
