@@ -3,6 +3,48 @@
 
 ![image](https://user-images.githubusercontent.com/4598641/226001268-afea64f1-d51c-48e0-b4b8-0bff27a3e893.png)
 
+**Regler** [Kontroller](#kontroller)
+
+**Översikt**
+
+**Kodning**
+[Rita rutnätet med block](#rita-rutnätet-med-block)
+&bull; [Lagring av orörliga block](#lagring-av-orörliga-block)
+&bull; [Färglägg blocken](#färglägg-blocken)
+&bull; [Hur vi sparar bitarnas utseende](#hur-vi-sparar-bitarnas-utseende)
+&bull; [Lagra biten som faller just nu](#lagra-biten-som-faller-just-nu)
+&bull; [Rita biten](#rita-biten)
+&bull; [Förenkla koden](#förenkla-koden)
+&bull; [Rotation](#rotation)
+&bull; [Testa bitar](]
+&bull; [Placera nästa bit]
+&bull; [Flytta biten]
+&bull; [Timer](
+&bull; [Fallande bit](
+&bull; [Begränsa rörelsefriheten](
+&bull; [Kolla vänsterkanten](
+&bull; [Förenkla koden](
+&bull; [Kolla högerkanten](
+&bull; [Kolla underkanten](
+&bull; [Kolla orörliga block](
+&bull; [Förenkla koden](
+&bull; [Släppa ner en bit](
+&bull; [Återställa biten](
+&bull; [Förenkla koden](
+&bull; [Håll reda på kommande bitar](
+&bull; [Nästa bit från listan](
+&bull; [Lägg till orörliga block](
+&bull; [Ny bit direkt efter släpp](
+&bull; [Hitta fyllda rader](
+&bull; [Ta bort fyllda rader](
+&bull; [Game over](
+&bull; [Förskjutning av spelplanen](
+ [Rita nästa bit]](
+ 
+**Källor**
+ 
+ 
+
 # Regler
 
 Det finns sju typer av bitar. Varje bit innehåller fyra rutor.
@@ -67,7 +109,38 @@ När alla bitar har tagits, skapas en ny slumpmässig ordning.
 ## Rita rutnätet med block
 En ruta ritas för varje block i spelplanen.
 
-Kod:XXXX
+✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/blocks-starter
+och spara en egen kopia med knappen Fork.
+
+```python
+import pgzrun
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+
+# Funktioner (def) här nedanför
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(18):
+        for x in range(10):
+            block_size = 20
+            block_draw_size = block_size - 1
+            screen.draw.filled_rect(
+                Rect(
+                    x * block_size, y * block_size,
+                    block_draw_size, block_draw_size
+                ),
+                color=(222, 222, 222)
+            )
+
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go()  # måste vara sista raden
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/226004861-bb0676e3-8ace-444f-af72-a4c3859483b0.png)
 
@@ -79,7 +152,7 @@ Bredden och höjden på rutnätet i block återanvänds från ritning av blocken
 
 Kod:XXXX
 
-## Sätt färgen på blocken
+## Färglägg blocken
 
 När block ritas, ställs färgen in baserat på vilken typ av block det är.
 
@@ -89,7 +162,7 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226006718-62e1013b-99f3-427b-b095-4cda85184e19.png)
 
-## Lagring av bitarnas utseende
+## Hur vi sparar bitarnas utseende
 Varje rotation av en biten är en 4x4-kvadrat av tecken.
 
 ```python
@@ -264,7 +337,7 @@ Biten som faller just nu representeras av
 
 Kod:XXXX
 
-## Rita blocket
+## Rita biten
 
 Biten ritas genom att loopa genom dess struktur och &ndash; om rutan är fylld &ndash; så ritar vi en fyrkant med den färg som bestäms av blocktypen.
 
@@ -293,7 +366,7 @@ Kod:XXXX
 ![image](https://user-images.githubusercontent.com/4598641/226011415-59b9b18c-2496-4af0-a39c-f854ef940d2e.png)
 
 
-## Testa block
+## Testa bitar
 
 För att göra det lätt att testa, låter vi upp- och och neråtpil byta mellan olika bitar.
 
@@ -312,7 +385,8 @@ Kod:XXXX
 
 
 
-## Flytta blocket
+## Flytta biten
+
 Vänster- och högerpilarna subtraherar eller adderar 1 till bitens X-koordinat.
 
 Kod:XXXX
@@ -333,7 +407,7 @@ För att se hur det fungerar skriver vi just nu ut 'tick' ut varje gång biten f
 
 Kod:XXXX
 
-## Fallande block
+## Fallande bit
 Timern används för att öka bitens Y-position var 0.5:e sekund.
 
 Kod:XXXX
@@ -357,7 +431,7 @@ Om kontrollfunktionen returnerar True ställs den faktiska positionen/rotationen
 
 Kod:XXXX
 
-## Kontrollera vänsterkanten
+## Kolla vänsterkanten
 Om något block inte är tomt och X-positionen är mindre än 0, returnerar funktionen False. Det är när blocket är utanför spelplanens vänstra sida.
 
 Kod:XXXX
@@ -365,21 +439,21 @@ Kod:XXXX
 ## Förenkla koden
 Storleken på varje bit i X- och Y-led återanvänds från att rita bitarna, så vi gör variabler för det.
 
-## Kontrollera högerkanten
+## Kolla högerkanten
 
 Om något blocks X-position är större än eller lika med spelplanens bredd hamnar det utanför spelplanens högra sida.
 Då returnerar funktionen också False.
 
 Kod:XXXX
 
-## Kontrollera underkanten
+## Kolla underkanten
 Om något blocks Y-position är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
 Då returnerar funktionen också False.
 
 
 Kod:XXXX
 
-## Kontrollera orörliga block
+## Kolla orörliga block
 Om det finns ett orörligt block vid något blocks position, returnerar funktionen också False .
 
 För att testa detta lägger vi in ett orörligt block.
@@ -393,13 +467,13 @@ De beräknade blockpositionerna som ska testas behövs på fler ställen. Vi spa
 
 Kod:XXXX
 
-## Släppa ner ett block
+## Släppa ner en bit
 
 När C-tangenten trycks, ökas bitens Y-position med 1 så länge som biten får plats.
 
 Kod:XXXX
 
-## Återställa blocket
+## Återställa biten
 
 Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position och rotation, och sin ursprungliga typ. 
 Vi ska ändra det sen.
@@ -412,7 +486,7 @@ Biten sätts till sitt ursprungliga tillstånd på två ställen. Vi gör en fun
 
 Kod:XXXX
 
-## Håll reda på kommande block
+## Håll reda på kommande bitar
 De kommande bitarna lagrar vi som en lista som innehåller numren som representerar bittyper i slumpmässig ordning.
 
 Vi gör en lista med talen från 0 till `len(piece_structures) - 1`. 
@@ -428,7 +502,7 @@ Kod:XXXX
 [3, 2, 4, 1, 0, 5, 6]
 ```
 
-## Nästa block från listan
+## Nästa bit från listan
 När en ny bit skapas tar den bort det sista talet från listan och använder det för att bestämma typen av bit.
 
 När listan med blocknummer är tom skapas en ny sådan lista.
@@ -467,7 +541,7 @@ Den översta raden kommer då att vara helt tom.
 
 Kod:XXXX
 
-## Slut på spelet
+## Game over
 
 Om en nyskapad bit är i en orörlig position är spelet över.
 
@@ -483,7 +557,7 @@ Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226016663-cb1d5333-1bd0-4943-91e7-8d22d195f2ef.png)
 
-## Rita nästa block
+## Rita nästa bit
 
 Den sista biten i sekvensen, alltså nästa bit som faller, ritas med sin första rotationsstil.
 Den är förskjuten rutor från vänster och en ruta uppifrån.
