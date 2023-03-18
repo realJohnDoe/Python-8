@@ -282,6 +282,8 @@ Varje bit sparas som en lista av de olika rotationerna.
 
 De olika bitarna och deras rotationer sparas som en lång lista.
 
+✏️ Uppdatera din kod med detta. Du kan testköra &ndash; det ska då fungera som innan eftersom vi inte gör något med bitarna än. De finns bara i datorns minne.
+
 ```python
 # Lägg detta bland de globala variablerna, nästan högst upp
 piece_structures = [ # lista med alla bitarna
@@ -423,6 +425,8 @@ Biten som faller just nu representeras av
 - dels ett tal som anger vilken typ av bit det är &ndash; vi behöver använda det för att indexera i listan över med olika bitar
 - dels ett tal som anger vilken rotation biten har &ndash; vi behöver det för att indexera i listan med rotationer.
 
+✏️ Lägg till och testkör att allt fungerar som innan.
+
 ```python
 # Lägg till som globala variabler nästan högst upp
 piece_type = 0
@@ -431,7 +435,7 @@ piece_rotation = 0
 
 ## Rita biten
 
-Biten ritas genom att loopa genom dess struktur och &ndash; om rutan är fylld &ndash; så ritar vi en fyrkant med den färg som bestäms av blocktypen.
+Biten ritas genom att loopa genom dess struktur. Om en viss ruta är fylld så ritar vi en fyrkant med den färg som bestäms av blocktypen.
 
 Kod:XXXX
 
