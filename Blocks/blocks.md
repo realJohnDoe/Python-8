@@ -9,13 +9,13 @@ Det finns sju typer av bitar. Varje bit innehåller fyra rutor.
 
 ![image](https://user-images.githubusercontent.com/4598641/226001342-33230a9a-d8a3-4218-9a37-3cc579827ad0.png)
 
-Bitar faller från toppen av spelområdet. Spelaren kan flytta bitar åt vänster och höger och rotera dem. När en bit landar, faller nästa bit.
+Bitar faller från toppen av spelplanen. Spelaren kan flytta bitar åt vänster och höger och rotera dem. När en bit landar, faller nästa bit.
 
-Hur kommande bit ser ut visas ovanför spelområdet som en hjälp till spelaren.
+Hur nästa bit ser ut visas ovanför spelplanen som en hjälp till spelaren.
 
 ![image](https://user-images.githubusercontent.com/4598641/226001405-e8e90545-4b84-4dc6-87a5-374f584ade98.png)
 
-När en obruten rad av bitar bildas, försvinner raden och alla rutor ovanför flyttas ner en rad.
+När en obruten rad av rutor bildas, försvinner raden och alla rutor ovanför flyttas ner en rad.
 
 Spelet slutar när en bit har hamnat i vila och nästa bit skulle omedelbart överlappa en tidigare nerfallen bit.
 
@@ -29,12 +29,12 @@ Spelet slutar när en bit har hamnat i vila och nästa bit skulle omedelbart öv
 
 
 # Översikt
-Ett rutnät lagrar de orörliga bitarna som redan har fallit.
+Ett rutnät lagrar de orörliga rutorna från nerfallna bitar.
 
 En ruta är antingen tom eller fylld med en viss färg.
 
-Tecknet `' '` är ett mellanslag och betyder en tom ruta.
-Tecknen  `'i'`, `'j'`, `'l'`, `'o'`, `'s'`, `'t'` och `'z'` betyder rutor med olika färger.
+- Tecknet `' '` är ett mellanslag och betyder en tom ruta.
+- Tecknen  `'i'`, `'j'`, `'l'`, `'o'`, `'s'`, `'t'` och `'z'` betyder rutor med olika färger.
 
 ![image](https://user-images.githubusercontent.com/4598641/226003821-3a435de3-4843-421e-ab20-477e93bf3fe8.png)
 
@@ -42,17 +42,19 @@ Alla olika typer av bitar lagras med sina roterade varianter.
 
 ![image](https://user-images.githubusercontent.com/4598641/226003959-15932dfd-3435-47dd-b1f2-78b050e562fb.png)
 
-Den fallande biten lagras som ett nummer som representerar vilken typ av bit det är, ett nummer som representerar vilken rotationsvariation den befinner sig vid, och siffror som representerar dess X- och Y-position i spelområdet.
+Den fallande biten lagras som ett tal som representerar vilken typ av bit det är,
+ett tal som representerar vilken rotationsvariation den befinner sig i
+och så X- och Y-koordinaten för biten på spelplanen.
 
 En ny bit skapas längst upp på skärmen, såvida den inte skulle överlappa ett inert block, i vilket fall spelet är över.
 
-Spelaren kan flytta biten åt vänster och höger, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelområdet.
+Spelaren kan flytta biten åt vänster och höger, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelplanen.
 
-Efter att en tid har gått flyttas biten nedåt, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelområdet, i vilket fall den har kommit till vila.
+Efter att en tid har gått flyttas biten nedåt, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelplanen, i vilket fall den har kommit till vila.
 
-När en av rotationsknapparna trycks in ändrar biten sin rotationsvariation, såvida inte denna variation skulle överlappa ett inert block eller vara utanför spelområdet.
+När en av rotationsknapparna trycks in ändrar biten sin rotationsvariation, såvida inte denna variation skulle överlappa ett inert block eller vara utanför spelplanen.
 
-När släppknappen trycks in, flyttas biten ner tills nästa position skulle överlappa ett inert block eller vara utanför spelområdet, vid vilken punkt den har kommit till vila.
+När släppknappen trycks in, flyttas biten ner tills nästa position skulle överlappa ett inert block eller vara utanför spelplanen, vid vilken punkt den har kommit till vila.
 
 När en bit kommer till vila, läggs bitarnas block till de inerta blocken, och nästa bit skapas.
 
@@ -61,7 +63,7 @@ En sekvens av en av var och en av de sju bitarna i en slumpmässig ordning skapa
 # Kodning
 
 ## Rita rutnätet med block
-En ruta ritas för varje block i spelområdet.
+En ruta ritas för varje block i spelplanen.
 
 Kod:XXXX
 
@@ -298,7 +300,7 @@ Kod:XXXX
 
 ## Placera nästa bit
 
-Bitens position i spelområdet lagras och biten ritas på den positionen.
+Bitens position i spelplanen lagras och biten ritas på den positionen.
 
 Kod:XXXX
 
@@ -336,7 +338,7 @@ Kod:XXXX
 
 ## Begränsa rörelsefriheten
 
-För att förhindra att biten flyttas från vänster eller höger om skärmen när den flyttas eller roteras, kontrolleras vart och ett av dess block för att se om de är inom spelområdet innan biten flyttas eller roteras.
+För att förhindra att biten flyttas från vänster eller höger om skärmen när den flyttas eller roteras, kontrolleras vart och ett av dess block för att se om de är inom spelplanen innan biten flyttas eller roteras.
 
 Eftersom denna kontroll kommer att göras på flera ställen kommer den att skrivas som en funktion. Denna funktion får position och rotation att kontrollera, och returnerar Sant eller Falskt beroende på om biten kan röra sig eller rotera.
 
@@ -347,7 +349,7 @@ Koden ändras från att omedelbart ställa in positioner/rotationer, till att sk
 Kod:XXXX
 
 ## Kontrollera vänsterkanten
-Om något block inte är tomt och dess X-position är mindre än 0 (dvs. utanför spelområdets vänstra sida), returnerar funktionen False .
+Om något block inte är tomt och dess X-position är mindre än 0 (dvs. utanför spelplanens vänstra sida), returnerar funktionen False .
 
 Kod:XXXX
 
@@ -356,13 +358,13 @@ Antalet block som varje bit har på X- och Y-axlarna återanvänds från att rit
 
 ## Kontrollera högerkanten
 
-Om något blocks X-position är större än eller lika med spelområdets bredd (dvs. utanför spelområdets högra sida), returnerar funktionen också False .
+Om något blocks X-position är större än eller lika med spelplanens bredd (dvs. utanför spelplanens högra sida), returnerar funktionen också False .
 
 
 Kod:XXXX
 
 ## Kontrollera underkanten
-Om något blocks Y-position är större än eller lika med höjden på spelområdet (dvs. utanför botten av spelområdet), returnerar funktionen också False .
+Om något blocks Y-position är större än eller lika med höjden på spelplanen (dvs. utanför botten av spelplanen), returnerar funktionen också False .
 
 
 Kod:XXXX
@@ -462,8 +464,8 @@ Denna funktion anropas innan spelet börjar och när spelet är över.
 
 Kod:XXXX
 
-## Förskjutning av spelområdet
-Spelområdet ritas 2 block från vänster på skärmen och 5 block från toppen av skärmen.
+## Förskjutning av spelplanen
+Spelplanen ritas 2 block från vänster på skärmen och 5 block från toppen av skärmen.
 
 Kod:XXXX
 
