@@ -460,7 +460,10 @@ import pgzrun
 
 Biten ritas genom att loopa genom dess struktur. Om en viss ruta är fylld så ritar vi en fyrkant med den färg som bestäms av blocktypen.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
+
 ![image](https://user-images.githubusercontent.com/4598641/226010899-049e0b7e-591d-4d0b-b296-7fb35778e094.png)
 
 <details>
@@ -477,6 +480,8 @@ import pgzrun
 
 Koden för att rita ett orörligt block och för att rita ett block av den fallande biten är samma. Därför gör vi en funktion för det.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -491,13 +496,14 @@ import pgzrun
 
 ## Rotation
 När vi trycker på X, ökas bitens rotationsnummer med 1 och biten roteras medurs.
-
 >Om rotationstalet är större än antalet möjliga rotationer minus 1 sätts rotationstalet till 0. Vi går alltså tillbaks till bitens första rotation.
 
 På samma sätt när vi trycker på Z så minskas rotationstalet med 1 och biten roterar moturs.
-
 >Om rotationstalet är mindre än 0, sätts rotationstalet till antalet rotationer minus 1, alltså bitens sista rotation.
->
+
+
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226011415-59b9b18c-2496-4af0-a39c-f854ef940d2e.png)
@@ -514,6 +520,8 @@ import pgzrun
 ## Testa bitar
 
 För att göra det lätt att testa, låter vi upp- och och neråtpil byta mellan olika bitar.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -532,6 +540,8 @@ import pgzrun
 
 Bitens position i spelplanen lagras och biten ritas på den positionen.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226011946-ae6035af-d12b-4390-bfe8-2a1a3019655b.png)
@@ -549,6 +559,8 @@ import pgzrun
 ## Flytta biten
 
 Vänster- och högerpilarna subtraherar eller adderar 1 till bitens X-koordinat.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -574,6 +586,8 @@ När timern har passerat 0.5, återställs den till 0.
 
 För att se hur det fungerar skriver vi just nu ut 'tick' ut varje gång biten faller.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -587,6 +601,8 @@ import pgzrun
 
 ## Fallande bit
 Timern används för att öka bitens Y-position var 0.5:e sekund.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -615,6 +631,8 @@ Vi ändrar koden från omedelbart ställa in positioner/rotationer.
 Istället skapar vi variabler för de ändrade värdena.
 Om kontrollfunktionen returnerar True ställs den faktiska positionen/rotationen till de ändrade värdena, annars inte.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -628,6 +646,8 @@ import pgzrun
 
 ## Kolla vänsterkanten
 Om något block inte är tomt och X-positionen är mindre än 0, returnerar funktionen False. Det är när blocket är utanför spelplanens vänstra sida.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -643,6 +663,10 @@ import pgzrun
 ## Förenkla koden
 Storleken på varje bit i X- och Y-led återanvänds från att rita bitarna, så vi gör variabler för det.
 
+✏️ Uppdatera koden och testkör!
+
+Kod:XXXX
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -656,6 +680,8 @@ import pgzrun
 
 Om något blocks X-position är större än eller lika med spelplanens bredd hamnar det utanför spelplanens högra sida.
 Då returnerar funktionen också False.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -671,6 +697,8 @@ import pgzrun
 ## Kolla underkanten
 Om något blocks Y-position är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
 Då returnerar funktionen också False.
+
+✏️ Uppdatera koden och testkör!
 
 
 Kod:XXXX
@@ -689,6 +717,8 @@ Om det finns ett orörligt block vid något blocks position, returnerar funktion
 
 För att testa detta lägger vi in ett orörligt block.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226013942-ae181f75-53b1-4b7c-8156-ba22cf2ecc9c.png)
@@ -705,6 +735,8 @@ import pgzrun
 ## Förenkla koden
 De beräknade blockpositionerna som ska testas behövs på fler ställen. Vi sparar dem i variabler.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -719,6 +751,8 @@ import pgzrun
 ## Släppa ner en bit
 
 När C-tangenten trycks, ökas bitens Y-position med 1 så länge som biten får plats.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -736,6 +770,8 @@ import pgzrun
 Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position och rotation, och sin ursprungliga typ. 
 Vi ska ändra det sen.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -750,6 +786,8 @@ import pgzrun
 ## Förenkla koden
 
 Biten sätts till sitt ursprungliga tillstånd på två ställen. Vi gör en funktion för det.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -772,6 +810,8 @@ För att testa, skapar vi  en ny sekvens när S-tangenten trycks ned och skriver
 
 Slumpmodulen importeras vi så att vi kan använda `random.shuffle`.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 ```python
@@ -792,6 +832,8 @@ När en ny bit skapas tar den bort det sista talet från listan och använder de
 
 När listan med blocknummer är tom skapas en ny sådan lista.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -807,6 +849,8 @@ import pgzrun
 När en bit har landat läggs bitens block till de orörliga blocken.
 
 Bitens block gås igenom och om ett block inte är tomt, sätter vi det orörliga blocket på den positionen till värdet som vi hämtar från biten.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -825,6 +869,8 @@ Då kommer nästa bit att skapas direkt istället för att vänta på timern.
 
 Timergränsen återanvänds, så vi gör den till en variabel.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -840,6 +886,8 @@ import pgzrun
 Varje rad av de orörliga blocken loopas igenom. Om ingen av kolumnerna i raden är ett tomt block så är raden fylld.
 
 För att göra det lättare att testa, skrivs de fullständiga radnumren ut just nu.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -860,6 +908,8 @@ Eftersom det inte finns något ovanför den översta raden behöver den inte loo
 
 Den översta raden kommer då att vara helt tom.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -878,6 +928,8 @@ Om en nyskapad bit är i en orörlig position är spelet över.
 Vi gör en funktion som ställer in spelets startläge.
 Den anropas innan spelet börjar och när spelet är över.
 
+✏️ Uppdatera koden och testkör!
+
 Kod:XXXX
 
 <details>
@@ -891,6 +943,8 @@ import pgzrun
 
 ## Förskjutning av spelplanen
 Spelplanen ritas 2 block från vänster på skärmen och 5 block från toppen av skärmen.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
@@ -908,7 +962,9 @@ import pgzrun
 ## Rita nästa bit
 
 Den sista biten i sekvensen, alltså nästa bit som faller, ritas med sin första rotationsstil.
-Den är förskjuten rutor från vänster och en ruta uppifrån.
+Den är förskjuten fyra rutor från vänster och en ruta uppifrån.
+
+✏️ Uppdatera koden och testkör!
 
 Kod:XXXX
 
