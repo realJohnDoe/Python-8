@@ -3,11 +3,11 @@
 
 ![image](https://user-images.githubusercontent.com/4598641/226001268-afea64f1-d51c-48e0-b4b8-0bff27a3e893.png)
 
-**Regler** [Kontroller](#kontroller)
+[**Regler**](#regler) [Kontroller](#kontroller)
 
-**Översikt**
+[**Översikt**](#översikt)
 
-**Kodning**
+[**Kodning**](#kodning)
 [Rita rutnätet med block](#rita-rutnätet-med-block)
 &bull; [Lagring av orörliga block](#lagring-av-orörliga-block)
 &bull; [Färglägg blocken](#färglägg-blocken)
@@ -16,34 +16,32 @@
 &bull; [Rita biten](#rita-biten)
 &bull; [Förenkla koden](#förenkla-koden)
 &bull; [Rotation](#rotation)
-&bull; [Testa bitar](]
-&bull; [Placera nästa bit]
-&bull; [Flytta biten]
-&bull; [Timer](
-&bull; [Fallande bit](
-&bull; [Begränsa rörelsefriheten](
-&bull; [Kolla vänsterkanten](
-&bull; [Förenkla koden](
-&bull; [Kolla högerkanten](
-&bull; [Kolla underkanten](
-&bull; [Kolla orörliga block](
-&bull; [Förenkla koden](
-&bull; [Släppa ner en bit](
-&bull; [Återställa biten](
-&bull; [Förenkla koden](
-&bull; [Håll reda på kommande bitar](
-&bull; [Nästa bit från listan](
-&bull; [Lägg till orörliga block](
-&bull; [Ny bit direkt efter släpp](
-&bull; [Hitta fyllda rader](
-&bull; [Ta bort fyllda rader](
-&bull; [Game over](
-&bull; [Förskjutning av spelplanen](
- [Rita nästa bit]](
- 
-**Källor**
- 
- 
+&bull; [Testa bitar](#testa-bitar)
+&bull; [Placera nästa bit](#placera-nästa-bit)
+&bull; [Flytta biten](#flytta-biten)
+&bull; [Timer](#timer)
+&bull; [Fallande bit](#fallande-bit)
+&bull; [Begränsa rörelsefriheten](#begränsa-rörelsefriheten)
+&bull; [Kolla vänsterkanten](#kolla-vänsterkanten)
+&bull; [Förenkla koden](#förenkla-koden-1)
+&bull; [Kolla högerkanten](#kolla-högerkanten)
+&bull; [Kolla underkanten](#kolla-underkanten)
+&bull; [Kolla orörliga block](#kolla-orörliga-block)
+&bull; [Förenkla koden](#förenkla-koden-2)
+&bull; [Släppa ner en bit](#släppa-ner-en-bit)
+&bull; [Återställa biten](#återställa-biten)
+&bull; [Förenkla koden](#förenkla-koden-3)
+&bull; [Håll reda på kommande bitar](#håll-reda-på-kommande-bitar)
+&bull; [Nästa bit från listan](#nästa-bit-från-listan)
+&bull; [Lägg till orörliga block](#lägg-till-orörliga-block)
+&bull; [Ny bit direkt efter släpp](#ny-bit-direkt-efter-släpp)
+&bull; [Hitta fyllda rader](#hitta-fyllda-rader)
+&bull; [Ta bort fyllda rader](#ta-bort-fyllda-rader)
+&bull; [Game over](#game-over)
+&bull; [Förskjutning av spelplanen](#förskjutning-av-spelplanen)
+&bull; [Rita nästa bit](#rita-nästa-bit)
+
+  
 
 # Regler
 
