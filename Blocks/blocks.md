@@ -23,9 +23,9 @@ Spelet slutar när en bit har hamnat i vila och nästa bit skulle omedelbart öv
 
 **Vänsterpil**	Flytta vänster ⬅️<br>
 **Högerpil**	Flytta höger ➡️<br>
-**z**	Rotera moturs 🔄<br>
-**x**	Rotera medurs 🔃<br>
-**c**	Släpp ⏬
+**Z**	Rotera moturs 🔄<br>
+**X**	Rotera medurs 🔃<br>
+**C**	Släpp ⏬
 
 
 # Översikt
