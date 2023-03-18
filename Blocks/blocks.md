@@ -962,7 +962,7 @@ import pgzrun
 ## Rita nästa bit
 
 Den sista biten i sekvensen, alltså nästa bit som faller, ritas med sin första rotationsstil.
-Den är förskjuten fyra rutor från vänster och en ruta uppifrån.
+Den är förskjuten fem rutor från vänster och en ruta uppifrån.
 
 ✏️ Uppdatera koden och testkör!
 
