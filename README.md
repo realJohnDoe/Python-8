@@ -35,7 +35,7 @@ https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md
 https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md
 
 ## ⭐⭐⭐ Blocks
-[![](https://user-images.githubusercontent.com/4598641/226103304-00173642-8a08-4ef3-a1b5-ae896b6d8c94.png)]([https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md](https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md))
+[![](https://user-images.githubusercontent.com/4598641/226103304-00173642-8a08-4ef3-a1b5-ae896b6d8c94.png)](https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md))
 
 https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md
 
