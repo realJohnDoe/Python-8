@@ -195,12 +195,62 @@ När block ritas, ställs färgen in baserat på vilken typ av block det är.
 
 För att kunna testa det, sätter vi en några block i det orörliga nätet till att ha olika typ.
 
-Kod:XXXX
+✏️ Uppdatera koden och testkör!
 
+```python
+# Funktioner (def) här nedanför
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            colors = { #nyrad
+                ' ': (222, 222, 222), #nyrad
+                'i': (120, 195, 239), #nyrad
+                'j': (236, 231, 108), #nyrad
+                'l': (124, 218, 193), #nyrad
+                'o': (234, 177, 121), #nyrad
+                's': (211, 136, 236), #nyrad
+                't': (248, 147, 196), #nyrad
+                'z': (169, 221, 118), #nyrad
+            } #nyrad
+            block = inert[y][x] #nyrad
+            color = colors[block] #nyrad
+            block_size = 20
+            block_draw_size = block_size - 1
+            screen.draw.filled_rect(
+                Rect(
+                    x * block_size, y * block_size,
+                    block_draw_size, block_draw_size
+                ),
+                color=color #ändra
+            )
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+# Tillfälligt
+inert[17][0] = 'i' #nyrad
+inert[16][1] = 'j' #nyrad
+inert[15][2] = 'l' #nyrad
+inert[14][3] = 'o' #nyrad
+inert[13][4] = 's' #nyrad
+inert[12][5] = 't' #nyrad
+inert[11][6] = 'z' #nyrad
+
+pgzrun.go()  # måste vara sista raden
+```
 ![image](https://user-images.githubusercontent.com/4598641/226006718-62e1013b-99f3-427b-b095-4cda85184e19.png)
 
+📝 Så här ser hela koden ut nu: XXXX
+
+
 ## Hur vi sparar bitarnas utseende
-Varje rotation av en biten är en 4x4-kvadrat av tecken.
+Varje rotation av en bit är en 4x4-kvadrat av tecken.
 
 ```python
 [
@@ -211,17 +261,17 @@ Varje rotation av en biten är en 4x4-kvadrat av tecken.
 ]
 ```
 
-Varje bit lagras som en lista av de olika rotationerna.
+Varje bit sparas som en lista av de olika rotationerna.
 
 ```python
-[ # en lista
-    [ # ett element i listan = en rotation av biten
+[ # en lista för biten
+    [ # ett element i listan = en av bitens rotationer av biten
         [' ', ' ', ' ', ' '],
         ['i', 'i', 'i', 'i'],
         [' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' '],
     ],
-    [
+    [ # nästa rotation
         [' ', 'i', ' ', ' '],
         [' ', 'i', ' ', ' '],
         [' ', 'i', ' ', ' '],
@@ -230,11 +280,12 @@ Varje bit lagras som en lista av de olika rotationerna.
 ]
 ```
 
-Alla de olika bitarna och deras rotationer sparas som en lista.
+De olika bitarna och deras rotationer sparas som en lång lista.
 
 ```python
-piece_structures = [
-    [ # en lista av bitar
+# Lägg detta bland de globala variablerna, nästan högst upp
+piece_structures = [ # lista med alla bitarna
+    [ # bit nr 1
         [ # bit 1, rotation nr 1
             [' ', ' ', ' ', ' '],
             ['i', 'i', 'i', 'i'],
@@ -372,7 +423,11 @@ Biten som faller just nu representeras av
 - dels ett tal som anger vilken typ av bit det är &ndash; vi behöver använda det för att indexera i listan över med olika bitar
 - dels ett tal som anger vilken rotation biten har &ndash; vi behöver det för att indexera i listan med rotationer.
 
-Kod:XXXX
+```python
+# Lägg till som globala variabler nästan högst upp
+piece_type = 0
+piece_rotation = 0
+```
 
 ## Rita biten
 
