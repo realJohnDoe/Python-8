@@ -42,21 +42,22 @@ Alla olika typer av bitar lagras med sina roterade varianter.
 
 ![image](https://user-images.githubusercontent.com/4598641/226003959-15932dfd-3435-47dd-b1f2-78b050e562fb.png)
 
-Den fallande biten lagras som ett tal som representerar vilken typ av bit det är,
-ett tal som representerar vilken rotationsvariation den befinner sig i
-och så X- och Y-koordinaten för biten på spelplanen.
+Den fallande biten lagras som 
+- ett tal som representerar vilken typ av bit det är,
+- ett tal som representerar vilken rotationsvariation den befinner sig i
+- och så X- och Y-koordinaten för biten på spelplanen.
 
-En ny bit skapas längst upp på skärmen, såvida den inte skulle överlappa ett inert block, i vilket fall spelet är över.
+En ny bit skapas längst upp på skärmen, såvida den inte skulle överlappa ett orörligt block, i vilket fall spelet är över.
 
-Spelaren kan flytta biten åt vänster och höger, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelplanen.
+Spelaren kan flytta biten åt vänster och höger, såvida inte denna nya position skulle överlappa ett orörligt block eller vara utanför spelplanen.
 
-Efter att en tid har gått flyttas biten nedåt, såvida inte denna nya position skulle överlappa ett inert block eller vara utanför spelplanen, i vilket fall den har kommit till vila.
+Efter att en tid har gått flyttas biten nedåt, såvida inte denna nya position skulle överlappa ett orörligt block eller vara utanför spelplanen, i vilket fall den har kommit till vila.
 
-När en av rotationsknapparna trycks in ändrar biten sin rotationsvariation, såvida inte denna variation skulle överlappa ett inert block eller vara utanför spelplanen.
+När en av rotationsknapparna trycks in ändrar biten sin rotationsvariation, såvida inte denna variation skulle överlappa ett orörligt block eller vara utanför spelplanen.
 
-När släppknappen trycks in, flyttas biten ner tills nästa position skulle överlappa ett inert block eller vara utanför spelplanen, vid vilken punkt den har kommit till vila.
+När släppknappen trycks in, flyttas biten ner tills nästa position skulle överlappa ett orörligt block eller vara utanför spelplanen, vid vilken punkt den har kommit till vila.
 
-När en bit kommer till vila, läggs bitarnas block till de inerta blocken, och nästa bit skapas.
+När en bit kommer till vila, läggs bitarnas block till de orörliga blocken, och nästa bit skapas.
 
 En sekvens av en av var och en av de sju bitarna i en slumpmässig ordning skapas, och nästa bit tas från denna sekvens. När alla bitar har tagits skapas en ny slumpmässig sekvens.
 
@@ -370,9 +371,9 @@ Om något blocks Y-position är större än eller lika med höjden på spelplane
 Kod:XXXX
 
 ## Kontrollera orörliga block
-Om det finns ett inert block vid något blocks position, returnerar funktionen också False .
+Om det finns ett orörligt block vid något blocks position, returnerar funktionen också False .
 
-För att testa detta sätts ett inert block manuellt.
+För att testa detta sätts ett orörligt block manuellt.
 
 Kod:XXXX
 
@@ -426,19 +427,19 @@ Kod:XXXX
 ## Lägg till orörliga block
 När en bit har landat läggs bitens till de orörliga blocken.
 
-Bitens block gås igenom och om ett block inte är tomt, är det inerta blocket i denna position inställt på typen av bitens block.
+Bitens block gås igenom och om ett block inte är tomt, är det orörliga blocket i denna position inställt på typen av bitens block.
 
 Kod:XXXX
 
 ## Ny bit direkt efter släpp
-När en bit tappas ställs timern omedelbart till gränsen så att lägga till biten till de inerta bitarna och den nya biten skapas direkt istället för att vänta på timern.
+När en bit tappas ställs timern omedelbart till gränsen så att lägga till biten till de orörliga bitarna och den nya biten skapas direkt istället för att vänta på timern.
 
 Timergränsen återanvänds, så den görs till en variabel.
 
 Kod:XXXX
 
 ## Hitta fyllda rader
-Varje rad av de inerta blocken loops igenom, och om ingen av kolumnerna i raden innehåller ett tomt block, är raden fylld.
+Varje rad av de orörliga blocken loopas igenom, och om ingen av kolumnerna i raden innehåller ett tomt block, är raden fylld.
 
 För närvarande skrivs de fullständiga radnumren ut.
 
