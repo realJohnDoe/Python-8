@@ -246,7 +246,7 @@ pgzrun.go()  # måste vara sista raden
 ```
 ![image](https://user-images.githubusercontent.com/4598641/226006718-62e1013b-99f3-427b-b095-4cda85184e19.png)
 
-📝 Så här ser hela koden ut nu: XXXX
+📝 [Så här ser hela koden ut nu](https://github.com/coderdojolund/Python-8/blob/50225b406d141ccea59c1c3596be90937dc17a98/Blocks/blocks.py)
 
 
 ## Hur vi sparar bitarnas utseende
