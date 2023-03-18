@@ -1,6 +1,27 @@
 # Game of Life
 ## En handledning för Python och Pygame Zero 1.2
 
+[**Regler**](#regler) [Kontroller](#kontroller)
+
+[**Översikt**](#översikt)
+
+[**Kodning**](#kodning)
+[Rita en cell](#rita-en-cell)
+&bull; [Rita en rad med celler](#rita-en-rad-med-celler)
+&bull; [Rita alla celler](#rita-alla-celler)
+&bull; [Markera celler](#markera-celler)
+&bull; [Begränsa vald cell till rutnätet](#begränsa-vald-cell-till-rutnätet)
+&bull; [Markera celler](#markera-celler)
+&bull; [Skapa rutnätet](#skapa-rutnätet)
+&bull; [Gör celler levande med vänster musknapp](#gör-celler-levande-med-vänster-musknapp)
+&bull; [Räkna dina grannar](#räkna-dina-grannar)
+&bull; [Uppdatera rutnätet vid knapptryckning](#uppdatera-rutnätet-vid-knapptryckning)
+&bull; [Uppdatera varje cell baserat på antalet grannar](#uppdatera-varje-cell-baserat-på-antalet-grannar)
+&bull; [Döda celler med högerklick](#döda-celler-med-högerklick)
+
+[**Testa intressanta mönster**](#testa-intressanta-mönster)
+
+
 Game of Life uppfanns av John Conway år 1970. Det är ett spel utan spelare &ndash; allt är bestämt när du valt startuppställningen.
 
 ![image](https://user-images.githubusercontent.com/4598641/225728407-f0313924-90f3-4f7e-83ce-43a6303881e7.png)
