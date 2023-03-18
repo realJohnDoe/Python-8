@@ -109,6 +109,8 @@ En ruta ritas för varje block i spelplanen.
 ✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/blocks-starter
 och spara en egen kopia med knappen Fork.
 
+Testkör!
+
 ```python
 import pgzrun
 
@@ -145,7 +147,7 @@ pgzrun.go()  # måste vara sista raden
 
 Rutnätet för de orörliga blocken skapas och varje block sätts till ett mellanslag, `' '`. Det representerar ett tomt block. Variabeln heter `inert`.
 
-Bredden och höjden på rutnätet i block återanvänds från ritning av blocken, så vi gör bredden och höjden till variabler.
+Bredden och höjden på rutnätet i block återanvänds från ritning av blocken. Vi gör bredden och höjden till variabler.
 
 ✏️ Uppdatera koden och testkör. Nya och ändrade rader är markerade.
 
@@ -160,7 +162,6 @@ grid_x_count = 10 #nyrad
 grid_y_count = 18 #nyrad
 
 inert = [] #nyrad
-
 
 # Funktioner (def) här nedanför
 def draw():
@@ -178,7 +179,6 @@ def draw():
                 color=(222, 222, 222)
             )
 
-
 # Kod för att starta appen här nedanför
 for y in range(grid_y_count): #nyrad
     inert.append([]) #nyrad
@@ -190,7 +190,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Färglägg blocken
 
-När block ritas, ställs färgen in baserat på vilken typ av block det är.
+Blocken ska ritas med olika färg, beroende på blocktypen.
 
 För att kunna testa det, sätter vi en några block i det orörliga nätet till att ha olika typ.
 
@@ -250,6 +250,60 @@ pgzrun.go()  # måste vara sista raden
 
 ```python
 import pgzrun
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+inert = []
+
+# Funktioner (def) här nedanför
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            colors = { #nyrad
+                ' ': (222, 222, 222), #nyrad
+                'i': (120, 195, 239), #nyrad
+                'j': (236, 231, 108), #nyrad
+                'l': (124, 218, 193), #nyrad
+                'o': (234, 177, 121), #nyrad
+                's': (211, 136, 236), #nyrad
+                't': (248, 147, 196), #nyrad
+                'z': (169, 221, 118), #nyrad
+            } #nyrad
+            block = inert[y][x] #nyrad
+            color = colors[block] #nyrad
+            block_size = 20
+            block_draw_size = block_size - 1
+            screen.draw.filled_rect(
+                Rect(
+                    x * block_size, y * block_size,
+                    block_draw_size, block_draw_size
+                ),
+                color=color #ändra
+            )
+
+  # Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+# Tillfälligt
+inert[17][0] = 'i' #nyrad
+inert[16][1] = 'j' #nyrad
+inert[15][2] = 'l' #nyrad
+inert[14][3] = 'o' #nyrad
+inert[13][4] = 's' #nyrad
+inert[12][5] = 't' #nyrad
+inert[11][6] = 'z' #nyrad
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -270,7 +324,7 @@ Varje bit sparas som en lista av de olika rotationerna.
 
 ```python
 [ # en lista för biten
-    [ # ett element i listan = en av bitens rotationer av biten
+    [ # ett element i listan = en av bitens rotationer
         [' ', ' ', ' ', ' '],
         ['i', 'i', 'i', 'i'],
         [' ', ' ', ' ', ' '],
@@ -285,7 +339,7 @@ Varje bit sparas som en lista av de olika rotationerna.
 ]
 ```
 
-De olika bitarna och deras rotationer sparas som en lång lista.
+De olika bitarna och deras rotationer sparas som en enda lång lista.
 
 ```python
 # Lägg detta bland de globala variablerna, nästan högst upp
@@ -427,6 +481,194 @@ piece_structures = [ # lista med alla bitarna
 
 ```python
 import pgzrun
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+inert = []
+
+piece_structures = [  # lista med alla bitarna
+    [  # bit nr 1
+        [  # bit 1, rotation nr 1
+            [' ', ' ', ' ', ' '],
+            ['i', 'i', 'i', 'i'],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 1, rotation nr 2
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+        ],
+    ],
+    [  # nästa bit
+        [  # bit 2, rotation nr 1 -- den har bara en!
+            [' ', ' ', ' ', ' '],
+            [' ', 'o', 'o', ' '],
+            [' ', 'o', 'o', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [  # nästa bit
+        [  # bit 3, rotation nr 1
+            [' ', ' ', ' ', ' '],
+            ['j', 'j', 'j', ' '],
+            [' ', ' ', 'j', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 2
+            [' ', 'j', ' ', ' '],
+            [' ', 'j', ' ', ' '],
+            ['j', 'j', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 3
+            ['j', ' ', ' ', ' '],
+            ['j', 'j', 'j', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 4
+            [' ', 'j', 'j', ' '],
+            [' ', 'j', ' ', ' '],
+            [' ', 'j', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['l', 'l', 'l', ' '],
+            ['l', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', 'l', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', ' ', 'l', ' '],
+            ['l', 'l', 'l', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            ['l', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['t', 't', 't', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            [' ', 't', 't', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            ['t', 't', 't', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            ['t', 't', ' ', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            [' ', 's', 's', ' '],
+            ['s', 's', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            ['s', ' ', ' ', ' '],
+            ['s', 's', ' ', ' '],
+            [' ', 's', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['z', 'z', ' ', ' '],
+            [' ', 'z', 'z', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 'z', ' ', ' '],
+            ['z', 'z', ' ', ' '],
+            ['z', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+]
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            colors = {
+                ' ': (222, 222, 222),
+                'i': (120, 195, 239),
+                'j': (236, 231, 108),
+                'l': (124, 218, 193),
+                'o': (234, 177, 121),
+                's': (211, 136, 236),
+                't': (248, 147, 196),
+                'z': (169, 221, 118),
+            }
+            block = inert[y][x]
+            color = colors[block]
+            block_size = 20
+            block_draw_size = block_size - 1
+            screen.draw.filled_rect(
+                Rect(
+                    x * block_size, y * block_size,
+                    block_draw_size, block_draw_size
+                ),
+                color=color
+            )
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+# Tillfälligt
+inert[17][0] = 'i'
+inert[16][1] = 'j'
+inert[15][2] = 'l'
+inert[14][3] = 'o'
+inert[13][4] = 's'
+inert[12][5] = 't'
+inert[11][6] = 'z'
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
