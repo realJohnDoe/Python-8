@@ -402,6 +402,8 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 
 Den första rutan är mörkröd med en vit siffra.
 
+✏️ Uppdatera funktionen `draw()` och testkör.
+
 ```python
 def draw():
     screen.fill((0, 0, 0))
@@ -425,13 +427,79 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence  # nyrad
+    global current  # nyrad
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
+
+    if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
+        if key == keys.K_1:
+            number = 1
+        elif key == keys.K_2:
+            number = 2
+        elif key == keys.K_3:
+            number = 3
+        elif key == keys.K_4:
+            number = 4
+
+        if number == sequence[current]:
+            current += 1
+            if current == len(sequence):  # nyrad
+                current = 0  # nyrad
+                add_to_sequence()
+        else:
+            reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    square_size = 50  # nyrad
+
+    screen.draw.filled_rect(  # nyrad
+        Rect(0, 0, square_size, square_size),  # nyrad
+        color=(50, 0, 0)  # nyrad
+    )  # nyrad
+    screen.draw.text('1', (19, 18))  # nyrad
+
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
 
 ## Rita alla rutor
 Resten av rutorna kan vi rita på liknande sätt.
+
+✏️ Uppdatera funktionen `draw()` igen och testkör.
 
 ```python
 def draw():
@@ -473,15 +541,98 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence  # nyrad
+    global current  # nyrad
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
+
+    if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
+        if key == keys.K_1:
+            number = 1
+        elif key == keys.K_2:
+            number = 2
+        elif key == keys.K_3:
+            number = 3
+        elif key == keys.K_4:
+            number = 4
+
+        if number == sequence[current]:
+            current += 1
+            if current == len(sequence):  # nyrad
+                current = 0  # nyrad
+                add_to_sequence()
+        else:
+            reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    square_size = 50
+
+    screen.draw.filled_rect(
+        Rect(0, 0, square_size, square_size),
+        color=(50, 0, 0)
+    )
+    screen.draw.text('1', (19, 18))
+
+    # Lägg till nya rader
+    screen.draw.filled_rect(
+        Rect(square_size, 0, square_size, square_size),
+        color=(0, 50, 0)
+    )
+    screen.draw.text('2', (square_size + 21, 18))
+
+    screen.draw.filled_rect(
+        Rect(square_size * 2, 0, square_size, square_size),
+        color=(0, 0, 50)
+    )
+    screen.draw.text('3', (square_size * 2 + 21, 18))
+
+    screen.draw.filled_rect(
+        Rect(square_size * 3, 0, square_size, square_size),
+        color=(50, 50, 0)
+    )
+    screen.draw.text('4', (square_size * 3 + 21, 18))
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
 
 ## Förenkla koden
-Koden för att rita varje ruta är likadan. Vi flyttar den koden funktionen `draw_square()` som vi kan använda flera gånger.
+Koden för att rita varje ruta är likadan. 
+Vi flyttar den koden till funktionen `draw_square()` som vi kan använda flera gånger.
 
-✏️ Byt ut funktionen `draw()` så att den blir så här. Testkör!
+✏️ Uppdatera funktionen `draw()` så att den blir så här. Testkör!
 
 ```python
 def draw():
@@ -507,7 +658,77 @@ def draw():
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-import abc
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+sequence = [4, 3, 1, 2, 2, 3]  # Tillfälligt
+current = 0  # nyrad
+
+# Funktioner här nedanför
+
+
+def add_to_sequence():
+    sequence.append(random.randint(1, 4))
+
+
+def reset():  # nyrad
+    global sequence  # nyrad
+    global current  # nyrad
+
+    sequence = []  # nyrad
+    add_to_sequence()  # nyrad
+    current = 0  # nyrad
+
+
+def on_key_down(key):  # Pygame Zero anropar denna när skärmen behöver ritas om
+    global current  # För att vi ska kunna uppdatera variabeln current som är utanför funktionen
+
+    if key in (keys.K_1, keys.K_2, keys.K_3, keys.K_4):  # siffertangenterna 1, 2, 3, 4
+        if key == keys.K_1:
+            number = 1
+        elif key == keys.K_2:
+            number = 2
+        elif key == keys.K_3:
+            number = 3
+        elif key == keys.K_4:
+            number = 4
+
+        if number == sequence[current]:
+            current += 1
+            if current == len(sequence):  # nyrad
+                current = 0  # nyrad
+                add_to_sequence()
+        else:
+            reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    def draw_square(number, color):  # ändra
+        square_size = 50
+        screen.draw.filled_rect(
+            Rect(square_size * (number - 1), 0,
+                 square_size, square_size),  # ändra
+            color=color  # ändra
+        )
+        screen.draw.text(str(number), (square_size *
+                         (number - 1) + 21, 18))  # ändra
+
+    draw_square(1, (50, 0, 0))  # nyrad
+    draw_square(2, (0, 50, 0))  # nyrad
+    draw_square(3, (0, 0, 50))  # nyrad
+    draw_square(4, (50, 50, 0))  # nyrad
+    screen.draw.text(", ".join(map(str, sequence)), (20, 60))  # ändra
+    screen.draw.text(f"{current + 1}/{len(sequence)}", (20, 100))  # ändra
+    screen.draw.text(
+        f"sequence[current]: {sequence[current]}", (20, 140))  # ändra
+
+
+# Till slut kod för att starta vår app
+reset()
+pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ```    
 
 </details>
