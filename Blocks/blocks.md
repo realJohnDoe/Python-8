@@ -44,22 +44,23 @@ Alla olika typer av bitar lagras med sina roterade varianter.
 
 Den fallande biten lagras som 
 - ett tal som representerar vilken typ av bit det är,
-- ett tal som representerar vilken rotationsvariation den befinner sig i
+- ett tal som representerar vilken rotation den befinner sig i
 - och så X- och Y-koordinaten för biten på spelplanen.
 
-En ny bit skapas längst upp på skärmen, såvida den inte skulle överlappa ett orörligt block, i vilket fall spelet är över.
+En ny bit skapas längst upp på skärmen, om den inte skulle överlappa ett orörligt block, i vilket fall spelet är över.
 
-Spelaren kan flytta biten åt vänster och höger, såvida inte denna nya position skulle överlappa ett orörligt block eller vara utanför spelplanen.
+Spelaren kan flytta biten åt vänster och höger, om inte den nya positionen överlappar ett orörligt block eller är utanför spelplanen.
 
-Efter att en tid har gått flyttas biten nedåt, såvida inte denna nya position skulle överlappa ett orörligt block eller vara utanför spelplanen, i vilket fall den har kommit till vila.
+Efter en liten fördröjning flyttas biten nedåt. Om den nya positionen överlappar ett orörligt block eller är utanför spelplanen så landar biten.
 
-När en av rotationsknapparna trycks in ändrar biten sin rotationsvariation, såvida inte denna variation skulle överlappa ett orörligt block eller vara utanför spelplanen.
+När någon av rotationsknapparna trycks, ändrar biten sin rotation, om inte den rotationen överlappar ett orörligt block eller är utanför spelplanen.
 
-När släppknappen trycks in, flyttas biten ner tills nästa position skulle överlappa ett orörligt block eller vara utanför spelplanen, vid vilken punkt den har kommit till vila.
+När släppknappen trycks in, flyttas biten neråt så långt det går utan att den överlappar ett orörligt block är vara utanför spelplanen. Sen landar biten.
 
-När en bit kommer till vila, läggs bitarnas block till de orörliga blocken, och nästa bit skapas.
+När en bit landar, läggs bitens block till de orörliga blocken och nästa bit skapas.
 
-En sekvens av en av var och en av de sju bitarna i en slumpmässig ordning skapas, och nästa bit tas från denna sekvens. När alla bitar har tagits skapas en ny slumpmässig sekvens.
+En sekvens av en av var och en av de sju bitarna i en slumpmässig ordning skapas, och nästa bit tas från denna sekvens. 
+När alla bitar har tagits, skapas en ny slumpmässig ordning.
 
 # Kodning
 
@@ -72,24 +73,24 @@ Kod:XXXX
 
 ## Lagring av orörliga block
 
-Rutnätet för de orörliga blocken skapas och varje block sätts till ' ' (ett mellanslag), vilket representerar ett tomt block.
+Rutnätet för de orörliga blocken skapas och varje block sätts till ett mellanslag, `' '`. Det representerar ett tomt block.
 
-Bredden och höjden på rutnätet i block återanvänds från ritning av blocken, så de görs till variabler.
+Bredden och höjden på rutnätet i block återanvänds från ritning av blocken, så vi gör bredden och höjden till variabler.
 
 Kod:XXXX
 
 ## Sätt färgen på blocken
 
-När block ritas ställs färgen in baserat på vilken typ av block det är.
+När block ritas, ställs färgen in baserat på vilken typ av block det är.
 
-För att testa detta är vissa block i det orörliga nätet inställda på olika typer.
+För att kunna testa det, sätter vi en några block i det orörliga nätet till att ha olika typ.
 
 Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226006718-62e1013b-99f3-427b-b095-4cda85184e19.png)
 
 ## Lagring av bitarnas utseende
-Varje rotation av en biten är en 4x4-kvadrat av strängar.
+Varje rotation av en biten är en 4x4-kvadrat av tecken.
 
 ```python
 [
@@ -103,8 +104,8 @@ Varje rotation av en biten är en 4x4-kvadrat av strängar.
 Varje bit lagras som en lista av de olika rotationerna.
 
 ```python
-[
-    [
+[ # en lista
+    [ # ett element i listan = en rotation av biten
         [' ', ' ', ' ', ' '],
         ['i', 'i', 'i', 'i'],
         [' ', ' ', ' ', ' '],
@@ -119,52 +120,52 @@ Varje bit lagras som en lista av de olika rotationerna.
 ]
 ```
 
-Alla bitarna och deras rotationer sparas som en lista.
+Alla de olika bitarna och deras rotationer sparas som en lista.
 
 ```python
 piece_structures = [
-    [
-        [
+    [ # en lista av bitar
+        [ # bit 1, rotation nr 1
             [' ', ' ', ' ', ' '],
             ['i', 'i', 'i', 'i'],
             [' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' '],
         ],
-        [
+        [ # bit 1, rotation nr 2
             [' ', 'i', ' ', ' '],
             [' ', 'i', ' ', ' '],
             [' ', 'i', ' ', ' '],
             [' ', 'i', ' ', ' '],
         ],
     ],
-    [
-        [
+    [ # nästa bit
+        [ # bit 2, rotation nr 1 -- den har bara en!
             [' ', ' ', ' ', ' '],
             [' ', 'o', 'o', ' '],
             [' ', 'o', 'o', ' '],
             [' ', ' ', ' ', ' '],
         ],
     ],
-    [
-        [
+    [ # nästa bit
+        [ # bit 3, rotation nr 1
             [' ', ' ', ' ', ' '],
             ['j', 'j', 'j', ' '],
             [' ', ' ', 'j', ' '],
             [' ', ' ', ' ', ' '],
         ],
-        [
+        [ # bit 3, rotation nr 2
             [' ', 'j', ' ', ' '],
             [' ', 'j', ' ', ' '],
             ['j', 'j', ' ', ' '],
             [' ', ' ', ' ', ' '],
         ],
-        [
+        [ # bit 3, rotation nr 3
             ['j', ' ', ' ', ' '],
             ['j', 'j', 'j', ' '],
             [' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' '],
         ],
-        [
+        [ # bit 3, rotation nr 4
             [' ', 'j', 'j', ' '],
             [' ', 'j', ' ', ' '],
             [' ', 'j', ' ', ' '],
@@ -255,15 +256,17 @@ piece_structures = [
 ```
 
 
-## Lagra det aktuella blocket
+## Lagra biten som faller just nu
 
-Det för närvarande fallande blocket representeras av ett nummer som anger vilken typ det är (som kommer att användas för att indexera listan över bitstrukturer), och ett nummer som anger vilken rotation den har (som kommer att användas för att indexera listan över rotationer).
+Biten som faller just nu representeras av
+- dels ett tal som anger vilken typ av bit det är &ndash; vi behöver använda det för att indexera i listan över med olika bitar
+- dels ett tal som anger vilken rotation biten har &ndash; vi behöver det för att indexera i listan med rotationer.
 
 Kod:XXXX
 
 ## Rita blocket
 
-Biten ritas genom att slinga genom dess struktur och, om inte blocket är tomt, ritar du en fyrkant med en färg som bestäms av blocktypen.
+Biten ritas genom att loopa genom dess struktur och &ndash; om rutan är fylld &ndash; så ritar vi en fyrkant med den färg som bestäms av blocktypen.
 
 Kod:XXXX
 
@@ -272,19 +275,19 @@ Kod:XXXX
 
 ## Förenkla koden
 
-Koden för att rita ett orörligt block och rita ett block av den fallande biten är liknande, så en funktion skapas.
+Koden för att rita ett orörligt block och för att rita ett block av den fallande biten är samma. Därför gör vi en funktion för det.
 
 Kod:XXXX
 
 ## Rotation
-När x-tangenten trycks in, ökas bitens rotationsnummer med 1, genom att rotera biten medurs.
+När vi trycker på X, ökas bitens rotationsnummer med 1 och biten roteras medurs.
 
-Om rotationstalet är större än antalet rotationspositioner minus 1 sätts rotationstalet till 0 (dvs första rotationspositionen).
+>Om rotationstalet är större än antalet möjliga rotationer minus 1 sätts rotationstalet till 0. Vi går alltså tillbaks till bitens första rotation.
 
-På samma sätt, när z -tangenten trycks ned, minskas talet för styckerotation med 1, varvid stycket roteras moturs.
+På samma sätt när vi trycker på Z så minskas rotationstalet med 1 och biten roterar moturs.
 
-Om rotationstalet är mindre än 0, sätts rotationstalet till antalet rotationspositioner minus 1 (dvs. den sista rotationspositionen).
-
+>Om rotationstalet är mindre än 0, sätts rotationstalet till antalet rotationer minus 1, alltså bitens sista rotation.
+>
 Kod:XXXX
 
 ![image](https://user-images.githubusercontent.com/4598641/226011415-59b9b18c-2496-4af0-a39c-f854ef940d2e.png)
