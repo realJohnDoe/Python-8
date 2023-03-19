@@ -1395,15 +1395,29 @@ pgzrun.go()  # måste vara sista raden
 
 ## Rotation
 När vi trycker på X, ökas bitens rotationsnummer med 1 och biten roteras medurs.
->Om rotationstalet är större än antalet möjliga rotationer minus 1 sätts rotationstalet till 0. Vi går alltså tillbaks till bitens första rotation.
+>Om rotationstalet är större än antalet möjliga rotationer sätts rotationstalet till 0. Vi går alltså tillbaks till bitens första rotation.
 
 På samma sätt när vi trycker på Z så minskas rotationstalet med 1 och biten roterar moturs.
 >Om rotationstalet är mindre än 0, sätts rotationstalet till antalet rotationer minus 1, alltså bitens sista rotation.
 
 
-✏️ Uppdatera koden och testkör!
+✏️ Lägg till funktionen `on_key_down()` och testkör!
 
-Kod:XXXX
+```python
+def on_key_down(key):
+    global piece_rotation
+
+    if key == keys.X:
+        piece_rotation += 1
+        if piece_rotation >= len(piece_structures[piece_type]):
+            piece_rotation = 0
+
+    elif key == keys.Z:
+        piece_rotation -= 1
+        if piece_rotation < 0:
+            piece_rotation = len(piece_structures[piece_type]) - 1          
+```
+
 
 ![image](https://user-images.githubusercontent.com/4598641/226011415-59b9b18c-2496-4af0-a39c-f854ef940d2e.png)
 
@@ -1412,6 +1426,212 @@ Kod:XXXX
 
 ```python
 import pgzrun
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+
+inert = []
+
+piece_structures = [  # lista med alla bitarna
+    [  # bit nr 1
+        [  # bit 1, rotation nr 1
+            [' ', ' ', ' ', ' '],
+            ['i', 'i', 'i', 'i'],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 1, rotation nr 2
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+        ],
+    ],
+    [  # nästa bit
+        [  # bit 2, rotation nr 1 -- den har bara en!
+            [' ', ' ', ' ', ' '],
+            [' ', 'o', 'o', ' '],
+            [' ', 'o', 'o', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [  # nästa bit
+        [  # bit 3, rotation nr 1
+            [' ', ' ', ' ', ' '],
+            ['j', 'j', 'j', ' '],
+            [' ', ' ', 'j', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 2
+            [' ', 'j', ' ', ' '],
+            [' ', 'j', ' ', ' '],
+            ['j', 'j', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 3
+            ['j', ' ', ' ', ' '],
+            ['j', 'j', 'j', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 4
+            [' ', 'j', 'j', ' '],
+            [' ', 'j', ' ', ' '],
+            [' ', 'j', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['l', 'l', 'l', ' '],
+            ['l', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', 'l', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', ' ', 'l', ' '],
+            ['l', 'l', 'l', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            ['l', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['t', 't', 't', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            [' ', 't', 't', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            ['t', 't', 't', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            ['t', 't', ' ', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            [' ', 's', 's', ' '],
+            ['s', 's', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            ['s', ' ', ' ', ' '],
+            ['s', 's', ' ', ' '],
+            [' ', 's', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['z', 'z', ' ', ' '],
+            [' ', 'z', 'z', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 'z', ' ', ' '],
+            ['z', 'z', ' ', ' '],
+            ['z', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+]
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(4):
+        for x in range(4):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x, y)
+
+
+def on_key_down(key):
+    global piece_rotation
+
+    if key == keys.X:
+        piece_rotation += 1
+        if piece_rotation >= len(piece_structures[piece_type]):
+            piece_rotation = 0
+
+    elif key == keys.Z:
+        piece_rotation -= 1
+        if piece_rotation < 0:
+            piece_rotation = len(piece_structures[piece_type]) - 1
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -1420,10 +1640,37 @@ import pgzrun
 
 För att göra det lätt att testa, låter vi upp- och och neråtpil byta mellan olika bitar.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera funktionen `on_key_down()` och testkör! Fungerar upp- och neråtpil och tangenterna X och C som du tänkt?
 
-Kod:XXXX
+```python
+def on_key_down(key):
+    global piece_rotation, piece_type # uppdatera
 
+    if key == keys.X:
+        piece_rotation += 1
+        if piece_rotation >= len(piece_structures[piece_type]):
+            piece_rotation = 0
+
+    elif key == keys.Z:
+        piece_rotation -= 1
+        if piece_rotation < 0:
+            piece_rotation = len(piece_structures[piece_type]) - 1
+    # Resten är nya rader
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+```
+  
 ![image](https://user-images.githubusercontent.com/4598641/226011550-d53162ca-1eaf-4674-b2dc-71eefe2fed7d.png)
 
 <details>
@@ -1431,18 +1678,252 @@ Kod:XXXX
 
 ```python
 import pgzrun
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+
+inert = []
+
+piece_structures = [  # lista med alla bitarna
+    [  # bit nr 1
+        [  # bit 1, rotation nr 1
+            [' ', ' ', ' ', ' '],
+            ['i', 'i', 'i', 'i'],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 1, rotation nr 2
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+        ],
+    ],
+    [  # nästa bit
+        [  # bit 2, rotation nr 1 -- den har bara en!
+            [' ', ' ', ' ', ' '],
+            [' ', 'o', 'o', ' '],
+            [' ', 'o', 'o', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [  # nästa bit
+        [  # bit 3, rotation nr 1
+            [' ', ' ', ' ', ' '],
+            ['j', 'j', 'j', ' '],
+            [' ', ' ', 'j', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 2
+            [' ', 'j', ' ', ' '],
+            [' ', 'j', ' ', ' '],
+            ['j', 'j', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 3
+            ['j', ' ', ' ', ' '],
+            ['j', 'j', 'j', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 4
+            [' ', 'j', 'j', ' '],
+            [' ', 'j', ' ', ' '],
+            [' ', 'j', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['l', 'l', 'l', ' '],
+            ['l', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', 'l', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', ' ', 'l', ' '],
+            ['l', 'l', 'l', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            ['l', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['t', 't', 't', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            [' ', 't', 't', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            ['t', 't', 't', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            ['t', 't', ' ', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            [' ', 's', 's', ' '],
+            ['s', 's', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            ['s', ' ', ' ', ' '],
+            ['s', 's', ' ', ' '],
+            [' ', 's', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['z', 'z', ' ', ' '],
+            [' ', 'z', 'z', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 'z', ' ', ' '],
+            ['z', 'z', ' ', ' '],
+            ['z', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+]
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(4):
+        for x in range(4):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x, y)
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type
+
+    if key == keys.X:
+        piece_rotation += 1
+        if piece_rotation >= len(piece_structures[piece_type]):
+            piece_rotation = 0
+
+    elif key == keys.Z:
+        piece_rotation -= 1
+        if piece_rotation < 0:
+            piece_rotation = len(piece_structures[piece_type]) - 1
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Placera nästa bit
 
-Bitens position i spelplanen lagras och biten ritas på den positionen.
+Bitens position på spelplanen sparas och biten ritas på den positionen.
 
-✏️ Uppdatera koden och testkör!
+✏️ Lägg till de två globala variablerna och ändra en rad i `draw()`. Testkör sen med pil upp, pil ner, X och C.
 
-Kod:XXXX
+```python
+# Läggs bland de globala variablerna
+piece_x = 3 #nyrad
+piece_y = 0 #nyrad
 
+def draw():
+    # etc.
+
+    for y in range(4):
+        for x in range(4):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y) #ändrad
+```
+  
+  
 ![image](https://user-images.githubusercontent.com/4598641/226011946-ae6035af-d12b-4390-bfe8-2a1a3019655b.png)
 
 <details>
@@ -1450,6 +1931,228 @@ Kod:XXXX
 
 ```python
 import pgzrun
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+
+piece_structures = [  # lista med alla bitarna
+    [  # bit nr 1
+        [  # bit 1, rotation nr 1
+            [' ', ' ', ' ', ' '],
+            ['i', 'i', 'i', 'i'],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 1, rotation nr 2
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+            [' ', 'i', ' ', ' '],
+        ],
+    ],
+    [  # nästa bit
+        [  # bit 2, rotation nr 1 -- den har bara en!
+            [' ', ' ', ' ', ' '],
+            [' ', 'o', 'o', ' '],
+            [' ', 'o', 'o', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [  # nästa bit
+        [  # bit 3, rotation nr 1
+            [' ', ' ', ' ', ' '],
+            ['j', 'j', 'j', ' '],
+            [' ', ' ', 'j', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 2
+            [' ', 'j', ' ', ' '],
+            [' ', 'j', ' ', ' '],
+            ['j', 'j', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 3
+            ['j', ' ', ' ', ' '],
+            ['j', 'j', 'j', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [  # bit 3, rotation nr 4
+            [' ', 'j', 'j', ' '],
+            [' ', 'j', ' ', ' '],
+            [' ', 'j', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['l', 'l', 'l', ' '],
+            ['l', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', 'l', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', ' ', 'l', ' '],
+            ['l', 'l', 'l', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            ['l', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', 'l', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['t', 't', 't', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            [' ', 't', 't', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            ['t', 't', 't', ' '],
+            [' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 't', ' ', ' '],
+            ['t', 't', ' ', ' '],
+            [' ', 't', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            [' ', 's', 's', ' '],
+            ['s', 's', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            ['s', ' ', ' ', ' '],
+            ['s', 's', ' ', ' '],
+            [' ', 's', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+    [
+        [
+            [' ', ' ', ' ', ' '],
+            ['z', 'z', ' ', ' '],
+            [' ', 'z', 'z', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+        [
+            [' ', 'z', ' ', ' '],
+            ['z', 'z', ' ', ' '],
+            ['z', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' '],
+        ],
+    ],
+]
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(4):
+        for x in range(4):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type
+
+    if key == keys.X:
+        piece_rotation += 1
+        if piece_rotation >= len(piece_structures[piece_type]):
+            piece_rotation = 0
+
+    elif key == keys.Z:
+        piece_rotation -= 1
+        if piece_rotation < 0:
+            piece_rotation = len(piece_structures[piece_type]) - 1
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
