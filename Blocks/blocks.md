@@ -1491,7 +1491,7 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Fallande bit
-Timern används för att öka bitens Y-position var 0.5:e sekund.
+Timern används för att öka bitens Y-koordinat var 0.5:e sekund.
 
 ✏️ Uppdatera funktionen `update()` och testkör!
 
@@ -1631,11 +1631,11 @@ För att förhindra att biten hamnar till vänster eller höger om spelplanen n�
 kontrollerar vi vart och ett av dess block för att se om de är inom spelplanen innan biten flyttas eller roteras.
 
 Eftersom den här kontrollen kommer att göras på flera ställen, gör vi en funktion med den koden.
-Funktionen ska kontrollera bitens position och rotation och returnera True om biten kan röra sig eller rotera, annars False.
+Funktionen `can_piece_move` ska kontrollera bitens position och rotation och svara True om biten kan röra sig eller rotera, annars False.
 
-Till att börja med kommer denna funktion alltid att returnera True, så att vi alltid kan flytta och rotera medan vi testar.
+Till att börja med kommer funktionen alltid att returnera True, så att vi alltid kan flytta och rotera medan vi testar.
 
-Vi ändrar koden från omedelbart ställa in positioner/rotationer.
+Vi behöver ändra koden från att omedelbart uppdatera bitens position/rotation.
 Istället skapar vi variabler för de ändrade värdena.
 Om kontrollfunktionen returnerar True ställs den faktiska positionen/rotationen till de ändrade värdena, annars inte.
 
@@ -1823,7 +1823,7 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Kolla vänsterkanten
-Om något block inte är tomt och X-positionen är mindre än 0, returnerar funktionen `can_piece_move` False. 
+Om något block inte är tomt och X-koordinaten är mindre än 0, returnerar funktionen `can_piece_move` False. 
 Det är när blocket är utanför spelplanens vänstra sida.
 
 ✏️ Uppdatera funktionen och testkör! Blir det stopp när du trycker vänsterpil flera gånger?
@@ -1983,31 +1983,188 @@ pgzrun.go()  # måste vara sista raden
 ## Förenkla koden
 Storleken på varje bit i X- och Y-led återanvänds från att rita bitarna, så vi gör variabler för det.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera koden. Du ska lägga till två globala variabler och sen använda dem i `can_piece_move()` och `draw()`. Testkör sen att det fungerar lika bra som innan!
 
 ```python
-Kod:XXXX
-```
+# Lägg till bland globala variablerna
+piece_x_count = 4
+piece_y_count = 4
+
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count): # ändra från 4 till piece_y_count
+        for x in range(piece_x_count): # ändra från 4
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and test_x + x < 0:
+                return False
+
+    return True
+
+def draw():
+    # etc.
+
+    for y in range(piece_y_count): # ändra från 4
+        for x in range(piece_x_count): # ändra från 4
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
 import pgzrun
+import pieces
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+piece_x_count = 4
+piece_y_count = 4
+
+timer = 0
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and test_x + x < 0:
+                return False
+
+    return True
+
+
+def update(dt):
+    global timer, piece_y
+
+    timer += dt
+    if timer >= 0.5:
+        timer = 0
+        test_y = piece_y + 1
+        if can_piece_move(piece_x, test_y, piece_rotation):
+            piece_y = test_y
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x
+
+    if key == keys.X:
+        test_rotation = piece_rotation + 1
+        if test_rotation >= len(piece_structures[piece_type]):
+            test_rotation = 0
+        if can_piece_move(piece_x, piece_y, test_rotation):
+            piece_rotation = test_rotation
+
+    elif key == keys.Z:
+        test_rotation = piece_rotation - 1
+        if test_rotation < 0:
+            test_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        test_x = piece_x - 1
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.RIGHT:
+        test_x = piece_x + 1
+
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Kolla högerkanten
 
-Om något blocks X-position är större än eller lika med spelplanens bredd hamnar det utanför spelplanens högra sida.
-Då returnerar funktionen också False.
+Om blockets X-koordinat är större än eller lika med spelplanens bredd hamnar det utanför spelplanens högra sida.
+Då svarar funktionen `can_piece_move()` också False.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera `can_piece_move()` och testkör!
 
 ```python
-Kod:XXXX
-```
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            if (
+                piece_structures[piece_type][test_rotation][y][x] != ' ' and (
+                    (test_x + x) < 0
+                    or (test_x + x) >= grid_x_count
+                )
+            ):
+                return False
+
+    return True```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -2019,7 +2176,7 @@ import pgzrun
 </details>
 
 ## Kolla underkanten
-Om något blocks Y-position är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
+Om något blocks Y-koordinat är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
 Då returnerar funktionen också False.
 
 ✏️ Uppdatera koden och testkör!
@@ -2080,7 +2237,7 @@ import pgzrun
 
 ## Släppa ner en bit
 
-När C-tangenten trycks, ökas bitens Y-position med 1 så länge som biten får plats.
+När C-tangenten trycks, ökas bitens Y-koordinat med 1 så länge som biten får plats.
 
 ✏️ Uppdatera koden och testkör!
 
