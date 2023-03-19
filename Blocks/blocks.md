@@ -1658,9 +1658,7 @@ def update(dt):
             piece_y = test_y # nyrad
 
 def on_key_down(key):
-    global piece_rotation
-    global piece_type
-    global piece_x
+    global piece_rotation, piece_type, piece_x, piece_y
 
     if key == keys.X: # logiken är ändrad
         test_rotation = piece_rotation + 1 
@@ -2150,18 +2148,178 @@ pgzrun.go()  # måste vara sista raden
 Om blockets X-koordinat är större än eller lika med spelplanens bredd hamnar det utanför spelplanens högra sida.
 Då svarar funktionen `can_piece_move()` också False.
 
-✏️ Uppdatera `can_piece_move()` och testkör!
+- Tidigare ställde vi frågan om vi var utanför vänsterkanten, alltså `test_x + x < 0`.
+- Vi vill lägga till frågan om vi är utanför högerkanten, alltså att `test_x + x >= grid_x_count`.
+- Vi kan kombinera de två frågorna så här: `test_x + x in range(grid_x_count)` eftersom `range(grid_x_count)` ger oss en lista med talen från `0` till `grid_x_count - 1`.
+
+✏️ Uppdatera en rad i `can_piece_move()` och testkör! Ser det rätt ut när du flyttar med höger- och vänsterpil och roterar bitarna?
 
 ```python
 def can_piece_move(test_x, test_y, test_rotation):
     for y in range(piece_y_count):
         for x in range(piece_x_count):
-            if (
-                piece_structures[piece_type][test_rotation][y][x] != ' ' and (
-                    (test_x + x) < 0
-                    or (test_x + x) >= grid_x_count
-                )
-            ):
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and test_x + x not in range(grid_x_count): # uppdatera
+                return False
+
+    return True
+```
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+import pieces
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+piece_x_count = 4
+piece_y_count = 4
+
+timer = 0
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and test_x + x not in range(grid_x_count):
+                return False
+
+    return True
+
+
+def update(dt):
+    global timer, piece_y
+
+    timer += dt
+    if timer >= 0.5:
+        timer = 0
+        test_y = piece_y + 1
+        if can_piece_move(piece_x, test_y, piece_rotation):
+            piece_y = test_y
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x
+
+    if key == keys.X:
+        test_rotation = piece_rotation + 1
+        if test_rotation >= len(piece_structures[piece_type]):
+            test_rotation = 0
+        if can_piece_move(piece_x, piece_y, test_rotation):
+            piece_rotation = test_rotation
+
+    elif key == keys.Z:
+        test_rotation = piece_rotation - 1
+        if test_rotation < 0:
+            test_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        test_x = piece_x - 1
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.RIGHT:
+        test_x = piece_x + 1
+
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+pgzrun.go()  # måste vara sista raden
+```
+
+</details>
+
+## Kolla underkanten
+  
+Om något blocks Y-koordinat är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
+Då returnerar funktionen `can_piece_move()` också False.
+
+Vi delar upp frågan i två rader för att göra det lättare att läsa koden.
+- Den första delen, `if piece_structures[piece_type][test_rotation][y][x] != ' '`, frågar om biten har något block i rutan (y, x) med rotationen `test_rotation` 
+- Den andra delen, `test_x + x not in range(grid_x_count) or test_y + y >= grid_y_count` fråga om biten får plats i x-led (höger/vänster) och i underkant
+  
+✏️ Uppdatera `can_piece_move()` och testkör! Fungerar det med underkanten nu?
+
+```python
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and ( # ändrad
+                    test_x + x not in range(grid_x_count) # ändrad
+                    or test_y + y >= grid_y_count): #ändrad
                 return False
 
     return True```
@@ -2171,39 +2329,163 @@ def can_piece_move(test_x, test_y, test_rotation):
 
 ```python
 import pgzrun
-```
+import pieces
 
-</details>
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
 
-## Kolla underkanten
-Om något blocks Y-koordinat är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
-Då returnerar funktionen också False.
+grid_x_count = 10
+grid_y_count = 18
 
-✏️ Uppdatera koden och testkör!
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+piece_x_count = 4
+piece_y_count = 4
+
+timer = 0
+
+# Funktioner (def) här nedanför
 
 
-```python
-Kod:XXXX
-```
+def draw():
+    screen.fill((255, 255, 255))
 
-<details>
-    <summary>📝 Så här kan koden se ut nu</summary>
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
 
-```python
-import pgzrun
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and (
+                    test_x + x not in range(grid_x_count)
+                    or test_y + y >= grid_y_count):
+                return False
+
+    return True
+
+
+def update(dt):
+    global timer, piece_y
+
+    timer += dt
+    if timer >= 0.5:
+        timer = 0
+        test_y = piece_y + 1
+        if can_piece_move(piece_x, test_y, piece_rotation):
+            piece_y = test_y
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x
+
+    if key == keys.X:
+        test_rotation = piece_rotation + 1
+        if test_rotation >= len(piece_structures[piece_type]):
+            test_rotation = 0
+        if can_piece_move(piece_x, piece_y, test_rotation):
+            piece_rotation = test_rotation
+
+    elif key == keys.Z:
+        test_rotation = piece_rotation - 1
+        if test_rotation < 0:
+            test_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        test_x = piece_x - 1
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.RIGHT:
+        test_x = piece_x + 1
+
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Kolla orörliga block
-Om det finns ett orörligt block vid något blocks position, returnerar funktionen också False .
+Om det finns ett orörligt block någonstans där biten skulle hamna, returnerar funktionen `can_piece_move` också False.
 
 För att testa detta lägger vi in ett orörligt block.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera `can_piece_move()` och testkör! Stannar den fallande biten som den ska?
 
 ```python
-Kod:XXXX
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and (
+                    test_x + x not in range(grid_x_count)
+                    or test_y + y >= grid_y_count #ändrad
+                    or inert[test_y + y][test_x + x] != ' '): #nyrad
+                return False
+
+    return True
+
+# Lägg nästan längst ner, före `pgzrun.go()`
+# Tillfälligt
+inert[7][4] = 'z'  
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/226013942-ae181f75-53b1-4b7c-8156-ba22cf2ecc9c.png)
@@ -2213,17 +2495,163 @@ Kod:XXXX
 
 ```python
 import pgzrun
+import pieces
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+piece_x_count = 4
+piece_y_count = 4
+
+timer = 0
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and (
+                    test_x + x not in range(grid_x_count)
+                    or test_y + y >= grid_y_count
+                    or inert[test_y + y][test_x + x] != ' '):
+                return False
+
+    return True
+
+
+def update(dt):
+    global timer, piece_y
+
+    timer += dt
+    if timer >= 0.5:
+        timer = 0
+        test_y = piece_y + 1
+        if can_piece_move(piece_x, test_y, piece_rotation):
+            piece_y = test_y
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x
+
+    if key == keys.X:
+        test_rotation = piece_rotation + 1
+        if test_rotation >= len(piece_structures[piece_type]):
+            test_rotation = 0
+        if can_piece_move(piece_x, piece_y, test_rotation):
+            piece_rotation = test_rotation
+
+    elif key == keys.Z:
+        test_rotation = piece_rotation - 1
+        if test_rotation < 0:
+            test_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        test_x = piece_x - 1
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.RIGHT:
+        test_x = piece_x + 1
+
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+# Tillfälligt
+inert[7][4] = 'z'
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Förenkla koden
-De beräknade blockpositionerna som ska testas behövs på fler ställen. Vi sparar dem i variabler.
+De beräknade blockpositionerna som ska testas behövs på fler ställen. Vi sparar dem i variabler så blir koden lite enklare.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera `can_piece_move()` och testkör!
 
 ```python
-Kod:XXXX
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            test_block_x = test_x + x #nyrad
+            test_block_y = test_y + y #nyrad
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and (
+                    test_block_x not in range(grid_x_count) #ändrad
+                    or test_block_y >= grid_y_count #ändrad
+                    or inert[test_block_y][test_block_x] != ' '): #ändrad
+                return False
+
+    return True
 ```
 
 <details>
@@ -2231,18 +2659,159 @@ Kod:XXXX
 
 ```python
 import pgzrun
+import pieces
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+piece_x_count = 4
+piece_y_count = 4
+
+timer = 0
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            test_block_x = test_x + x
+            test_block_y = test_y + y
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and (
+                    test_block_x not in range(grid_x_count)
+                    or test_block_y >= grid_y_count
+                    or inert[test_block_y][test_block_x] != ' '):
+                return False
+
+    return True
+
+
+def update(dt):
+    global timer, piece_y
+
+    timer += dt
+    if timer >= 0.5:
+        timer = 0
+        test_y = piece_y + 1
+        if can_piece_move(piece_x, test_y, piece_rotation):
+            piece_y = test_y
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x
+
+    if key == keys.X:
+        test_rotation = piece_rotation + 1
+        if test_rotation >= len(piece_structures[piece_type]):
+            test_rotation = 0
+        if can_piece_move(piece_x, piece_y, test_rotation):
+            piece_rotation = test_rotation
+
+    elif key == keys.Z:
+        test_rotation = piece_rotation - 1
+        if test_rotation < 0:
+            test_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        test_x = piece_x - 1
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.RIGHT:
+        test_x = piece_x + 1
+
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+# Tillfälligt
+inert[7][4] = 'z'
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Släppa ner en bit
 
-När C-tangenten trycks, ökas bitens Y-koordinat med 1 så länge som biten får plats.
+När C-tangenten trycks, ska bitens Y-koordinat öka med 1 så länge som biten får plats.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera koden i `on_key_down()` och testkör!
 
 ```python
-Kod:XXXX
+def on_key_down():
+# Lägg till raderna på lämpligt ställe
+    elif key == keys.C: #nyrad
+        while can_piece_move(piece_x, piece_y + 1, piece_rotation): #nyrad
+            piece_y += 1 #nyrad
 ```
 
 <details>
@@ -2256,7 +2825,7 @@ import pgzrun
 
 ## Återställa biten
 
-Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position och rotation, och sin ursprungliga typ. 
+Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position, rotation och sin ursprungliga typ. 
 Vi ska ändra det sen.
 
 ✏️ Uppdatera koden och testkör!
