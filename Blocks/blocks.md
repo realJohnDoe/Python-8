@@ -1,4 +1,4 @@
-# Blocks
+# Blocks ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
 ![image](https://user-images.githubusercontent.com/4598641/226001268-afea64f1-d51c-48e0-b4b8-0bff27a3e893.png)
