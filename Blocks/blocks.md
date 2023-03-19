@@ -1495,7 +1495,9 @@ Timern används för att öka bitens Y-position var 0.5:e sekund.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/226012579-0a5bce97-00a6-4f54-ba96-95cc123f9a4c.png)
 
@@ -1524,7 +1526,9 @@ Om kontrollfunktionen returnerar True ställs den faktiska positionen/rotationen
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1540,7 +1544,9 @@ Om något block inte är tomt och X-positionen är mindre än 0, returnerar funk
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1556,7 +1562,9 @@ Storleken på varje bit i X- och Y-led återanvänds från att rita bitarna, så
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1574,7 +1582,9 @@ Då returnerar funktionen också False.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1592,7 +1602,9 @@ Då returnerar funktionen också False.
 ✏️ Uppdatera koden och testkör!
 
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1610,7 +1622,9 @@ För att testa detta lägger vi in ett orörligt block.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/226013942-ae181f75-53b1-4b7c-8156-ba22cf2ecc9c.png)
 
@@ -1628,7 +1642,9 @@ De beräknade blockpositionerna som ska testas behövs på fler ställen. Vi spa
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1645,7 +1661,9 @@ När C-tangenten trycks, ökas bitens Y-position med 1 så länge som biten får
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1663,7 +1681,9 @@ Vi ska ändra det sen.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1680,7 +1700,9 @@ Biten sätts till sitt ursprungliga tillstånd på två ställen. Vi gör en fun
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1703,7 +1725,9 @@ Slumpmodulen importeras vi så att vi kan använda `random.shuffle`.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 ```python
 [3, 2, 4, 1, 0, 5, 6]
@@ -1725,7 +1749,9 @@ När listan med blocknummer är tom skapas en ny sådan lista.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1743,7 +1769,9 @@ Bitens block gås igenom och om ett block inte är tomt, sätter vi det orörlig
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1762,7 +1790,9 @@ Timergränsen återanvänds, så vi gör den till en variabel.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1780,7 +1810,9 @@ För att göra det lättare att testa, skrivs de fullständiga radnumren ut just
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1801,7 +1833,9 @@ Den översta raden kommer då att vara helt tom.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1821,7 +1855,9 @@ Den anropas innan spelet börjar och när spelet är över.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1837,7 +1873,9 @@ Spelplanen ritas 2 block från vänster på skärmen och 5 block från toppen av
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/226016663-cb1d5333-1bd0-4943-91e7-8d22d195f2ef.png)
 
@@ -1857,7 +1895,9 @@ Den är förskjuten fem rutor från vänster och en ruta uppifrån.
 
 ✏️ Uppdatera koden och testkör!
 
+```python
 Kod:XXXX
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/226016912-b2e1d0a6-fbf5-41b8-b808-9fdacaea6fb0.png)
 
