@@ -1205,10 +1205,35 @@ pgzrun.go()  # måste vara sista raden
 
 Vänster- och högerpilarna minskar eller ökar bitens X-koordinat med 1.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera `on_key_down()` med regler för `keys.LEFT` och `keys.RIGHT` och testkör! Flyttar sig biten med höger- o vänsterpil?
 
-Kod:XXXX
+```python
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x
 
+    if key == keys.X:
+        piece_rotation += 1
+        if piece_rotation >= len(piece_structures[piece_type]):
+            piece_rotation = 0
+
+    elif key == keys.Z:
+        piece_rotation -= 1
+        if piece_rotation < 0:
+            piece_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT: #nyrad 
+        piece_x -= 1 #nyrad
+
+    elif key == keys.RIGHT: #nyrad
+        piece_x += 1 #nyrad
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+  ```
 ![image](https://user-images.githubusercontent.com/4598641/226012210-eff3bfe9-dcb6-4579-be14-4eb21ec43338.png)
 
 <details>
@@ -1216,6 +1241,104 @@ Kod:XXXX
 
 ```python
 import pgzrun
+import pieces
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(4):
+        for x in range(4):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x
+
+    if key == keys.X:
+        piece_rotation += 1
+        if piece_rotation >= len(piece_structures[piece_type]):
+            piece_rotation = 0
+
+    elif key == keys.Z:
+        piece_rotation -= 1
+        if piece_rotation < 0:
+            piece_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        piece_x -= 1
+
+    elif key == keys.RIGHT:
+        piece_x += 1
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -1231,15 +1354,138 @@ När timern har passerat 0.5, återställs den till 0.
 
 För att se hur det fungerar skriver vi just nu ut 'tick' ut varje gång biten faller.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera koden med den globala variabeln `timer`. Lägg till funktionen `update` och testkör sen! Ser du utskriften i terminalfönstret med text?
 
-Kod:XXXX
+```python
+# Lägg till ny global variabel
+timer = 0
+
+# Längre ner vid funktionerna
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.5:
+        timer = 0
+        # Temporary
+        print('tick')
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
 import pgzrun
+import pieces
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+
+timer = 0
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(4):
+        for x in range(4):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.5:
+        timer = 0
+        # Temporary
+        print('tick')
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x
+
+    if key == keys.X:
+        piece_rotation += 1
+        if piece_rotation >= len(piece_structures[piece_type]):
+            piece_rotation = 0
+
+    elif key == keys.Z:
+        piece_rotation -= 1
+        if piece_rotation < 0:
+            piece_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        piece_x -= 1
+
+    elif key == keys.RIGHT:
+        piece_x += 1
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
