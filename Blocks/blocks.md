@@ -2003,8 +2003,9 @@ def draw():
         for x in range(piece_x_count): # ändra från 4
             block = piece_structures[piece_type][piece_rotation][y][x]
             if block != ' ':
-                draw_block(block, x + piece_x, y + piece_y)```
-
+                draw_block(block, x + piece_x, y + piece_y)
+```                                                                                           
+                                                                                           
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
