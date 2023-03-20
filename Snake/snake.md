@@ -1,5 +1,5 @@
 # Snake ⭐⭐⭐
-En handledning för Python och Pygame Zero 1.2
+## En handledning för Python och Pygame Zero 1.2
 
 ![image](https://user-images.githubusercontent.com/4598641/226439115-c9800ff9-c916-406c-9efb-39407658988a.png)
 
