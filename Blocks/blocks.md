@@ -4006,8 +4006,6 @@ def on_key_down(key):
         while can_piece_move(piece_x, piece_y + 1, piece_rotation):
             piece_y += 1
             timer = timer_limit # uppdatera
-
-Kod:XXXX
 ```
 
 <details>
