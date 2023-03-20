@@ -29,19 +29,14 @@ n	Nästa nivå<br>
 sid	Tidigare nivå<br>
 
 # Översikt
-De olika tillstånden en cell kan vara i representeras av följande strängar:
+De olika tillstånden en ruta kan vara i representeras av följande strängar:
 
-'@':	Spelare
-
-'+':	Spelare på lagring
-
-'$':	Låda
-
-'*':	Box på förvaring
-
-'.':	Lagring
-
-'#':	Vägg
+**@**	Spelare<br>
+**+**	Spelare på lagring<br>
+**$**	Låda<br>
+__*__	Box på förvaring<br>
+**.**	Lagring<br>
+**#**	Vägg
 
 Varje spelnivå (level) lagras som ett rutnät av dessa strängar.
 
