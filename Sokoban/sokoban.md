@@ -23,22 +23,193 @@ Lagring<br>
 Vägg
 
 ## Kontroller
-Piltangenter	Flytta
-r	Återställ nivån
-n	Nästa nivå
-sid	Tidigare nivå
+Piltangenter	Flytta<br>
+r	Återställ nivån<br>
+n	Nästa nivå<br>
+sid	Tidigare nivå<br>
 
 # Översikt
 De olika tillstånden en cell kan vara i representeras av följande strängar:
 
-'@'	Spelare
-'+'	Spelare på lagring
-'$'	Låda
-'*'	Box på förvaring
-'.'	Lagring
-'#'	Vägg
+'@':	Spelare
+
+'+':	Spelare på lagring
+
+'$':	Låda
+
+'*':	Box på förvaring
+
+'.':	Lagring
+
+'#':	Vägg
 
 Varje spelnivå (level) lagras som ett rutnät av dessa strängar.
+
+![image](https://user-images.githubusercontent.com/4598641/226441339-fc46c4d7-6fd0-414c-9829-4755286aa054.png)
+
+
+När en piltangent trycks in, slingras rutnätet för att hitta var spelaren är.
+
+Om positionen på rutnätet intill spelaren i pilens riktning är flyttbar (dvs. tom eller en lagringsplats), ändras rutnätets värden för att återspegla den nya spelarpositionen.
+
+![image](https://user-images.githubusercontent.com/4598641/226441412-0d311596-2d1f-4e54-bf51-e163588f9e16.png)
+
+Om positionen intill spelaren är en box och positionen utanför boxen är flyttbar, ändras rutnätet för att återspegla den nya spelaren och nya boxpositioner.
+
+![image](https://user-images.githubusercontent.com/4598641/226441447-3953051d-e11b-4f3c-8f92-5589f177cd2d.png)
+
+Om det inte finns några lådor kvar som inte finns på lagringsplatser är nivån klar.
+
+
+# Kodning
+## Rita en nivå
+Varje nivå lagras som ett rutnät av strängar. 
+För närvarande lagras en enstaka nivå och en kvadrat ritas för varje cell som inte är ett mellanslag (dvs. tom).
+
+![image](https://user-images.githubusercontent.com/4598641/226441552-531f43b9-788f-4e53-9f34-84ab40932038.png)
+
+## Rita celltyper
+Cellens sträng ritas ovanpå cellen.
+
+![image](https://user-images.githubusercontent.com/4598641/226441595-3f2259b1-970d-46d2-98f1-b1ba305e126b.png)
+
+## Ställa in färger
+Bakgrundsfärgen ändras och färgen på varje cell ställs in baserat på dess typ.
+
+![image](https://user-images.githubusercontent.com/4598641/226441696-30c32370-c672-422b-9a3c-4f8851498f74.png)
+
+## Namnge celltyper
+Så vi behöver inte komma ihåg vilken sträng som refererar till vilken celltyp, celltypssträngarna lagras i variabler.
+
+## Hitta spelarcell
+Det första steget i att flytta spelaren är att hitta vilken cellposition de befinner sig på.
+
+Cellerna i nivån loopas igenom, och om celltypen är en spelare eller en spelare på lagring, så skrivs spelarens position ut för närvarande.
+
+```
+4 4
+```
+
+## Hitta celltyp i riktning mot tangenten som trycks ned
+Celltypen för spelarens nuvarande position och celltypen för den intilliggande positionen i riktningen för den nedtryckta piltangenten lagras i variabler och skrivs för närvarande ut.
+
+```python
+current = level[4][4] (@)
+adjacent = level[3][4] ( )
+
+current = level[4][4] (@)
+adjacent = level[4][5] (#)
+
+current = level[4][4] (@)
+adjacent = level[5][4] ($)
+
+current = level[4][4] (@)
+adjacent = level[4][3] ($)
+```
+
+## Skapar testnivå
+En testnivå är gjord för att testa spelarens rörelse.
+
+![image](https://user-images.githubusercontent.com/4598641/226441985-25fde8b7-f083-443e-bc3c-3e0082023c45.png)
+
+
+## Flyttar spelaren till tom plats
+Om värdet på spelarens nuvarande position är spelare (dvs. inte player_on_storage ) och den intilliggande cellen är tom , så blir spelarens position tom och den intilliggande positionen blir spelare .
+
+![image](https://user-images.githubusercontent.com/4598641/226442037-607ab9cd-4a59-47de-a13e-6ea0b696a3da.png)
+
+## Flytta spelaren till lagring
+Om den intilliggande positionen är lagring , blir den nya intilliggande positionen player_on_storage .
+
+För närvarande kan spelaren gå vidare till lagring, men inte utanför lagring.
+
+![image](https://user-images.githubusercontent.com/4598641/226442060-dddc88af-c52b-4d75-bafc-d202d9069ae1.png)
+
+## Förenkla kod
+Den nya intilliggande positionen (antingen player eller player_on_storage ) ställs in baserat på typen av intilliggande , så en ordlista skapas som returnerar nästa intilliggande celltyp när den indexeras av den aktuella intilliggande celltypen.
+
+Den används också för att kontrollera om spelaren kan flytta till den intilliggande positionen genom att kontrollera om den har en nyckel med värdet intilliggande .
+
+## Flytta spelare från lagring
+Om spelaren är på lagring är spelarens nuvarande position inställd på lagring .
+
+![image](https://user-images.githubusercontent.com/4598641/226442123-828097c9-b89f-449a-9de0-e83d8a774464.png)
+
+## Förenkla kod
+En ordbok skapas som returnerar nästa celltyp för spelarens tidigare position när den indexeras av den aktuella spelarens celltyp.
+
+## Trycker på boxen till tom plats
+Cellen bortom den intilliggande cellen lagras i en variabel.
+
+player_y + dy + dy kontrolleras för att se om det är större än eller lika med 0 och mindre än len ( level ) , dvs det är inom nivån höjdmässigt, och player_x + dx + dx kontrolleras för att se om det är större än eller lika med 0 och mindre än len ( nivå [ player_y + dy + dy ] ) , dvs det är inom nivån breddmässigt.
+
+(Den intilliggande positionen är inte markerad på samma sätt eftersom det alltid finns en kant av väggar runt varje nivå, så player_y + dy eller player_x + dx kommer aldrig att vara utanför nivån.)
+
+Om den intilliggande cellen är en ruta och den bortom cellen är tom, är den intilliggande positionen inställd på spelare och positionen bortom är satt till box .
+
+![image](https://user-images.githubusercontent.com/4598641/226442221-e7c86311-2b78-4175-94f7-29befecbb32e.png)
+
+## Skjuta på lådan till förvaringen
+Om den bortomstående positionen är lagring , så ställs bortom positionen till box_on_storage .
+
+
+![image](https://user-images.githubusercontent.com/4598641/226442270-45099ac7-095b-4291-a2e4-344aa34e1862.png)
+
+
+## Förenkla kod
+En ordbok skapas som returnerar nästa celltyp när den indexeras av den aktuella celltypen.
+
+## Trycklåda på förvaring
+Om den intilliggande cellen är en ruta på lagring, så sätts den intilliggande positionen till box_on_storage .
+
+![image](https://user-images.githubusercontent.com/4598641/226442358-30a184b9-f44a-4b1f-b418-b73c8b0cd8b9.png)
+
+## Förenkla koden
+En ordlista skapas som returnerar nästa intilliggande celltyp när en ruta trycks när den indexeras av den aktuella intilliggande celltypen.
+
+## Laddar nivå från nivålistan
+Nivåerna lagras i en lista.
+
+Numret på den aktuella nivån lagras också.
+
+Den aktuella nivån kopieras från listan som innehåller alla nivåer.
+
+Kopieringsmodulen importeras så att copy.deepcopy kan användas .
+
+![image](https://user-images.githubusercontent.com/4598641/226442656-f303feef-223f-4342-a498-17eb88ffb112.png)
+
+## Återställ nivå
+När r -tangenten trycks ned återställs nivån.
+
+Koden för att kopiera den aktuella nivån återanvänds, så en funktion görs.
+
+## Nästa och föregående nivå
+När n- tangenten trycks in laddas nästa nivå och när p -tangenten trycks in laddas föregående nivå.
+
+
+## Slå in nästa och föregående nivå
+Om nästa nivå är efter den sista nivån laddas den första nivån.
+
+Om den föregående nivån är före den första nivån laddas den sista nivån.
+
+
+## Gå till nästa nivå när du är klar
+Efter att spelaren har flyttat, går alla celler i nivån igenom, och om ingen av cellerna är lådor (dvs. alla lådor är lagrade), är nivån klar och nästa nivå laddas.
+
+## Fler nivåer
+
+Kod: XXXX
+
+
+
+
+
+
+
+
+
+
+
 
 
 
