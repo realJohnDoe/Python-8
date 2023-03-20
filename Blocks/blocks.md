@@ -3362,8 +3362,25 @@ Slumpmodulen importeras vi så att vi kan använda `random.shuffle`.
 ✏️ Uppdatera koden och testkör!
 
 ```python
-Kod:XXXX
-```
+import random # lägg till högt upp
+
+def new_sequence(): # lägg till bland funktionerna
+    global sequence
+
+    sequence = list(range(len(piece_structures)))
+    random.shuffle(sequence)
+
+def on_key_down(key):
+    # etc.
+
+    # Tillfälligt
+    elif key == keys.S: # nyrad
+        new_sequence() # nyrad
+        print(sequence) # nyrad
+
+# Lägg till detta nästan längst ner, t.ex. under `new_piece()`
+new_sequence()
+``` 
 
 ```python
 [3, 2, 4, 1, 0, 5, 6]
@@ -3374,19 +3391,198 @@ Kod:XXXX
 
 ```python
 import pgzrun
+import pieces
+import random
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+piece_x_count = 4
+piece_y_count = 4
+
+timer = 0
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            test_block_x = test_x + x
+            test_block_y = test_y + y
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and (
+                    test_block_x not in range(grid_x_count)
+                    or test_block_y >= grid_y_count
+                    or inert[test_block_y][test_block_x] != ' '):
+                return False
+
+    return True
+
+
+def new_piece():
+    global piece_x, piece_y, piece_type, piece_rotation
+
+    piece_x = 3
+    piece_y = 0
+    piece_type = 0
+    piece_rotation = 0
+
+
+def new_sequence():
+    global sequence
+
+    sequence = list(range(len(piece_structures)))
+    random.shuffle(sequence)
+
+
+def update(dt):
+    global timer, piece_y
+
+    timer += dt
+    if timer >= 0.5:
+        timer = 0
+        test_y = piece_y + 1
+        if can_piece_move(piece_x, test_y, piece_rotation):
+            piece_y = test_y
+        else:
+            new_piece()
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x, piece_y
+
+    if key == keys.X:
+        test_rotation = piece_rotation + 1
+        if test_rotation >= len(piece_structures[piece_type]):
+            test_rotation = 0
+        if can_piece_move(piece_x, piece_y, test_rotation):
+            piece_rotation = test_rotation
+
+    elif key == keys.Z:
+        test_rotation = piece_rotation - 1
+        if test_rotation < 0:
+            test_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        test_x = piece_x - 1
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.RIGHT:
+        test_x = piece_x + 1
+
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.C:  # nyrad
+        while can_piece_move(piece_x, piece_y + 1, piece_rotation):  # nyrad
+            piece_y += 1  # nyrad
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.S:
+        new_sequence()
+        print(sequence)
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+new_piece()
+new_sequence()
+
+# Tillfälligt
+inert[7][4] = 'z'
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Nästa bit från listan
-När en ny bit skapas tar den bort det sista talet från listan och använder det för att bestämma typen av bit.
+När en ny bit behöver skapas tar vi bort det sista talet från listan och använder det för att bestämma typen av bit.
 
 När listan med blocknummer är tom skapas en ny sådan lista.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera koden i `new_piece()` och testkör!
 
 ```python
-Kod:XXXX
+def new_piece():
+    global piece_x
+    global piece_y
+    global piece_type
+    global piece_rotation
+
+    piece_x = 3
+    piece_y = 0
+    piece_type = sequence.pop() # nyrad
+    if len(sequence) == 0: # nyrad
+        new_sequence() # nyrad
+    piece_rotation = 0
 ```
 
 <details>
