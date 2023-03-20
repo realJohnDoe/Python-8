@@ -125,7 +125,7 @@ För närvarande kan spelaren gå vidare till lagring, men inte utanför lagring
 
 ![image](https://user-images.githubusercontent.com/4598641/226442060-dddc88af-c52b-4d75-bafc-d202d9069ae1.png)
 
-## Förenkla kod
+## Förenkla koden
 Den nya intilliggande positionen (antingen player eller player_on_storage ) ställs in baserat på typen av intilliggande , så en ordlista skapas som returnerar nästa intilliggande celltyp när den indexeras av den aktuella intilliggande celltypen.
 
 Den används också för att kontrollera om spelaren kan flytta till den intilliggande positionen genom att kontrollera om den har en nyckel med värdet intilliggande .
@@ -135,7 +135,7 @@ Om spelaren är på lagring är spelarens nuvarande position inställd på lagri
 
 ![image](https://user-images.githubusercontent.com/4598641/226442123-828097c9-b89f-449a-9de0-e83d8a774464.png)
 
-## Förenkla kod
+## Förenkla koden
 En ordbok skapas som returnerar nästa celltyp för spelarens tidigare position när den indexeras av den aktuella spelarens celltyp.
 
 ## Trycker på boxen till tom plats
@@ -156,7 +156,7 @@ Om den bortomstående positionen är lagring , så ställs bortom positionen til
 ![image](https://user-images.githubusercontent.com/4598641/226442270-45099ac7-095b-4291-a2e4-344aa34e1862.png)
 
 
-## Förenkla kod
+## Förenkla koden
 En ordbok skapas som returnerar nästa celltyp när den indexeras av den aktuella celltypen.
 
 ## Trycklåda på förvaring
