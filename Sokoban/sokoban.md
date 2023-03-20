@@ -23,10 +23,10 @@ Lagring<br>
 Vägg
 
 ## Kontroller
-Piltangenter	Flytta<br>
-r	Återställ nivån<br>
-n	Nästa nivå<br>
-sid	Tidigare nivå<br>
+**Piltangenter**	Flytta<br>
+**r**	Återställ nivån<br>
+**n**	Nästa nivå<br>
+**p**	Tidigare nivå<br>
 
 # Översikt
 De olika tillstånden en ruta kan vara i representeras av följande strängar:
