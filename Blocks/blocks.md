@@ -3792,7 +3792,8 @@ def update(dt):
                 for x in range(piece_x_count):
                     block = piece_structures[piece_type][piece_rotation][y][x]
                     if block != ' ':
-                        inert[piece_y + y][piece_x + x] = block```
+                        inert[piece_y + y][piece_x + x] = block
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
