@@ -3767,7 +3767,7 @@ pgzrun.go()  # måste vara sista raden
 
 </details>
 
-## Lägg till orörliga block
+## Lägg bitens block till de orörliga blocken
   
 När en bit har landat läggs bitens block till de orörliga blocken.
 
@@ -3793,6 +3793,7 @@ def update(dt):
                     block = piece_structures[piece_type][piece_rotation][y][x]
                     if block != ' ':
                         inert[piece_y + y][piece_x + x] = block
+            new_piece()
 ```
 
 <details>
@@ -3912,6 +3913,7 @@ def update(dt):
                     block = piece_structures[piece_type][piece_rotation][y][x]
                     if block != ' ':
                         inert[piece_y + y][piece_x + x] = block
+            new_piece()
 
 
 def on_key_down(key):
@@ -4127,6 +4129,7 @@ def update(dt):
                     block = piece_structures[piece_type][piece_rotation][y][x]
                     if block != ' ':
                         inert[piece_y + y][piece_x + x] = block
+            new_piece()
 
 
 def on_key_down(key):
@@ -4198,14 +4201,44 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Hitta fyllda rader
-Varje rad av de orörliga blocken loopas igenom. Om ingen av kolumnerna i raden är ett tomt block så är raden fylld.
+ 
+Varje rad med orörliga blocke loopas igenom. 
+Om ingen av kolumnerna i raden är ett tomt block så är raden fylld.
 
 För att göra det lättare att testa, skrivs de fullständiga radnumren ut just nu.
 
-✏️ Uppdatera koden och testkör!
+✏️ Lägg till i funktionen `update()` och testkör!
 
 ```python
-Kod:XXXX
+def update(dt):
+    global timer, piece_y
+
+    timer += dt
+    if timer >= timer_limit:
+        timer = 0
+        test_y = piece_y + 1
+        if can_piece_move(piece_x, test_y, piece_rotation):
+            piece_y = test_y
+        else:
+            # Lägg till biten bland de orörliga blocken
+            for y in range(piece_y_count):
+                for x in range(piece_x_count):
+                    block = piece_structures[piece_type][piece_rotation][y][x]
+                    if block != ' ':
+                        inert[piece_y + y][piece_x + x] = block
+            # Hitta fyllda rader # nyrad
+            for y in range(grid_y_count): # nyrad
+                complete = True  # nyrad
+                for x in range(grid_x_count):  # nyrad
+                    if inert[y][x] == ' ':  # nyrad
+                        complete = False # nyrad
+                        break # nyrad
+
+                if complete: # nyrad
+                    # Tillfälligt  # nyrad
+                    print(f"Complete row: {y}") # nyrad
+
+            new_piece()
 ```
 
 <details>
@@ -4213,6 +4246,198 @@ Kod:XXXX
 
 ```python
 import pgzrun
+import pieces
+import random
+
+# Globala variabler här nedanför
+WIDTH = 20 * 14
+HEIGHT = 20 * 25
+
+grid_x_count = 10
+grid_y_count = 18
+
+piece_type = 0
+piece_rotation = 0
+piece_x = 3
+piece_y = 0
+
+inert = []
+piece_structures = pieces.get_piece_structures()
+piece_x_count = 4
+piece_y_count = 4
+
+sequence = []
+
+timer = 0
+timer_limit = 0.5
+
+# Funktioner (def) här nedanför
+
+
+def draw():
+    screen.fill((255, 255, 255))
+
+    def draw_block(block, x, y):
+        colors = {
+            ' ': (222, 222, 222),
+            'i': (120, 195, 239),
+            'j': (236, 231, 108),
+            'l': (124, 218, 193),
+            'o': (234, 177, 121),
+            's': (211, 136, 236),
+            't': (248, 147, 196),
+            'z': (169, 221, 118),
+        }
+        color = colors[block]
+
+        block_size = 20
+        block_draw_size = block_size - 1
+        screen.draw.filled_rect(
+            Rect(
+                x * block_size, y * block_size,
+                block_draw_size, block_draw_size
+            ),
+            color=color
+        )
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            draw_block(inert[y][x], x, y)
+
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            block = piece_structures[piece_type][piece_rotation][y][x]
+            if block != ' ':
+                draw_block(block, x + piece_x, y + piece_y)
+
+
+def can_piece_move(test_x, test_y, test_rotation):
+    for y in range(piece_y_count):
+        for x in range(piece_x_count):
+            test_block_x = test_x + x
+            test_block_y = test_y + y
+            if piece_structures[piece_type][test_rotation][y][x] != ' ' and (
+                    test_block_x not in range(grid_x_count)
+                    or test_block_y >= grid_y_count
+                    or inert[test_block_y][test_block_x] != ' '):
+                return False
+
+    return True
+
+
+def new_sequence():
+    global sequence
+
+    sequence = list(range(len(piece_structures)))
+    random.shuffle(sequence)
+
+
+def new_piece():
+    global piece_x, piece_y, piece_type, piece_rotation
+
+    piece_x = 3
+    piece_y = 0
+    piece_type = sequence.pop()
+    if len(sequence) == 0:
+        new_sequence()
+    piece_rotation = 0
+
+
+def update(dt):
+    global timer, piece_y
+
+    timer += dt
+    if timer >= timer_limit:
+        timer = 0
+        test_y = piece_y + 1
+        if can_piece_move(piece_x, test_y, piece_rotation):
+            piece_y = test_y
+        else:
+            # Lägg till biten bland de orörliga blocken
+            for y in range(piece_y_count):
+                for x in range(piece_x_count):
+                    block = piece_structures[piece_type][piece_rotation][y][x]
+                    if block != ' ':
+                        inert[piece_y + y][piece_x + x] = block
+            # Hitta fyllda rader
+            for y in range(grid_y_count):
+                complete = True
+                for x in range(grid_x_count):
+                    if inert[y][x] == ' ':
+                        complete = False
+                        break
+
+                if complete:
+                    # Tillfälligt
+                    print(f"Complete row: {y}")
+
+            new_piece()
+
+
+def on_key_down(key):
+    global piece_rotation, piece_type, piece_x, piece_y
+
+    if key == keys.X:
+        test_rotation = piece_rotation + 1
+        if test_rotation >= len(piece_structures[piece_type]):
+            test_rotation = 0
+        if can_piece_move(piece_x, piece_y, test_rotation):
+            piece_rotation = test_rotation
+
+    elif key == keys.Z:
+        test_rotation = piece_rotation - 1
+        if test_rotation < 0:
+            test_rotation = len(piece_structures[piece_type]) - 1
+
+    elif key == keys.LEFT:
+        test_x = piece_x - 1
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.RIGHT:
+        test_x = piece_x + 1
+
+        if can_piece_move(test_x, piece_y, piece_rotation):
+            piece_x = test_x
+
+    elif key == keys.C:
+        while can_piece_move(piece_x, piece_y + 1, piece_rotation):
+            piece_y += 1
+            timer = timer_limit
+
+    # Tillfälligt
+    elif key == keys.DOWN:
+        piece_type += 1
+        if piece_type >= len(piece_structures):
+            piece_type = 0
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.UP:
+        piece_type -= 1
+        if piece_type < 0:
+            piece_type = len(piece_structures) - 1
+        piece_rotation = 0
+
+    # Tillfälligt
+    elif key == keys.S:
+        new_sequence()
+        print(sequence)
+
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count):
+    inert.append([])
+    for x in range(grid_x_count):
+        inert[y].append(' ')
+
+new_sequence()
+new_piece()
+
+# Tillfälligt
+inert[7][4] = 'z'
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
