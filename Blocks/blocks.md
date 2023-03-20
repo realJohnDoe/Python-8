@@ -2323,7 +2323,8 @@ def can_piece_move(test_x, test_y, test_rotation):
                     or test_y + y >= grid_y_count): #ändrad
                 return False
 
-    return True```
+    return True
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
