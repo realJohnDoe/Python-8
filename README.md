@@ -47,6 +47,10 @@ https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md
 
 ##  Flowers ⭐⭐⭐
 
+[![](https://user-images.githubusercontent.com/4598641/226452466-c09472f6-9f75-435b-b7c3-9bda65238539.png)](https://github.com/coderdojolund/Python-8/blob/main/Flowers/flowers.md)
+
+https://github.com/coderdojolund/Python-8/blob/main/Flowers/flowers.md
+
 ##  Hur många dagar fyller du? ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)](https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md)
