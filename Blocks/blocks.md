@@ -344,7 +344,7 @@ I startprojektet finns allt detta förberett i filen `pieces.py`.
 Funktionen `get_piece_structures()` ger oss listan.
 
 **pieces.py**<br>
-Du behöver inte mata in detta. Titta gärna i pieces.py så du ser hur det är gjort.
+**Du behöver inte mata in detta själv.** Titta gärna i pieces.py så du ser hur det är gjort.
 
 ```python
 def get_piece_structures():
