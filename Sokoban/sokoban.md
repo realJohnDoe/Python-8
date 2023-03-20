@@ -1,4 +1,4 @@
-# Snake ⭐⭐⭐
+# Sokoban ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 ![image](https://user-images.githubusercontent.com/4598641/226440407-e4b478ca-f453-48b3-a640-38e4858d1c56.png)
 
