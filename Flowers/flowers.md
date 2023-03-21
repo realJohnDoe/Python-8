@@ -8,15 +8,16 @@
 # Regler
 Spelet börjar med ett rutnät av täckta celler. Under några av cellerna finns blommor. Spelet är över när en blomma avslöjas.
 
-Vänsterklicka på en cell avslöjar den, och om ingen av dess intilliggande celler innehåller blommor, avtäcks de också, och för de avslöjade cellerna, om ingen av deras intilliggande celler innehåller blommor, avslöjas de också, och så vidare.
+Vänsterklick på en cell avslöjar den. Om ingen av de intilliggande cellerna innehåller blommor, avtäcks de också och för de avslöjade cellerna, om ingen av deras intilliggande celler innehåller blommor, avslöjas de också, och så vidare.
 
-Att högerklicka på en cell växlar mellan cellen som har en flagga, ett frågetecken eller ingenting. Flaggor förhindrar att en cell avslöjas med ett vänsterklick. Frågetecken är visuella markörer som inte påverkar vad som händer när cellen klickas.
+Att högerklicka på en cell växlar mellan en flagga, ett frågetecken eller ingenting. Flaggor förhindrar att en cell avslöjas med ett vänsterklick. Frågetecken är  markeringar som inte påverkar vad som händer när cellen klickas.
 
-Spelet är klart när alla icke-blommiga celler avslöjas.
+Spelet är klart när alla celler utan blommor har avslöjats.
 
 ## Kontroller
-Vänsterklick	Avslöja en cell
-Högerklicka	Cykla en täckt cell genom att ha en flagga, ett frågetecken eller ingenting
+
+**Vänsterklick**	Avslöja en cell
+**Högerklicka** Växla en dold cell mellan att ha en flagga, ett frågetecken eller ingenting.
 
 # Översikt
 
