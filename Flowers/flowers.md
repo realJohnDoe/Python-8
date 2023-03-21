@@ -10,9 +10,11 @@ Spelet börjar med ett rutnät av täckta celler. Under några av cellerna finns
 
 Vänsterklick på en cell avslöjar den. Om ingen av de intilliggande cellerna innehåller blommor, avtäcks de också och för de avslöjade cellerna, om ingen av deras intilliggande celler innehåller blommor, avslöjas de också, och så vidare.
 
-Att högerklicka på en cell växlar mellan en flagga, ett frågetecken eller ingenting. Flaggor förhindrar att en cell avslöjas med ett vänsterklick. Frågetecken är  markeringar som inte påverkar vad som händer när cellen klickas.
+Att högerklicka på en cell växlar mellan en flagga, ett frågetecken eller ingenting. 
+- Flaggor förhindrar att en cell avslöjas med ett vänsterklick. 
+- Frågetecken är  markeringar som inte påverkar vad som händer när cellen klickas.
 
-Spelet är klart när alla celler utan blommor har avslöjats.
+Spelet är slut när alla celler utan blommor har avslöjats.
 
 ## Kontroller
 
@@ -43,19 +45,79 @@ Den täckta cellbilden ritas för varje cell.
 
 Du kan komma åt bildfilerna som används i den här handledningen genom att ladda ner och packa upp .zip-filen som länkas till högst upp på den här sidan.
 
+Så här ser koden ut nu. Du hittar den i startprojektet https://replit.com/@RobertStorlind/flowers-starter
+
+```python
+import pgzrun
+
+# Globala variabler här nedanför
+
+
+# Funktioner här nedanför
+def draw():
+  screen.fill((0, 0, 0))
+  cell_size = 18
+
+  for y in range(14):
+    for x in range(19):
+      screen.blit('covered', (x * cell_size, y * cell_size))
+
+
+# Kod för att starta appen
+
+pgzrun.go()  # måste vara sista raden
+```
+
 ![image](https://user-images.githubusercontent.com/4598641/226451206-410b436d-e044-4c2f-876e-f5109dc96310.png)
 
 ## Markera celler
+
 Cellpositionen under musen uppdateras varje bildruta.
 
 Detta behöver cellstorleken, så det flyttas till att vara globalt.
 
 För närvarande är denna position ritad som text.
 
-pygame - modulen importeras så att pygame.mouse.get_pos kan användas.
+pygame &ndash; modulen importeras så att `pygame.mouse.get_pos` kan användas.
 
-Matematikmodulen är importerad så att math.floor kan användas .
+Matematikmodulen är importerad så att `math.floor` kan användas.
 
+Så här ser koden ut nu:
+
+```python
+import pgzrun
+import pygame
+import math
+
+# Globala variabler här nedanför
+cell_size = 18
+
+# Funktioner här nedanför
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = math.floor(mouse_x / cell_size)
+    selected_y = math.floor(mouse_y / cell_size)
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(14):
+        for x in range(19):
+            # Removed: cell_size = 18
+            screen.blit('covered', (x * cell_size, y * cell_size))
+
+    # Temporary
+    screen.draw.text(
+        f"selected x: {selected_x} selected y: {selected_y}",
+        (0, 0), color=(0, 0, 0)
+    )
+
+# Kod för att starta appen
+pgzrun.go()  # måste vara sista raden
+```
 ![image](https://user-images.githubusercontent.com/4598641/226451267-d9515e88-2fc0-4a97-828d-6781174e029a.png)
 
 ## Håller vald cell inom rutnätet
