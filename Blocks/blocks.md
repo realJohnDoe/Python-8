@@ -181,8 +181,7 @@ def draw():
 # Kod för att starta appen här nedanför
 for y in range(grid_y_count): #nyrad
     inert.append([]) #nyrad
-    for x in range(grid_x_count): #nyrad
-        inert[y].append(' ') #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -226,10 +225,9 @@ def draw():
 
 
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[17][0] = 'i' #nyrad
@@ -287,11 +285,11 @@ def draw():
                 color=color #ändra
             )
 
-  # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[17][0] = 'i' #nyrad
@@ -537,11 +535,10 @@ def draw():
                 color=color #ändra
             )
 
-  # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[17][0] = 'i' #nyrad
@@ -620,11 +617,11 @@ def draw():
                 color=color #ändra
             )
 
-  # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[17][0] = 'i' #nyrad
@@ -753,11 +750,11 @@ def draw():
                     color=color
                 )
 
-  # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -826,11 +823,11 @@ def draw():
             if block != ' ':
                 draw_block(block, x, y)
 
-  # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -936,11 +933,11 @@ def on_key_down(key):
         if piece_rotation < 0:
             piece_rotation = len(piece_structures[piece_type]) - 1          
 
-  # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+
+# Kod för att starta appen här nedanför
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -1068,11 +1065,11 @@ def on_key_down(key):
             piece_type = len(piece_structures) - 1
         piece_rotation = 0
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -1189,11 +1186,11 @@ def on_key_down(key):
             piece_type = len(piece_structures) - 1
         piece_rotation = 0
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -1259,7 +1256,6 @@ inert = []
 piece_structures = pieces.get_piece_structures()
 
 # Funktioner (def) här nedanför
-
 
 def draw():
     screen.fill((255, 255, 255))
@@ -1333,10 +1329,9 @@ def on_key_down(key):
 
 
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -1479,11 +1474,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -1614,11 +1609,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -1809,11 +1804,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -1963,11 +1958,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -2131,11 +2126,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -2292,11 +2287,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -2455,11 +2450,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -2622,11 +2617,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[7][4] = 'z'
@@ -2788,11 +2783,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[7][4] = 'z'
@@ -2954,11 +2949,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[7][4] = 'z'
@@ -3133,11 +3128,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[7][4] = 'z'
@@ -3149,16 +3144,13 @@ pgzrun.go()  # måste vara sista raden
 
 ## Förenkla koden
 
-Biten sätts till sitt startläge på två ställen. Vi gör en funktion för det, `neW_piece`.
+Biten sätts till sitt startläge på två ställen. Vi gör en funktion för det, `new_piece`.
 
 ✏️ Uppdatera koden och testkör! Lägg till `new_piece`, ändra i `update` och anropa `new_piece` längst ner.
 
 ```python
 def new_piece(): # lägg till funktionen
-    global piece_x
-    global piece_y
-    global piece_type
-    global piece_rotation
+    global piece_x, piece_y, piece_type, piece_rotation
 
     piece_x = 3
     piece_y = 0
@@ -3179,11 +3171,11 @@ def update(dt): # ändra i denna
         else:
             new_piece() # förenkla här
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): 
+    inert.append([]) 
+        inert[y] = [' '] * grid_x_count 
 
 new_piece() # nyrad
 ```
@@ -3333,11 +3325,11 @@ def on_key_down(key):
         piece_rotation = 0
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 new_piece()
 
@@ -3550,11 +3542,11 @@ def on_key_down(key):
         print(sequence)
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 new_sequence()
 new_piece()
@@ -3750,11 +3742,11 @@ def on_key_down(key):
         print(sequence)
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 new_sequence()
 new_piece()
@@ -3966,11 +3958,11 @@ def on_key_down(key):
         print(sequence)
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 new_sequence()
 new_piece()
@@ -4183,11 +4175,11 @@ def on_key_down(key):
         print(sequence)
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 new_sequence()
 new_piece()
@@ -4425,11 +4417,11 @@ def on_key_down(key):
         print(sequence)
 
 
+
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count):
-    inert.append([])
-    for x in range(grid_x_count):
-        inert[y].append(' ')
+for y in range(grid_y_count): #nyrad
+    inert.append([]) #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad
 
 new_sequence()
 new_piece()
