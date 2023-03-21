@@ -4,8 +4,8 @@
 ![image](https://user-images.githubusercontent.com/4598641/226001268-afea64f1-d51c-48e0-b4b8-0bff27a3e893.png)
 
 ## Innehåll
-[**Regler**](#regler) [Kontroller](#kontroller) &ndash;
-[**Översikt**](#översikt) &ndash;
+[**Regler**](#regler) [Kontroller](#kontroller) &bull;
+[**Översikt**](#översikt) &bull;
 [**Kodning**](#kodning)
 [Rita rutnätet med block](#rita-rutnätet-med-block)
 &bull; [Lagring av orörliga block](#lagring-av-orörliga-block)
