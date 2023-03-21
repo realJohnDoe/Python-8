@@ -1,7 +1,7 @@
 # Flowers ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
-[flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip)
+[flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip) &ndash; grafikfiler som redan finns med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter
 
 ![image](https://user-images.githubusercontent.com/4598641/226450608-0fb4fbf9-c465-4d93-8acd-c3f38ac4225d.png)
 
@@ -96,7 +96,7 @@ Koden för att rita celler och rita blomman är densamma förutom bilden att rit
 För teständamål, högerklickar du på en cell för att växla dess blomma.
 
 
-## Visar det omgivande antalet blommor
+## Visa antalet blommor runt cellen
 För att hitta det omgivande antalet blommor, slingras varje position i de 8 riktningarna runt varje cell. Om någon av dessa positioner är inuti rutnätet och cellen vid positionen har en blomma, läggs 1 till det omgivande antalet blommor.
 
 Om det omgivande antalet blommor är större än 0, så ritas, för närvarande, lämplig nummerbild över cellen.
@@ -124,8 +124,6 @@ Om en cells tillstånd är "avtäckt" ritas den avtäckta bilden istället för 
 
 
 ![image](https://user-images.githubusercontent.com/4598641/226451742-496e7414-d3d4-4be4-b251-df824a393c09.png)
-
-
 
 
 ## Översvämningsfyllning: avtäck stapeln
@@ -210,14 +208,6 @@ Om en cell inte avtäcks, visas inte dess omgivande blommängd.
 För att det första klicket inte ska avslöja en blomma, flyttas koden för att placera blommor så att den körs när vänster musknapp klickas, och cellen under muspekaren läggs inte till de möjliga blompositionerna.
 
 En variabel skapas för att lagra om ett klick är det första klicket i spelet.
-
-
-
-
-
-
-
-
 
 
 
