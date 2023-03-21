@@ -56,7 +56,7 @@ Hur nästa bit ser ut visas ovanför spelplanen som en hjälp till spelaren.
 
 När en obruten rad av rutor bildas, försvinner raden och alla rutor ovanför flyttas ner en rad.
 
-Spelet slutar när en bit har hamnat i vila och nästa bit skulle omedelbart överlappa en tidigare nerfallen bit.
+Spelet slutar när en bit har landat och nästa bit skulle omedelbart överlappa en tidigare nerfallen bit.
 
 ## Kontroller
 
