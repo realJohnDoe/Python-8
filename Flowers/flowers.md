@@ -1,7 +1,8 @@
 # Flowers ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
-Det här projektet använder bilder från [flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip) &ndash; alla filerna finns redan med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter
+Det här projektet använder bilder från [flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip). 
+De filerna finns redan med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter.
 
 ![image](https://user-images.githubusercontent.com/4598641/226450608-0fb4fbf9-c465-4d93-8acd-c3f38ac4225d.png)
 
@@ -62,7 +63,6 @@ def draw():
   for y in range(14):
     for x in range(19):
       screen.blit('covered', (x * cell_size, y * cell_size))
-
 
 # Kod för att starta appen
 
@@ -339,9 +339,47 @@ Varje cell kommer att representeras av en ordbok som lagrar två värden: om den
 
 För närvarande kommer det bara att lagra blomvärdet.
 
-Om en cells "blomma" -nyckel är sann, för närvarande ritas blombilden över cellbilden.
+Om en cells "blomma"-nyckel är sann, ritas just nu blombilden över cellbilden. Vi kommer att ändra det sen så klart 🙂
+
+Uppdatera koden och testkör. Ritas blommorna rätt?
 
 ```python
+grid = [] #nytt
+grid_x_count = 19
+grid_y_count = 14
+
+# etc.
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if x == selected_x and y == selected_y:
+                if pygame.mouse.get_pressed()[0] == 1:
+                    image = 'uncovered'
+                else:
+                    image = 'covered_highlighted'
+            else:
+                image = 'covered'
+            screen.blit(image, (x * cell_size, y * cell_size))
+
+            if grid[y][x]['flower']: #nytt
+                screen.blit('flower', (x * cell_size, y * cell_size)) #nytt
+
+# Kod för att starta appen
+for y in range(grid_y_count): #nytt
+    grid.append([]) #nytt
+    for x in range(grid_x_count): #nytt
+        grid[y].append({ #nytt
+            'flower': False #nytt
+        }) #nytt
+
+    # Tillälligt för att testa ritningen av blommor
+    grid[0][0]['flower'] = True
+    grid[0][1]['flower'] = True
+
+
+pgzrun.go()  # måste vara sista raden
 
 ```
 
@@ -349,6 +387,65 @@ Om en cells "blomma" -nyckel är sann, för närvarande ritas blombilden över c
   <summary>📝 Så här ser hela koden ut nu</summary>
 
 ```python
+import pgzrun
+import pygame
+import math
+
+# Globala variabler här nedanför
+cell_size = 18
+
+grid = []
+grid_x_count = 19
+grid_y_count = 14
+
+# Funktioner här nedanför
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = math.floor(mouse_x / cell_size)
+    selected_y = math.floor(mouse_y / cell_size)
+
+    if selected_x > grid_x_count - 1:
+        selected_x = grid_x_count - 1
+    if selected_y > grid_y_count - 1:
+        selected_y = grid_y_count - 1
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if x == selected_x and y == selected_y:
+                if pygame.mouse.get_pressed()[0] == 1:
+                    image = 'uncovered'
+                else:
+                    image = 'covered_highlighted'
+            else:
+                image = 'covered'
+            screen.blit(image, (x * cell_size, y * cell_size))
+
+            if grid[y][x]['flower']:
+                screen.blit('flower', (x * cell_size, y * cell_size))
+
+
+# Kod för att starta appen
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append({
+            'flower': False
+        })
+
+    # Temporary
+    grid[0][0]['flower'] = True
+    grid[0][1]['flower'] = True
+
+
+pgzrun.go()  # måste vara sista raden
 
 ```
   
