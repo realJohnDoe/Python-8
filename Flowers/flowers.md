@@ -6,7 +6,7 @@
 [**Översikt**](#översikt)
 
 [**Kodning**](#kodning)
-&bull; [Rita brickor](#rita-brickor)
+[Rita brickor](#rita-brickor)
 &bull; [Markera celler](#markera-celler)
 &bull; [Bara celler inom rutnätet ska gå att välja](#bara-celler-inom-rutnätet-ska-gå-att-välja)
 &bull; [Markera celler](#markera-celler)
