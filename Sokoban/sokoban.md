@@ -1,6 +1,9 @@
 # Sokoban ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
+
 ![image](https://user-images.githubusercontent.com/4598641/226440407-e4b478ca-f453-48b3-a640-38e4858d1c56.png)
+
+[Spelnivåerna i den här handledningen är hämtade från Rockbox-projektet.](http://git.rockbox.org/?p=rockbox.git;a=blob_plain;f=apps/plugins/sokoban.levels)
 
 # Regler
 Skjut alla lådorna på förvaringsplatserna.
@@ -198,19 +201,5 @@ Efter att spelaren har flyttat, går alla celler i nivån igenom, och om ingen a
 
 Kod: XXXX
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Källor
-https://simplegametutorials.github.io/pygamezero/sokoban/
+Engelska originalprojektet: https://simplegametutorials.github.io/pygamezero/sokoban/
