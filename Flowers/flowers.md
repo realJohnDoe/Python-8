@@ -210,6 +210,7 @@ grid_y_count = 14
 
 # Funktioner här nedanför
 
+
 def update():
     global selected_x, selected_y
 
@@ -222,12 +223,17 @@ def update():
     if selected_y > grid_y_count - 1:
         selected_y = grid_y_count - 1
 
+
 def draw():
     screen.fill((0, 0, 0))
 
     for y in range(grid_y_count):
         for x in range(grid_x_count):
-            screen.blit('covered', (x * cell_size, y * cell_size))
+            if x == selected_x and y == selected_y:
+                image = 'covered_highlighted'
+            else:
+                image = 'covered'
+            screen.blit(image, (x * cell_size, y * cell_size))
 
     # Tillfälligt
     screen.draw.text(
@@ -245,19 +251,82 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226451429-c6b5e111-f945-47a4-bfe6-5005c372f603.png)
 
 ## Ändra cellbild när vänster musknapp är nere
-När vänster musknapp är nere, ritas den markerade cellen som en avslöjad cell.
+När vänster musknapp är nere, ritas den markerade cellen som en avslöjad cell. Bildfilen heter 'uncovered' och du hittar den i mappen 'images' i repl.it.
+
+✏️ Uppdatera funktionen `draw()` och testkör. Fungerar det att klicka?
 
 ```python
+def draw():
+    screen.fill((0, 0, 0))
 
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if x == selected_x and y == selected_y:
+                if pygame.mouse.get_pressed()[0] == 1:
+                    image = 'uncovered'
+                else:
+                    image = 'covered_highlighted'
+            else:
+                image = 'covered'
+            screen.blit(image, (x * cell_size, y * cell_size))
+    # etc.
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
 
 ```python
+import pgzrun
+import pygame
+import math
 
+# Globala variabler här nedanför
+cell_size = 18
+
+grid_x_count = 19
+grid_y_count = 14
+
+# Funktioner här nedanför
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = math.floor(mouse_x / cell_size)
+    selected_y = math.floor(mouse_y / cell_size)
+
+    if selected_x > grid_x_count - 1:
+        selected_x = grid_x_count - 1
+    if selected_y > grid_y_count - 1:
+        selected_y = grid_y_count - 1
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if x == selected_x and y == selected_y:
+                if pygame.mouse.get_pressed()[0] == 1:
+                    image = 'uncovered'
+                else:
+                    image = 'covered_highlighted'
+            else:
+                image = 'covered'
+            screen.blit(image, (x * cell_size, y * cell_size))
+
+    # Tillfälligt
+    screen.draw.text(
+        f"selected x: {selected_x} selected y: {selected_y}",
+        (0, 0), color=(0, 0, 0)
+    )
+
+# Kod för att starta appen
+
+pgzrun.go()  # måste vara sista raden
 ```
-  
+
 </details>
 
 ![image](https://user-images.githubusercontent.com/4598641/226451476-56697739-2fbd-436c-8baa-06d9e22be4ad.png)
