@@ -1,5 +1,16 @@
 # Ögon
 
+[Rita ett öga](#rita-ett-öga)
+&bull; [Räkna ut avståndet mellan muspekaren och ögat](#räkna-ut-avståndet-mellan-muspekaren-och-ögat)
+&bull; [Räkna ut avståndet mellan muspekaren och ögat](#räkna-ut-avståndet-mellan-muspekaren-och-ögat)
+&bull; [Rörlig pupill](#rörlig-pupill)
+&bull; [Pupillen ska inte smita när muspekaren är utanför ögat](#pupillen-ska-inte-smita-när-muspekaren-är-utanför-ögat)
+&bull; [Två ögon](#två-ögon)
+&bull; [Utmaningar](#utmaningar)
+&bull; [Källor](#källor)
+
+---
+
 ![image](https://user-images.githubusercontent.com/4598641/223815678-2c97174e-578c-4df4-9f8a-d8764f0b2424.png)
 
 Vi vill göra en animering där ögonen följer muspekaren.
