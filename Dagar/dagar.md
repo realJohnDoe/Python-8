@@ -1,5 +1,20 @@
 # Hur många dagar fyller du?
 
+&bull; [Steg 1: Prata med användaren](#steg-1-prata-med-användaren)
+&bull; [Steg 2: Förbered test](#steg-2-förbered-test)
+&bull; [Steg 3: Testa januari](#steg-3-testa-januari)
+&bull; [Testa februari också](#testa-februari-också)
+&bull; [Steg 3. Hantera olika år](#steg-3.-hantera-olika-år)
+&bull; [Steg 4: Testa användarupplevelsen](#steg-4-testa-användarupplevelsen)
+"&bull; [Steg 5: EXTRAUPPGIFT: Men skottåren då?
+](#steg-5-extrauppgift-men-skottåren-då?
+)"
+&bull; [Räkna rätt på antalet dagar](#räkna-rätt-på-antalet-dagar)
+&bull; [Nästan klara](#nästan-klara)
+&bull; [Testa en förenkling](#testa-en-förenkling)
+&bull; [Hjälp på traven](#hjälp-på-traven)
+
+
 Har du fyllt 5000 dagar? Vilket datum fyller eller fyllde du 5555 dagar?
 
 **Uppgift:** Gör en app som räknar ut hur många dagar det är mellan två datum. Använd den för att räkna ut hur många **dagar** du fyller idag!
