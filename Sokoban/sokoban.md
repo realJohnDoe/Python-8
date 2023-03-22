@@ -61,6 +61,9 @@ Om det inte finns några lådor kvar som inte finns på lagringsplatser är niv�
 Varje nivå lagras som ett rutnät av strängar. 
 För närvarande lagras en enstaka nivå och en kvadrat ritas för varje cell som inte är ett mellanslag (dvs. tom).
 
+✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/sokoban-starter
+och spara en egen kopia med knappen "Fork". Testkör!
+
 ![image](https://user-images.githubusercontent.com/4598641/226441552-531f43b9-788f-4e53-9f34-84ab40932038.png)
 
 ## Rita celltyper
