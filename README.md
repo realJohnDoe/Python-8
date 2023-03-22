@@ -39,13 +39,13 @@ https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migra
 
 https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md
 
-##  Fifteen ⭐⭐⭐
+##  ARBETE PÅGÅR: Fifteen ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438128-2ee9720e-4128-4af2-aa04-5cc69daafd27.png)](https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md))
 
 https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md
 
-##  Flowers ⭐⭐⭐
+## ARBETE PÅGÅR: Flowers ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226452466-c09472f6-9f75-435b-b7c3-9bda65238539.png)](https://github.com/coderdojolund/Python-8/blob/main/Flowers/flowers.md)
 
@@ -70,13 +70,13 @@ https://github.com/coderdojolund/Python-8/blob/main/Life/life.md
 https://github.com/coderdojolund/Python-8/blob/main/Repeat/repeat.md
 
 
-##  Snake ⭐⭐⭐
+## ARBETE PÅGÅR: Snake ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md)
 
 https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md
 
-##  Sokoban ⭐⭐⭐
+##  ARBETE PÅGÅR: Sokoban ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438553-be7f0fc4-19b6-43b1-86ba-cc869b76dab4.png)](https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md)
 
