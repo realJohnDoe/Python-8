@@ -786,7 +786,7 @@ Slumpmässiga positioner tas upprepade gånger bort från den här listan och ce
 import pgzrun
 import pygame
 import math
-import random #nytt 🔔
+import random #nytt 🌻
 
 # Globala variabler här nedanför
 cell_size = 18
@@ -795,7 +795,7 @@ grid = []
 grid_x_count = 19
 grid_y_count = 14
 
-possible_flower_positions = [] #nytt 🔔
+possible_flower_positions = [] #nytt 🌻
 
 # etc.
 
@@ -809,12 +809,12 @@ for y in range(grid_y_count):
 
 for y in range(grid_y_count): #nytt
     for x in range(grid_x_count): #nytt
-        possible_flower_positions.append({'x': x, 'y': y}) #nytt 🔔
+        possible_flower_positions.append({'x': x, 'y': y}) #nytt 🌻
 
 for flower_index in range(40): #nytt
     position = possible_flower_positions.pop( #nytt
-        random.randrange(len(possible_flower_positions))) #nytt 🔔
-    grid[position['y']][position['x']]['flower'] = True #nytt 🔔
+        random.randrange(len(possible_flower_positions))) #nytt 🌻
+    grid[position['y']][position['x']]['flower'] = True #nytt 🌻
  
 pgzrun.go()  # måste vara sista raden
 ```
