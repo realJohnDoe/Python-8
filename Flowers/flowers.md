@@ -1,7 +1,7 @@
 # Flowers ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
-[flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip) &ndash; grafikfiler som redan finns med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter
+Det här projektet använder bilder från [flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip) &ndash; alla filerna finns redan med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter
 
 ![image](https://user-images.githubusercontent.com/4598641/226450608-0fb4fbf9-c465-4d93-8acd-c3f38ac4225d.png)
 
