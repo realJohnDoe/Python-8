@@ -34,6 +34,9 @@ Bitarna är ritade som rutor.
 
 För nu ritas en bit där det tomma utrymmet ska vara.
 
+✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/fifteen-starter och spara en egen kopia med knappen "Fork".
+Testkör!
+
 ![image](https://user-images.githubusercontent.com/4598641/226436463-1d10dd82-ed1c-429b-b0bc-e855b4969551.png)
 
 ## Rita siffrorna
