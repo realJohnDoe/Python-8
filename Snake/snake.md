@@ -36,6 +36,8 @@ Spelområdet är 20 celler brett och 15 celler högt, och varje cell har en sido
 
 En rektangel ritas för bakgrunden.
 
+✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/snake-starter och spara en egen kopia med knappen "Fork".
+
 ![image](https://user-images.githubusercontent.com/4598641/226439410-a04eb468-d4cf-4b10-9916-02534cea3a3d.png)
 
 ## Rita ormen
