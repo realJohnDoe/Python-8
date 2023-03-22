@@ -6,22 +6,22 @@
 [Spelnivåerna i den här handledningen är hämtade från Rockbox-projektet.](http://git.rockbox.org/?p=rockbox.git;a=blob_plain;f=apps/plugins/sokoban.levels)
 
 # Regler
-Skjut alla lådorna på förvaringsplatserna.
+Skjut in alla lådorna på lagerplatserna.
 
-Lådor kan endast flyttas om det finns ett ledigt utrymme bortom den (inte en vägg eller annan låda).
+Lådor kan endast flyttas om det finns ett ledigt utrymme bredvid den (inte en vägg eller annan låda).
 
 ## Teckenförklaring
 
 ![image](https://user-images.githubusercontent.com/4598641/226440572-913c4152-7a92-415b-82c2-ebf0f5817183.png)
 Spelare<br>
 ![image](https://user-images.githubusercontent.com/4598641/226440611-a41f140d-f21d-4e68-a216-17f9fe4ef197.png)
-Spelare på lagring<br>
+Spelare på lagerplats<br>
 ![image](https://user-images.githubusercontent.com/4598641/226440626-7c18df09-a547-48eb-ab11-13b1e372e626.png)
 Låda<br>
 ![image](https://user-images.githubusercontent.com/4598641/226440685-78b3e349-3357-44c4-abc7-5fffb41ff9b6.png)
-Box på förvaring<br>
+Låda på lagerplats<br>
 ![image](https://user-images.githubusercontent.com/4598641/226440711-2682f8f3-d36c-448d-a9c4-7f37e79a1840.png)
-Lagring<br>
+Lagerplats<br>
 ![image](https://user-images.githubusercontent.com/4598641/226440721-3dafc158-56c0-4038-8c98-8dd8bb8b512a.png)
 Vägg
 
@@ -35,10 +35,10 @@ Vägg
 De olika tillstånden en ruta kan vara i representeras av följande strängar:
 
 **@**	Spelare<br>
-**+**	Spelare på lagring<br>
+**+**	Spelare på lagerplats<br>
 **$**	Låda<br>
-__*__	Box på förvaring<br>
-**.**	Lagring<br>
+__*__	Låda på lagerplats<br>
+**.**	Lagerplats<br>
 **#**	Vägg
 
 Varje spelnivå (level) lagras som ett rutnät av dessa strängar.
@@ -46,9 +46,9 @@ Varje spelnivå (level) lagras som ett rutnät av dessa strängar.
 ![image](https://user-images.githubusercontent.com/4598641/226441339-fc46c4d7-6fd0-414c-9829-4755286aa054.png)
 
 
-När en piltangent trycks in, slingras rutnätet för att hitta var spelaren är.
+När en piltangent trycks in, loopar vi genom rutnätet för att hitta var spelaren är.
 
-Om positionen på rutnätet intill spelaren i pilens riktning är flyttbar (dvs. tom eller en lagringsplats), ändras rutnätets värden för att återspegla den nya spelarpositionen.
+Om positionen på rutnätet intill spelaren i pilens riktning är flyttbar (dvs. tom eller en lagerplats), ändras rutnätets värden för att återspegla den nya spelarpositionen.
 
 ![image](https://user-images.githubusercontent.com/4598641/226441412-0d311596-2d1f-4e54-bf51-e163588f9e16.png)
 
@@ -56,7 +56,7 @@ Om positionen intill spelaren är en box och positionen utanför boxen är flytt
 
 ![image](https://user-images.githubusercontent.com/4598641/226441447-3953051d-e11b-4f3c-8f92-5589f177cd2d.png)
 
-Om det inte finns några lådor kvar som inte finns på lagringsplatser är nivån klar.
+Om det inte finns några lådor kvar som inte finns på lagerplatser är nivån klar.
 
 
 # Kodning
@@ -85,7 +85,7 @@ Så vi behöver inte komma ihåg vilken sträng som refererar till vilken cellty
 ## Hitta spelarcell
 Det första steget i att flytta spelaren är att hitta vilken cellposition de befinner sig på.
 
-Cellerna i nivån loopas igenom, och om celltypen är en spelare eller en spelare på lagring, så skrivs spelarens position ut för närvarande.
+Cellerna i nivån loopas igenom, och om celltypen är en spelare eller en spelare på lagerplats, så skrivs spelarens position ut för närvarande.
 
 ```
 4 4
@@ -119,10 +119,10 @@ Om värdet på spelarens nuvarande position är spelare (dvs. inte player_on_sto
 
 ![image](https://user-images.githubusercontent.com/4598641/226442037-607ab9cd-4a59-47de-a13e-6ea0b696a3da.png)
 
-## Flytta spelaren till lagring
-Om den intilliggande positionen är lagring , blir den nya intilliggande positionen player_on_storage .
+## Flytta spelaren till lagerplats
+Om den intilliggande positionen är en lagerplats, blir den nya intilliggande positionen `player_on_storage`.
 
-För närvarande kan spelaren gå vidare till lagring, men inte utanför lagring.
+För närvarande kan spelaren gå vidare till en lagerplats, men inte utanför lagerplatsen.
 
 ![image](https://user-images.githubusercontent.com/4598641/226442060-dddc88af-c52b-4d75-bafc-d202d9069ae1.png)
 
@@ -131,8 +131,8 @@ Den nya intilliggande positionen (antingen player eller player_on_storage ) stä
 
 Den används också för att kontrollera om spelaren kan flytta till den intilliggande positionen genom att kontrollera om den har en nyckel med värdet intilliggande .
 
-## Flytta spelare från lagring
-Om spelaren är på lagring är spelarens nuvarande position inställd på lagring .
+## Flytta spelare från lagerplats
+Om spelaren är på lagerplats är spelarens nuvarande position inställd på lagerplats.
 
 ![image](https://user-images.githubusercontent.com/4598641/226442123-828097c9-b89f-449a-9de0-e83d8a774464.png)
 
