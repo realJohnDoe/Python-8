@@ -187,10 +187,10 @@ def draw():
 
     for y in range(grid_y_count):
         for x in range(grid_x_count):
-            if x == selected_x and y == selected_y: #nytt
-                image = 'covered_highlighted' #nytt
-            else: #nytt
-                image = 'covered' #nytt
+            if x == selected_x and y == selected_y: #nytt 🌻
+                image = 'covered_highlighted' #nytt 🌻
+            else: #nytt 🌻
+                image = 'covered' #nytt 🌻
             screen.blit(image, (x * cell_size, y * cell_size))
 ```
 
@@ -344,7 +344,7 @@ Om en cells "blomma"-nyckel är sann, ritas just nu blombilden över cellbilden.
 Uppdatera koden och testkör. Ritas blommorna rätt?
 
 ```python
-grid = [] #nytt
+grid = [] #nytt 🌻
 grid_x_count = 19
 grid_y_count = 14
 
@@ -363,16 +363,16 @@ def draw():
                 image = 'covered'
             screen.blit(image, (x * cell_size, y * cell_size))
 
-            if grid[y][x]['flower']: #nytt
-                screen.blit('flower', (x * cell_size, y * cell_size)) #nytt
+            if grid[y][x]['flower']: #nytt 🌻
+                screen.blit('flower', (x * cell_size, y * cell_size)) #nytt 🌻
 
 # Kod för att starta appen
-for y in range(grid_y_count): #nytt
-    grid.append([]) #nytt
-    for x in range(grid_x_count): #nytt
-        grid[y].append({ #nytt
-            'flower': False #nytt
-        }) #nytt
+for y in range(grid_y_count): #nytt 🌻
+    grid.append([]) #nytt 🌻
+    for x in range(grid_x_count): #nytt 🌻
+        grid[y].append({ #nytt 🌻
+            'flower': False #nytt 🌻
+        }) #nytt 🌻
 
     # Tillälligt för att testa ritningen av blommor
     grid[0][0]['flower'] = True
@@ -463,19 +463,19 @@ def draw():
     for y in range(grid_y_count):
         for x in range(grid_x_count):
 
-            def draw_cell(image, x, y): #nytt
-                screen.blit(image, (x * cell_size, y * cell_size)) #nytt
+            def draw_cell(image, x, y): #nytt 🌻
+                screen.blit(image, (x * cell_size, y * cell_size)) #nytt 🌻
 
             if x == selected_x and y == selected_y:
                 if pygame.mouse.get_pressed()[0] == 1:
-                    draw_cell('uncovered', x, y) #nytt
+                    draw_cell('uncovered', x, y) #nytt 🌻
                 else:
-                    draw_cell('covered_highlighted', x, y) #nytt
+                    draw_cell('covered_highlighted', x, y) #nytt 🌻
             else:
-                draw_cell('covered', x, y) #nytt
+                draw_cell('covered', x, y) #nytt 🌻
 
             if grid[y][x]['flower']:
-                draw_cell('flower', x, y) #nytt
+                draw_cell('flower', x, y) #nytt 🌻
 ```
 
 <details>
@@ -667,20 +667,20 @@ def draw():
 
             surrounding_flower_count = 0
 
-            for dy in range(-1, 2): #nytt
-                for dx in range(-1, 2): #nytt
-                    if ( #nytt 
-                        not (dy == 0 and dx == 0) #nytt
-                        and 0 <= (y + dy) < len(grid) #nytt
-                        and 0 <= (x + dx) < len(grid[y + dy]) #nytt
-                        and grid[y + dy][x + dx]['flower'] #nytt 
-                    ): #nytt
-                        surrounding_flower_count += 1 #nytt
+            for dy in range(-1, 2): #nytt 🌻
+                for dx in range(-1, 2): #nytt 🌻
+                    if ( #nytt 🌻
+                        not (dy == 0 and dx == 0) #nytt 🌻
+                        and 0 <= (y + dy) < len(grid) #nytt 🌻
+                        and 0 <= (x + dx) < len(grid[y + dy]) #nytt 🌻
+                        and grid[y + dy][x + dx]['flower'] #nytt 🌻
+                    ): #nytt 🌻
+                        surrounding_flower_count += 1 #nytt 🌻
 
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
-            elif surrounding_flower_count > 0: #nytt
-                draw_cell(str(surrounding_flower_count), x, y) #nytt
+            elif surrounding_flower_count > 0: #nytt 🌻
+                draw_cell(str(surrounding_flower_count), x, y) #nytt 🌻
 ```
 
 <details>
