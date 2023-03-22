@@ -1,6 +1,43 @@
 # Flowers ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
+[**Regler**](#regler) [Kontroller](#kontroller)
+
+[**Översikt**](#översikt)
+
+[**Kodning**](#kodning)
+&bull; [Rita brickor](#rita-brickor)
+&bull; [Markera celler](#markera-celler)
+&bull; [Bara celler inom rutnätet ska gå att välja](#bara-celler-inom-rutnätet-ska-gå-att-välja)
+&bull; [Markera celler](#markera-celler)
+&bull; [Ändra cellbild när vänster musknapp är nere](#ändra-cellbild-när-vänster-musknapp-är-nere)
+&bull; [Rita blommor](#rita-blommor)
+&bull; [Förenkla kod](#förenkla-kod)
+&bull; [Växla blommor](#växla-blommor)
+&bull; [Visa antalet blommor runt cellen](#visa-antalet-blommor-runt-cellen)
+&bull; [Slumpmässig placering av blommor](#slumpmässig-placering-av-blommor)
+&bull; [Återställa spelet](#återställa-spelet)
+&bull; [Att avslöja celler](#att-avslöja-celler)
+&bull; [Översvämningsfyllning: avtäck stapeln](#)
+&bull; [Översvämningspåfyllning: lägga till i högen](#)
+&bull; [Översvämningsfyllning: med omgivande blommängd](#)
+&bull; [Rita flaggor och frågetecken](#rita-flaggor-och-frågetecken)
+&bull; [Cykelflaggor och frågetecken](#cykelflaggor-och-frågetecken)
+&bull; [Förhindra att flaggor avslöjas](#förhindra-att-flaggor-avslöjas)
+&bull; [Frågetecken slutar inte fyllas](#frågetecken-slutar-inte-fyllas)
+&bull; [Ändra cellbild när vänster musknapp är nere över flaggan](#)
+&bull; [Spelet slut](#spelet-slut)
+&bull; [Spelet vunnet](#spelet-vunnet)
+&bull; [Nytt spel vid nästa klick](#nytt-spel-vid-nästa-klick)
+&bull; [Markera inte när spelet är över](#markera-inte-när-spelet-är-över)
+&bull; [Göm blommor tills spelet är över](#göm-blommor-tills-spelet-är-över)
+&bull; [Dölj nummer för täckta celler](#dölj-nummer-för-täckta-celler)
+[Förhindra att du klickar på blomman vid det första klicket](#)
+
+[**Källor**](#källor)
+
+---
+
 Det här projektet använder bilder från [flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip). 
 De filerna finns redan med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter.
 
