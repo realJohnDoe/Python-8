@@ -175,8 +175,8 @@ import math
 # Globala variabler här nedanför
 cell_size = 18
 
-grid_x_count = 19 #nyrad
-grid_y_count = 14 #nyrad
+grid_x_count = 19 #nyrad 🌻
+grid_y_count = 14 #nyrad 🌻
 
 # Funktioner här nedanför
 
@@ -187,10 +187,10 @@ def update():
     selected_x = math.floor(mouse_x / cell_size)
     selected_y = math.floor(mouse_y / cell_size)
 
-    if selected_x > grid_x_count - 1: #nyrad
-        selected_x = grid_x_count - 1 #nyrad
-    if selected_y > grid_y_count - 1: #nyrad
-        selected_y = grid_y_count - 1 #nyrad
+    if selected_x > grid_x_count - 1: #nyrad 🌻
+        selected_x = grid_x_count - 1 #nyrad 🌻
+    if selected_y > grid_y_count - 1: #nyrad 🌻
+        selected_y = grid_y_count - 1 #nyrad 🌻
 
 def draw():
     screen.fill((0, 0, 0))
@@ -817,7 +817,7 @@ pgzrun.go()  # måste vara sista raden
 En lista skapas som innehåller varje X- och Y-position i rutnätet.
 
 
-Slumpmässiga positioner tas upprepade gånger bort från den här listan och cellerna på dessa positioner är inställda på att ha en blomma.
+Slumpmässiga positioner tas upprepade gånger bort från den här listan och cellerna på dessa positioner tilldelas en blomma.
 
 ```python
 import pgzrun
@@ -949,26 +949,168 @@ for flower_index in range(40):
     grid[position['y']][position['x']]['flower'] = True
 
 pgzrun.go()  # måste vara sista raden
-
 ```
-  
 </details>
 
 ![image](https://user-images.githubusercontent.com/4598641/226451656-7aac2925-cd35-488f-a397-0a2efc8d269b.png)
 
 ## Återställa spelet
-En funktion skapas som ställer in spelets initiala tillstånd.
+Vi gör en funktion, `reset()`. Den ska ställa in spelets startläge. 
+Nästan all kod som ligger längst ner under "Kod för att starta appen" flyttar vi dit.
 
-Denna funktion anropas innan spelet börjar och när någon knapp trycks ned.
+Den funktionen anropas innan spelet börjar och när någon knapp trycks ned.
 
 ```python
+import pgzrun
+import pygame
+import math
+import random
 
+# Globala variabler här nedanför
+cell_size = 18
+
+grid = []
+grid_x_count = 19
+grid_y_count = 14
+
+# Funktioner här nedanför
+
+# Ny funktion 🌻
+def reset():
+    global grid
+    grid = []
+
+    for y in range(grid_y_count):
+        grid.append([])
+        for x in range(grid_x_count):
+            grid[y].append({
+                'flower': False
+            })
+
+    possible_flower_positions = []
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            possible_flower_positions.append({'x': x, 'y': y})
+
+    for flower_index in range(40):
+        position = possible_flower_positions.pop(
+            random.randrange(len(possible_flower_positions)))
+        grid[position['y']][position['x']]['flower'] = True
+   
+# etc.
+
+def on_key_down(): #nyrad 🌻
+    reset() #nyrad 🌻
+
+# Kod för att starta appen
+reset() #nyrad 🌻
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
 
 ```python
+import pgzrun
+import pygame
+import math
+import random
+
+# Globala variabler här nedanför
+cell_size = 18
+
+grid = []
+grid_x_count = 19
+grid_y_count = 14
+
+# Funktioner här nedanför
+
+def reset():
+    global grid
+    grid = []
+
+    for y in range(grid_y_count):
+        grid.append([])
+        for x in range(grid_x_count):
+            grid[y].append({
+                'flower': False
+            })
+
+    possible_flower_positions = []
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            possible_flower_positions.append({'x': x, 'y': y})
+
+    for flower_index in range(40):
+        position = possible_flower_positions.pop(
+            random.randrange(len(possible_flower_positions)))
+        grid[position['y']][position['x']]['flower'] = True
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = math.floor(mouse_x / cell_size)
+    selected_y = math.floor(mouse_y / cell_size)
+
+    if selected_x > grid_x_count - 1:
+        selected_x = grid_x_count - 1
+    if selected_y > grid_y_count - 1:
+        selected_y = grid_y_count - 1
+
+
+
+def on_mouse_up(button):
+    # Temporary
+    if button == mouse.RIGHT:
+        grid[selected_y][selected_x]['flower'] = not grid[selected_y][selected_x]['flower']
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+
+            def draw_cell(image, x, y):
+                screen.blit(image, (x * cell_size, y * cell_size))
+
+            if x == selected_x and y == selected_y:
+                if pygame.mouse.get_pressed()[0] == 1:
+                    draw_cell('uncovered', x, y)
+                else:
+                    draw_cell('covered_highlighted', x, y)
+            else:
+                draw_cell('covered', x, y)
+
+            surrounding_flower_count = 0
+
+            for dy in range(-1, 2):
+                for dx in range(-1, 2):
+                    if (
+                        not (dy == 0 and dx == 0)
+                        and 0 <= (y + dy) < len(grid)
+                        and 0 <= (x + dx) < len(grid[y + dy])
+                        and grid[y + dy][x + dx]['flower']
+                    ):
+                        surrounding_flower_count += 1
+
+            if grid[y][x]['flower']:
+                draw_cell('flower', x, y)
+            elif surrounding_flower_count > 0:
+                draw_cell(str(surrounding_flower_count), x, y)
+
+def on_key_down():
+    reset()
+
+# Kod för att starta appen
+reset()
+
+pgzrun.go()  # måste vara sista raden
 
 ```
   
