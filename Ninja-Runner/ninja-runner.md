@@ -456,7 +456,7 @@ Inuti funktionen `update()` ska vi upptäckte om vår ninja har krockat med någ
 if runner.collidelist(obstacles) != -1:
   game_over = True
 ```
-**Viktigt: kom ihåg att deklarera `game_over` som global i funktionen `update()`.
+**Viktigt: kom ihåg att deklarera `game_over` som global i funktionen `update()`**
 
 Frågan `runner.collidelist(obstacles)` kollar om ninjan har krockat med något av hindren i listan `obstacles`.
 Om hon inte gjorde det, ger funktionen `collidelist` värdet &ndash;1.
