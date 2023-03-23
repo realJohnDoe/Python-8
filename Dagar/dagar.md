@@ -39,7 +39,7 @@ Vi börjar med hur det ska se ut när vi kör appen.
 def dagnummer(år, månad, dag):
   return 1
   
-### Skriv testfunktioner här under
+### Skriv testkod här under
 def testa():
   print("Vi testar")
   print("Slut på tester")
