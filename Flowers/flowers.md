@@ -6,33 +6,33 @@
 [**Översikt**](#översikt)
 
 [**Kodning**](#kodning)
-[Rita brickor](#rita-brickor)
+[Rita celler](#rita-celler)
 &bull; [Markera celler](#markera-celler)
 &bull; [Bara celler inom rutnätet ska gå att välja](#bara-celler-inom-rutnätet-ska-gå-att-välja)
 &bull; [Markera celler](#markera-celler)
-&bull; [Ändra cellbild när vänster musknapp är nere](#ändra-cellbild-när-vänster-musknapp-är-nere)
+&bull; [Ändra cellens utseende när vänster musknapp klickas](#ändra-cellens-utseende-när-vänster-musknapp-klickas)
 &bull; [Rita blommor](#rita-blommor)
-&bull; [Förenkla kod](#förenkla-kod)
+&bull; [Förenkla koden](#förenkla-koden)
 &bull; [Växla blommor](#växla-blommor)
 &bull; [Visa antalet blommor runt cellen](#visa-antalet-blommor-runt-cellen)
 &bull; [Slumpmässig placering av blommor](#slumpmässig-placering-av-blommor)
 &bull; [Återställa spelet](#återställa-spelet)
-&bull; [Att avslöja celler](#att-avslöja-celler)
-&bull; [Översvämningsfyllning: avtäck stapeln](#översvämningsfyllning-avtäck-stapeln)
-&bull; [Översvämningspåfyllning: lägga till i högen](#översvämningspåfyllning-lägga-till-i-högen)
-&bull; [Översvämningsfyllning: med omgivande blommängd](#översvämningsfyllning-med-omgivande-blommängd)
+&bull; [Att avtäcka celler](#att-avtäcka-celler)
+&bull; [En stack som sparar celler som ska avtäckas](#en-stack-som-sparar-celler-som-ska-avtäckas)
+&bull; [Lägg till fler celler på stacken](#lägg-till-fler-celler-på-stacken)
+&bull; [Håll reda på antalet grannar när vi avtäcker](#håll-reda-på-antalet-grannar-när-vi-avtäcker)
 &bull; [Rita flaggor och frågetecken](#rita-flaggor-och-frågetecken)
-&bull; [Cykelflaggor och frågetecken](#cykelflaggor-och-frågetecken)
-&bull; [Förhindra att flaggor avslöjas](#förhindra-att-flaggor-avslöjas)
-&bull; [Frågetecken slutar inte fyllas](#frågetecken-slutar-inte-fyllas)
-&bull; [Ändra cellbild när vänster musknapp är nere över flaggan](#ändra-cellbild-när-vänster-musknapp-är-nere-över-flaggan)
-&bull; [Spelet slut](#spelet-slut)
-&bull; [Spelet vunnet](#spelet-vunnet)
+&bull; [Ändra cellens status mellan blank, flagga och frågetecken](#ändra-cellens-status-mellan-blank-flagga-och-frågetecken)
+&bull; [Hindra att flaggade celler avtäcks](#hindra-att-flaggade-celler-avtäcks)
+&bull; [Celler med frågetecken får avtäckas](#celler-med-frågetecken-får-avtäckas)
+&bull; [Ändra grafiken när vänster musknapp klickar på en flaggad cell](#ändra-grafiken-när-vänster-musknapp-klickar-på-en-flaggad-cell)
+&bull; [Slut på spelet](#slut-på-spelet)
+&bull; [Att vinna spelet](#att-vinna-spelet)
 &bull; [Nytt spel vid nästa klick](#nytt-spel-vid-nästa-klick)
-&bull; [Markera inte när spelet är över](#markera-inte-när-spelet-är-över)
-&bull; [Göm blommor tills spelet är över](#göm-blommor-tills-spelet-är-över)
-&bull; [Dölj nummer för täckta celler](#dölj-nummer-för-täckta-celler)
-[Förhindra att du klickar på blomman vid det första klicket](#förhindra-att-du-klickar-på-blomman-vid-det-första-klicket)
+&bull; [Stäng av musklick när spelet är slut](#stäng-av-musklick-när-spelet-är-slut)
+&bull; [Göm blommorna tills spelet är över](#göm-blommorna-tills-spelet-är-över)
+&bull; [Dölj antalet blomgrannar för täckta celler](#dölj-antalet-blomgrannar-för-täckta-celler)
+[Hindra att man klickar på en blomma vid första klicket](#hindra-att-man-klickar-på-en-blomma-vid-första-klicket)
 
 [**Källor**](#källor)
 
@@ -78,7 +78,7 @@ Cellerna ritas genom att sätta ihop följande bilder:
 ![image](https://user-images.githubusercontent.com/4598641/226450949-d9e02014-22b1-4aac-84ed-d00dfe9f782b.png)
 
 # Kodning
-## Rita brickor
+## Rita celler
 Den täckta cellbilden ritas för varje cell.
 
 >Om du vill så hittar du bildfilerna som används i den här handledningen genom att ladda ner och packa upp .zip-filen som länkas till högst upp på den här sidan. Det är redan förberett i startprojektet.
@@ -286,8 +286,9 @@ pgzrun.go()  # måste vara sista raden
 
 ![image](https://user-images.githubusercontent.com/4598641/226451429-c6b5e111-f945-47a4-bfe6-5005c372f603.png)
 
-## Ändra cellens utseende när vänster musknapp är nere
-När vänster musknapp är nere, ritas den markerade cellen som en avtäckt cell. Bildfilen heter 'uncovered' och du hittar den i mappen 'images' i repl.it.
+## Ändra cellens utseende när vänster musknapp klickas
+När vänster musknapp klickas, ritas den markerade cellen som en avtäckt cell. 
+>Bildfilen heter 'uncovered' och du hittar den i mappen 'images' i repl.it.
 
 ✏️ Uppdatera funktionen `draw()` och testkör. Fungerar det att klicka?
 
@@ -489,7 +490,7 @@ pgzrun.go()  # måste vara sista raden
 
 ![image](https://user-images.githubusercontent.com/4598641/226451517-df57e52b-abe0-4c91-b75c-fd350bc0ef44.png)
 
-## Förenkla kod
+## Förenkla koden
 Koden för att rita celler och för att rita blomman är samma förutom vilken grafik som ska användas.
 Därför gör vi en funktion med bilden och X- och Y-värdena som parametrar.
 
@@ -1276,7 +1277,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226451742-496e7414-d3d4-4be4-b251-df824a393c09.png)
 
 
-## En stack för att hålla reda på vad som ska avtäckas
+## En stack som sparar celler som ska avtäckas
 
 En lista över cellpositioner skapas. Så småningom kommer alla cellpositioner som ska avtäckas att läggas till i denna lista.
 
@@ -1298,7 +1299,7 @@ Medan det finns positioner i avtäckningsstacken, tas en position bort från den
 </details>
 
 
-## Lägg till fler rutor på stacken
+## Lägg till fler celler på stacken
 Varje position i de åtta riktningarna runt varje cell loopas igenom.
 Om en position är inuti rutnätet och den är täckt så läggs den till i avtäckningsstacken.
 
@@ -1365,7 +1366,7 @@ För att testa detta ändras status för två celler till att ha en flagga och e
 ![image](https://user-images.githubusercontent.com/4598641/226451916-0675c6bd-8039-4926-b164-3cf556ff3a08.png)
 
 
-## Ändra en cells status mellan blank, flagga och frågetecken
+## Ändra cellens status mellan blank, flagga och frågetecken
 När man högerklickar på en cell ska statusen ändras mellan blank, flagga och frågetecken.
 
 ```python
@@ -1381,7 +1382,7 @@ När man högerklickar på en cell ska statusen ändras mellan blank, flagga och
   
 </details>
 
-## Förhindra att flaggor avslöjas
+## Hindra att flaggade celler avtäcks
 Om en cell har en flagga ska den inte kunna avslöjas med ett vänsterklick.
 
 ```python
@@ -1413,7 +1414,7 @@ Positioner läggs till i avtäckningsstacken om cellens status är täckt eller 
   
 </details>
 
-## Ändra cellens grafik när vänster musknapp klickar på en flaggmärkt cell
+## Ändra grafiken när vänster musknapp klickar på en flaggad cell
 Om man klickar med vänster musknapp på en cell med en flagga, så ritas cellen med den täckta bilden.
 
 ```python
@@ -1537,7 +1538,7 @@ Om en cell inte avtäcks, visas inte antalet grannceller med blommor.
 ![image](https://user-images.githubusercontent.com/4598641/226452196-f8755175-df82-4650-be3a-73491516082d.png)
 
 
-## Hindra att man klickar på en blomman vid  första klicket
+## Hindra att man klickar på en blomma vid  första klicket
 För att det första klicket inte ska avtäcka en blomma, flyttar vi koden för att placera blommor så att den körs när vänster musknapp klickas.
 
 Cellen vi klickade på läggs inte till de möjliga blompositionerna.
