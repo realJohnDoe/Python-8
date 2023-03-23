@@ -1,17 +1,15 @@
 # Hur många dagar fyller du?
 
-&bull; [Steg 1: Prata med användaren](#steg-1-prata-med-användaren)
+[Steg 1: Prata med användaren](#steg-1-prata-med-användaren)
 &bull; [Steg 2: Förbered test](#steg-2-förbered-test)
 &bull; [Steg 3: Testa januari](#steg-3-testa-januari)
-&bull; [Testa februari också](#testa-februari-också)
-&bull; [Steg 3. Hantera olika år](#steg-3.-hantera-olika-år)
-&bull; [Steg 4: Testa användarupplevelsen](#steg-4-testa-användarupplevelsen)
-"&bull; [Steg 5: EXTRAUPPGIFT: Men skottåren då?
-](#steg-5-extrauppgift-men-skottåren-då?
-)"
-&bull; [Räkna rätt på antalet dagar](#räkna-rätt-på-antalet-dagar)
-&bull; [Nästan klara](#nästan-klara)
-&bull; [Testa en förenkling](#testa-en-förenkling)
+&ndash; [Testa februari också](#testa-februari-också)
+&bull; [Steg 4: Hantera olika år](#steg-4-hantera-olika-år)
+&bull; [Steg 5: Testa användarupplevelsen](#steg-5-testa-användarupplevelsen)
+&bull; [Steg 6: EXTRAUPPGIFT: Men skottåren då?](#steg-6-extrauppgift-men-skottåren-då)
+&ndash; [Räkna rätt på antalet dagar](#räkna-rätt-på-antalet-dagar)
+&ndash; [Nästan klara](#nästan-klara)
+&ndash; [Testa en förenkling](#testa-en-förenkling)
 &bull; [Hjälp på traven](#hjälp-på-traven)
 
 
@@ -185,7 +183,7 @@ def testa():
 Nu ska funktionen `dagnummer_på_året` fungera. Alla testfallen ska ge rätt svar.
 - Om ett testfall inte ger rätt svar kan testfallet eller koden vara fel, eller i värsta fall båda :)
 
-## STEG 3. Hantera olika år
+## STEG 4: Hantera olika år
 
 Nu ska vi göra klart funktionen `dagnummer` så att den klarar olika år. Just nu struntar den helt i vilket år det är.
 
@@ -217,7 +215,7 @@ def dagnummer(år, månad, dag):
 
 ✏️ Innan la vi till testet för dagnummer(2001, 1, 1). Tror du det fungerar? Testkör.
 
-## STEG 4: Testa användarupplevelsen
+## STEG 5: Testa användarupplevelsen
 
 ✏️ Ändra så att vi kan testa appen som vanlig användare nu.
 
@@ -230,7 +228,7 @@ fråga_och_svara()
 
 ✏️ Kan du använda din app för att svara på frågan när du fyller 5555 dagar?
 
-## STEG 5: EXTRAUPPGIFT: Men skottåren då?
+## STEG 6: EXTRAUPPGIFT: Men skottåren då?
 
 Normalt är vart fjärde år skottår. Då har vi en skottdag den 29 februari att räkna med.
 
