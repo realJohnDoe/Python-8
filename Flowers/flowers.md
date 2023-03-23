@@ -44,35 +44,34 @@ De filerna finns redan med i startprojektet på https://replit.com/@RobertStorli
 ![image](https://user-images.githubusercontent.com/4598641/226450608-0fb4fbf9-c465-4d93-8acd-c3f38ac4225d.png)
 
 # Regler
-Spelet börjar med ett rutnät av täckta celler. Under några av cellerna finns blommor. Spelet är över när en blomma avslöjas.
+Spelet börjar med ett rutnät av täckta celler. Under några av cellerna finns blommor. Spelet är över när en cell med blomma avtäcks.
 
-Vänsterklick på en cell avslöjar den. Om ingen av de intilliggande cellerna innehåller blommor, avtäcks de också och för de avslöjade cellerna, om ingen av deras intilliggande celler innehåller blommor, avslöjas de också, och så vidare.
+Vänsterklick på en cell avtäcker den. Om ingen av de intilliggande cellerna innehåller blommor, avtäcks de också och för de avtäckta cellerna, om ingen av deras intilliggande celler innehåller blommor, avtäcks de också, och så vidare.
 
 Att högerklicka på en cell växlar mellan en flagga, ett frågetecken eller ingenting. 
-- Flaggor förhindrar att en cell avslöjas med ett vänsterklick. 
+- Flaggor förhindrar att en cell avtäckas med ett vänsterklick. 
 - Frågetecken är  markeringar som inte påverkar vad som händer när cellen klickas.
 
-Spelet är slut när alla celler utan blommor har avslöjats.
+Spelet är slut när alla celler utan blommor har avtäckts.
 
 ## Kontroller
 
-**Vänsterklick med musen**	Avslöja en cell
+**Vänsterklick med musen**	Avtäck en cell
 
 **Högerklick med musen** Växla en dold cell mellan att ha en flagga, ett frågetecken eller ingenting.
 
 # Översikt
 
-Cellerna representeras av ordböcker som innehåller ett booleskt värde som anger om den innehåller en blomma eller inte, och ett strängvärde som anger i vilket av fyra tillstånd cellen är: täckt, täckt med en flagga, täckt med ett frågetecken eller avslöjad.
+Cellerna representeras av ordböcker som innehåller ett booleskt värde som anger om den innehåller en blomma eller inte, och ett strängvärde som anger i vilket av fyra tillstånd cellen är: täckt, täckt med en flagga, täckt med ett frågetecken eller avtäckt.
 
 De celler som har blommor är slumpmässigt valda. Den första cellen som klickas utesluts från de möjliga alternativen.
 
 När en cell klickas läggs dess position till i listan "avtäckningsstacken".
 
-Medan det finns något kvar i avtäckningsstacken...
-
+Så länge finns något kvar i avtäckningsstacken:
 - En position tas bort från slutet av stacken.
-- Denna position är inställd på avslöjad .
-- Om det inte finns några blommor som omger denna position läggs de omgivande täckta och frågemarkerade positionerna (dvs. inte de avtäckta och flaggade positionerna) till avtäckningsstacken.
+- Denna position är inställd på avtäckt.
+- Om det inte finns några blommor som omger denna position läggs de omgivande täckta och frågemarkerade positionerna  till avtäckningsstacken. Celler som redan är avtäcka eller har en flagga läggs inte till avtäckningsstacken.
 
 Cellerna ritas genom att sätta ihop följande bilder:
 
@@ -82,7 +81,7 @@ Cellerna ritas genom att sätta ihop följande bilder:
 ## Rita brickor
 Den täckta cellbilden ritas för varje cell.
 
-Du kan komma åt bildfilerna som används i den här handledningen genom att ladda ner och packa upp .zip-filen som länkas till högst upp på den här sidan.
+>Om du vill så hittar du bildfilerna som används i den här handledningen genom att ladda ner och packa upp .zip-filen som länkas till högst upp på den här sidan. Det är redan förberett i startprojektet.
 
 Så här ser koden ut nu. Du hittar den i startprojektet https://replit.com/@RobertStorlind/flowers-starter
 
@@ -90,7 +89,6 @@ Så här ser koden ut nu. Du hittar den i startprojektet https://replit.com/@Rob
 import pgzrun
 
 # Globala variabler här nedanför
-
 
 # Funktioner här nedanför
 def draw():
@@ -112,13 +110,13 @@ pgzrun.go()  # måste vara sista raden
 
 Cellpositionen under musen uppdateras varje bildruta.
 
-Detta behöver cellstorleken, så det flyttas till att vara globalt.
+Detta behöver cellstorleken, så det flyttas till att vara en global variabel.
 
 För närvarande är denna position ritad som text.
 
-pygame &ndash; modulen importeras så att `pygame.mouse.get_pos` kan användas.
+Module `pygame` importeras så att vi kan använda `pygame.mouse.get_pos` för att få reda på var muspekaren är.
 
-Matematikmodulen är importerad så att `math.floor` kan användas.
+Matematikmodulen är importerad så vi kan använda `math.floor` för avrundning.
 
 Så här ser koden ut nu:
 
@@ -147,7 +145,7 @@ def draw():
             # Removed: cell_size = 18
             screen.blit('covered', (x * cell_size, y * cell_size))
 
-    # Temporary
+    # Tillfälligt
     screen.draw.text(
         f"selected x: {selected_x} selected y: {selected_y}",
         (0, 0), color=(0, 0, 0)
@@ -156,6 +154,7 @@ def draw():
 # Kod för att starta appen
 pgzrun.go()  # måste vara sista raden
 ```
+
 ![image](https://user-images.githubusercontent.com/4598641/226451267-d9515e88-2fc0-4a97-828d-6781174e029a.png)
 
 ## Bara celler inom rutnätet ska gå att välja
@@ -287,8 +286,8 @@ pgzrun.go()  # måste vara sista raden
 
 ![image](https://user-images.githubusercontent.com/4598641/226451429-c6b5e111-f945-47a4-bfe6-5005c372f603.png)
 
-## Ändra cellbild när vänster musknapp är nere
-När vänster musknapp är nere, ritas den markerade cellen som en avslöjad cell. Bildfilen heter 'uncovered' och du hittar den i mappen 'images' i repl.it.
+## Ändra cellens utseende när vänster musknapp är nere
+När vänster musknapp är nere, ritas den markerade cellen som en avtäckt cell. Bildfilen heter 'uncovered' och du hittar den i mappen 'images' i repl.it.
 
 ✏️ Uppdatera funktionen `draw()` och testkör. Fungerar det att klicka?
 
@@ -370,9 +369,9 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Rita blommor
-Ett rutnät skapas för att lagra tillståndet för cellerna.
+Ett rutnät skapas för att hålla reda på läget i varje cell.
 
-Varje cell kommer att representeras av en ordbok som lagrar två värden: om den har en blomma och om den är avslöjad/flaggad/frågemarkerad/ingenting.
+Varje cell kommer att representeras av en ordbok som lagrar två värden: om den har en blomma och om den är avtäckt/flaggad/frågemarkerad/ingenting.
 
 För närvarande kommer det bara att lagra blomvärdet.
 
@@ -491,7 +490,8 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226451517-df57e52b-abe0-4c91-b75c-fd350bc0ef44.png)
 
 ## Förenkla kod
-Koden för att rita celler och rita blomman är densamma förutom bilden att rita, så en funktion skapas med bilden och X- och Y-värdena som parametrar.
+Koden för att rita celler och för att rita blomman är samma förutom vilken grafik som ska användas.
+Därför gör vi en funktion med bilden och X- och Y-värdena som parametrar.
 
 ```python
 def draw():
@@ -587,7 +587,7 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Växla blommor
-För teständamål, högerklickar du på en cell för att växla dess blomma.
+För att kunna testa vill vi kunna högerklicka  på en cell för att byta om det ska vara en blomma där eller inte.
 
 📝 Lägg in koden efter funktionen `update()` och testkör. Fungerar högerklick som det ska?
 
@@ -670,17 +670,16 @@ for y in range(grid_y_count):
 
 
 pgzrun.go()  # måste vara sista raden
-
 ```
   
 </details>
 
 
 ## Visa antalet blommor runt cellen
-För att räkna ut antalet blommor runt en cell, loopar vi igenom de 8 grannarna runt varje cell. 
-Om någon av dessa positioner är inuti rutnätet och cellen vid positionen har en blomma, ökar vi antalet blommor med 1.
+För att räkna antalet blommor runt en cell, loopar vi igenom de åtta grannarna runt varje cell. 
+Om någon av de positionerna är inuti rutnätet och cellen vid den positionen har en blomma, ökar vi antalet blommor med 1.
 
-Om det omgivande antalet blommor är större än 0, så ritas, för närvarande, lämplig nummerbild över cellen.
+Om det omgivande antalet blommor är större än 0, så ritar vi rätt nummer (bild) över cellen.
 
 ✏️ Uppdatera funktionen `draw` genom att lägga till kod i slutet. Testkör!
 
@@ -806,7 +805,6 @@ for y in range(grid_y_count):
 
 
 pgzrun.go()  # måste vara sista raden
-
 ```
   
 </details>
@@ -814,10 +812,11 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226451615-217a10c0-cf61-41f0-80fd-df17ef8c238e.png)
 
 ## Slumpmässig placering av blommor
+
 En lista skapas som innehåller varje X- och Y-position i rutnätet.
 
-
-Slumpmässiga positioner tas upprepade gånger bort från den här listan och cellerna på dessa positioner tilldelas en blomma.
+Vi tar ut ett antal slumpmässiga positioner från den listan. 
+Cellerna på de positionerna tilldelas en blomma.
 
 ```python
 import pgzrun
@@ -955,10 +954,10 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226451656-7aac2925-cd35-488f-a397-0a2efc8d269b.png)
 
 ## Återställa spelet
-Vi gör en funktion, `reset()`. Den ska ställa in spelets startläge. 
-Nästan all kod som ligger längst ner under "Kod för att starta appen" flyttar vi dit.
+Vi gör en funktion som heter `reset()`. Den ska ställa in spelets startläge. 
+Nästan all kod som just nu ligger längst ner under "Kod för att starta appen" flyttar vi dit.
 
-Den funktionen anropas innan spelet börjar och när någon knapp trycks ned.
+`reset()` anropas innan spelet börjar och när någon knapp trycks ned.
 
 ```python
 import pgzrun
@@ -1111,12 +1110,11 @@ def on_key_down():
 reset()
 
 pgzrun.go()  # måste vara sista raden
-
 ```
   
 </details>
 
-## Att avslöja celler
+## Att avtäcka celler
 Varje cell behöver en egenskap som talar om cellens tillstånd.
 För närvarande är detta bara om cellen är täckt eller avtäckt.
 
@@ -1279,9 +1277,10 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## En stack för att hålla reda på vad som ska avtäckas
-En lista över cellpositioner skapas, och så småningom kommer alla cellpositioner som ska avslöjas att läggas till i denna lista.
 
-För närvarande kommer denna "avtäckstapel" bara att innehålla den valda positionen, så den kommer bara att avslöja den valda cellen som tidigare.
+En lista över cellpositioner skapas. Så småningom kommer alla cellpositioner som ska avtäckas att läggas till i denna lista.
+
+För närvarande kommer denna "avtäckningsstack" bara att innehålla den valda positionen, så den kommer bara att avtäcka den valda cellen som tidigare.
 
 Medan det finns positioner i avtäckningsstacken, tas en position bort från den och cellen vid denna position på rutnätet avtäcks.
 
@@ -1300,9 +1299,10 @@ Medan det finns positioner i avtäckningsstacken, tas en position bort från den
 
 
 ## Lägg till fler rutor på stacken
-Varje position i de 8 riktningarna runt varje cell slingras igenom, och om positionen är inuti rutnätet och den är täckt, så läggs den till i avtäckningsstacken.
+Varje position i de åtta riktningarna runt varje cell loopas igenom.
+Om en position är inuti rutnätet och den är täckt så läggs den till i avtäckningsstacken.
 
-Detta resulterar i att alla celler blir avslöjade.
+Detta gör att alla celler blir avslöjade.
 
 ```python
 
@@ -1319,10 +1319,11 @@ Detta resulterar i att alla celler blir avslöjade.
 
 ![image](https://user-images.githubusercontent.com/4598641/226451814-b25ebd8c-a36b-445d-9512-a291112a56f4.png)
 
-## Översvämningsfyllning: med omgivande blommängd
-De omgivande cellerna i en position som tagits bort från avtäckningsstacken läggs bara till stapeln om ingen av de omgivande cellerna har blommor.
+## Håll reda på antalet grannar när vi avtäcker
 
-Att hitta antalet omgivande blommor återanvänds från att rita det, så en funktion skapas.
+De omgivande cellerna i en position som har tagits bort från avtäckningsstacken läggs bara till i stacken om ingen av de omgivande cellerna har blommor.
+
+Vi behöver kunna räkna ut antalet omgivande blommor på flera ställen. Därför gör vi det till en funktion.
 
 ```python
 
@@ -1341,11 +1342,11 @@ Att hitta antalet omgivande blommor återanvänds från att rita det, så en fun
 
 
 ## Rita flaggor och frågetecken
-En cells tillstånd kan också vara en flagga eller ett frågetecken.
+En cells status kan också vara en flagga eller ett frågetecken.
 
-Om en cells tillstånd är en flagga/frågetecken, ritas flaggan/frågeteckenbilden över cellen.
+Om en cells status är flagga eller frågetecken, ritas flaggan-/frågeteckenbilden över cellen.
 
-För att testa detta ändras tillståndet för två celler till att ha en flagga och ett frågetecken.
+För att testa detta ändras status för två celler till att ha en flagga och ett frågetecken.
 
 ```python
 
@@ -1364,8 +1365,8 @@ För att testa detta ändras tillståndet för två celler till att ha en flagga
 ![image](https://user-images.githubusercontent.com/4598641/226451916-0675c6bd-8039-4926-b164-3cf556ff3a08.png)
 
 
-## Cykelflaggor och frågetecken
-Att högerklicka på en cell växlar dess tillstånd genom att det inte finns någonting, en flagga och ett frågetecken.
+## Ändra en cells status mellan blank, flagga och frågetecken
+När man högerklickar på en cell ska statusen ändras mellan blank, flagga och frågetecken.
 
 ```python
 
@@ -1381,7 +1382,7 @@ Att högerklicka på en cell växlar dess tillstånd genom att det inte finns n�
 </details>
 
 ## Förhindra att flaggor avslöjas
-Om en cell har en flagga kan den inte avslöjas med ett vänsterklick.
+Om en cell har en flagga ska den inte kunna avslöjas med ett vänsterklick.
 
 ```python
 
@@ -1396,8 +1397,8 @@ Om en cell har en flagga kan den inte avslöjas med ett vänsterklick.
   
 </details>
 
-## Frågetecken slutar inte fyllas
-Positioner läggs till i avtäckningsstacken om cellens tillstånd är täckt eller ett frågetecken (men inte en flagga).
+## Celler med frågetecken får avtäckas
+Positioner läggs till i avtäckningsstacken om cellens status är täckt eller ett frågetecken. Celler som har flaggstatus avtäcks inte automatiskt.
 
 ```python
 
@@ -1412,8 +1413,8 @@ Positioner läggs till i avtäckningsstacken om cellens tillstånd är täckt el
   
 </details>
 
-## Ändra cellbild när vänster musknapp är nere över flaggan
-Om vänster musknapp är nere när musen är på en cell med en flagga, så ritas cellen med den täckta bilden.
+## Ändra cellens grafik när vänster musknapp klickar på en flaggmärkt cell
+Om man klickar med vänster musknapp på en cell med en flagga, så ritas cellen med den täckta bilden.
 
 ```python
 
@@ -1428,12 +1429,12 @@ Om vänster musknapp är nere när musen är på en cell med en flagga, så rita
   
 </details>
 
-## Spelet slut
-Om en blomma avslöjas är spelet över.
+## Slut på spelet
+Om en blomma avtäcks är spelet över.
 
-En variabel görs för att lagra om spelet är över eller inte.
+Vi behöver en variabel för att hålla reda på om spelet är över eller inte.
 
-För närvarande gör det ingenting att klicka på celler om spelet är över.
+För närvarande kan man klicka på celler även när spelet är slut.
 
 ```python
 
@@ -1448,8 +1449,8 @@ För närvarande gör det ingenting att klicka på celler om spelet är över.
   
 </details>
 
-## Spelet vunnet
-Om det inte finns några celler som är täckta och inte har en blomma, är spelet vunnet.
+## Att vinna spelet
+Om det inte finns några celler som är täckta och inte har en blomma, har spelaren vunnit.
 
 ```python
 
@@ -1465,7 +1466,7 @@ Om det inte finns några celler som är täckta och inte har en blomma, är spel
 </details>
 
 ## Nytt spel vid nästa klick
-Om spelet är över och en musknapp klickas, återställs spelet.
+Om spelet är slut och en musknapp klickas, återställs spelet.
 
 ```python
 
@@ -1480,8 +1481,8 @@ Om spelet är över och en musknapp klickas, återställs spelet.
   
 </details>
 
-## Markera inte när spelet är över
-När spelet är över markerar musen inte längre celler.
+## Stäng av musklick spelet är slut
+När spelet är slut ska musen inte markera cellerna längre.
 
 ```python
 
@@ -1497,8 +1498,8 @@ När spelet är över markerar musen inte längre celler.
 </details>
 
 
-## Göm blommor tills spelet är över
-Blommorna dras inte förrän spelet är över.
+## Göm blommorna tills spelet är slut
+Vi ska inte rita några blommor förrän spelet är slut.
 
 ```python
 
@@ -1517,8 +1518,8 @@ Blommorna dras inte förrän spelet är över.
 ![image](https://user-images.githubusercontent.com/4598641/226452171-3df8c25a-b72c-4d16-9ff4-c654bb0e6db3.png)
 
 
-## Dölj nummer för täckta celler
-Om en cell inte avtäcks, visas inte dess omgivande blommängd.
+## Dölj antalet blomgrannar för täckta celler
+Om en cell inte avtäcks, visas inte antalet grannceller med blommor.
 
 ```python
 
@@ -1536,10 +1537,12 @@ Om en cell inte avtäcks, visas inte dess omgivande blommängd.
 ![image](https://user-images.githubusercontent.com/4598641/226452196-f8755175-df82-4650-be3a-73491516082d.png)
 
 
-## Förhindra att du klickar på blomman vid det första klicket
-För att det första klicket inte ska avslöja en blomma, flyttas koden för att placera blommor så att den körs när vänster musknapp klickas, och cellen under muspekaren läggs inte till de möjliga blompositionerna.
+## Hindra att man klickar på en blomman vid  första klicket
+För att det första klicket inte ska avtäcka en blomma, flyttar vi koden för att placera blommor så att den körs när vänster musknapp klickas.
 
-En variabel skapas för att lagra om ett klick är det första klicket i spelet.
+Cellen vi klickade på läggs inte till de möjliga blompositionerna.
+
+En variabel skapas för att hålla reeda på om ett klick är det första klicket i spelet.
 
 ```python
 
