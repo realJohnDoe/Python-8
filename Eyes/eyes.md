@@ -63,10 +63,10 @@ def draw():
     distance_x = mouse_x - eye_x #nyrad 👀
     distance_y = mouse_y - eye_y #nyrad 👀
 
-    screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255)) #lite ändrad
+    screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255)) #lite ändrad 👀
     screen.draw.filled_circle((200, 200), 15, color=(0, 0, 100))
 
-    screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}", (0, 0)) #nyrad 👀
+    screen.draw.text(f"distance x: {distance_x}\ndistance y: {distance_y}", (0, 0)) #nyrad 👀
 
 pgzrun.go() # måste vara sist
 ```
@@ -94,7 +94,7 @@ def draw():
 
     # etc.
 
-    screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}\ndistance: {str(distance)}", (0, 0)) #ändrad 👀
+    screen.draw.text(f"distance x: {distance_x}\ndistance y: {distance_y}\ndistance: {distance}", (0, 0)) #ändrad 👀
 ```
 
 :pencil2: **Mata in** och testkör koden!
