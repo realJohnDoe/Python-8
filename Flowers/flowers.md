@@ -30,7 +30,7 @@
 &bull; [Att vinna spelet](#att-vinna-spelet)
 &bull; [Nytt spel vid nästa klick](#nytt-spel-vid-nästa-klick)
 &bull; [Stäng av musklick när spelet är slut](#stäng-av-musklick-när-spelet-är-slut)
-&bull; [Göm blommorna tills spelet är över](#göm-blommorna-tills-spelet-är-över)
+&bull; [Göm blommorna tills spelet är slut](#göm-blommorna-tills-spelet-är-slut)
 &bull; [Dölj antalet blomgrannar för täckta celler](#dölj-antalet-blomgrannar-för-täckta-celler)
 &bull; [Hindra att man klickar på en blomma vid första klicket](#hindra-att-man-klickar-på-en-blomma-vid-första-klicket)
 
