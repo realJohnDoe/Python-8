@@ -85,7 +85,7 @@ Avståndet i pixlar är roten ur (antalet pixlar i X-led i kvadrat + antalet pix
 - Vi importerar mattemodulen `math` för att räkna roten ur med `math.sqrt()`.
 
 ```python
-import math #lägg detta överst
+import math #lägg detta överst 👀
 
 def draw():
     # Ändra i draw. Behåll oförändrade rader!
@@ -111,7 +111,7 @@ Då kan koden för `draw()` se ut så här. Den övriga koden är samma som inna
 ```python
 # behåll resten av koden
 
-def draw(): #uppdaterad 👀
+def draw(): #funktionen är uppdaterad 👀
     screen.fill((0, 0, 0))
 
     mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -173,7 +173,7 @@ def draw(): #uppdaterad 👀
 
 # behåll resten av koden
 ```
-:pencil2: **Testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
+:pencil2: **Uppdatera och testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
 
 # Två ögon
 Vi vill ha två ögon som följer muspekaren. Vi kan återanvända samma kod. Därför lägger vi ögats kod
@@ -217,7 +217,7 @@ def draw():
 
 pgzrun.go()
 ```
-:pencil2: **Testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
+:pencil2: **Uppdatera och testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
 
 # Utmaningar
 Kan du göra det ännu mer spännande?
