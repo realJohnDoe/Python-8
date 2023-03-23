@@ -1117,21 +1117,160 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Att avslöja celler
-Cellerna får en ny nyckel för cellens tillstånd. För närvarande är detta bara om cellen är täckt eller avtäckt.
+Varje cell behöver en egenskap som talar om cellens tillstånd.
+För närvarande är detta bara om cellen är täckt eller avtäckt.
 
-För närvarande, när en cell vänsterklickas är dess tillstånd inställt på " avtäckt" .
+Just nu gör vi så att cellen sätts till "avtäckt" när vi vänsterklickar med musen.
 
 Om en cells tillstånd är "avtäckt" ritas den avtäckta bilden istället för den täckta bilden.
 
 ```python
+def reset():
+    global grid
 
+    grid = []
+
+    for y in range(grid_y_count):
+        grid.append([])
+        for x in range(grid_x_count):
+            grid[y].append({
+                'flower': False,
+                'state': 'covered', # 'covered', 'uncovered' #nyrad 🌻
+            })
+
+    # etc.
+
+def on_mouse_up(button): # funktionen ändrad
+    if button == mouse.LEFT: #nyrad 🌻
+        grid[selected_y][selected_x]['state'] = 'uncovered' #nyrad 🌻
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+
+            def draw_cell(image, x, y):
+                screen.blit(image, (x * cell_size, y * cell_size))
+
+            if grid[y][x]['state'] == 'uncovered': #nyrad 🌻
+                draw_cell('uncovered', x, y) #nyrad 🌻
+            else: #nyrad 🌻 Kom ihåg att dra in raderna under
+                if x == selected_x and y == selected_y:
+                    if pygame.mouse.get_pressed()[0] == 1:
+                        draw_cell('uncovered', x, y)
+                    else:
+                        draw_cell('covered_highlighted', x, y)
+                else:
+                    draw_cell('covered', x, y)
+
+            # etc.
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
 
 ```python
+import pgzrun
+import pygame
+import math
+import random
 
+# Globala variabler här nedanför
+cell_size = 18
+
+grid = []
+grid_x_count = 19
+grid_y_count = 14
+
+# Funktioner här nedanför
+
+def reset():
+    global grid
+    grid = []
+
+    for y in range(grid_y_count):
+        grid.append([])
+        for x in range(grid_x_count):
+            grid[y].append({
+                'flower': False,
+                'state': 'covered', # 'covered', 'uncovered'
+            })
+
+    possible_flower_positions = []
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            possible_flower_positions.append({'x': x, 'y': y})
+
+    for flower_index in range(40):
+        position = possible_flower_positions.pop(
+            random.randrange(len(possible_flower_positions)))
+        grid[position['y']][position['x']]['flower'] = True
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = math.floor(mouse_x / cell_size)
+    selected_y = math.floor(mouse_y / cell_size)
+
+    if selected_x > grid_x_count - 1:
+        selected_x = grid_x_count - 1
+    if selected_y > grid_y_count - 1:
+        selected_y = grid_y_count - 1
+
+
+
+def on_mouse_up(button):
+    if button == mouse.LEFT:
+        grid[selected_y][selected_x]['state'] = 'uncovered'
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+
+            def draw_cell(image, x, y):
+                screen.blit(image, (x * cell_size, y * cell_size))
+
+            if grid[y][x]['state'] == 'uncovered':
+                draw_cell('uncovered', x, y)
+            else:
+                if x == selected_x and y == selected_y:
+                    if pygame.mouse.get_pressed()[0] == 1:
+                        draw_cell('uncovered', x, y)
+                    else:
+                        draw_cell('covered_highlighted', x, y)
+                else:
+                    draw_cell('covered', x, y)
+
+            surrounding_flower_count = 0
+
+            for dy in range(-1, 2):
+                for dx in range(-1, 2):
+                    if (
+                        not (dy == 0 and dx == 0)
+                        and 0 <= (y + dy) < len(grid)
+                        and 0 <= (x + dx) < len(grid[y + dy])
+                        and grid[y + dy][x + dx]['flower']
+                    ):
+                        surrounding_flower_count += 1
+
+            if grid[y][x]['flower']:
+                draw_cell('flower', x, y)
+            elif surrounding_flower_count > 0:
+                draw_cell(str(surrounding_flower_count), x, y)
+
+def on_key_down():
+    reset()
+
+# Kod för att starta appen
+reset()
+
+pgzrun.go()  # måste vara sista raden
 ```
   
 </details>
