@@ -36,8 +36,6 @@
 
 [**Källor**](#källor)
 
----
-
 >Det här projektet använder bilder från [flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip). 
 >De filerna finns redan med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter.
 
