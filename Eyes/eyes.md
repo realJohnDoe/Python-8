@@ -33,9 +33,8 @@ def draw():
 
 pgzrun.go() # måste vara sist
 ```
-✏️ **Starta ett nytt projekt** i repl.it och mata in koden där. Testkör!
-
-<img src=https://user-images.githubusercontent.com/4598641/224134063-e4416cb9-86ed-4d39-a0b3-5321a16c5dd1.png width="500px">
+✏️ Se till att du är inloggad i repl.it. Gör en kopia av startprojektet https://replit.com/@RobertStorlind/eyes-starter
+med knappen "Fork". Testkör!
 
 # Räkna ut avståndet mellan muspekaren och ögat
 Vi lägger till kod så att avståndet mellan ögats mitt och muspekaren visas, räknat i pixlar.
@@ -45,9 +44,10 @@ Vi lägger till kod så att avståndet mellan ögats mitt och muspekaren visas, 
 - Funktionen `update()` är tom så länge. Funktionen `draw()` ritar om skärmen vid varje uppdatering.
 
 Koden så här långt &ndash; nya rader är markerade:
+
 ```python
 import pgzrun
-import pygame #nyrad
+import pygame #nyrad 👀
 WIDTH, HEIGHT = 530, 400
 
 def update():
@@ -56,17 +56,17 @@ def update():
 def draw():
     screen.fill((0, 0, 0))
 
-    mouse_x, mouse_y = pygame.mouse.get_pos() #nyrad
-    eye_x = 200 #nyrad
-    eye_y = 200 #nyrad
+    mouse_x, mouse_y = pygame.mouse.get_pos() #nyrad 👀
+    eye_x = 200 #nyrad 👀
+    eye_y = 200 #nyrad 👀
 
-    distance_x = mouse_x - eye_x #nyrad
-    distance_y = mouse_y - eye_y #nyrad
+    distance_x = mouse_x - eye_x #nyrad 👀
+    distance_y = mouse_y - eye_y #nyrad 👀
 
     screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255)) #lite ändrad
     screen.draw.filled_circle((200, 200), 15, color=(0, 0, 100))
 
-    screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}", (0, 0)) #nyrad
+    screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}", (0, 0)) #nyrad 👀
 
 pgzrun.go() # måste vara sist
 ```
@@ -90,11 +90,11 @@ import math #lägg detta överst
 def draw():
     # Ändra i draw. Behåll oförändrade rader!
 
-    distance = math.sqrt(distance_x**2 + distance_y**2) #lägg detta under raden som räknar ut distance_y
+    distance = math.sqrt(distance_x**2 + distance_y**2) #lägg detta under raden som räknar ut distance_y 👀
 
     # etc.
 
-    screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}\ndistance: {str(distance)}", (0, 0)) #ändrad
+    screen.draw.text(f"distance x: {str(distance_x)}\ndistance y: {str(distance_y)}\ndistance: {str(distance)}", (0, 0)) #ändrad 👀
 ```
 
 :pencil2: **Mata in** och testkör koden!
@@ -111,7 +111,7 @@ Då kan koden för `draw()` se ut så här. Den övriga koden är samma som inna
 ```python
 # behåll resten av koden
 
-def draw():
+def draw(): #uppdaterad 👀
     screen.fill((0, 0, 0))
 
     mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -148,7 +148,7 @@ Så här kan `draw()` se ut nu:
 ```python
 # behåll resten av koden
 
-def draw():
+def draw(): #uppdaterad 👀
     screen.fill((0, 0, 0))
 
     mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -194,7 +194,7 @@ def update():
 def draw():
     screen.fill((0, 0, 0))
 
-    def draw_eye(eye_x, eye_y): # vi återanvänder denna
+    def draw_eye(eye_x, eye_y): # vi återanvänder denna 👀 
         radius = 30
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
@@ -212,8 +212,8 @@ def draw():
         screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255))
         screen.draw.filled_circle((pupil_x, pupil_y), 15, color=(0, 0, 100))
 
-    draw_eye(200, 200) # första ögat
-    draw_eye(330, 200) # andra ögat
+    draw_eye(200, 200) # första ögat 👀
+    draw_eye(330, 200) # andra ögat 👀
 
 pgzrun.go()
 ```
