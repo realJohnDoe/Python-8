@@ -32,7 +32,7 @@
 &bull; [Stäng av musklick när spelet är slut](#stäng-av-musklick-när-spelet-är-slut)
 &bull; [Göm blommorna tills spelet är över](#göm-blommorna-tills-spelet-är-över)
 &bull; [Dölj antalet blomgrannar för täckta celler](#dölj-antalet-blomgrannar-för-täckta-celler)
-[Hindra att man klickar på en blomma vid första klicket](#hindra-att-man-klickar-på-en-blomma-vid-första-klicket)
+&bull; [Hindra att man klickar på en blomma vid första klicket](#hindra-att-man-klickar-på-en-blomma-vid-första-klicket)
 
 [**Källor**](#källor)
 
@@ -1536,7 +1536,7 @@ Om en cell inte avtäcks, visas inte antalet grannceller med blommor.
 ![image](https://user-images.githubusercontent.com/4598641/226452196-f8755175-df82-4650-be3a-73491516082d.png)
 
 
-## Hindra att man klickar på en blomma vid  första klicket
+## Hindra att man klickar på en blomma vid första klicket
 För att det första klicket inte ska avtäcka en blomma, flyttar vi koden för att placera blommor så att den körs när vänster musknapp klickas.
 
 Cellen vi klickade på läggs inte till de möjliga blompositionerna.
