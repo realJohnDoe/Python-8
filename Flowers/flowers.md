@@ -66,11 +66,11 @@ Cellerna representeras av ordböcker som innehåller ett booleskt värde som ang
 
 De celler som har blommor är slumpmässigt valda. Den första cellen som klickas utesluts från de möjliga alternativen.
 
-När en cell klickas läggs dess position till i listan "avtäck stack".
+När en cell klickas läggs dess position till i listan "avtäckningsstacken".
 
 Medan det finns något kvar i avtäckningsstacken...
 
-- En position tas bort från slutet av stapeln.
+- En position tas bort från slutet av stacken.
 - Denna position är inställd på avslöjad .
 - Om det inte finns några blommor som omger denna position läggs de omgivande täckta och frågemarkerade positionerna (dvs. inte de avtäckta och flaggade positionerna) till avtäckningsstacken.
 
@@ -1278,7 +1278,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226451742-496e7414-d3d4-4be4-b251-df824a393c09.png)
 
 
-## Översvämningsfyllning: avtäck stapeln
+## En stack för att hålla reda på vad som ska avtäckas
 En lista över cellpositioner skapas, och så småningom kommer alla cellpositioner som ska avslöjas att läggas till i denna lista.
 
 För närvarande kommer denna "avtäckstapel" bara att innehålla den valda positionen, så den kommer bara att avslöja den valda cellen som tidigare.
@@ -1299,7 +1299,7 @@ Medan det finns positioner i avtäckningsstacken, tas en position bort från den
 </details>
 
 
-## Översvämningspåfyllning: lägga till i högen
+## Lägg till fler rutor på stacken
 Varje position i de 8 riktningarna runt varje cell slingras igenom, och om positionen är inuti rutnätet och den är täckt, så läggs den till i avtäckningsstacken.
 
 Detta resulterar i att alla celler blir avslöjade.
