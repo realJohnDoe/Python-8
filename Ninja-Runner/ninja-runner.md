@@ -467,7 +467,8 @@ Sen behöver vi skriva texten "Game over" inuti `draw()` genom att ändra från
   for actor in obstacles:
     actor.draw()
   screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
-.. till
+```
+till
 ```python
 if game_over:
   screen.draw.text('Game Over', centerx=WIDTH/2, centery=HEIGHT - 330, color=(255, 255, 255), fontsize=60)
