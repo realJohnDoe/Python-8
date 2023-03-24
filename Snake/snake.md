@@ -149,3 +149,6 @@ Ormens färg ändras beroende på om den är vid liv eller inte.
 # Källor
 
 https://simplegametutorials.github.io/pygamezero/snake/
+
+https://web.archive.org/web/20140820192218/http://www.realtid.se/ArticlePages/200603/01/20060301132710_Realtid437/20060301132710_Realtid437.dbp.asp?Action=Print
+
