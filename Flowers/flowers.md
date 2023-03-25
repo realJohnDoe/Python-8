@@ -145,7 +145,7 @@ def draw():
 
     for y in range(14):
         for x in range(19):
-            # Removed: cell_size = 18
+            # Borttaget: cell_size = 18
             screen.blit('covered', (x * cell_size, y * cell_size))
 
     # Tillfälligt
