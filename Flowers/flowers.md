@@ -480,7 +480,7 @@ for y in range(grid_y_count):
             'flower': False
         })
 
-    # Temporary
+    # Tillfälligt
     grid[0][0]['flower'] = True
     grid[0][1]['flower'] = True
 
@@ -579,7 +579,7 @@ for y in range(grid_y_count):
             'flower': False
         })
 
-    # Temporary
+    # Tillfälligt
     grid[0][0]['flower'] = True
     grid[0][1]['flower'] = True
 
@@ -597,7 +597,7 @@ För att kunna testa vill vi kunna högerklicka  på en cell för att byta om de
 
 ```python
 def on_mouse_up(button):
-    # Temporary
+    # Tillfälligt
     if button == mouse.RIGHT:
         grid[selected_y][selected_x]['flower'] = not grid[selected_y][selected_x]['flower']
 ```
@@ -634,7 +634,7 @@ def update():
 
 
 def on_mouse_up(button):
-    # Temporary
+    # Tillfälligt
     if button == mouse.RIGHT:
         grid[selected_y][selected_x]['flower'] = not grid[selected_y][selected_x]['flower']
 
@@ -668,7 +668,7 @@ for y in range(grid_y_count):
             'flower': False
         })
 
-    # Temporary
+    # Tillfälligt
     grid[0][0]['flower'] = True
     grid[0][1]['flower'] = True
 
@@ -755,7 +755,7 @@ def update():
 
 
 def on_mouse_up(button):
-    # Temporary
+    # Tillfälligt
     if button == mouse.RIGHT:
         grid[selected_y][selected_x]['flower'] = not grid[selected_y][selected_x]['flower']
 
@@ -803,7 +803,7 @@ for y in range(grid_y_count):
             'flower': False
         })
 
-    # Temporary
+    # Tillfälligt
     grid[0][0]['flower'] = True
     grid[0][1]['flower'] = True
 
@@ -894,7 +894,7 @@ def update():
 
 
 def on_mouse_up(button):
-    # Temporary
+    # Tillfälligt
     if button == mouse.RIGHT:
         grid[selected_y][selected_x]['flower'] = not grid[selected_y][selected_x]['flower']
 
@@ -1068,7 +1068,7 @@ def update():
 
 
 def on_mouse_up(button):
-    # Temporary
+    # Tillfälligt
     if button == mouse.RIGHT:
         grid[selected_y][selected_x]['flower'] = not grid[selected_y][selected_x]['flower']
 
