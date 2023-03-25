@@ -168,7 +168,6 @@ Rutnätets storlek i X- och Y-led återanvänds från att rita cellerna. Vi gör
 
 ✏️ Uppdatera koden och testkör. Vad händer när du pekar innanför och utanför spelplanen med muspekaren?
 
-![image](https://user-images.githubusercontent.com/4598641/226451363-15f4d3b2-c3f1-4187-9d11-949fd2691b7d.png)
 
 📝 Så här ser koden ut nu:
 ```python
@@ -213,6 +212,7 @@ def draw():
 
 pgzrun.go()  # måste vara sista raden
 ```
+![image](https://user-images.githubusercontent.com/4598641/226451363-15f4d3b2-c3f1-4187-9d11-949fd2691b7d.png)
 
 
 ## Markera celler
