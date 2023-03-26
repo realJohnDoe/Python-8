@@ -198,8 +198,8 @@ def update():
 def draw():
     screen.fill((0, 0, 0))
 
-    for y in range(grid_y_count): #ändrad
-        for x in range(grid_x_count): #ändrad
+    for y in range(grid_y_count): #ändrad 🌻
+        for x in range(grid_x_count): #ändrad 🌻
             screen.blit('covered', (x * cell_size, y * cell_size))
 
     # Tillfälligt
@@ -1852,10 +1852,10 @@ def draw():
             elif get_surrounding_flower_count(x, y) > 0:
                 draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
 
-            if grid[y][x]['state'] == 'flag':
-                draw_cell('flag', x, y)
-            elif grid[y][x]['state'] == 'question':
-                draw_cell('question', x, y)
+            if grid[y][x]['state'] == 'flag': #nyrad 🌻
+                draw_cell('flag', x, y) #nyrad 🌻
+            elif grid[y][x]['state'] == 'question': #nyrad 🌻
+                draw_cell('question', x, y) #nyrad 🌻
 
 # etc.
 
@@ -2034,7 +2034,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226451916-0675c6bd-8039-4926-b164-3cf556ff3a08.png)
 
 
-## Ändra cellens status mellan blank, flagga och frågetecken
+## Byta cellens status mellan blank, flagga och frågetecken
 När man högerklickar på en cell ska statusen ändras mellan blank, flagga och frågetecken.
 
 ```python
@@ -2042,15 +2042,15 @@ def on_mouse_up(button):
     if button == mouse.LEFT:
         # etc.
 
-    elif button == mouse.RIGHT:
-        if grid[selected_y][selected_x]['state'] == 'covered':
-            grid[selected_y][selected_x]['state'] = 'flag'
+    elif button == mouse.RIGHT: #nyrad 🌻
+        if grid[selected_y][selected_x]['state'] == 'covered': #nyrad 🌻
+            grid[selected_y][selected_x]['state'] = 'flag' #nyrad 🌻
 
-        elif grid[selected_y][selected_x]['state'] == 'flag':
-            grid[selected_y][selected_x]['state'] = 'question'
+        elif grid[selected_y][selected_x]['state'] == 'flag': #nyrad 🌻
+            grid[selected_y][selected_x]['state'] = 'question' #nyrad 🌻
 
-        elif grid[selected_y][selected_x]['state'] == 'question':
-            grid[selected_y][selected_x]['state'] = 'covered'
+        elif grid[selected_y][selected_x]['state'] == 'question': #nyrad 🌻
+            grid[selected_y][selected_x]['state'] = 'covered' #nyrad 🌻
 
 ```
 
@@ -2230,7 +2230,7 @@ Om en cell har en flagga ska den inte kunna avtäckas med ett vänsterklick.
 
 ```python
 def on_mouse_up(button):
-    if button == mouse.LEFT and grid[selected_y][selected_x]['state'] != 'flag':
+    if button == mouse.LEFT and grid[selected_y][selected_x]['state'] != 'flag': #ändrad 🌻
         # etc.
 ```
 
@@ -2421,7 +2421,7 @@ def on_mouse_up(button):
                             not (dy == 0 and dx == 0)
                             and 0 <= (y + dy) < len(grid)
                             and 0 <= (x + dx) < len(grid[y + dy])
-                            and grid[y + dy][x + dx]['state'] in ('covered', 'question')
+                            and grid[y + dy][x + dx]['state'] in ('covered', 'question') #ändrad 🌻
                         ):
                             stack.append({
                                 'x': x + dx,
@@ -2611,9 +2611,9 @@ def draw():
     # etc.
 
                     if pygame.mouse.get_pressed()[0] == 1:
-                        if grid[y][x]['state'] == 'flag':
-                            draw_cell('covered', x, y)
-                        else:
+                        if grid[y][x]['state'] == 'flag': #nyrad 🌻
+                            draw_cell('covered', x, y) #nyrad 🌻
+                        else: #nyrad 🌻
                             draw_cell('uncovered', x, y)
                     else:
                         draw_cell('covered_highlighted', x, y)
@@ -2804,17 +2804,17 @@ För närvarande kan man klicka på celler även när spelet är slut.
 
 ```python
 def reset():
-    global grid, game_over # ändrad
+    global grid, game_over # ändrad 🌻
 
     # etc.
 
     game_over = False # sista raden i funktionen
 
 def on_mouse_up(button):
-    global game_over # ny rad
+    global game_over # ny rad 🌻
 
-    if game_over: # ny rad
-        return # ny rad
+    if game_over: # ny rad 🌻
+        return # ny rad 🌻
 
     if button == mouse.LEFT and grid[selected_y][selected_x]['state'] != 'flag':
         if grid[selected_y][selected_x]['flower']: # ny rad
@@ -3042,15 +3042,15 @@ def on_mouse_up(button):
                                         'y': y + dy,
                                     })
 
-                complete = True # ny rad
+                complete = True # ny rad 🌻
 
-                for y in range(grid_y_count): # ny rad
-                    for x in range(grid_x_count): # ny rad
-                        if grid[y][x]['state'] != 'uncovered' and not grid[y][x]['flower']: # ny rad
-                            complete = False # ny rad
+                for y in range(grid_y_count): # ny rad 🌻
+                    for x in range(grid_x_count): # ny rad 🌻
+                        if grid[y][x]['state'] != 'uncovered' and not grid[y][x]['flower']: # ny rad 🌻
+                            complete = False # ny rad 🌻
 
                 if complete: # ny rad
-                    game_over = True # ny rad
+                    game_over = True # ny rad 🌻
 
 ```
 
@@ -3257,7 +3257,7 @@ def on_mouse_up(button):
     global game_over
 
     if game_over:
-        reset() # ny rad
+        reset() # ny rad 🌻
         return
 ```
 
@@ -3467,7 +3467,7 @@ def draw():
             if grid[y][x]['state'] == 'uncovered':
                 draw_cell('uncovered', x, y)
             else:
-                if x == selected_x and y == selected_y and not game_over: # ändrad
+                if x == selected_x and y == selected_y and not game_over: # ändrad 🌻
 
     # etc.
 ```
@@ -3674,7 +3674,7 @@ Vi ska inte rita några blommor förrän spelet är slut.
 ```python
 def draw():
     # etc.
-            if grid[y][x]['flower'] and game_over: # ändrad
+            if grid[y][x]['flower'] and game_over: # ändrad 🌻
                 draw_cell('flower', x, y)
 
     # etc.
@@ -3885,7 +3885,7 @@ def draw():
 
             if grid[y][x]['flower'] and game_over:
                 draw_cell('flower', x, y)
-            elif get_surrounding_flower_count(x, y) > 0 and grid[y][x]['state'] == 'uncovered': # ändrad
+            elif get_surrounding_flower_count(x, y) > 0 and grid[y][x]['state'] == 'uncovered': # ändrad 🌻 
                 draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
 
     # etc.
@@ -4091,7 +4091,7 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Hindra att man klickar på en blomma vid första klicket
-För att det första klicket inte ska avtäcka en blomma, flyttar vi koden för att placera blommor så att den körs när vänster musknapp klickas.
+För att det första klicket inte ska avtäcka en blomma, flyttar vi koden för att placera blommor så att den körs efter att vänster musknapp klickas för första gången.
 
 Blomplanteringen får en egen funktion, `plant_flowers_avoiding(x, y)` där en del av koden från `reset()` hamnar.
 `on_mouse_up` kan då anropa den koden vid första klicket.
@@ -4104,7 +4104,7 @@ Vi skapar en variabel för att hålla reda på om ett klick är det första klic
 
 ```python
 def reset():
-    global grid, game_over, first_click # ändrad
+    global grid, game_over, first_click # ändrad 🌻
     grid = []
 
     for y in range(grid_y_count):
@@ -4135,7 +4135,7 @@ def plant_flowers_avoiding(avoid_x, avoid_y): # lite av koden från reset() med 
         grid[position['y']][position['x']]['flower'] = True
 
 def on_mouse_up(button):
-    global game_over, first_click #ändrad
+    global game_over, first_click #ändrad 🌻
 
     if game_over:
         reset()
@@ -4144,7 +4144,7 @@ def on_mouse_up(button):
     if button == mouse.LEFT and grid[selected_y][selected_x]['state'] != 'flag':
         if first_click:
             first_click = False
-            plant_flowers_avoiding(selected_x, selected_y) # nyrad
+            plant_flowers_avoiding(selected_x, selected_y) # nyrad 🌻
 
         if grid[selected_y][selected_x]['flower']:
             grid[selected_y][selected_x]['state'] = 'uncovered'
