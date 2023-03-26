@@ -4100,7 +4100,7 @@ Den första cellen vi klickade på får då ingen blomma.
 
 Vi skapar en variabel för att hålla reda på om ett klick är det första klicket i spelet.
 
-✏️ Mata in koden och testkör! Fungerar spelet som du tänker dig nu?
+✏️ Uppdatera koden och testkör! Fungerar spelet som du tänker dig nu?
 
 ```python
 def reset():
