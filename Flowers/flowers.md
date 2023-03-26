@@ -3058,6 +3058,192 @@ def on_mouse_up(button):
   <summary>📝 Så här ser hela koden ut nu</summary>
 
 ```python
+import pgzrun
+import pygame
+import math
+import random
+
+# Globala variabler här nedanför
+cell_size = 18
+
+grid = []
+grid_x_count = 19
+grid_y_count = 14
+
+# Funktioner här nedanför
+
+
+def reset():
+    global grid, game_over
+    grid = []
+
+    for y in range(grid_y_count):
+        grid.append([])
+        for x in range(grid_x_count):
+            grid[y].append({
+                'flower': False,
+                'state': 'covered',  # 'covered', 'uncovered', 'flag', 'question'
+            })
+
+    possible_flower_positions = []
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            possible_flower_positions.append({'x': x, 'y': y})
+
+    for flower_index in range(40):
+        position = possible_flower_positions.pop(
+            random.randrange(len(possible_flower_positions)))
+        grid[position['y']][position['x']]['flower'] = True
+
+    game_over = False
+
+
+def update():
+    global selected_x, selected_y
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    selected_x = math.floor(mouse_x / cell_size)
+    selected_y = math.floor(mouse_y / cell_size)
+
+    if selected_x > grid_x_count - 1:
+        selected_x = grid_x_count - 1
+    if selected_y > grid_y_count - 1:
+        selected_y = grid_y_count - 1
+
+
+def get_surrounding_flower_count(x, y):
+    surrounding_flower_count = 0
+
+    for dy in range(-1, 2):
+        for dx in range(-1, 2):
+            if (
+                not (dy == 0 and dx == 0)
+                and 0 <= (y + dy) < len(grid)
+                and 0 <= (x + dx) < len(grid[y + dy])
+                and grid[y + dy][x + dx]['flower']
+            ):
+                surrounding_flower_count += 1
+
+    return surrounding_flower_count
+
+
+def on_mouse_up(button):
+    global game_over
+
+    if game_over:
+        return
+
+    if button == mouse.LEFT and grid[selected_y][selected_x]['state'] != 'flag':
+        if grid[selected_y][selected_x]['flower']:
+            grid[selected_y][selected_x]['state'] = 'uncovered'
+            game_over = True
+        else:
+            stack = [
+                {
+                    'x': selected_x,
+                    'y': selected_y,
+                }
+            ]
+
+            while len(stack) > 0:
+                current = stack.pop()
+                x = current['x']
+                y = current['y']
+
+                grid[y][x]['state'] = 'uncovered'
+
+                if get_surrounding_flower_count(x, y) == 0:
+                    for dy in range(-1, 2):
+                        for dx in range(-1, 2):
+                            if (
+                                not (dy == 0 and dx == 0)
+                                and 0 <= (y + dy) < len(grid)
+                                and 0 <= (x + dx) < len(grid[y + dy])
+                                and grid[y + dy][x + dx]['state'] in ('covered', 'question')
+                            ):
+                                stack.append({
+                                    'x': x + dx,
+                                    'y': y + dy,
+                                })
+
+            complete = True
+
+            for y in range(grid_y_count):
+                for x in range(grid_x_count):
+                    if grid[y][x]['state'] != 'uncovered' and not grid[y][x]['flower']:
+                        complete = False
+
+            if complete:
+                game_over = True
+
+    elif button == mouse.RIGHT:
+        if grid[selected_y][selected_x]['state'] == 'covered':
+            grid[selected_y][selected_x]['state'] = 'flag'
+
+        elif grid[selected_y][selected_x]['state'] == 'flag':
+            grid[selected_y][selected_x]['state'] = 'question'
+
+        elif grid[selected_y][selected_x]['state'] == 'question':
+            grid[selected_y][selected_x]['state'] = 'covered'
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+
+            def draw_cell(image, x, y):
+                screen.blit(image, (x * cell_size, y * cell_size))
+
+            if grid[y][x]['state'] == 'uncovered':
+                draw_cell('uncovered', x, y)
+            else:
+                if x == selected_x and y == selected_y:
+                    if pygame.mouse.get_pressed()[0] == 1:
+                        if grid[y][x]['state'] == 'flag':
+                            draw_cell('covered', x, y)
+                        else:
+                            draw_cell('uncovered', x, y)
+                    else:
+                        draw_cell('covered_highlighted', x, y)
+                else:
+                    draw_cell('covered', x, y)
+
+            surrounding_flower_count = 0
+
+            for dy in range(-1, 2):
+                for dx in range(-1, 2):
+                    if (
+                        not (dy == 0 and dx == 0)
+                        and 0 <= (y + dy) < len(grid)
+                        and 0 <= (x + dx) < len(grid[y + dy])
+                        and grid[y + dy][x + dx]['flower']
+                    ):
+                        surrounding_flower_count += 1
+
+            if grid[y][x]['flower']:
+                draw_cell('flower', x, y)
+            elif get_surrounding_flower_count(x, y) > 0:
+                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+
+            if grid[y][x]['state'] == 'flag':
+                draw_cell('flag', x, y)
+            elif grid[y][x]['state'] == 'question':
+                draw_cell('question', x, y)
+
+
+def on_key_down():
+    reset()
+
+
+# Kod för att starta appen
+reset()
+grid[0][0]['state'] = 'flag'
+grid[0][1]['state'] = 'question'
+
+pgzrun.go()  # måste vara sista raden
 
 ```
   
@@ -3188,6 +3374,7 @@ def on_mouse_up(button):
                                     'x': x + dx,
                                     'y': y + dy,
                                 })
+
             complete = True
 
             for y in range(grid_y_count):
@@ -3270,7 +3457,7 @@ pgzrun.go()  # måste vara sista raden
   
 </details>
 
-## Stäng av musklick spelet är slut
+## Sluta markera celler när spelet är slut
 När spelet är slut ska musen inte markera cellerna längre.
 
 ```python
@@ -3817,6 +4004,7 @@ def on_mouse_up(button):
                                     'x': x + dx,
                                     'y': y + dy,
                                 })
+
             complete = True
 
             for y in range(grid_y_count):
@@ -3875,9 +4063,9 @@ def draw():
 
             if grid[y][x]['flower'] and game_over:
                 draw_cell('flower', x, y)
-            elif get_surrounding_flower_count(x, y) > 0 and grid[y][x]['state'] == 'uncovered':
+            elif get_surrounding_flower_count(x, y) > 0 and grid[y][x]['state'] == 'uncovered': 
                 draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
-
+                
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
             elif grid[y][x]['state'] == 'question':
@@ -3890,6 +4078,8 @@ def on_key_down():
 
 # Kod för att starta appen
 reset()
+grid[0][0]['state'] = 'flag'
+grid[0][1]['state'] = 'question'
 
 pgzrun.go()  # måste vara sista raden
 
@@ -3902,19 +4092,60 @@ pgzrun.go()  # måste vara sista raden
 
 ## Hindra att man klickar på en blomma vid första klicket
 För att det första klicket inte ska avtäcka en blomma, flyttar vi koden för att placera blommor så att den körs när vänster musknapp klickas.
+Den biten av koden flyttas alltså från `reset()` till en egen funktion, `plant_flowers`.
 
-Cellen vi klickade på läggs inte till de möjliga blompositionerna.
+Den första cellen vi klickade på får ingen blomma.
 
-En variabel skapas för att hålla reeda på om ett klick är det första klicket i spelet.
+En variabel skapas för att hålla reda på om ett klick är det första klicket i spelet.
 
 ```python
-def draw():
-    # etc.
+def reset():
+    global grid, game_over, first_click # ändrad
+    grid = []
 
-            if grid[y][x]['flower'] and game_over:
-                draw_cell('flower', x, y)
-            elif get_surrounding_flower_count(x, y) > 0 and grid[y][x]['state'] == 'uncovered': # ändrad
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+    for y in range(grid_y_count):
+        grid.append([])
+        for x in range(grid_x_count):
+            grid[y].append({
+                'flower': False,
+                'state': 'covered',  # 'covered', 'uncovered', 'flag', 'question'
+            })
+
+    game_over = False
+    first_click = True
+
+#etc. 
+
+def plant_flowers_avoiding(avoid_x, avoid_y): # lite av koden från reset() med lite ändringar
+    possible_flower_positions = []
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if x != avoid_x or y != avoid_y:  # OK att plantera en blomma här
+                possible_flower_positions.append({'x': x, 'y': y})
+
+    for flower_index in range(40):
+        position = possible_flower_positions.pop(
+            random.randrange(len(possible_flower_positions)))
+        grid[position['y']][position['x']]['flower'] = True
+
+def on_mouse_up(button):
+    global game_over, first_click #ändrad
+
+    if game_over:
+        reset()
+        return
+
+    if button == mouse.LEFT and grid[selected_y][selected_x]['state'] != 'flag':
+        if first_click:
+            first_click = False
+            plant_flowers_avoiding(selected_x, selected_y) # nyrad
+
+        if grid[selected_y][selected_x]['flower']:
+            grid[selected_y][selected_x]['state'] = 'uncovered'
+            game_over = True
+        else:
+            stack = [
 
     # etc.
 ```
@@ -3939,7 +4170,7 @@ grid_y_count = 14
 
 
 def reset():
-    global grid, game_over
+    global grid, game_over, first_click
     grid = []
 
     for y in range(grid_y_count):
@@ -3950,18 +4181,8 @@ def reset():
                 'state': 'covered',  # 'covered', 'uncovered', 'flag', 'question'
             })
 
-    possible_flower_positions = []
-
-    for y in range(grid_y_count):
-        for x in range(grid_x_count):
-            possible_flower_positions.append({'x': x, 'y': y})
-
-    for flower_index in range(40):
-        position = possible_flower_positions.pop(
-            random.randrange(len(possible_flower_positions)))
-        grid[position['y']][position['x']]['flower'] = True
-
     game_over = False
+    first_click = True
 
 
 def update():
@@ -3993,14 +4214,32 @@ def get_surrounding_flower_count(x, y):
     return surrounding_flower_count
 
 
+def plant_flowers_avoiding(avoid_x, avoid_y):
+    possible_flower_positions = []
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if x != avoid_x or y != avoid_y:  # OK att plantera en blomma här
+                possible_flower_positions.append({'x': x, 'y': y})
+
+    for flower_index in range(40):
+        position = possible_flower_positions.pop(
+            random.randrange(len(possible_flower_positions)))
+        grid[position['y']][position['x']]['flower'] = True
+
+
 def on_mouse_up(button):
-    global game_over
+    global game_over, first_click
 
     if game_over:
         reset()
         return
 
     if button == mouse.LEFT and grid[selected_y][selected_x]['state'] != 'flag':
+        if first_click:
+            first_click = False
+            plant_flowers_avoiding(selected_x, selected_y)
+
         if grid[selected_y][selected_x]['flower']:
             grid[selected_y][selected_x]['state'] = 'uncovered'
             game_over = True
@@ -4032,6 +4271,7 @@ def on_mouse_up(button):
                                     'x': x + dx,
                                     'y': y + dy,
                                 })
+
             complete = True
 
             for y in range(grid_y_count):
@@ -4105,8 +4345,6 @@ def on_key_down():
 
 # Kod för att starta appen
 reset()
-grid[0][0]['state'] = 'flag'
-grid[0][1]['state'] = 'question'
 
 pgzrun.go()  # måste vara sista raden
 
