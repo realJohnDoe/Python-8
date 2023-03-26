@@ -4092,11 +4092,15 @@ pgzrun.go()  # måste vara sista raden
 
 ## Hindra att man klickar på en blomma vid första klicket
 För att det första klicket inte ska avtäcka en blomma, flyttar vi koden för att placera blommor så att den körs när vänster musknapp klickas.
-Den biten av koden flyttas alltså från `reset()` till en egen funktion, `plant_flowers`.
 
-Den första cellen vi klickade på får ingen blomma.
+Blomplanteringen får en egen funktion, `plant_flowers_avoiding(x, y)` där en del av koden från `reset()` hamnar.
+`on_mouse_up` kan då anropa den koden vid första klicket.
 
-En variabel skapas för att hålla reda på om ett klick är det första klicket i spelet.
+Den första cellen vi klickade på får då ingen blomma.
+
+Vi skapar en variabel för att hålla reda på om ett klick är det första klicket i spelet.
+
+✏️ Mata in koden och testkör! Fungerar spelet som du tänker dig nu?
 
 ```python
 def reset():
@@ -4117,6 +4121,7 @@ def reset():
 #etc. 
 
 def plant_flowers_avoiding(avoid_x, avoid_y): # lite av koden från reset() med lite ändringar
+    global grid
     possible_flower_positions = []
 
     for y in range(grid_y_count):
@@ -4215,6 +4220,7 @@ def get_surrounding_flower_count(x, y):
 
 
 def plant_flowers_avoiding(avoid_x, avoid_y):
+    global grid
     possible_flower_positions = []
 
     for y in range(grid_y_count):
