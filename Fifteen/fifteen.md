@@ -68,7 +68,7 @@ pgzrun.go() # Ska alltid vara sist
 
 ## Rita siffrorna
 
-Stycknumren dras ovanpå pjäserna.
+Numren ritas ovanpå pjäserna.
 
 Ett styckenummer beräknas genom att addera Y-positionen (dvs. radnummer) multiplicerat med antalet pjäser i en rad till X-positionen plus 1.
 
@@ -129,7 +129,7 @@ Antalet bitar på X- och Y-axlarna återanvänds från att rita bitarna, så de 
 
 
 ## Rita inte det tomma utrymmet
-Antalet pjäser på varje axel multiplicerat tillsammans ger det totala antalet pjäser (dvs. 4 gånger 4 betyder 16 pjäser), och en pjäs dras endast om det inte är detta nummer.
+Antalet pjäser på varje axel multiplicerat tillsammans ger det totala antalet pjäser (dvs. 4 gånger 4 betyder 16 pjäser), och en pjäs ritas bara om numret är skilt från 16.
 
 ✏️ Uppdatera koden och testkör.
 
