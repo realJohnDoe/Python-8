@@ -38,17 +38,31 @@ För nu ritas en bit där det tomma utrymmet ska vara.
 Testkör!
 
 ```python
-###
-```
+import pgzrun
 
-<details>
-  <summary>📝 Så här ser hela koden ut nu</summary>
-  
-```python
-###
+# Globala variabler här under
+
+# Funktioner (def) här under
+def draw():
+    screen.fill((0, 0, 0))
+
+    for y in range(4):
+        for x in range(4):
+            piece_size = 100
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+
+# Kod för att starta appen här under
+
+pgzrun.go() # Ska alltid vara sist
 ```
-  
-</details>
 
 ![image](https://user-images.githubusercontent.com/4598641/226436463-1d10dd82-ed1c-429b-b0bc-e855b4969551.png)
 
@@ -64,17 +78,32 @@ På den andra raden läggs 4 till varje X-position, så den första nummer på a
 ✏️ Uppdatera koden och testkör.
 
 ```python
-###
-```
+def draw():
+    screen.fill((0, 0, 0))
 
-<details>
-  <summary>📝 Så här ser hela koden ut nu</summary>
-  
-```python
-###
+    for y in range(4):
+        for x in range(4):
+            piece_size = 100
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text( #nyrad 🔲
+                str(y * 4 + x + 1), #nyrad 🔲
+                (x * piece_size, y * piece_size), #nyrad 🔲
+                fontsize=60 #nyrad 🔲
+            ) #nyrad 🔲
+            
+
+# Kod för att starta appen här under
+
+pgzrun.go() # Ska alltid vara sist
 ```
-  
-</details>
 
 ![image](https://user-images.githubusercontent.com/4598641/226436562-731e3960-4198-4bef-8635-e239557be6c9.png)
 
