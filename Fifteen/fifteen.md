@@ -7,11 +7,11 @@
 # Regler
 
 Det finns en tavla med 15 bitar och ett tomt utrymme. 
-Flytta runt pjäserna tills de är i nummerordning genom att använda piltangenterna för att flytta pjäserna till det tomma utrymmet.
+Flytta runt bitarna tills de är i nummerordning genom att använda piltangenterna för att flytta en bit i taget till det tomma utrymmet.
 
 ## Kontroller
 
-**Piltangenter**	Flytta pjäs
+**Piltangenter**	Flytta en bit
 
 # Översikt
 Bitarna lagras som ett rutnät med siffror.
@@ -20,35 +20,36 @@ Siffran 16 representerar det tomma utrymmet.
 
 ![image](https://user-images.githubusercontent.com/4598641/226436258-85719c97-8e01-4aca-85b0-82d3cc184876.png)
 
-De andra siffrorna byts ut med det tomma utrymmet när en piltangent trycks ned.
+Grannbiten flyttas till tomma utrymmet när en piltangent trycks ned.
 
-I början av spelet är rutnätet initialt i sorterad ordning, och slumpmässiga drag görs för att blanda det. (Om pjäspositionerna istället var helt slumpmässiga kan det resultera i en olöslig bräda.)
+I början av spelet är bitarna i stigande nummerordning och slumpmässiga drag görs för att blanda det. Om bitarnas position blandas helt slumpmässigt kan det resultera i en uppställning som inte går att lösa.
 
-Efter att en pjäs har flyttats, går pjäserna igenom, och om de alla har sina initiala sorterade värden är spelet över.
+Efter att en bit har flyttats, gås bitarna igenom. Om alla har sina ursprungliga värden i nummerordning är spelet över.
 
 # Kodning
 
 ## Rita bitarna
 
-Bitarna är ritade som rutor.
+Bitarna ritas som rutor.
 
-För nu ritas en bit där det tomma utrymmet ska vara.
+Just nu ritas en bit där det tomma utrymmet ska vara.
 
 ✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/fifteen-starter och spara en egen kopia med knappen "Fork".
 Testkör!
 
 ```python
 import pgzrun
-
 # Globala variabler här under
+WIDTH, HEIGHT = 400, 400
 
 # Funktioner (def) här under
+
 def draw():
     screen.fill((0, 0, 0))
+    piece_size = 100
 
     for y in range(4):
         for x in range(4):
-            piece_size = 100
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
@@ -61,16 +62,16 @@ def draw():
 
 # Kod för att starta appen här under
 
-pgzrun.go() # Ska alltid vara sist
+pgzrun.go()  # Ska alltid vara sist
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/226436463-1d10dd82-ed1c-429b-b0bc-e855b4969551.png)
 
 ## Rita siffrorna
 
-Numren ritas ovanpå pjäserna.
+Numren ritas ovanpå bitarna.
 
-Ett styckenummer beräknas genom att addera Y-positionen (dvs. radnummer) multiplicerat med antalet pjäser i en rad till X-positionen plus 1.
+Bitens nummer beräknas genom att addera Y-positionen (dvs. radnummer) multiplicerat med antalet bitar i en rad till X-positionen plus 1.
 
 Till exempel, på den första raden är Y-positionen 0, så ingenting läggs till varje X-position, så den första siffran på den första raden är 1.
 På den andra raden läggs 4 till varje X-position, så den första nummer på andra raden är 5.
@@ -108,7 +109,7 @@ pgzrun.go() # Ska alltid vara sist
 ![image](https://user-images.githubusercontent.com/4598641/226436562-731e3960-4198-4bef-8635-e239557be6c9.png)
 
 ## Skapa rutnätet
-Ett rutnät skapas med varje pjäs nummer lagrat på sin plats på rutnätet, och detta nummer dras.
+Ett rutnät skapas med varje bits nummer lagrat på sin plats på rutnätet, och detta nummer ritas.
 
 Antalet bitar på X- och Y-axlarna återanvänds från att rita bitarna, så de görs till variabler.
 
@@ -129,7 +130,7 @@ Antalet bitar på X- och Y-axlarna återanvänds från att rita bitarna, så de 
 
 
 ## Rita inte det tomma utrymmet
-Antalet pjäser på varje axel multiplicerat tillsammans ger det totala antalet pjäser (dvs. 4 gånger 4 betyder 16 pjäser), och en pjäs ritas bara om numret är skilt från 16.
+Antalet bitar på varje axel multiplicerat tillsammans ger det totala antalet bitar (dvs. 4 gånger 4 betyder 16 bitar), och en bit ritas bara om numret är skilt från 16.
 
 ✏️ Uppdatera koden och testkör.
 
@@ -174,9 +175,9 @@ tom x: 3, tom y: 3
 ```
 
 ## Flytta bitar ner
-Om Y-positionen för det tomma utrymmet är större än 0, betyder det att det finns en pjäs ovanför det tomma utrymmet, så det är möjligt att flytta en pjäs nedåt.
+Om Y-positionen för det tomma utrymmet är större än 0, betyder det att det finns en bit ovanför det tomma utrymmet, så det är möjligt att flytta en bit neråt.
 
-Det tomma utrymmet ändras till styckenumret ovanför utrymmet, och stycket ovanför utrymmet ändras till utrymmesnumret.
+Det tomma utrymmet ändras till bitnumret ovanför utrymmet, och stycket ovanför utrymmet ändras till den lediga platsen (16).
 
 För nu flyttar vilken tangent som helst en bit ner.
 
@@ -199,7 +200,7 @@ För nu flyttar vilken tangent som helst en bit ner.
 
 ## Flytta upp bitar
 Om Y-positionen för det tomma utrymmet är mindre än antalet rader i rutnätet, betyder det att det finns en bit under det tomma utrymmet,
-så att det är möjligt att flytta pjäsen uppåt.
+så att det är möjligt att flytta biten uppåt.
 
 Y-positionen för den bit som det tomma utrymmet byter med görs till en variabel. 
 När upp-tangenten trycks in ställs den till positionen under det tomma utrymmet (dvs plus 1 på Y-axeln).
@@ -291,7 +292,7 @@ så en funktion görs med riktningen som parameter.
 
 ## Gör den nedre högra positionen tom
 Så att det tomma utrymmet alltid börjar i det nedre högra hörnet, flyttas bitarna åt vänster och uppåt flera gånger. 
-Antalet pjäser på en axel minus 1 är det maximala antalet drag det skulle ta för att flytta utrymmet från ena sidan till den andra.
+Antalet bitar på en axel minus 1 är det maximala antalet drag det skulle ta för att flytta utrymmet från ena sidan till den andra.
 
 ✏️ Uppdatera koden och testkör.
 
@@ -334,7 +335,7 @@ Denna funktion anropas innan spelet börjar och när r- tangenten trycks ned.
 
 
 ## Kontrollera om vi är klara
-Efter att ett drag har gjorts, slingras pjäserna igenom, och om ingen av pjäserna inte är lika med numret som de fick från början 
+Efter att ett drag har gjorts, loopar vi genom bitarna, och om ingen av bitarna inte är lika med numret som de fick från början 
 (dvs de är alla i sina sorterade positioner), återställs spelet.
 
 ## Förenkla koden
