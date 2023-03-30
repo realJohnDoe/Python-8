@@ -6,8 +6,8 @@
 
 # Regler
 
-Det finns en tavla med 15 bitar och ett tomt utrymme. 
-Flytta runt bitarna tills de är i nummerordning genom att använda piltangenterna för att flytta en bit i taget till det tomma utrymmet.
+Det finns en tavla med 15 bitar och en tom ruta. 
+Flytta runt bitarna tills de är i nummerordning genom att använda piltangenterna för att flytta en bit i taget till den tomma rutan.
 
 ## Kontroller
 
@@ -16,11 +16,11 @@ Flytta runt bitarna tills de är i nummerordning genom att använda piltangenter
 # Översikt
 Bitarna lagras som ett rutnät med siffror.
 
-Siffran 16 representerar det tomma utrymmet.
+Siffran 16 representerar den tomma rutan.
 
 ![image](https://user-images.githubusercontent.com/4598641/226436258-85719c97-8e01-4aca-85b0-82d3cc184876.png)
 
-Grannbiten flyttas till tomma utrymmet när en piltangent trycks ned.
+Grannbiten flyttas till den tomma rutan när en piltangent trycks ned.
 
 I början av spelet är bitarna i stigande nummerordning och slumpmässiga drag görs för att blanda det. Om bitarnas position blandas helt slumpmässigt kan det resultera i en uppställning som inte går att lösa.
 
@@ -32,7 +32,7 @@ Efter att en bit har flyttats, gås bitarna igenom. Om alla har sina ursprunglig
 
 Bitarna ritas som rutor.
 
-Just nu ritas en bit där det tomma utrymmet ska vara.
+Just nu ritas en bit där den tomma rutan ska vara.
 
 ✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/fifteen-starter och spara en egen kopia med knappen "Fork".
 Testkör!
@@ -227,10 +227,10 @@ pgzrun.go()  # Ska alltid vara sist
 
 ![image](https://user-images.githubusercontent.com/4598641/226437183-8e41b05e-77bc-488b-b400-4785be077050.png)
 
-## Hitta position för tomt utrymme
-Det första steget i att flytta en bit är att hitta positionen för det tomma utrymmet.
+## Hitta den tomma rutans position
+Det första steget i att flytta en bit är att hitta positionen för den tomma rutan.
 
-När en tangent trycks in, slingras rutnätet, och om en bit är lika med antalet bitar på varje axel multiplicerat med varandra (dvs det är det tomma utrymmet), så skrivs dess position för närvarande ut.
+När en tangent trycks in, loopar vi igenom rutnätet. Om en bit är lika med antalet bitar på varje axel multiplicerat med varandra (dvs det är den tomma rutan), så skrivs dess position för närvarande ut.
 
 ✏️ Uppdatera koden och testkör.
 
@@ -253,11 +253,11 @@ tom x: 3, tom y: 3
 ```
 
 ## Flytta bitar ner
-Om Y-positionen för det tomma utrymmet är större än 0, betyder det att det finns en bit ovanför det tomma utrymmet, så det är möjligt att flytta en bit neråt.
+Om Y-positionen för den tomma rutan är större än 0, betyder det att det finns en bit ovanför den tomma rutan, så det är möjligt att flytta en bit neråt.
 
-Det tomma utrymmet ändras till bitnumret ovanför utrymmet, och stycket ovanför utrymmet ändras till den lediga platsen (16).
+Den tomma rutan ändras till bitnumret ovanför rutan. Biten ovanför rutan ändras till den lediga rutan (16).
 
-För nu flyttar vilken tangent som helst en bit ner.
+Just nu flyttar vilken tangent som helst en bit ner.
 
 ✏️ Uppdatera koden och testkör.
 
@@ -277,11 +277,11 @@ För nu flyttar vilken tangent som helst en bit ner.
 ![image](https://user-images.githubusercontent.com/4598641/226437400-e5f88975-05ce-4b80-80ca-50862059eb21.png)
 
 ## Flytta upp bitar
-Om Y-positionen för det tomma utrymmet är mindre än antalet rader i rutnätet, betyder det att det finns en bit under det tomma utrymmet,
+Om Y-positionen för den tomma rutan är mindre än antalet rader i rutnätet, betyder det att det finns en bit under den tomma rutan,
 så att det är möjligt att flytta biten uppåt.
 
-Y-positionen för den bit som det tomma utrymmet byter med görs till en variabel. 
-När upp-tangenten trycks in ställs den till positionen under det tomma utrymmet (dvs plus 1 på Y-axeln).
+Y-positionen för den bit som det tomma rutan byter med görs till en variabel. 
+När upp-tangenten trycks in ställs den till positionen under den tomma rutan (dvs plus 1 på Y-axeln).
 
 ✏️ Uppdatera koden och testkör.
 
@@ -300,7 +300,7 @@ När upp-tangenten trycks in ställs den till positionen under det tomma utrymme
 
 
 ## Flytta bitar åt vänster och höger
-X-positionen för den bit som det tomma utrymmet byter med görs till en variabel, och den ändras när vänster- eller högerpilen trycks ned.
+X-positionen för den bit som den tomma rutan byter med görs till en variabel, och den ändras när vänster- eller högerpilen trycks ned.
 
 ✏️ Uppdatera koden och testkör.
 
@@ -369,8 +369,8 @@ så en funktion görs med riktningen som parameter.
 
 
 ## Gör den nedre högra positionen tom
-Så att det tomma utrymmet alltid börjar i det nedre högra hörnet, flyttas bitarna åt vänster och uppåt flera gånger. 
-Antalet bitar på en axel minus 1 är det maximala antalet drag det skulle ta för att flytta utrymmet från ena sidan till den andra.
+Den tomma rutan ska vara längst ner till höger när spelet börjar. Därför flyttas bitarna åt vänster och uppåt flera gånger. 
+Antalet bitar på en axel minus 1 är det maximala antalet drag det skulle ta för att flytta den tomma rutan från ena sidan till den andra.
 
 ✏️ Uppdatera koden och testkör.
 
