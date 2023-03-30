@@ -76,6 +76,11 @@ Bitens nummer beräknas genom att addera Y-koordinaten (dvs. radnummer) multipli
 Till exempel, på den första raden är Y-koordinaten 0, så ingenting läggs till varje X-koordinat, så den första siffran på den första raden är 1.
 På den andra raden läggs 4 till varje X-koordinat, så den första nummer på andra raden är 5.
 
+Tänk på att koordinatsystemet för våra rutor är upp och ner och att (x, y) = (0, 0) är i övre högra hörnet. Kolla bilden!
+
+![image](https://user-images.githubusercontent.com/4598641/228945276-453d6676-74ea-428e-850b-8033a408033a.png)
+
+
 ✏️ Uppdatera koden och testkör.
 
 ```python
