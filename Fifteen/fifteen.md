@@ -310,7 +310,7 @@ pgzrun.go()  # Ska alltid vara sist
 
 Så här ska det se ut i det svarta konsollfönstret:
 ```
-tom x: 3, tom y: 3
+empty x: 3, empty y: 3
 ```
 
 ## Flytta en bit neråt
