@@ -232,22 +232,83 @@ Det första steget i att flytta en bit är att hitta positionen för den tomma r
 
 När en tangent trycks in, loopar vi igenom rutnätet. Om en bit är lika med antalet bitar på varje axel multiplicerat med varandra (dvs det är den tomma rutan), så skrivs dess position för närvarande ut.
 
-✏️ Uppdatera koden och testkör.
+✏️ Lägg till funktionen `on_key_down()` och testkör genom att klicka på tangentbordet. Utskriften kommer i det svarta konsollfönstret.
 
 ```python
-###
+def on_key_down(key): #
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    # Tillfälligt
+    print(f"empty x: {empty_x}, empty y: {empty_y}")
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+grid = []
+
+# Funktioner (def) här under
+
+
+def on_key_down(key):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    # Tillfälligt
+    print(f"empty x: {empty_x}, empty y: {empty_y}")
+
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+pgzrun.go()  # Ska alltid vara sist
 ```
   
 </details>
 
-
+Så här ska det se ut i det svarta konsollfönstret:
 ```
 tom x: 3, tom y: 3
 ```
