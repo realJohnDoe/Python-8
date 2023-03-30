@@ -116,33 +116,111 @@ Antalet bitar på X- och Y-axlarna återanvänds från att rita bitarna, så de 
 ✏️ Uppdatera koden och testkör.
 
 ```python
-###
+import pgzrun
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4 #nyrad 🔲
+grid_y_count = 4 #nyrad 🔲
+grid = [] #nyrad 🔲
+
+# Funktioner (def) här under
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count): #ändrad 🔲
+        for x in range(grid_x_count): #ändrad 🔲
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]), #ändrad 🔲
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count): #nyrad 🔲
+    grid.append([]) #nyrad 🔲
+    for x in range(grid_x_count): #nyrad 🔲
+        grid[y].append(y * grid_x_count + x + 1) #nyrad 🔲
+
+pgzrun.go()  # Ska alltid vara sist
 ```
 
-<details>
-  <summary>📝 Så här ser hela koden ut nu</summary>
-  
-```python
-###
-```
-  
-</details>
-
-
-## Rita inte det tomma utrymmet
+## Rita inte den tomma rutan
 Antalet bitar på varje axel multiplicerat tillsammans ger det totala antalet bitar (dvs. 4 gånger 4 betyder 16 bitar), och en bit ritas bara om numret är skilt från 16.
 
 ✏️ Uppdatera koden och testkör.
 
 ```python
-###
+# etc.
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count: #ändrad 🔲
+                continue  # hoppa över detta x och gå till nästa värde i "for x" #ändrad 🔲
+# etc.
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+grid = []
+
+# Funktioner (def) här under
+
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+pgzrun.go()  # Ska alltid vara sist
 ```
   
 </details>
