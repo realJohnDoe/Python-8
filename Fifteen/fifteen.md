@@ -71,10 +71,10 @@ pgzrun.go()  # Ska alltid vara sist
 
 Numren ritas ovanpå bitarna.
 
-Bitens nummer beräknas genom att addera Y-positionen (dvs. radnummer) multiplicerat med antalet bitar i en rad till X-positionen plus 1.
+Bitens nummer beräknas genom att addera Y-koordinaten (dvs. radnummer) multiplicerat med antalet bitar i en rad till X-koordinaten plus 1.
 
-Till exempel, på den första raden är Y-positionen 0, så ingenting läggs till varje X-position, så den första siffran på den första raden är 1.
-På den andra raden läggs 4 till varje X-position, så den första nummer på andra raden är 5.
+Till exempel, på den första raden är Y-koordinaten 0, så ingenting läggs till varje X-koordinat, så den första siffran på den första raden är 1.
+På den andra raden läggs 4 till varje X-koordinat, så den första nummer på andra raden är 5.
 
 ✏️ Uppdatera koden och testkör.
 
@@ -313,24 +313,93 @@ Så här ska det se ut i det svarta konsollfönstret:
 tom x: 3, tom y: 3
 ```
 
-## Flytta bitar ner
-Om Y-positionen för den tomma rutan är större än 0, betyder det att det finns en bit ovanför den tomma rutan, så det är möjligt att flytta en bit neråt.
+## Flytta en bit neråt
+Om Y-koordinaten för den tomma rutan är större än 0, betyder det att det finns en bit ovanför den tomma rutan, så det är möjligt att flytta en bit neråt.
 
 Den tomma rutan ändras till bitnumret ovanför rutan. Biten ovanför rutan ändras till den lediga rutan (16).
 
 Just nu flyttar vilken tangent som helst en bit ner.
 
-✏️ Uppdatera koden och testkör.
+✏️ Uppdatera koden och testkör genom att trycka på någon tangent. Flyttas biten neråt som den ska?
 
 ```python
-###
+def on_key_down(key):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    # Tillfälligt
+    print(f"empty x: {empty_x}, empty y: {empty_y}")
+
+    if empty_y > 0: #nyrad 🔲
+        changed = (grid[empty_y][empty_x], grid[empty_y - 1][empty_x]) #nyrad 🔲
+        grid[empty_y - 1][empty_x], grid[empty_y][empty_x] = changed #nyrad 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+grid = []
+
+# Funktioner (def) här under
+
+
+def on_key_down(key):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    # Tillfälligt
+    print(f"empty x: {empty_x}, empty y: {empty_y}")
+
+    if empty_y > 0:
+        changed = (grid[empty_y][empty_x], grid[empty_y - 1][empty_x])
+        grid[empty_y - 1][empty_x], grid[empty_y][empty_x] = changed
+
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+pgzrun.go()  # Ska alltid vara sist
 ```
   
 </details>
@@ -338,10 +407,10 @@ Just nu flyttar vilken tangent som helst en bit ner.
 ![image](https://user-images.githubusercontent.com/4598641/226437400-e5f88975-05ce-4b80-80ca-50862059eb21.png)
 
 ## Flytta upp bitar
-Om Y-positionen för den tomma rutan är mindre än antalet rader i rutnätet, betyder det att det finns en bit under den tomma rutan,
+Om Y-koordinaten för den tomma rutan är mindre än antalet rader i rutnätet, betyder det att det finns en bit under den tomma rutan,
 så att det är möjligt att flytta biten uppåt.
 
-Y-positionen för den bit som det tomma rutan byter med görs till en variabel. 
+Y-koordinaten för den bit som det tomma rutan byter med görs till en variabel. 
 När upp-tangenten trycks in ställs den till positionen under den tomma rutan (dvs plus 1 på Y-axeln).
 
 ✏️ Uppdatera koden och testkör.
@@ -361,7 +430,7 @@ När upp-tangenten trycks in ställs den till positionen under den tomma rutan (
 
 
 ## Flytta bitar åt vänster och höger
-X-positionen för den bit som den tomma rutan byter med görs till en variabel, och den ändras när vänster- eller högerpilen trycks ned.
+X-koordinaten för den bit som den tomma rutan byter med görs till en variabel, och den ändras när vänster- eller högerpilen trycks ned.
 
 ✏️ Uppdatera koden och testkör.
 
