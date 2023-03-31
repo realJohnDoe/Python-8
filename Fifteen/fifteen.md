@@ -411,43 +411,212 @@ pgzrun.go()  # Ska alltid vara sist
 
 ![image](https://user-images.githubusercontent.com/4598641/226437400-e5f88975-05ce-4b80-80ca-50862059eb21.png)
 
-## Flytta upp bitar
-Om Y-koordinaten för den tomma rutan är mindre än antalet rader i rutnätet, betyder det att det finns en bit under den tomma rutan,
-så att det är möjligt att flytta biten uppåt.
+## Flytta en bit uppåt
+Om Y-koordinaten för den tomma rutan är mindre än antalet rader i rutnätet, betyder det att det finns en bit under den tomma rutan. 
+Den biten kan då flyttas upp.
 
 Y-koordinaten för den bit som det tomma rutan byter med görs till en variabel. 
-När upp-tangenten trycks in ställs den till positionen under den tomma rutan (dvs plus 1 på Y-axeln).
+När upp-tangenten trycks in ställs den till positionen under den tomma rutan, alltså ett steg ner på Y-axeln.
 
-✏️ Uppdatera koden och testkör.
+✏️ Ändra koden i `on_key_down()` och testkör med pil upp och ner.
 
 ```python
-###
+def on_key_down(key):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y #nyrad 🔲
+
+    if key == keys.DOWN: #nyrad 🔲
+        new_empty_y -= 1 #nyrad 🔲
+    elif key == keys.UP: #nyrad 🔲
+        new_empty_y += 1 #nyrad 🔲
+
+    if 0 <= new_empty_y < grid_y_count: #nyrad 🔲
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][empty_x]) #ändrad 🔲
+        grid[new_empty_y][empty_x], grid[empty_y][empty_x] = changed #ändrad 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+grid = []
+
+# Funktioner (def) här under
+
+
+def on_key_down(key):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y
+
+    if key == keys.DOWN:
+        new_empty_y -= 1
+    elif key == keys.UP:
+        new_empty_y += 1
+
+    if 0 <= new_empty_y < grid_y_count:
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][empty_x])
+        grid[new_empty_y][empty_x], grid[empty_y][empty_x] = changed
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+pgzrun.go()  # Ska alltid vara sist
 ```
   
 </details>
 
 
 ## Flytta bitar åt vänster och höger
-X-koordinaten för den bit som den tomma rutan byter med görs till en variabel, och den ändras när vänster- eller högerpilen trycks ned.
+X-koordinaten för den bit som den tomma rutan byter med görs till en variabel. Den ändras när vänster- eller högerpilen trycks ned.
 
-✏️ Uppdatera koden och testkör.
+✏️ Uppdatera koden i `on_key_down()` och testkör med alla fyra piltangenterna.
 
 ```python
-###
+def on_key_down(key):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+
+    if key == keys.DOWN:
+        new_empty_y -= 1
+    elif key == keys.UP:
+        new_empty_y += 1
+    elif key == keys.RIGHT:
+        new_empty_x -= 1
+    elif key == keys.LEFT:
+        new_empty_x += 1
+
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+grid = []
+
+# Funktioner (def) här under
+
+
+def on_key_down(key):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+
+    if key == keys.DOWN:
+        new_empty_y -= 1
+    elif key == keys.UP:
+        new_empty_y += 1
+    elif key == keys.RIGHT:
+        new_empty_x -= 1
+    elif key == keys.LEFT:
+        new_empty_x += 1
+
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+pgzrun.go()  # Ska alltid vara sist    
 ```
   
 </details>
