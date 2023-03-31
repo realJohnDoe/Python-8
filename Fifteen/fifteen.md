@@ -1543,6 +1543,8 @@ reset()
 pgzrun.go()  # Ska alltid vara sist    
 ```
 
+</details>
+
 ## Blanda igen om det råkar vara klart direkt efter blandningen
 
     Om bitarna fortfarande är i rätt ordning efter att de har blandats, försöker vi igen.
