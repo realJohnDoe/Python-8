@@ -524,23 +524,23 @@ def on_key_down(key):
                 empty_y = y
 
     new_empty_y = empty_y
-    new_empty_x = empty_x
+    new_empty_x = empty_x #nyrad 🔲
 
     if key == keys.DOWN:
         new_empty_y -= 1
     elif key == keys.UP:
         new_empty_y += 1
-    elif key == keys.RIGHT:
-        new_empty_x -= 1
-    elif key == keys.LEFT:
-        new_empty_x += 1
+    elif key == keys.RIGHT: #nyrad 🔲
+        new_empty_x -= 1 #nyrad 🔲
+    elif key == keys.LEFT: #nyrad 🔲
+        new_empty_x += 1 #nyrad 🔲
 
-    if (
-        0 <= new_empty_y < grid_y_count and
-        0 <= new_empty_x < grid_x_count
-    ):
-        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
-        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+    if ( #nyrad 🔲
+        0 <= new_empty_y < grid_y_count and #ändrad 🔲
+        0 <= new_empty_x < grid_x_count #nyrad 🔲
+    ): #nyrad 🔲
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x]) #ändrad 🔲
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed #ändrad 🔲
 ```
 
 <details>
@@ -626,24 +626,162 @@ pgzrun.go()  # Ska alltid vara sist
 
 
 
-## Blanda rutorna
+## Blanda bitarna
 I början av spelet görs ett antal slumpmässiga drag för att blanda brädet.
 
 Ett slumptal mellan 1 och 4 genereras och ett drag görs i en av de fyra rörelseriktningarna baserat på detta nummer.
 
-Slumpmodulen importeras så att random.randint kan användas.
+Slumpmodulen importeras så att `random.randint` kan användas.
 
-✏️ Uppdatera koden och testkör.
+✏️ Uppdatera koden och testkör. Vi återanvänder kod från `on_key_down()`.
 
 ```python
-###
+import pgzrun
+import random #nyrad 🔲
+
+# etc.
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+# Koden är kopierad från on_key_down med en del småändringar
+for move_number in range(1000): #nyrad
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+    
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+    
+    roll = random.randint(0, 3) #nyrad 🔲
+    if roll == 0: #nyrad 🔲
+        new_empty_y -= 1
+    elif roll == 1: #nyrad 🔲
+        new_empty_y += 1
+    elif roll == 2: #nyrad 🔲
+        new_empty_x -= 1
+    elif roll == 3: #nyrad 🔲
+        new_empty_x += 1
+    
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+
+pgzrun.go()  # Ska alltid vara sist
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+grid = []
+
+# Funktioner (def) här under
+
+
+def on_key_down(key):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+
+    if key == keys.DOWN:
+        new_empty_y -= 1
+    elif key == keys.UP:
+        new_empty_y += 1
+    elif key == keys.RIGHT:
+        new_empty_x -= 1
+    elif key == keys.LEFT:
+        new_empty_x += 1
+
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+
+for move_number in range(1000):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+    
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+    
+    roll = random.randint(0, 3)
+    if roll == 0:
+        new_empty_y -= 1
+    elif roll == 1:
+        new_empty_y += 1
+    elif roll == 2:
+        new_empty_x -= 1
+    elif roll == 3:
+        new_empty_x += 1
+    
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+
+pgzrun.go()  # Ska alltid vara sist
 ```
   
 </details>
@@ -652,41 +790,285 @@ Slumpmodulen importeras så att random.randint kan användas.
 ![image](https://user-images.githubusercontent.com/4598641/226437586-c1a482c0-b465-4214-822a-68f8b2530839.png)
 
 ## Förenkla koden
-Den enda skillnaden mellan blandningskoden och den tangentbordskontrollerade koden är hur riktningen för förflyttningen bestäms,
-så en funktion görs med riktningen som parameter.
+Den enda skillnaden mellan den nya blandningskoden (längst ner) och koden i `on_key_down()` är hur riktningen för förflyttningen bestäms.
+Vi gör en funktion med riktningen som parameter.
 
-✏️ Uppdatera koden och testkör.
+✏️ Uppdatera koden och testkör. Fungerar den som innan?
 
 ```python
-###
+# etc.
+
+# Funktioner (def) här under
+
+def move(direction): #nyrad 🔲
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+
+    if direction == 'down': #nyrad 🔲
+        new_empty_y -= 1
+    elif direction == 'up': #nyrad 🔲
+        new_empty_y += 1
+    elif direction == 'right': #nyrad 🔲
+        new_empty_x -= 1
+    elif direction == 'left': #nyrad 🔲
+        new_empty_x += 1
+
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+
+
+def on_key_down(key):
+    if key == keys.DOWN:
+        move('down') #nyrad 🔲
+    elif key == keys.UP:
+        move('up') #nyrad 🔲
+    elif key == keys.RIGHT:
+        move('right') #nyrad 🔲
+    elif key == keys.LEFT:
+        move('left') #nyrad 🔲
+
+# etc.
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+for move_number in range(1000):
+    move(random.choice(('down', 'up', 'right', 'left'))) #nyrad 🔲
+
+pgzrun.go()  # Ska alltid vara sist
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+grid = []
+
+# Funktioner (def) här under
+
+def move(direction):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+
+    if direction == 'down':
+        new_empty_y -= 1
+    elif direction == 'up':
+        new_empty_y += 1
+    elif direction == 'right':
+        new_empty_x -= 1
+    elif direction == 'left':
+        new_empty_x += 1
+
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+
+
+def on_key_down(key):
+    if key == keys.DOWN:
+        move('down')
+    elif key == keys.UP:
+        move('up')
+    elif key == keys.RIGHT:
+        move('right')
+    elif key == keys.LEFT:
+        move('left')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+for move_number in range(1000):
+    move(random.choice(('down', 'up', 'right', 'left')))
+
+pgzrun.go()  # Ska alltid vara sist
 ```
   
 </details>
 
 
 
-## Gör den nedre högra positionen tom
+## Gör den nedre högra rutan tom
 Den tomma rutan ska vara längst ner till höger när spelet börjar. Därför flyttas bitarna åt vänster och uppåt flera gånger. 
 Antalet bitar på en axel minus 1 är det maximala antalet drag det skulle ta för att flytta den tomma rutan från ena sidan till den andra.
 
-✏️ Uppdatera koden och testkör.
+✏️ Den nya koden gör samma sak som tre tryck på vänsterpil och tre på uppåtpil. Testa med piltangenterna. Hamnar den tomma rutan längst ner till höger?
+
+✏️ Uppdatera sedan koden och testkör.
 
 ```python
-###
+# etc.
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+for move_number in range(1000):
+    move(random.choice(('down', 'up', 'right', 'left')))
+
+for move_number in range(grid_x_count - 1): #nyrad 🔲
+    move('left') #nyrad 🔲
+
+for move_number in range(grid_y_count - 1): #nyrad 🔲
+    move('up') #nyrad 🔲
+    
+pgzrun.go()  # Ska alltid vara sist
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+grid = []
+
+# Funktioner (def) här under
+
+def move(direction):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+
+    if direction == 'down':
+        new_empty_y -= 1
+    elif direction == 'up':
+        new_empty_y += 1
+    elif direction == 'right':
+        new_empty_x -= 1
+    elif direction == 'left':
+        new_empty_x += 1
+
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+
+
+def on_key_down(key):
+    if key == keys.DOWN:
+        move('down')
+    elif key == keys.UP:
+        move('up')
+    elif key == keys.RIGHT:
+        move('right')
+    elif key == keys.LEFT:
+        move('left')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+for y in range(grid_y_count):
+    grid.append([])
+    for x in range(grid_x_count):
+        grid[y].append(y * grid_x_count + x + 1)
+
+for move_number in range(1000):
+    move(random.choice(('down', 'up', 'right', 'left')))
+
+for move_number in range(grid_x_count - 1):
+    move('left')
+
+for move_number in range(grid_y_count - 1):
+    move('up')
+    
+pgzrun.go()  # Ska alltid vara sist
 ```
   
 </details>
@@ -696,21 +1078,168 @@ Antalet bitar på en axel minus 1 är det maximala antalet drag det skulle ta f�
 
 
 ## Återställa spelet
-En funktion skapas som ställer in spelets initiala tillstånd.
+Vi gör en funktion som ställer in spelets startläge.
 
-Denna funktion anropas innan spelet börjar och när r- tangenten trycks ned.
+Den funktionen anropas innan spelet börjar och när vi trycker på tangenten `R`.
 
-✏️ Uppdatera koden och testkör.
+✏️ Uppdatera koden och testkör. Blir det en ny spelplan när man trycker på `R`?
 
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+
+# Funktioner (def) här under
+
+def move(direction):
+    # etc.
+
+def reset():
+    global grid #nyrad 🔲
+    grid = [] #flyttad 🔲
+
+    for y in range(grid_y_count):
+        grid.append([])
+        for x in range(grid_x_count):
+            grid[y].append(y * grid_x_count + x + 1)
+
+    for move_number in range(1000):
+        move(random.choice(('down', 'up', 'right', 'left')))
+
+    for move_number in range(grid_x_count - 1):
+        move('left')
+
+    for move_number in range(grid_y_count - 1):
+        move('up')
+
+def on_key_down(key):
+    if key == keys.DOWN:
+        move('down')
+    elif key == keys.UP:
+        move('up')
+    elif key == keys.RIGHT:
+        move('right')
+    elif key == keys.LEFT:
+        move('left')
+    elif key == keys.R: #nyrad 🔲
+        reset() #nyrad 🔲
+
+
+def draw():
+    # etc.
+
+# Kod för att starta appen här under
+reset() #nyrad 🔲
+
+pgzrun.go()  # Ska alltid vara sist
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här under
+WIDTH, HEIGHT = 400, 400
+
+grid_x_count = 4
+grid_y_count = 4
+
+# Funktioner (def) här under
+
+def move(direction):
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                empty_x = x
+                empty_y = y
+
+    new_empty_y = empty_y
+    new_empty_x = empty_x
+
+    if direction == 'down':
+        new_empty_y -= 1
+    elif direction == 'up':
+        new_empty_y += 1
+    elif direction == 'right':
+        new_empty_x -= 1
+    elif direction == 'left':
+        new_empty_x += 1
+
+    if (
+        0 <= new_empty_y < grid_y_count and
+        0 <= new_empty_x < grid_x_count
+    ):
+        changed = (grid[empty_y][empty_x], grid[new_empty_y][new_empty_x])
+        grid[new_empty_y][new_empty_x], grid[empty_y][empty_x] = changed
+
+def reset():
+    global grid
+    grid = []
+
+    for y in range(grid_y_count):
+        grid.append([])
+        for x in range(grid_x_count):
+            grid[y].append(y * grid_x_count + x + 1)
+
+    for move_number in range(1000):
+        move(random.choice(('down', 'up', 'right', 'left')))
+
+    for move_number in range(grid_x_count - 1):
+        move('left')
+
+    for move_number in range(grid_y_count - 1):
+        move('up')
+
+def on_key_down(key):
+    if key == keys.DOWN:
+        move('down')
+    elif key == keys.UP:
+        move('up')
+    elif key == keys.RIGHT:
+        move('right')
+    elif key == keys.LEFT:
+        move('left')
+    elif key == keys.R:
+        reset()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+    piece_size = 100
+
+    for y in range(grid_y_count):
+        for x in range(grid_x_count):
+            if grid[y][x] == grid_x_count * grid_y_count:
+                continue  # hoppa över detta x och gå till nästa värde i "for x"
+
+            piece_draw_size = piece_size - 1
+
+            screen.draw.filled_rect(
+                Rect(
+                    x * piece_size, y * piece_size,
+                    piece_draw_size, piece_draw_size
+                ),
+                color=(100, 20, 150)
+            )
+            screen.draw.text(
+                str(grid[y][x]),
+                (x * piece_size, y * piece_size),
+                fontsize=60
+            )
+
+
+# Kod för att starta appen här under
+reset()
+
+pgzrun.go()  # Ska alltid vara sist
 ```
   
 </details>
