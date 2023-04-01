@@ -132,6 +132,11 @@ När timern är på eller över 0,15 återställs den till 0.
 
 För närvarande skrivs 'tick' ut varje gång ormen ska röra sig.
 
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -146,6 +151,11 @@ Nästa position för ormens huvud beräknas genom att lägga till 1 till den nuv
 Det sista elementet i segmentlistan (ormens svans) tas bort.
 
 Segmentlistan ändras i uppdateringsfunktionen , så den flyttas till att vara global.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/226439549-4395b5df-c7f0-4a1f-9a91-921994eb1365.png)
 
@@ -162,6 +172,11 @@ Ormens nuvarande riktning lagras i en variabel och ändras med hjälp av piltang
 
 Ormens nästa huvudposition ställs in utifrån denna riktning.
 
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 ![image](https://user-images.githubusercontent.com/4598641/226439597-2d0fded6-4174-4bbb-8dc1-9f3499761701.png)
 
 <details>
@@ -174,6 +189,11 @@ Ormens nästa huvudposition ställs in utifrån denna riktning.
 
 ## Förhindrar att röra sig rakt bakåt
 Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går i (t.ex. när den går åt höger ska den inte direkt gå åt vänster), så detta kontrolleras innan riktningen ställs in.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -196,6 +216,11 @@ När en knapp trycks ned läggs riktningen till i slutet av vägbeskrivningskön
 
 Den sista posten i riktningskön (dvs. den senast tryckta riktningen) kontrolleras för att se om den inte är i motsatt riktning mot den nya riktningen innan den nya riktningen läggs till i riktningskön.
 
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 ![image](https://user-images.githubusercontent.com/4598641/226439688-1765d719-ee76-4b94-be2f-d8760ced80d7.png)
 
 <details>
@@ -209,6 +234,11 @@ Den sista posten i riktningskön (dvs. den senast tryckta riktningen) kontroller
 ## Förhindrar att lägga till samma riktning två gånger
 Om den sista riktningen är i samma riktning som den nya riktningen läggs den nya riktningen inte till i riktningskön.
 
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -221,6 +251,11 @@ Om den sista riktningen är i samma riktning som den nya riktningen läggs den n
 Om nästa position skulle vara utanför nätet, lindas den runt till positionen på andra sidan.
 
 Rutnätets X/Y-antal återanvänds från att rita bakgrunden, så de flyttas till att vara globala.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
 
 ![image](https://user-images.githubusercontent.com/4598641/226439789-ce8299ae-1e6c-449b-9dc0-6c64b6124c6f.png)
 
@@ -238,6 +273,11 @@ Maten lagras som ett par av X- och Y-värden och ritas som en kvadrat.
 
 Slumpmodulen importeras så att random.randint kan användas .
 
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 ![image](https://user-images.githubusercontent.com/4598641/226439842-6fae488e-e72d-494c-bad4-9204c860144a.png)
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -249,6 +289,12 @@ Slumpmodulen importeras så att random.randint kan användas .
 
 ## Förenkla kod
 Koden för att rita en orms segment och rita maten är densamma förutom färgen, så en funktion görs med färgen som parameter.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -259,7 +305,14 @@ Koden för att rita en orms segment och rita maten är densamma förutom färgen
 
 
 ## Äter mat
-Om ormens nya huvudposition är densamma som matens position tas inte ormens svans bort, och maten får en ny slumpmässig position.
+Om ormens nya huvudposition är samma som matens position tas inte ormens svans bort, och maten får en ny slumpmässig position.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -268,8 +321,14 @@ Om ormens nya huvudposition är densamma som matens position tas inte ormens sva
 ```
 </details>
 
-## Förenkla kod
+## Förenkla koden
 Koden för att ställa in maten till en slumpmässig position återanvänds, så en funktion görs.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -282,6 +341,11 @@ Koden för att ställa in maten till en slumpmässig position återanvänds, så
 Istället för att flytta maten till valfri slumpmässig position, flyttas den till en position som ormen inte upptar.
 
 Alla positioner i rutnätet loopas igenom, och för varje rutnätsposition slingras alla segment av ormen, och om inga segment av ormen är i samma position som rutnätspositionen läggs rutnätspositionen till till en lista över möjliga matpositioner. Nästa matposition väljs slumpmässigt från denna lista.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -297,6 +361,12 @@ Ormens segment slingras igenom, och om någon av dem förutom det sista är i sa
 Det sista segmentet är inte markerat eftersom det kommer att tas bort inom samma bock.
 
 För närvarande skrivs 'kollision' ut när ormen kraschar in i sig själv.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -309,6 +379,12 @@ För närvarande skrivs 'kollision' ut när ormen kraschar in i sig själv.
 En funktion skapas som ställer in spelets initiala tillstånd.
 
 Denna funktion anropas innan spelet börjar och när ormen kraschar.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -321,6 +397,12 @@ Denna funktion anropas innan spelet börjar och när ormen kraschar.
 En variabel används för att lagra om ormen är vid liv eller inte, och den är inställd på False när ormen har kraschat.
 
 Om ormen är död, väntar timern i 2 sekunder innan den ringer återställning .
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -331,6 +413,12 @@ Om ormen är död, väntar timern i 2 sekunder innan den ringer återställning 
 
 ## Ändra ormens färg när den är död
 Ormens färg ändras beroende på om den är vid liv eller inte.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+```
+
 
 ![image](https://user-images.githubusercontent.com/4598641/226440133-a580b309-3b49-400d-ab5b-97c545c75ecd.png)
 <details>
