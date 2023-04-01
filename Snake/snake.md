@@ -2041,12 +2041,6 @@ import pgzrun
 import random
 
 # Globala variabler här nedanför
-snake_segments = [
-    {'x': 2, 'y': 0},
-    {'x': 1, 'y': 0},
-    {'x': 0, 'y': 0},
-]
-
 timer = 0
 
 direction_queue = ['right']
@@ -2248,12 +2242,6 @@ import pgzrun
 import random
 
 # Globala variabler här nedanför
-snake_segments = [
-    {'x': 2, 'y': 0},
-    {'x': 1, 'y': 0},
-    {'x': 0, 'y': 0},
-]
-
 timer = 0
 
 direction_queue = ['right']
@@ -2443,12 +2431,6 @@ import pgzrun
 import random
 
 # Globala variabler här nedanför
-snake_segments = [
-    {'x': 2, 'y': 0},
-    {'x': 1, 'y': 0},
-    {'x': 0, 'y': 0},
-]
-
 timer = 0
 
 direction_queue = ['right']
