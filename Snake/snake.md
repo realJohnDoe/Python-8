@@ -1804,11 +1804,6 @@ direction_queue = ['right']
 grid_x_count = 20
 grid_y_count = 15
 
-food_position = {
-    'x': random.randint(0, grid_x_count - 1),
-    'y': random.randint(0, grid_y_count - 1),
-}
-
 # Funktioner här nedanför
 
 
@@ -1970,23 +1965,7 @@ def update(dt):
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-        can_move = True
-
-        for segment in snake_segments[:-1]:
-            if (next_x_position == segment['x']
-            and next_y_position == segment['y']):
-                can_move = False
-
-        if can_move:
-            snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
-
-            if (snake_segments[0]['x'] == food_position['x']
-            and snake_segments[0]['y'] == food_position['y']):
-                move_food()
-            else:
-                snake_segments.pop()
-        else:
-            print('collision')
+!!!FEL
 ```
 </details>
 
@@ -2048,10 +2027,6 @@ direction_queue = ['right']
 grid_x_count = 20
 grid_y_count = 15
 
-food_position = {
-    'x': random.randint(0, grid_x_count - 1),
-    'y': random.randint(0, grid_y_count - 1),
-}
 
 # Funktioner här nedanför
 
@@ -2249,13 +2224,8 @@ direction_queue = ['right']
 grid_x_count = 20
 grid_y_count = 15
 
-food_position = {
-    'x': random.randint(0, grid_x_count - 1),
-    'y': random.randint(0, grid_y_count - 1),
-}
-
+    
 # Funktioner här nedanför
-
 
 def move_food():
     global food_position
@@ -2438,13 +2408,7 @@ direction_queue = ['right']
 grid_x_count = 20
 grid_y_count = 15
 
-food_position = {
-    'x': random.randint(0, grid_x_count - 1),
-    'y': random.randint(0, grid_y_count - 1),
-}
-
 # Funktioner här nedanför
-
 
 def move_food():
     global food_position
