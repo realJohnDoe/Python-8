@@ -38,12 +38,90 @@ En rektangel ritas för bakgrunden.
 
 ✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/snake-starter och spara en egen kopia med knappen "Fork".
 
+```python
+import pgzrun
+
+# Globala variabler här nedanför
+
+# Funktioner här nedanför
+def draw():
+    screen.fill((0, 0, 0))
+    
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+    
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+  
+# Kod för att starta appen här nedanför
+
+pgzrun.go() # måste vara sista raden
+```
+
 ![image](https://user-images.githubusercontent.com/4598641/226439410-a04eb468-d4cf-4b10-9916-02534cea3a3d.png)
 
 ## Rita ormen
 Ormens segment lagras som X- och Y-positioner och ritas som rutor.
 
+Uppdatera funktionen `draw` och testkör!
+
+```python
+import pgzrun
+
+# Globala variabler här nedanför
+
+# Funktioner här nedanför
+def draw():
+    screen.fill((0, 0, 0))
+
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    snake_segments = [ #nytt 🐍
+        {'x': 2, 'y': 0}, #nytt 🐍
+        {'x': 1, 'y': 0}, #nytt 🐍 
+        {'x': 0, 'y': 0}, #nytt 🐍
+    ] #nytt 🐍
+
+    for segment in snake_segments: #nytt 🐍
+        screen.draw.filled_rect( #nytt 🐍
+            Rect( #nytt 🐍
+                segment['x'] * cell_size, segment['y'] * cell_size, #nytt 🐍
+                cell_size - 1, cell_size - 1 #nytt 🐍
+            ), #nytt 🐍
+            color=(165, 255, 81) #nytt 🐍
+        ) #nytt 🐍
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go()  # måste vara sista raden
+```
+
 ![image](https://user-images.githubusercontent.com/4598641/226439469-a0bf9621-d2ff-4b38-810e-9a1be63b3324.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
+
 
 ## Timer
 Ormen kommer att röra sig en gång var 0,15:e sekund.
@@ -54,6 +132,14 @@ När timern är på eller över 0,15 återställs den till 0.
 
 För närvarande skrivs 'tick' ut varje gång ormen ska röra sig.
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
+
 ## Flytta ormen rätt
 Nästa position för ormens huvud beräknas genom att lägga till 1 till den nuvarande X-positionen för ormens huvud (dvs. det första elementet i segmentlistan). Detta nya segment läggs till i början av segmentlistan.
 
@@ -63,6 +149,14 @@ Segmentlistan ändras i uppdateringsfunktionen , så den flyttas till att vara g
 
 ![image](https://user-images.githubusercontent.com/4598641/226439549-4395b5df-c7f0-4a1f-9a91-921994eb1365.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
+
 ## Flytta ormen i alla fyra riktningar
 Ormens nuvarande riktning lagras i en variabel och ändras med hjälp av piltangenterna.
 
@@ -70,9 +164,24 @@ Ormens nästa huvudposition ställs in utifrån denna riktning.
 
 ![image](https://user-images.githubusercontent.com/4598641/226439597-2d0fded6-4174-4bbb-8dc1-9f3499761701.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
+
 ## Förhindrar att röra sig rakt bakåt
 Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går i (t.ex. när den går åt höger ska den inte direkt gå åt vänster), så detta kontrolleras innan riktningen ställs in.
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Använder riktningskö
 För närvarande kan ormen fortfarande gå bakåt om en annan riktning och sedan den motsatta riktningen trycks in inom en enda bock på timern. Till exempel, om ormen flyttade höger på den sista bocken, och sedan spelaren trycker ner och sedan vänster före nästa bock, kommer ormen att flytta åt vänster på nästa bock.
@@ -89,8 +198,24 @@ Den sista posten i riktningskön (dvs. den senast tryckta riktningen) kontroller
 
 ![image](https://user-images.githubusercontent.com/4598641/226439688-1765d719-ee76-4b94-be2f-d8760ced80d7.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
+
 ## Förhindrar att lägga till samma riktning två gånger
 Om den sista riktningen är i samma riktning som den nya riktningen läggs den nya riktningen inte till i riktningskön.
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Slår sig runt skärmen
 Om nästa position skulle vara utanför nätet, lindas den runt till positionen på andra sidan.
@@ -99,6 +224,14 @@ Rutnätets X/Y-antal återanvänds från att rita bakgrunden, så de flyttas til
 
 ![image](https://user-images.githubusercontent.com/4598641/226439789-ce8299ae-1e6c-449b-9dc0-6c64b6124c6f.png)
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
+
 
 ## Rita mat
 Maten lagras som ett par av X- och Y-värden och ritas som en kvadrat.
@@ -106,22 +239,57 @@ Maten lagras som ett par av X- och Y-värden och ritas som en kvadrat.
 Slumpmodulen importeras så att random.randint kan användas .
 
 ![image](https://user-images.githubusercontent.com/4598641/226439842-6fae488e-e72d-494c-bad4-9204c860144a.png)
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Förenkla kod
 Koden för att rita en orms segment och rita maten är densamma förutom färgen, så en funktion görs med färgen som parameter.
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 
 ## Äter mat
 Om ormens nya huvudposition är densamma som matens position tas inte ormens svans bort, och maten får en ny slumpmässig position.
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Förenkla kod
 Koden för att ställa in maten till en slumpmässig position återanvänds, så en funktion görs.
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Flytta mat till lediga positioner
 Istället för att flytta maten till valfri slumpmässig position, flyttas den till en position som ormen inte upptar.
 
 Alla positioner i rutnätet loopas igenom, och för varje rutnätsposition slingras alla segment av ormen, och om inga segment av ormen är i samma position som rutnätspositionen läggs rutnätspositionen till till en lista över möjliga matpositioner. Nästa matposition väljs slumpmässigt från denna lista.
 
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Spelet slut
 Ormens segment slingras igenom, och om någon av dem förutom det sista är i samma position som ormens nya huvudposition, så har ormen kraschat in i sig själv.
@@ -129,21 +297,49 @@ Ormens segment slingras igenom, och om någon av dem förutom det sista är i sa
 Det sista segmentet är inte markerat eftersom det kommer att tas bort inom samma bock.
 
 För närvarande skrivs 'kollision' ut när ormen kraschar in i sig själv.
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Återställa spelet
 En funktion skapas som ställer in spelets initiala tillstånd.
 
 Denna funktion anropas innan spelet börjar och när ormen kraschar.
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Pausar efter att ormen har kraschat
 En variabel används för att lagra om ormen är vid liv eller inte, och den är inställd på False när ormen har kraschat.
 
 Om ormen är död, väntar timern i 2 sekunder innan den ringer återställning .
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 ## Ändra ormens färg när den är död
 Ormens färg ändras beroende på om den är vid liv eller inte.
 
 ![image](https://user-images.githubusercontent.com/4598641/226440133-a580b309-3b49-400d-ab5b-97c545c75ecd.png)
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+###
+```
+</details>
 
 
 # Källor
