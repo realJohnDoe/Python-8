@@ -926,14 +926,47 @@ pgzrun.go()  # måste vara sista raden
 ```
 </details>
 
-## Vik över vid skärmkanten
-Om nästa position skulle vara utanför nätet, viker vi över till motsatta sidan på skärmen.
+## Slå över vid skärmkanten
+Om nästa position skulle vara utanför nätet, slår vi över till motsatta sidan på skärmen.
 
 Rutnätets X/Y-antal återanvänds från att rita bakgrunden, så de flyttas till att vara globala.
 
 ✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
 
 ```python
+# etc.
+
+grid_x_count = 20 #flyttad 🐍
+grid_y_count = 15 #flyttad 🐍
+
+def update(dt):
+    # etc.
+
+        if direction_queue[0] == 'right':
+            next_x_position += 1
+            if next_x_position >= grid_x_count: #nytt 🐍
+                next_x_position = 0 #nytt 🐍
+
+        elif direction_queue[0] == 'left':
+            next_x_position -= 1
+            if next_x_position < 0: #nytt 🐍
+                next_x_position = grid_x_count - 1 #nytt 🐍
+
+        elif direction_queue[0] == 'down':
+            next_y_position += 1
+            if next_y_position >= grid_y_count: #nytt 🐍
+                next_y_position = 0 #nytt 🐍
+
+        elif direction_queue[0] == 'up':
+            next_y_position -= 1
+            if next_y_position < 0: #nytt 🐍
+                next_y_position = grid_y_count - 1 #nytt 🐍
+
+    # etc.
+
+def draw():
+    # Flyttat: grid_x_count = 20
+    # Flyttat: grid_y_count = 15
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/226439789-ce8299ae-1e6c-449b-9dc0-6c64b6124c6f.png)
@@ -942,19 +975,153 @@ Rutnätets X/Y-antal återanvänds från att rita bakgrunden, så de flyttas til
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction_queue = ['right']
+
+grid_x_count = 20
+grid_y_count = 15
+
+# Funktioner här nedanför
+
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        if len(direction_queue) > 1:
+            direction_queue.pop(0)
+
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction_queue[0] == 'right':
+            next_x_position += 1
+            if next_x_position >= grid_x_count:
+                next_x_position = 0
+
+        elif direction_queue[0] == 'left':
+            next_x_position -= 1
+            if next_x_position < 0:
+                next_x_position = grid_x_count - 1
+
+        elif direction_queue[0] == 'down':
+            next_y_position += 1
+            if next_y_position >= grid_y_count:
+                next_y_position = 0
+
+        elif direction_queue[0] == 'up':
+            next_y_position -= 1
+            if next_y_position < 0:
+                next_y_position = grid_y_count - 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+
+def on_key_down(key):
+    if (key == keys.RIGHT
+        and direction_queue[-1] != 'right'
+            and direction_queue[-1] != 'left'):
+        direction_queue.append('right')
+
+    elif (key == keys.LEFT
+          and direction_queue[-1] != 'left'
+          and direction_queue[-1] != 'right'):
+        direction_queue.append('left')
+
+    elif (key == keys.DOWN
+          and direction_queue[-1] != 'down'
+          and direction_queue[-1] != 'up'):
+        direction_queue.append('down')
+
+    elif (key == keys.UP
+          and direction_queue[-1] != 'up'
+          and direction_queue[-1] != 'down'):
+        direction_queue.append('up')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    for segment in snake_segments:
+        screen.draw.filled_rect(
+            Rect(
+                segment['x'] * cell_size, segment['y'] * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=(165, 255, 81)
+        )
+
+    # Tillfälligt
+    for direction_index, direction in enumerate(direction_queue):
+        screen.draw.text(
+            f"direction_queue[{direction_index}]: {direction}",
+            (15, 15 + 15 * direction_index))
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
+
 </details>
 
 
-## Rita mat
+## Rita maten
 Maten lagras som ett par av X- och Y-värden och ritas som en kvadrat.
 
-Slumpmodulen importeras så att random.randint kan användas .
+Slumpmodulen importeras så att `random.randint` kan användas.
 
 ✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
 
 ```python
+import pgzrun
+import random #nytt 🐍
+
+# etc.
+
+grid_x_count = 20
+grid_y_count = 15
+
+food_position = { #nytt 🐍
+    'x': random.randint(0, grid_x_count - 1), #nytt 🐍
+    'y': random.randint(0, grid_y_count - 1), #nytt 🐍
+} #nytt 🐍
+
+# etc.
+
+def draw():
+    # etc.
+
+    screen.draw.filled_rect( #nytt 🐍
+        Rect( #nytt 🐍
+            food_position['x'] * cell_size, food_position['y'] * cell_size, #nytt 🐍
+            cell_size - 1, cell_size - 1 #nytt 🐍
+        ), #nytt 🐍
+        color=(255, 76, 76) #nytt 🐍
+    ) #nytt 🐍 
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/226439842-6fae488e-e72d-494c-bad4-9204c860144a.png)
@@ -962,7 +1129,122 @@ Slumpmodulen importeras så att random.randint kan användas .
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction_queue = ['right']
+
+grid_x_count = 20
+grid_y_count = 15
+
+food_position = {
+    'x': random.randint(0, grid_x_count - 1),
+    'y': random.randint(0, grid_y_count - 1),
+}
+
+# Funktioner här nedanför
+
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        if len(direction_queue) > 1:
+            direction_queue.pop(0)
+
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction_queue[0] == 'right':
+            next_x_position += 1
+            if next_x_position >= grid_x_count:
+                next_x_position = 0
+
+        elif direction_queue[0] == 'left':
+            next_x_position -= 1
+            if next_x_position < 0:
+                next_x_position = grid_x_count - 1
+
+        elif direction_queue[0] == 'down':
+            next_y_position += 1
+            if next_y_position >= grid_y_count:
+                next_y_position = 0
+
+        elif direction_queue[0] == 'up':
+            next_y_position -= 1
+            if next_y_position < 0:
+                next_y_position = grid_y_count - 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+
+def on_key_down(key):
+    if (key == keys.RIGHT
+        and direction_queue[-1] != 'right'
+            and direction_queue[-1] != 'left'):
+        direction_queue.append('right')
+
+    elif (key == keys.LEFT
+          and direction_queue[-1] != 'left'
+          and direction_queue[-1] != 'right'):
+        direction_queue.append('left')
+
+    elif (key == keys.DOWN
+          and direction_queue[-1] != 'down'
+          and direction_queue[-1] != 'up'):
+        direction_queue.append('down')
+
+    elif (key == keys.UP
+          and direction_queue[-1] != 'up'
+          and direction_queue[-1] != 'down'):
+        direction_queue.append('up')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    for segment in snake_segments:
+        screen.draw.filled_rect(
+            Rect(
+                segment['x'] * cell_size, segment['y'] * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=(165, 255, 81)
+        )
+
+    screen.draw.filled_rect(
+        Rect(
+            food_position['x'] * cell_size, food_position['y'] * cell_size,
+            cell_size - 1, cell_size - 1
+        ),
+        color=(255, 76, 76)
+    )
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go()  # måste vara sista raden
 ```
 </details>
 
