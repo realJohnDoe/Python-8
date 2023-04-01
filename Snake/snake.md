@@ -794,7 +794,7 @@ pgzrun.go()  # måste vara sista raden
 ```
 </details>
 
-## Förhindrar att lägga till samma riktning två gånger
+## Hindra att lägga till samma riktning två gånger
 Om den sista riktningen är i samma riktning som den nya riktningen läggs den nya riktningen inte till i riktningskön.
 
 ✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
@@ -810,8 +810,8 @@ Om den sista riktningen är i samma riktning som den nya riktningen läggs den n
 ```
 </details>
 
-## Slår sig runt skärmen
-Om nästa position skulle vara utanför nätet, lindas den runt till positionen på andra sidan.
+## Slår sig runt skärmen!!!
+Om nästa position skulle vara utanför nätet, lindas!!! den runt till positionen på andra sidan.
 
 Rutnätets X/Y-antal återanvänds från att rita bakgrunden, så de flyttas till att vara globala.
 
