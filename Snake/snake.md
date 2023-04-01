@@ -340,25 +340,6 @@ Ormens nästa huvudposition ställs in beroende på denna riktning.
 ✏️ Uppdatera koden så här. Testkör &ndash; vad händer när ...?
 
 ```python
-
-```
-
-![image](https://user-images.githubusercontent.com/4598641/226439597-2d0fded6-4174-4bbb-8dc1-9f3499761701.png)
-
-<details>
-    <summary>📝 Så här kan koden se ut nu</summary>
-
-```python
-###
-```
-</details>
-
-## Förhindrar att röra sig rakt bakåt
-Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går i (t.ex. när den går åt höger ska den inte direkt gå åt vänster), så detta kontrolleras innan riktningen ställs in.
-
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
-
-```python
 import pgzrun
 
 # Globala variabler här nedanför
@@ -408,6 +389,63 @@ def on_key_down(key): #nytt 🐍
         direction = 'up' #nytt 🐍
 
 # etc.
+```
+
+![image](https://user-images.githubusercontent.com/4598641/226439597-2d0fded6-4174-4bbb-8dc1-9f3499761701.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
+```python
+import pgzrun
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction = 'right'
+
+# Funktioner här nedanför
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction == 'right':
+            next_x_position += 1
+        elif direction == 'left':
+            next_x_position -= 1
+        elif direction == 'down':
+            next_y_position += 1
+        elif direction == 'up':
+            next_y_position -= 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+
+def on_key_down(key):
+    global direction
+
+    if key == keys.RIGHT:
+        direction = 'right'
+    elif key == keys.LEFT:
+        direction = 'left'
+    elif key == keys.DOWN:
+        direction = 'down'
+    elif key == keys.UP:
+        direction = 'up'
+
 
 def draw():
     screen.fill((0, 0, 0))
@@ -435,8 +473,18 @@ def draw():
 
 # Kod för att starta appen här nedanför
 
-
 pgzrun.go()  # måste vara sista raden
+```
+    
+</details>
+
+## Förhindrar att röra sig rakt bakåt
+Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går i (t.ex. när den går åt höger ska den inte direkt gå åt vänster), så detta kontrolleras innan riktningen ställs in.
+
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+
+```python
+
 ```
 
 <details>
