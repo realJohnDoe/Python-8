@@ -124,37 +124,149 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Timer
-Ormen kommer att röra sig en gång var 0,15:e sekund.
+Ormen kommer att röra sig var 0,15:e sekund.
 
-En timervariabel börjar vid 0 och ökar med dt för varje bildruta.
+En timervariabel börjar på 0 och ökar med dt för varje bildruta.
 
-När timern är på eller över 0,15 återställs den till 0.
+När timern är större eller lika med 0,15 återställs den till 0.
 
 För närvarande skrivs 'tick' ut varje gång ormen ska röra sig.
 
 ✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
 
 ```python
+import pgzrun
+
+# Globala variabler här nedanför
+timer = 0 #nytt 🐍
+
+# Funktioner här nedanför
+def update(dt): #nytt 🐍
+    global timer #nytt 🐍
+    
+    timer += dt #nytt 🐍
+    if timer >= 0.15: #nytt 🐍
+        timer = 0 #nytt 🐍
+        # Tillfälligt #nytt 🐍
+        print('tick') #nytt 🐍
+
+# etc.
 ```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+
+# Globala variabler här nedanför
+timer = 0
+
+# Funktioner här nedanför
+
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        # Temporary
+        print('tick')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    snake_segments = [
+        {'x': 2, 'y': 0},
+        {'x': 1, 'y': 0},
+        {'x': 0, 'y': 0},
+    ]
+
+    for segment in snake_segments:
+        screen.draw.filled_rect(
+            Rect(
+                segment['x'] * cell_size, segment['y'] * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=(165, 255, 81)
+        )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
+
 </details>
 
-## Flytta ormen rätt
+## Flytta ormen åt höger
 Nästa position för ormens huvud beräknas genom att lägga till 1 till den nuvarande X-positionen för ormens huvud (dvs. det första elementet i segmentlistan). Detta nya segment läggs till i början av segmentlistan.
 
 Det sista elementet i segmentlistan (ormens svans) tas bort.
 
-Segmentlistan ändras i uppdateringsfunktionen , så den flyttas till att vara global.
+Segmentlistan ändras i funktionen `update()`, så den flyttas till att vara global.
 
 ✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
 
 ```python
+import pgzrun
+
+# Globala variabler här nedanför
+snake_segments = [ #flyttad från funktionen draw() 🐍
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+# Funktioner här nedanför
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        next_x_position = snake_segments[0]['x'] + 1  #nytt 🐍
+        next_y_position = snake_segments[0]['y']  #nytt 🐍
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position}) #nytt 🐍
+        snake_segments.pop() #nytt 🐍
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    # snake_segments har flyttat 🐍
+
+    for segment in snake_segments:
+    # etc.
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/226439549-4395b5df-c7f0-4a1f-9a91-921994eb1365.png)
@@ -163,18 +275,72 @@ Segmentlistan ändras i uppdateringsfunktionen , så den flyttas till att vara g
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+# Funktioner här nedanför
+
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        next_x_position = snake_segments[0]['x'] + 1
+        next_y_position = snake_segments[0]['y']
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    for segment in snake_segments:
+        screen.draw.filled_rect(
+            Rect(
+                segment['x'] * cell_size, segment['y'] * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=(165, 255, 81)
+        )
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go()  # måste vara sista raden
 ```
 </details>
 
 ## Flytta ormen i alla fyra riktningar
 Ormens nuvarande riktning lagras i en variabel och ändras med hjälp av piltangenterna.
 
-Ormens nästa huvudposition ställs in utifrån denna riktning.
+Ormens nästa huvudposition ställs in beroende på denna riktning.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden så här. Testkör &ndash; vad händer när ...?
 
 ```python
+
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/226439597-2d0fded6-4174-4bbb-8dc1-9f3499761701.png)
@@ -193,14 +359,169 @@ Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går 
 ✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
 
 ```python
+import pgzrun
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction = 'right' #nytt 🐍
+
+# Funktioner här nedanför
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        next_x_position = snake_segments[0]['x'] #nytt 🐍
+        next_y_position = snake_segments[0]['y']
+
+        if direction == 'right': #nytt 🐍
+            next_x_position += 1 #nytt 🐍
+        elif direction == 'left': #nytt 🐍
+            next_x_position -= 1 #nytt 🐍
+        elif direction == 'down': #nytt 🐍
+            next_y_position += 1 #nytt 🐍
+        elif direction == 'up': #nytt 🐍
+            next_y_position -= 1 #nytt 🐍
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+def on_key_down(key): #nytt 🐍
+    global direction #nytt 🐍
+
+    if key == keys.RIGHT: #nytt 🐍
+        direction = 'right' #nytt 🐍
+    elif key == keys.LEFT: #nytt 🐍
+        direction = 'left' #nytt 🐍
+    elif key == keys.DOWN: #nytt 🐍
+        direction = 'down' #nytt 🐍
+    elif key == keys.UP: #nytt 🐍
+        direction = 'up' #nytt 🐍
+
+# etc.
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    for segment in snake_segments:
+        screen.draw.filled_rect(
+            Rect(
+                segment['x'] * cell_size, segment['y'] * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=(165, 255, 81)
+        )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction = 'right'
+
+# Funktioner här nedanför
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction == 'right':
+            next_x_position += 1
+        elif direction == 'left':
+            next_x_position -= 1
+        elif direction == 'down':
+            next_y_position += 1
+        elif direction == 'up':
+            next_y_position -= 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+
+def on_key_down(key):
+    global direction
+
+    if key == keys.RIGHT:
+        direction = 'right'
+    elif key == keys.LEFT:
+        direction = 'left'
+    elif key == keys.DOWN:
+        direction = 'down'
+    elif key == keys.UP:
+        direction = 'up'
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    for segment in snake_segments:
+        screen.draw.filled_rect(
+            Rect(
+                segment['x'] * cell_size, segment['y'] * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=(165, 255, 81)
+        )
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go()  # måste vara sista raden
 ```
+    
 </details>
 
 ## Använder riktningskö
