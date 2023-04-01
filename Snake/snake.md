@@ -1248,29 +1248,216 @@ pgzrun.go()  # måste vara sista raden
 ```
 </details>
 
-## Förenkla kod
-Koden för att rita en orms segment och rita maten är densamma förutom färgen, så en funktion görs med färgen som parameter.
+## Förenkla koden
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+Koden för att rita en orms segment och rita maten är densamma förutom färgen. Vi gör det till en funktion med färgen som parameter.
+
+✏️ Uppdatera koden i `draw`. Testkör &ndash; vad händer när ...?
 
 ```python
+def draw():
+    screen.fill((0, 0, 0))
+
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    def draw_cell(x, y, color): #nytt 🐍
+        screen.draw.filled_rect( #nytt 🐍
+            Rect( #nytt 🐍
+                x * cell_size, y * cell_size, #nytt 🐍
+                cell_size - 1, cell_size - 1 #nytt 🐍
+            ), #nytt 🐍
+            color=color #nytt 🐍
+        ) #nytt 🐍
+
+    for segment in snake_segments:
+        draw_cell(segment['x'], segment['y'], color=(165, 255, 81)) #nytt 🐍
+
+    draw_cell(food_position['x'], food_position['y'], (255, 76, 76)) #nytt 🐍
 ```
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction_queue = ['right']
+
+grid_x_count = 20
+grid_y_count = 15
+
+food_position = {
+    'x': random.randint(0, grid_x_count - 1),
+    'y': random.randint(0, grid_y_count - 1),
+}
+
+# Funktioner här nedanför
+
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        if len(direction_queue) > 1:
+            direction_queue.pop(0)
+
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction_queue[0] == 'right':
+            next_x_position += 1
+            if next_x_position >= grid_x_count:
+                next_x_position = 0
+
+        elif direction_queue[0] == 'left':
+            next_x_position -= 1
+            if next_x_position < 0:
+                next_x_position = grid_x_count - 1
+
+        elif direction_queue[0] == 'down':
+            next_y_position += 1
+            if next_y_position >= grid_y_count:
+                next_y_position = 0
+
+        elif direction_queue[0] == 'up':
+            next_y_position -= 1
+            if next_y_position < 0:
+                next_y_position = grid_y_count - 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+
+def on_key_down(key):
+    if (key == keys.RIGHT
+        and direction_queue[-1] != 'right'
+            and direction_queue[-1] != 'left'):
+        direction_queue.append('right')
+
+    elif (key == keys.LEFT
+          and direction_queue[-1] != 'left'
+          and direction_queue[-1] != 'right'):
+        direction_queue.append('left')
+
+    elif (key == keys.DOWN
+          and direction_queue[-1] != 'down'
+          and direction_queue[-1] != 'up'):
+        direction_queue.append('down')
+
+    elif (key == keys.UP
+          and direction_queue[-1] != 'up'
+          and direction_queue[-1] != 'down'):
+        direction_queue.append('up')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    def draw_cell(x, y, color):
+        screen.draw.filled_rect(
+            Rect(
+                x * cell_size, y * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=color
+        )
+
+    for segment in snake_segments:
+        draw_cell(segment['x'], segment['y'], color=(165, 255, 81))
+
+    draw_cell(food_position['x'], food_position['y'], (255, 76, 76))
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
+
 ```
 </details>
 
 
-## Äter mat
-Om ormens nya huvudposition är samma som matens position tas inte ormens svans bort, och maten får en ny slumpmässig position.
+## Äta maten
+    
+Om ormens nya huvudposition är samma som matens position tas inte ormens svans bort, och maten får en ny slumpmässig position. 
+    
+På så vis blir ormen en ruta längre.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden i `update()`. Testkör &ndash; vad händer när ...?
 
 ```python
+def update(dt):
+    global timer, food_position #ändrat 🐍
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+
+        if len(direction_queue) > 1:
+            direction_queue.pop(0)
+
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction_queue[0] == 'right':
+            next_x_position += 1
+            if next_x_position >= grid_x_count:
+                next_x_position = 0
+
+        elif direction_queue[0] == 'left':
+            next_x_position -= 1
+            if next_x_position < 0:
+                next_x_position = grid_x_count - 1
+
+        elif direction_queue[0] == 'down':
+            next_y_position += 1
+            if next_y_position >= grid_y_count:
+                next_y_position = 0
+
+        elif direction_queue[0] == 'up':
+            next_y_position -= 1
+            if next_y_position < 0:
+                next_y_position = grid_y_count - 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+
+        if (snake_segments[0]['x'] == food_position['x'] #nytt 🐍
+        and snake_segments[0]['y'] == food_position['y']): #nytt 🐍
+            food_position = { #nytt 🐍
+                'x': random.randint(0, grid_x_count - 1), #nytt 🐍
+                'y': random.randint(0, grid_y_count - 1), #nytt 🐍
+            } #nytt 🐍
+        else: #nytt 🐍
+            snake_segments.pop() #dra in raden 🐍
 ```
 
 
@@ -1278,8 +1465,130 @@ Om ormens nya huvudposition är samma som matens position tas inte ormens svans 
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction_queue = ['right']
+
+grid_x_count = 20
+grid_y_count = 15
+
+food_position = {
+    'x': random.randint(0, grid_x_count - 1),
+    'y': random.randint(0, grid_y_count - 1),
+}
+
+# Funktioner här nedanför
+
+
+def update(dt):
+    global timer, food_position
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        if len(direction_queue) > 1:
+            direction_queue.pop(0)
+
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction_queue[0] == 'right':
+            next_x_position += 1
+            if next_x_position >= grid_x_count:
+                next_x_position = 0
+
+        elif direction_queue[0] == 'left':
+            next_x_position -= 1
+            if next_x_position < 0:
+                next_x_position = grid_x_count - 1
+
+        elif direction_queue[0] == 'down':
+            next_y_position += 1
+            if next_y_position >= grid_y_count:
+                next_y_position = 0
+
+        elif direction_queue[0] == 'up':
+            next_y_position -= 1
+            if next_y_position < 0:
+                next_y_position = grid_y_count - 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+
+        if (snake_segments[0]['x'] == food_position['x']
+                and snake_segments[0]['y'] == food_position['y']):
+            food_position = {
+                'x': random.randint(0, grid_x_count - 1),
+                'y': random.randint(0, grid_y_count - 1),
+            }
+        else:
+            snake_segments.pop()
+
+
+def on_key_down(key):
+    if (key == keys.RIGHT
+        and direction_queue[-1] != 'right'
+            and direction_queue[-1] != 'left'):
+        direction_queue.append('right')
+
+    elif (key == keys.LEFT
+          and direction_queue[-1] != 'left'
+          and direction_queue[-1] != 'right'):
+        direction_queue.append('left')
+
+    elif (key == keys.DOWN
+          and direction_queue[-1] != 'down'
+          and direction_queue[-1] != 'up'):
+        direction_queue.append('down')
+
+    elif (key == keys.UP
+          and direction_queue[-1] != 'up'
+          and direction_queue[-1] != 'down'):
+        direction_queue.append('up')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    def draw_cell(x, y, color):
+        screen.draw.filled_rect(
+            Rect(
+                x * cell_size, y * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=color
+        )
+
+    for segment in snake_segments:
+        draw_cell(segment['x'], segment['y'], color=(165, 255, 81))
+
+    draw_cell(food_position['x'], food_position['y'], (255, 76, 76))
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
+
 </details>
 
 ## Förenkla koden
