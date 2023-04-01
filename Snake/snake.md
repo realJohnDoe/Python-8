@@ -478,13 +478,23 @@ pgzrun.go()  # måste vara sista raden
     
 </details>
 
-## Förhindrar att röra sig rakt bakåt
+## Hindra att ormen rör sig rakt bakåt
 Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går i (t.ex. när den går åt höger ska den inte direkt gå åt vänster), så detta kontrolleras innan riktningen ställs in.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera funktionen `on_key_down()`. Testkör &ndash; vad händer när ...?
 
 ```python
+def on_key_down(key):
+    global direction
 
+    if key == keys.RIGHT and direction != 'left': #ändrat 🐍
+        direction = 'right'
+    elif key == keys.LEFT and direction != 'right': #ändrat 🐍
+        direction = 'left'
+    elif key == keys.DOWN and direction != 'up': #ändrat 🐍
+        direction = 'down'
+    elif key == keys.UP and direction != 'down': #ändrat 🐍
+        direction = 'up'
 ```
 
 <details>
@@ -505,6 +515,7 @@ timer = 0
 direction = 'right'
 
 # Funktioner här nedanför
+
 
 def update(dt):
     global timer
@@ -531,13 +542,13 @@ def update(dt):
 def on_key_down(key):
     global direction
 
-    if key == keys.RIGHT:
+    if key == keys.RIGHT and direction != 'left':
         direction = 'right'
-    elif key == keys.LEFT:
+    elif key == keys.LEFT and direction != 'right':
         direction = 'left'
-    elif key == keys.DOWN:
+    elif key == keys.DOWN and direction != 'up':
         direction = 'down'
-    elif key == keys.UP:
+    elif key == keys.UP and direction != 'down':
         direction = 'up'
 
 
@@ -567,27 +578,118 @@ def draw():
 
 # Kod för att starta appen här nedanför
 
+
 pgzrun.go()  # måste vara sista raden
 ```
     
 </details>
 
-## Använder riktningskö
-För närvarande kan ormen fortfarande gå bakåt om en annan riktning och sedan den motsatta riktningen trycks in inom en enda bock på timern. Till exempel, om ormen flyttade höger på den sista bocken, och sedan spelaren trycker ner och sedan vänster före nästa bock, kommer ormen att flytta åt vänster på nästa bock.
+## Använd en kö för riktningarna
+För närvarande kan ormen fortfarande gå bakåt om en annan riktning och sedan den motsatta riktningen trycks in inom ett enda tick på timern. Till exempel, om ormen flyttade höger på den sista ticket, och sedan spelaren trycker ner och sedan vänster före nästa tick, kommer ormen att flytta åt vänster på nästa tick.
 
-Dessutom kan spelaren vilja ge flera anvisningar inom en enda bock. I exemplet ovan kan spelaren ha velat att ormen skulle flytta ner för nästa bock, och sedan lämnat på bocken efter.
+Dessutom kan spelaren vilja ge flera anvisningar inom ett enda tick. I exemplet ovan kan spelaren ha velat att ormen skulle flytta ner för nästa tick, och sedan lämnat på ticket efter.
 
-En vägbeskrivningskö skapas. Det första objektet i kön är riktningen som ormen kommer att röra sig vid nästa bock.
+En riktningskö skapas. Det första objektet i kön är riktningen som ormen kommer att röra sig vid nästa tick.
 
-Om vägbeskrivningskön har mer än en post tas den första posten bort från den vid varje bock.
+Om vägbeskrivningskön har mer än en post tas den första posten bort från den vid varje tick.
 
 När en knapp trycks ned läggs riktningen till i slutet av vägbeskrivningskön.
 
 Den sista posten i riktningskön (dvs. den senast tryckta riktningen) kontrolleras för att se om den inte är i motsatt riktning mot den nya riktningen innan den nya riktningen läggs till i riktningskön.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden. Testkör &ndash; vad händer när du trycker snabbt på de olika piltangenterna?
 
 ```python
+import pgzrun
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction_queue = ['right'] #ändrat 🐍
+
+# Funktioner här nedanför
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        if len(direction_queue) > 1: #nytt 🐍
+            direction_queue.pop(0) #nytt 🐍
+
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction_queue[0] == 'right': #ändrat 🐍
+            next_x_position += 1
+        elif direction_queue[0] == 'left': #ändrat 🐍
+            next_x_position -= 1
+        elif direction_queue[0] == 'down': #ändrat 🐍
+            next_y_position += 1
+        elif direction_queue[0] == 'up': #ändrat 🐍
+            next_y_position -= 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+
+def on_key_down(key):
+    if (key == keys.RIGHT #ändrat 🐍
+            and direction_queue[-1] != 'left'): #ändrat 🐍
+        direction_queue.append('right') #nytt 🐍
+
+    elif (key == keys.LEFT #ändrat 🐍
+          and direction_queue[-1] != 'right'): #ändrat 🐍
+        direction_queue.append('left') #nytt 🐍
+
+    elif (key == keys.DOWN #ändrat 🐍
+          and direction_queue[-1] != 'up'): #ändrat 🐍
+        direction_queue.append('down') #nytt 🐍
+
+    elif (key == keys.UP #ändrat 🐍
+          and direction_queue[-1] != 'down'): #ändrat 🐍
+        direction_queue.append('up') #nytt 🐍
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    for segment in snake_segments:
+        screen.draw.filled_rect(
+            Rect(
+                segment['x'] * cell_size, segment['y'] * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=(165, 255, 81)
+        )
+
+    # Tillfälligt #nytt 🐍
+    for direction_index, direction in enumerate(direction_queue): #nytt 🐍
+        screen.draw.text( #nytt 🐍
+            f"direction_queue[{direction_index}]: {direction}", #nytt 🐍
+            (15, 15 + 15 * direction_index)) #nytt 🐍
+
+# Kod för att starta appen här nedanför
+pgzrun.go()  # måste vara sista raden
+
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/226439688-1765d719-ee76-4b94-be2f-d8760ced80d7.png)
@@ -596,7 +698,99 @@ Den sista posten i riktningskön (dvs. den senast tryckta riktningen) kontroller
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction_queue = ['right']
+
+# Funktioner här nedanför
+
+
+def update(dt):
+    global timer
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        if len(direction_queue) > 1:
+            direction_queue.pop(0)
+
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction_queue[0] == 'right':
+            next_x_position += 1
+        elif direction_queue[0] == 'left':
+            next_x_position -= 1
+        elif direction_queue[0] == 'down':
+            next_y_position += 1
+        elif direction_queue[0] == 'up':
+            next_y_position -= 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+        snake_segments.pop()
+
+
+def on_key_down(key):
+    if (key == keys.RIGHT
+            and direction_queue[-1] != 'left'):
+        direction_queue.append('right')
+
+    elif (key == keys.LEFT
+          and direction_queue[-1] != 'right'):
+        direction_queue.append('left')
+
+    elif (key == keys.DOWN
+          and direction_queue[-1] != 'up'):
+        direction_queue.append('down')
+
+    elif (key == keys.UP
+          and direction_queue[-1] != 'down'):
+        direction_queue.append('up')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    grid_x_count = 20
+    grid_y_count = 15
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    for segment in snake_segments:
+        screen.draw.filled_rect(
+            Rect(
+                segment['x'] * cell_size, segment['y'] * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=(165, 255, 81)
+        )
+
+    # Tillfälligt
+    for direction_index, direction in enumerate(direction_queue):
+        screen.draw.text(
+            f"direction_queue[{direction_index}]: {direction}",
+            (15, 15 + 15 * direction_index))
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 </details>
 
