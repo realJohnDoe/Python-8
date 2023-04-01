@@ -129,10 +129,10 @@ import pygame
 import math
 
 # Globala variabler här nedanför
-cell_size = 18
+cell_size = 18 #nyrad 🌻
 
 # Funktioner här nedanför
-def update():
+def update(): #nyfunktion 🌻
     global selected_x, selected_y
 
     mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -230,7 +230,7 @@ def draw():
                 image = 'covered_highlighted' #nytt 🌻
             else: #nytt 🌻
                 image = 'covered' #nytt 🌻
-            screen.blit(image, (x * cell_size, y * cell_size))
+            screen.blit(image, (x * cell_size, y * cell_size)) #ändrad 🌻
 ```
 
 <details>
@@ -249,7 +249,6 @@ grid_y_count = 14
 
 # Funktioner här nedanför
 
-
 def update():
     global selected_x, selected_y
 
@@ -261,7 +260,6 @@ def update():
         selected_x = grid_x_count - 1
     if selected_y > grid_y_count - 1:
         selected_y = grid_y_count - 1
-
 
 def draw():
     screen.fill((0, 0, 0))
@@ -302,9 +300,9 @@ def draw():
     for y in range(grid_y_count):
         for x in range(grid_x_count):
             if x == selected_x and y == selected_y:
-                if pygame.mouse.get_pressed()[0] == 1:
-                    image = 'uncovered'
-                else:
+                if pygame.mouse.get_pressed()[0] == 1: #nyrad 🌻
+                    image = 'uncovered' #nyrad 🌻
+                else: #nyrad 🌻
                     image = 'covered_highlighted'
             else:
                 image = 'covered'
@@ -379,7 +377,7 @@ Varje cell kommer att representeras av en ordbok som lagrar två värden: om den
 
 För närvarande kommer det bara att lagra blomvärdet.
 
-Om en cells "blomma"-nyckel är sann, ritas just nu blombilden över cellbilden. Vi kommer att ändra det sen så klart 🙂
+Om en cells "flower"-nyckel är sann, ritas just nu blombilden över cellbilden. Vi kommer att ändra det sen så klart 🙂
 
 Uppdatera koden och testkör. Ritas blommorna rätt?
 
@@ -414,9 +412,9 @@ for y in range(grid_y_count): #nytt 🌻
             'flower': False #nytt 🌻
         }) #nytt 🌻
 
-    # Tillälligt för att testa ritningen av blommor
-    grid[0][0]['flower'] = True
-    grid[0][1]['flower'] = True
+    # Tillälligt för att testa ritningen av blommor #nyrad 🌻
+    grid[0][0]['flower'] = True #nyrad 🌻
+    grid[0][1]['flower'] = True #nyrad 🌻
 
 
 pgzrun.go()  # måste vara sista raden
@@ -440,7 +438,6 @@ grid_y_count = 14
 
 # Funktioner här nedanför
 
-
 def update():
     global selected_x, selected_y
 
@@ -452,7 +449,6 @@ def update():
         selected_x = grid_x_count - 1
     if selected_y > grid_y_count - 1:
         selected_y = grid_y_count - 1
-
 
 def draw():
     screen.fill((0, 0, 0))
@@ -495,7 +491,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Förenkla koden
 Koden för att rita celler och för att rita blomman är samma förutom vilken grafik som ska användas.
-Därför gör vi en funktion med bilden och X- och Y-värdena som parametrar.
+Därför gör vi en funktion med bilden och X- och Y-koordinaterna som parametrar.
 
 ```python
 def draw():
@@ -505,7 +501,7 @@ def draw():
         for x in range(grid_x_count):
 
             def draw_cell(image, x, y): #nytt 🌻
-                screen.blit(image, (x * cell_size, y * cell_size)) #nytt 🌻
+                screen.blit(image, (x * cell_size, y * cell_size)) #ändrat 🌻
 
             if x == selected_x and y == selected_y:
                 if pygame.mouse.get_pressed()[0] == 1:
@@ -585,7 +581,6 @@ for y in range(grid_y_count):
 
 
 pgzrun.go()  # måste vara sista raden
-
 ```
   
 </details>
@@ -597,9 +592,9 @@ För att kunna testa vill vi kunna högerklicka  på en cell för att byta om de
 
 ```python
 def on_mouse_up(button):
-    # Tillfälligt
-    if button == mouse.RIGHT:
-        grid[selected_y][selected_x]['flower'] = not grid[selected_y][selected_x]['flower']
+    # Tillfälligt #nyrad 🌻
+    if button == mouse.RIGHT: #nyrad 🌻
+        grid[selected_y][selected_x]['flower'] = not grid[selected_y][selected_x]['flower'] #nyrad 🌻
 ```
 
 <details>
@@ -705,7 +700,7 @@ def draw():
             else:
                 draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
+            surrounding_flower_count = 0 #nytt 🌻
 
             for dy in range(-1, 2): #nytt 🌻
                 for dx in range(-1, 2): #nytt 🌻
@@ -815,12 +810,12 @@ pgzrun.go()  # måste vara sista raden
 
 ![image](https://user-images.githubusercontent.com/4598641/226451615-217a10c0-cf61-41f0-80fd-df17ef8c238e.png)
 
-## Slumpmässig placering av blommor
+## Slumpa blomplanteringen
 
 En lista skapas som innehåller varje X- och Y-position i rutnätet.
 
 Vi tar ut ett antal slumpmässiga positioner från den listan. 
-Cellerna på de positionerna tilldelas en blomma.
+Cellerna på de positionerna får en blomma.
 
 ```python
 import pgzrun
@@ -1122,9 +1117,9 @@ pgzrun.go()  # måste vara sista raden
 Varje cell behöver en egenskap som talar om cellens status.
 För närvarande är detta bara om cellen är täckt eller avtäckt.
 
-Just nu gör vi så att cellen sätts till "avtäckt" när vi vänsterklickar med musen.
+Just nu gör vi så att cellen sätts till "uncovered" när vi vänsterklickar med musen.
 
-Om en cells status är "avtäckt" ritas den avtäckta bilden istället för den täckta bilden.
+Om en cells status är "uncovered" ritas den avtäckta bilden istället för den täckta bilden.
 
 ```python
 def reset():
@@ -1142,7 +1137,7 @@ def reset():
 
     # etc.
 
-def on_mouse_up(button): # funktionen ändrad
+def on_mouse_up(button): #funktionen ändrad
     if button == mouse.LEFT: #nyrad 🌻
         grid[selected_y][selected_x]['state'] = 'uncovered' #nyrad 🌻
 
@@ -1280,15 +1275,15 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226451742-496e7414-d3d4-4be4-b251-df824a393c09.png)
 
 
-## En stack som sparar celler som ska avtäckas
+## En lista som sparar celler som ska avtäckas
 
 En lista över cellpositioner skapas. Så småningom kommer alla cellpositioner som ska avtäckas att läggas till i denna lista.
 
 För närvarande kommer denna "avtäckningsstack" bara att innehålla den valda positionen, så den kommer bara att avtäcka den valda cellen som tidigare.
 
-Medan det finns positioner i avtäckningsstacken, tas en position bort från den och cellen vid denna position på rutnätet avtäcks.
+Så länge det finns positioner i avtäckningsstacken, tas en position bort från den och cellen vid denna position på rutnätet avtäcks.
 
-✏️ Uppdatera funktionen `on_mouse_up()` och testkör vad som händer när du klickar!
+✏️ Uppdatera hela funktionen `on_mouse_up()`. Testkör vad som händer när du klickar på olika ställen i rutnätet!
 
 ```python
 def on_mouse_up(button):
@@ -1437,6 +1432,7 @@ Varje position i de åtta riktningarna runt varje cell loopas igenom.
 Om en position är inuti rutnätet och den är täckt så läggs den till i avtäckningsstacken.
 
 Detta gör att alla celler blir avtäckta. Vi ska rätta till det problemet lite senare.
+>Varför blir alla celler avtäckta?
 
 ✏️ Uppdatera `on_mouse_up()` och testa igen.
 
@@ -1457,7 +1453,7 @@ def on_mouse_up(button):
 
             grid[y][x]['state'] = 'uncovered'
 
-            for dy in range(-1, 2):
+            for dy in range(-1, 2): #nytt härifrån och neråt 🌻
                 for dx in range(-1, 2):
                     if (
                         not (dy == 0 and dx == 0)
@@ -1468,7 +1464,7 @@ def on_mouse_up(button):
                         stack.append({
                             'x': x + dx,
                             'y': y + dy,
-                        })
+                        }) #slut på det nya 🌻
 ```
 
 <details>
@@ -1610,12 +1606,14 @@ pgzrun.go()  # måste vara sista raden
 
 ## Håll reda på antalet grannar när vi avtäcker
 
-De omgivande cellerna i en position som har tagits bort från avtäckningsstacken läggs bara till i stacken om ingen av de omgivande cellerna har blommor.
+!!!FÖRKLARA BÄTTRE: Cellerna runt en position som har tagits bort från avtäckningsstacken läggs bara till i stacken om ingen av de omgivande cellerna har blommor.
 
 Vi behöver kunna räkna ut antalet omgivande blommor på flera ställen. Därför gör vi det till en funktion.
 
+!!!surrounding_flower_count räknas ut lokalt i draw() -- redundant kod 
+
 ```python
-def get_surrounding_flower_count(x, y):
+def get_surrounding_flower_count(x, y): #nytt 🌻
     surrounding_flower_count = 0
 
     for dy in range(-1, 2):
@@ -1647,7 +1645,7 @@ def on_mouse_up(button):
 
             grid[y][x]['state'] = 'uncovered'
 
-            if get_surrounding_flower_count(x, y) == 0:
+            if get_surrounding_flower_count(x, y) == 0: #nytt 🌻
                 for dy in range(-1, 2):
                     for dx in range(-1, 2):
                         if (
@@ -1663,11 +1661,10 @@ def on_mouse_up(button):
 
 def draw():
     # etc.
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
-            elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+            elif get_surrounding_flower_count(x, y) > 0: #nytt 🌻
+                draw_cell(str(get_surrounding_flower_count(x, y)), x, y) #nytt 🌻
 ```
 
 <details>
