@@ -1,6 +1,8 @@
 # Flowers ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
+Se noteringar!!!
+
 [**Regler**](#regler) [Kontroller](#kontroller)
 
 [**Översikt**](#översikt)
