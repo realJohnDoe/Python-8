@@ -16,7 +16,7 @@ Spelet är över när ormen kraschar in i sig själv.
 # Översikt
 Ormen representeras av en sekvens av X- och Y-koordinater.
 
-Maten representeras av en enda X- och Y-koordinat.
+Maten representeras av en X- och Y-koordinat.
 
 När ormen rör sig, tas det sista föremålet i sekvensen (dvs. dess gamla svansposition) bort, och ett föremål läggs till framtill (dvs. dess nya huvudposition) i den riktning som ormen går.
 
