@@ -1585,29 +1585,174 @@ def draw():
 
 # Kod för att starta appen här nedanför
 
-
 pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Förenkla koden
-Koden för att ställa in maten till en slumpmässig position återanvänds, så en funktion görs.
-
+Koden för att ställa maten på en slumpmässig position återanvänds. Vi gör en funktion för det.
+    
 ✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
 
 ```python
+def move_food(): #nytt 🐍
+    global food_position #nytt 🐍
+
+    food_position = { #flyttat 🐍
+        'x': random.randint(0, grid_x_count - 1), #flyttat 🐍
+        'y': random.randint(0, grid_y_count - 1) #flyttat 🐍
+    } #flyttat 🐍
+
+def update(dt):
+    # etc.
+
+        if (snake_segments[0]['x'] == food_position['x']
+        and snake_segments[0]['y'] == food_position['y']):
+            move_food() #nytt 🐍
+        else:
+            snake_segments.pop()
+
+    # etc.
+    
+# Kod för att starta appen här nedanför
+move_food() #nytt 🐍
+
+pgzrun.go()  # måste vara sista raden
 ```
+
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
 ```python
-###
+import pgzrun
+import random
+
+# Globala variabler här nedanför
+snake_segments = [
+    {'x': 2, 'y': 0},
+    {'x': 1, 'y': 0},
+    {'x': 0, 'y': 0},
+]
+
+timer = 0
+
+direction_queue = ['right']
+
+grid_x_count = 20
+grid_y_count = 15
+
+food_position = {
+    'x': random.randint(0, grid_x_count - 1),
+    'y': random.randint(0, grid_y_count - 1),
+}
+
+# Funktioner här nedanför
+
+
+def update(dt):
+    global timer, food_position
+
+    timer += dt
+    if timer >= 0.15:
+        timer = 0
+        if len(direction_queue) > 1:
+            direction_queue.pop(0)
+
+        next_x_position = snake_segments[0]['x']
+        next_y_position = snake_segments[0]['y']
+
+        if direction_queue[0] == 'right':
+            next_x_position += 1
+            if next_x_position >= grid_x_count:
+                next_x_position = 0
+
+        elif direction_queue[0] == 'left':
+            next_x_position -= 1
+            if next_x_position < 0:
+                next_x_position = grid_x_count - 1
+
+        elif direction_queue[0] == 'down':
+            next_y_position += 1
+            if next_y_position >= grid_y_count:
+                next_y_position = 0
+
+        elif direction_queue[0] == 'up':
+            next_y_position -= 1
+            if next_y_position < 0:
+                next_y_position = grid_y_count - 1
+
+        snake_segments.insert(0, {'x': next_x_position, 'y': next_y_position})
+
+        if (snake_segments[0]['x'] == food_position['x']
+                and snake_segments[0]['y'] == food_position['y']):
+            food_position = {
+                'x': random.randint(0, grid_x_count - 1),
+                'y': random.randint(0, grid_y_count - 1),
+            }
+        else:
+            snake_segments.pop()
+
+
+def on_key_down(key):
+    if (key == keys.RIGHT
+        and direction_queue[-1] != 'right'
+            and direction_queue[-1] != 'left'):
+        direction_queue.append('right')
+
+    elif (key == keys.LEFT
+          and direction_queue[-1] != 'left'
+          and direction_queue[-1] != 'right'):
+        direction_queue.append('left')
+
+    elif (key == keys.DOWN
+          and direction_queue[-1] != 'down'
+          and direction_queue[-1] != 'up'):
+        direction_queue.append('down')
+
+    elif (key == keys.UP
+          and direction_queue[-1] != 'up'
+          and direction_queue[-1] != 'down'):
+        direction_queue.append('up')
+
+
+def draw():
+    screen.fill((0, 0, 0))
+
+    cell_size = 15
+
+    screen.draw.filled_rect(
+        Rect(
+            0, 0,
+            grid_x_count * cell_size, grid_y_count * cell_size
+        ),
+        color=(70, 70, 70)
+    )
+
+    def draw_cell(x, y, color):
+        screen.draw.filled_rect(
+            Rect(
+                x * cell_size, y * cell_size,
+                cell_size - 1, cell_size - 1
+            ),
+            color=color
+        )
+
+    for segment in snake_segments:
+        draw_cell(segment['x'], segment['y'], color=(165, 255, 81))
+
+    draw_cell(food_position['x'], food_position['y'], (255, 76, 76))
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
+
 ```
 </details>
 
-## Flytta mat till lediga positioner
+## Flytta maten till ledig plats
 Istället för att flytta maten till valfri slumpmässig position, flyttas den till en position som ormen inte upptar.
 
 Alla positioner i rutnätet loopas igenom, och för varje rutnätsposition slingras alla segment av ormen, och om inga segment av ormen är i samma position som rutnätspositionen läggs rutnätspositionen till till en lista över möjliga matpositioner. Nästa matposition väljs slumpmässigt från denna lista.
