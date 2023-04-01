@@ -14,7 +14,7 @@ Spelet är över när ormen kraschar in i sig själv.
 **Piltangenter**	Byt riktning
 
 # Översikt
-Ormen representeras av en sekvens av X- och Y-positioner.
+Ormen representeras av en sekvens av X- och Y-koordinater.
 
 Maten representeras av en enda X- och Y-position.
 
@@ -67,7 +67,7 @@ pgzrun.go() # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226439410-a04eb468-d4cf-4b10-9916-02534cea3a3d.png)
 
 ## Rita ormen
-Ormens segment lagras som X- och Y-positioner och ritas som rutor.
+Ormens segment lagras som X- och Y-koordinater och ritas som rutor.
 
 Uppdatera funktionen `draw` och testkör!
 
@@ -214,7 +214,7 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Flytta ormen åt höger
-Nästa position för ormens huvud beräknas genom att lägga till 1 till den nuvarande X-positionen för ormens huvud (dvs. det första elementet i segmentlistan). Detta nya segment läggs till i början av segmentlistan.
+Nästa position för ormens huvud beräknas genom att lägga till 1 till den nuvarande X-koordinat för ormens huvud (dvs. det första elementet i segmentlistan). Detta nya segment läggs till i början av segmentlistan.
 
 Det sista elementet i segmentlistan (ormens svans) tas bort.
 
