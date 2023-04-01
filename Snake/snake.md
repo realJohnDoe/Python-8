@@ -1753,13 +1753,31 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Flytta maten till ledig plats
-Istället för att flytta maten till valfri slumpmässig position, flyttas den till en position som ormen inte upptar.
-
+    
+Istället för att flytta maten till en slumpmässig plats, flyttar den till en plats där ormen inte är just nu.
+    
 Alla positioner i rutnätet loopas igenom, och för varje rutnätsposition slingras alla segment av ormen, och om inga segment av ormen är i samma position som rutnätspositionen läggs rutnätspositionen till till en lista över möjliga matpositioner. Nästa matposition väljs slumpmässigt från denna lista.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden i `move_food`. Testkör &ndash; vad händer när ...?
 
 ```python
+def move_food():
+    global food_position
+
+    possible_food_positions = [] #nytt 🐍
+
+    for food_x in range(grid_x_count): #nytt 🐍
+        for food_y in range(grid_y_count): #nytt 🐍
+            possible = True #nytt 🐍
+
+            for segment in snake_segments: #nytt 🐍
+                if food_x == segment['x'] and food_y == segment['y']: #nytt 🐍
+                    possible = False #nytt 🐍
+
+            if possible: #nytt 🐍
+                possible_food_positions.append({'x': food_x, 'y': food_y}) #nytt 🐍
+
+    food_position = random.choice(possible_food_positions) #nytt 🐍
 ```
 
 <details>
