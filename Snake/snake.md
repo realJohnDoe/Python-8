@@ -4,9 +4,9 @@
 ![image](https://user-images.githubusercontent.com/4598641/226439115-c9800ff9-c916-406c-9efb-39407658988a.png)
 
 # Regler
-Att äta mat gör att ormen växer. När maten är uppäten flyttas den till en annan slumpmässig position.
+När ormen äter mat, växer den. När en matbit är uppäten, dyker det upp en ny på en slumpmässig position.
 
-Ormen kommer att slå över till andra sidan skärmen när den går av kanten.
+Ormen kommer att slå över till andra sidan skärmen när den går utanför kanten.
 
 Spelet är över när ormen kraschar in i sig själv.
 
