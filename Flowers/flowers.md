@@ -717,7 +717,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif surrounding_flower_count > 0: #nytt 🌻
-                draw_cell(str(surrounding_flower_count), x, y) #nytt 🌻
+                draw_cell(f"{surrounding_flower_count}", x, y) #nytt 🌻
 ```
 
 <details>
@@ -789,7 +789,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif surrounding_flower_count > 0:
-                draw_cell(str(surrounding_flower_count), x, y)
+                draw_cell(f"{surrounding_flower_count}", x, y)
 
 
 # Kod för att starta appen
@@ -928,7 +928,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif surrounding_flower_count > 0:
-                draw_cell(str(surrounding_flower_count), x, y)
+                draw_cell(f"{surrounding_flower_count}", x, y)
 
 
 # Kod för att starta appen
@@ -1102,7 +1102,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif surrounding_flower_count > 0:
-                draw_cell(str(surrounding_flower_count), x, y)
+                draw_cell(f"{surrounding_flower_count}", x, y)
 
 def on_key_down():
     reset()
@@ -1261,7 +1261,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif surrounding_flower_count > 0:
-                draw_cell(str(surrounding_flower_count), x, y)
+                draw_cell(f"{surrounding_flower_count}", x, y)
 
 def on_key_down():
     reset()
@@ -1413,7 +1413,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif surrounding_flower_count > 0:
-                draw_cell(str(surrounding_flower_count), x, y)
+                draw_cell(f"{surrounding_flower_count}", x, y)
 
 
 def on_key_down():
@@ -1589,7 +1589,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif surrounding_flower_count > 0:
-                draw_cell(str(surrounding_flower_count), x, y)
+                draw_cell(f"{surrounding_flower_count}", x, y)
 
 
 def on_key_down():
@@ -1666,7 +1666,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0: #nytt 🌻
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y) #nytt 🌻
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y) #nytt 🌻
 ```
 
 <details>
@@ -1686,7 +1686,6 @@ grid_x_count = 19
 grid_y_count = 14
 
 # Funktioner här nedanför
-
 
 def reset():
     global grid
@@ -1793,22 +1792,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
 
 def on_key_down():
@@ -1849,7 +1836,7 @@ def draw():
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag': #nyrad 🌻
                 draw_cell('flag', x, y) #nyrad 🌻
@@ -1991,22 +1978,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -2187,22 +2162,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -2367,22 +2330,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -2564,22 +2515,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -2756,22 +2695,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -2976,22 +2903,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -3210,22 +3125,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -3418,22 +3321,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -3628,22 +3519,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower']:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -3836,22 +3715,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower'] and game_over:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0:
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -3885,7 +3752,7 @@ def draw():
             if grid[y][x]['flower'] and game_over:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0 and grid[y][x]['state'] == 'uncovered': # ändrad 🌻 
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
     # etc.
 ```
@@ -4048,22 +3915,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower'] and game_over:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0 and grid[y][x]['state'] == 'uncovered': 
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
                 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
@@ -4321,22 +4176,10 @@ def draw():
                 else:
                     draw_cell('covered', x, y)
 
-            surrounding_flower_count = 0
-
-            for dy in range(-1, 2):
-                for dx in range(-1, 2):
-                    if (
-                        not (dy == 0 and dx == 0)
-                        and 0 <= (y + dy) < len(grid)
-                        and 0 <= (x + dx) < len(grid[y + dy])
-                        and grid[y + dy][x + dx]['flower']
-                    ):
-                        surrounding_flower_count += 1
-
             if grid[y][x]['flower'] and game_over:
                 draw_cell('flower', x, y)
             elif get_surrounding_flower_count(x, y) > 0 and grid[y][x]['state'] == 'uncovered':
-                draw_cell(str(get_surrounding_flower_count(x, y)), x, y)
+                draw_cell(f"{get_surrounding_flower_count(x, y)}", x, y)
 
             if grid[y][x]['state'] == 'flag':
                 draw_cell('flag', x, y)
