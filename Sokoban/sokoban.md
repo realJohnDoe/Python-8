@@ -224,7 +224,58 @@ def draw():
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+
+level = [
+    [' ', ' ', '#', '#', '#'],
+    [' ', ' ', '#', '.', '#'],
+    [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+    ['#', '#', '#', '$', ' ', '$', '.', '#'],
+    ['#', '.', ' ', '$', '@', '#', '#', '#'],
+    ['#', '#', '#', '#', '$', '#'],
+    [' ', ' ', ' ', '#', '.', '#'],
+    [' ', ' ', ' ', '#', '#', '#'],
+]
+
+
+# Funktioner här nedanför
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != ' ':
+                cell_size = 23
+
+                colors = {
+                    '@': (167, 135, 255),
+                    '+': (158, 119, 255),
+                    '$': (255, 201, 126),
+                    '*': (150, 255, 127),
+                    '.': (156, 229, 255),
+                    '#': (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
