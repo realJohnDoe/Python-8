@@ -34,12 +34,12 @@ Vägg
 # Översikt
 De olika tillstånden en ruta kan vara i representeras av följande strängar:
 
-**@**	Spelare<br>
-**+**	Spelare på lagerplats<br>
-**$**	Låda<br>
+__@__	Spelare<br>
+__+__	Spelare på lagerplats<br>
+__$__	Låda<br>
 __*__	Låda på lagerplats<br>
-**.**	Lagerplats<br>
-**#**	Vägg
+__.__	Lagerplats<br>
+__#__	Vägg
 
 Varje spelnivå (level) lagras som ett rutnät av dessa strängar.
 
