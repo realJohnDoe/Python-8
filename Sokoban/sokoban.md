@@ -27,9 +27,9 @@ Vägg
 
 ## Kontroller
 **Piltangenter**	Flytta<br>
-**r**	Återställ nivån<br>
-**n**	Nästa nivå<br>
-**p**	Tidigare nivå<br>
+**R**	Återställ nivån<br>
+**N**	Nästa nivå<br>
+**P**	Tidigare nivå<br>
 
 # Översikt
 De olika tillstånden en ruta kan vara i representeras av följande strängar:
@@ -45,14 +45,14 @@ Varje spelnivå (level) lagras som ett rutnät av dessa strängar.
 
 ![image](https://user-images.githubusercontent.com/4598641/226441339-fc46c4d7-6fd0-414c-9829-4755286aa054.png)
 
+När en piltangent trycks, loopar vi genom rutnätet för att hitta var spelaren är.
 
-När en piltangent trycks in, loopar vi genom rutnätet för att hitta var spelaren är.
-
-Om positionen på rutnätet intill spelaren i pilens riktning är flyttbar (dvs. tom eller en lagerplats), ändras rutnätets värden för att återspegla den nya spelarpositionen.
+Om spelaren kan gå i piltangentens riktning, flyttar vi spelaren dit och ritar om med rätt grafik.
+>En gul ruta är tom. Spelaren kan bara stå på tomma rutor och på lagerplatser. Det första exemplet visar när spelaren går ett steg åt höger.
 
 ![image](https://user-images.githubusercontent.com/4598641/226441412-0d311596-2d1f-4e54-bf51-e163588f9e16.png)
 
-Om positionen intill spelaren är en låda och positionen utanför lådan är flyttbar, ändras rutnätet för att återspegla den nya spelaren och nya lådpositioner.
+Om spelaren står vid en låda och rutan bredvid lådan är ledig, kan spelaren putta lådan i den riktningen. Sedan ritar vi om. Det första exemplet visar hur spelaren puttar lådan ett steg åt höger. Tomma rutor är gula.
 
 ![image](https://user-images.githubusercontent.com/4598641/226441447-3953051d-e11b-4f3c-8f92-5589f177cd2d.png)
 
