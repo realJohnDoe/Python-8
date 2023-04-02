@@ -52,7 +52,7 @@ Om positionen på rutnätet intill spelaren i pilens riktning är flyttbar (dvs.
 
 ![image](https://user-images.githubusercontent.com/4598641/226441412-0d311596-2d1f-4e54-bf51-e163588f9e16.png)
 
-Om positionen intill spelaren är en box och positionen utanför boxen är flyttbar, ändras rutnätet för att återspegla den nya spelaren och nya boxpositioner.
+Om positionen intill spelaren är en låda och positionen utanför lådan är flyttbar, ändras rutnätet för att återspegla den nya spelaren och nya lådpositioner.
 
 ![image](https://user-images.githubusercontent.com/4598641/226441447-3953051d-e11b-4f3c-8f92-5589f177cd2d.png)
 
@@ -139,14 +139,14 @@ Om spelaren är på lagerplats är spelarens nuvarande position inställd på la
 ## Förenkla koden
 En ordbok skapas som returnerar nästa celltyp för spelarens tidigare position när den indexeras av den aktuella spelarens celltyp.
 
-## Trycker på boxen till tom plats
+## Puttar lådan till tom plats
 Cellen bortom den intilliggande cellen lagras i en variabel.
 
 player_y + dy + dy kontrolleras för att se om det är större än eller lika med 0 och mindre än len ( level ) , dvs det är inom nivån höjdmässigt, och player_x + dx + dx kontrolleras för att se om det är större än eller lika med 0 och mindre än len ( nivå [ player_y + dy + dy ] ) , dvs det är inom nivån breddmässigt.
 
 (Den intilliggande positionen är inte markerad på samma sätt eftersom det alltid finns en kant av väggar runt varje nivå, så player_y + dy eller player_x + dx kommer aldrig att vara utanför nivån.)
 
-Om den intilliggande cellen är en ruta och den bortom cellen är tom, är den intilliggande positionen inställd på spelare och positionen bortom är satt till box .
+Om den intilliggande cellen är en ruta och den bortom cellen är tom, är den intilliggande positionen inställd på spelare och positionen bortom är satt till låda.
 
 ![image](https://user-images.githubusercontent.com/4598641/226442221-e7c86311-2b78-4175-94f7-29befecbb32e.png)
 
