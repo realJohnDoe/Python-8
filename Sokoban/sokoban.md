@@ -121,11 +121,11 @@ def draw():
             if cell != ' ':
                 # etc.
 
-                screen.draw.text( #nytt 
-                    cell, #nytt
-                    (x * cell_size, y * cell_size), #nytt
-                    color=(0, 0, 0) #nytt
-                ) #nytt
+                screen.draw.text( #nytt  🔲
+                    cell, #nytt 🔲
+                    (x * cell_size, y * cell_size), #nytt 🔲
+                    color=(0, 0, 0) #nytt 🔲
+                ) #nytt 🔲
 ```
 
 
@@ -186,8 +186,38 @@ Bakgrundsfärgen ändras och färgen på varje cell ställs in baserat på dess 
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
+
 ```python
-####
+def draw():
+    screen.fill((255, 255, 190)) #nytt 🔲
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != ' ':
+                cell_size = 23
+
+                colors = { #nytt 🔲
+                    '@': (167, 135, 255),
+                    '+': (158, 119, 255),
+                    '$': (255, 201, 126),
+                    '*': (150, 255, 127),
+                    '.': (156, 229, 255),
+                    '#': (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell] #nytt 🔲
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255) #nytt 🔲
+                )
 ```
 
 <details>
