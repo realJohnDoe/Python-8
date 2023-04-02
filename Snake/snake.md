@@ -1,6 +1,29 @@
 # Snake ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
+- [Regler](#regler)
+- [Översikt](#översikt)
+- [Kodning](#kodning)
+  - [Rita bakgrunden](#rita-bakgrunden)
+  - [Rita ormen](#rita-ormen)
+  - [Timer](#timer)
+  - [Flytta ormen åt höger](#flytta-ormen-åt-höger)
+  - [Flytta ormen i alla fyra riktningar](#flytta-ormen-i-alla-fyra-riktningar)
+  - [Hindra att ormen rör sig rakt bakåt](#hindra-att-ormen-rör-sig-rakt-bakåt)
+  - [Använd en kö för riktningarna](#använd-en-kö-för-riktningarna)
+  - [Hindra att lägga till samma riktning två gånger](#hindra-att-lägga-till-samma-riktning-två-gånger)
+  - [Slå över vid skärmkanten](#slå-över-vid-skärmkanten)
+  - [Rita maten](#rita-maten)
+  - [Förenkla koden](#förenkla-koden)
+  - [Äta maten](#äta-maten)
+  - [Förenkla koden](#förenkla-koden-1)
+  - [Flytta maten till en ledig ruta](#flytta-maten-till-en-ledig-ruta)
+  - [Game over](#game-over)
+  - [Återställa spelet](#återställa-spelet)
+  - [Pausa efter att ormen har kraschat](#pausa-efter-att-ormen-har-kraschat)
+  - [Ändra ormens färg när den är död](#ändra-ormens-färg-när-den-är-död)
+- [Källor](#källor)
+
 ![image](https://user-images.githubusercontent.com/4598641/226439115-c9800ff9-c916-406c-9efb-39407658988a.png)
 
 # Regler
