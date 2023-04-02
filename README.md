@@ -45,7 +45,7 @@ https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md
 
 https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md
 
-## ARBETE PÅGÅR: Flowers ⭐⭐⭐
+## Flowers ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226452466-c09472f6-9f75-435b-b7c3-9bda65238539.png)](https://github.com/coderdojolund/Python-8/blob/main/Flowers/flowers.md)
 
