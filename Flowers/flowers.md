@@ -1606,13 +1606,13 @@ pgzrun.go()  # måste vara sista raden
 
 ![image](https://user-images.githubusercontent.com/4598641/226451814-b25ebd8c-a36b-445d-9512-a291112a56f4.png)
 
-## Håll reda på antalet grannar när vi avtäcker
+## Ta hänsyn till antalet grannblommor när vi avtäcker
 
-!!!FÖRKLARA BÄTTRE: Cellerna runt en position som har tagits bort från avtäckningsstacken läggs bara till i stacken om ingen av de omgivande cellerna har blommor.
+Som koden ser ut just nu kommer den att avtäcka alla cellerna. Vi behöver rätta till det.
+
+När vi tar en ruta från avtäckningsstacken ska vi lägga till granncellerna. Vi vill bara lägga till de grannceller som *inte* har någon blomgranne i sin tur.
 
 Vi behöver kunna räkna ut antalet omgivande blommor på flera ställen. Därför gör vi det till en funktion.
-
-!!!surrounding_flower_count räknas ut lokalt i draw() -- redundant kod 
 
 ```python
 def get_surrounding_flower_count(x, y): #nytt 🌻
