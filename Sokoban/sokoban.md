@@ -107,8 +107,8 @@ pgzrun.go() # måste vara sista raden
 
 ![image](https://user-images.githubusercontent.com/4598641/226441552-531f43b9-788f-4e53-9f34-84ab40932038.png)
 
-## Rita celltyper
-Rutans sträng visas på varje ruta.
+## Skriv celltypen i varje cell
+Rutans sträng visas i varje ruta.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
@@ -128,17 +128,53 @@ def draw():
                 ) #nytt
 ```
 
-✏️ Uppdatera koden. Vad händer när du ...?
-
-```python
-####
-```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+
+level = [
+    [' ', ' ', '#', '#', '#'],
+    [' ', ' ', '#', '.', '#'],
+    [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+    ['#', '#', '#', '$', ' ', '$', '.', '#'],
+    ['#', '.', ' ', '$', '@', '#', '#', '#'],
+    ['#', '#', '#', '#', '$', '#'],
+    [' ', ' ', ' ', '#', '.', '#'],
+    [' ', ' ', ' ', '#', '#', '#'],
+]
+
+
+# Funktioner här nedanför
+def draw():
+    screen.fill((0, 0, 0))
+    
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != ' ':
+                cell_size = 23
+                
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=(255, 255, 255)
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(0, 0, 0)
+                )
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go() # måste vara sista raden
 ```
 
 </details>
