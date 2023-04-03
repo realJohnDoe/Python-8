@@ -1560,8 +1560,8 @@ pgzrun.go()  # måste vara sista raden
 
 ![image](https://user-images.githubusercontent.com/4598641/226442221-e7c86311-2b78-4175-94f7-29befecbb32e.png)
 
-## Skjuta på lådan till förvaringen
-Om den bortomstående positionen är lagring , så ställs bortom positionen till box_on_storage .
+## Putta lådan till en lagerplats
+Om den bortomstående positionen är `storage`, så ställs bortom positionen till `box_on_storage`.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
@@ -1583,7 +1583,8 @@ Om den bortomstående positionen är lagring , så ställs bortom positionen til
 
 
 ## Förenkla koden
-En ordbok skapas som returnerar nästa celltyp när den indexeras av den aktuella celltypen.
+
+Vi gör en ordlista som returnerar nästa celltyp när den indexeras av den aktuella celltypen.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
@@ -1600,7 +1601,7 @@ En ordbok skapas som returnerar nästa celltyp när den indexeras av den aktuell
 
 </details>
 
-## Trycklåda på förvaring
+## Putta lådan till en lagerplats
 Om den intilliggande cellen är en ruta på lagring, så sätts den intilliggande positionen till box_on_storage .
 
 ✏️ Uppdatera koden. Vad händer när du ...?
@@ -1638,14 +1639,15 @@ En ordlista skapas som returnerar nästa intilliggande celltyp när en ruta tryc
 
 </details>
 
-## Laddar nivå från nivålistan
-Nivåerna lagras i en lista.
+## Laddar spelnivåer från en lista
+Nivåerna sparas i en lista.
 
-Numret på den aktuella nivån lagras också.
+Numret på den aktuella nivån sparas också.
 
 Den aktuella nivån kopieras från listan som innehåller alla nivåer.
 
-Kopieringsmodulen importeras så att copy.deepcopy kan användas .
+Kopieringsmodulen importeras så att `copy.deepcopy` kan användas.
+>Varför behövs deepcopy?
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
@@ -1664,8 +1666,8 @@ Kopieringsmodulen importeras så att copy.deepcopy kan användas .
 
 ![image](https://user-images.githubusercontent.com/4598641/226442656-f303feef-223f-4342-a498-17eb88ffb112.png)
 
-## Återställ nivå
-När R -tangenten trycks ned återställs nivån.
+## Återställ nivån
+När R-tangenten trycks ned återställs nivån.
 
 Koden för att kopiera den aktuella nivån återanvänds, så en funktion görs.
 
@@ -1686,7 +1688,7 @@ Koden för att kopiera den aktuella nivån återanvänds, så en funktion görs.
 </details>
 
 ## Nästa och föregående nivå
-När N-tangenten trycks in laddas nästa nivå och när p -tangenten trycks in laddas föregående nivå.
+När N-tangenten trycks in laddas nästa spelnivå och när P-tangenten trycks in laddas föregående spelnivå.
 
 
 ✏️ Uppdatera koden. Vad händer när du ...?
