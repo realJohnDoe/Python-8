@@ -888,22 +888,125 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442037-607ab9cd-4a59-47de-a13e-6ea0b696a3da.png)
 
 ## Flytta spelaren till lagerplats
-Om den intilliggande positionen är en lagerplats, blir den nya intilliggande positionen `player_on_storage`.
+Om den rutan bredvid är av typen `storage`, blir den nya rutan `player_on_storage`.
 
-För närvarande kan spelaren gå vidare till en lagerplats, men inte utanför lagerplatsen.
+För närvarande kan spelaren gå till en lagerplats, men inte lämna den.
 
-
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden i `on_key_down`. Vad händer när du ...?
 
 ```python
-####
+def on_key_down(key):
+   # etc.
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        if current == player:
+            if adjacent == empty: #nytt 🔲
+                level[player_y][player_x] = empty
+                level[player_y + dy][player_x + dx] = player
+            elif adjacent == storage: #nytt 🔲
+                level[player_y][player_x] = empty #nytt 🔲
+                level[player_y + dy][player_x + dx] = player_on_storage #nytt 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        if current == player:
+            if adjacent == empty:
+                level[player_y][player_x] = empty
+                level[player_y + dy][player_x + dx] = player
+            elif adjacent == storage:
+                level[player_y][player_x] = empty
+                level[player_y + dy][player_x + dx] = player_on_storage
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -911,22 +1014,126 @@ För närvarande kan spelaren gå vidare till en lagerplats, men inte utanför l
 ![image](https://user-images.githubusercontent.com/4598641/226442060-dddc88af-c52b-4d75-bafc-d202d9069ae1.png)
 
 ## Förenkla koden
-Den nya intilliggande positionen (antingen player eller player_on_storage ) ställs in baserat på typen av intilliggande , så en ordlista skapas som returnerar nästa intilliggande celltyp när den indexeras av den aktuella intilliggande celltypen.
+Den nya grannrutan, antingen `player` eller `player_on_storage` ställs in baserat på typen av `adjacent`. Därför skapar vi en ordlista som ger nästa intilliggande celltyp när den indexeras av den aktuella intilliggande celltypen.
 
-Den används också för att kontrollera om spelaren kan flytta till den intilliggande positionen genom att kontrollera om den har en nyckel med värdet intilliggande .
+Den används också för att kontrollera om spelaren kan flytta till den intilliggande positionen genom att kontrollera om den har en nyckel med värdet `adjacent` .
 
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        next_adjacent = { #nytt 🔲
+            empty: player, #nytt 🔲
+            storage: player_on_storage, #nytt 🔲
+        } #nytt 🔲
+
+        if current == player and adjacent in next_adjacent: #ändrat 🔲
+            level[player_y][player_x] = empty
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent] #ändrat 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        if current == player and adjacent in next_adjacent:
+            level[player_y][player_x] = empty
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
