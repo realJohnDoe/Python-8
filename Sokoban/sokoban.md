@@ -34,12 +34,12 @@ Vägg
 # Översikt
 De olika tillstånden en ruta kan vara i representeras av följande strängar:
 
-__@__	Spelare<br>
-__+__	Spelare på lagerplats<br>
-__$__	Låda<br>
-__*__	Låda på lagerplats<br>
-__.__	Lagerplats<br>
-__#__	Vägg
+__@__	Spelare &ndash; *player*<br>
+__+__	Spelare på lagerplats &ndash; *player_on_storage*<br>
+__$__	Låda &ndash; *box*<br>
+__*__	Låda på lagerplats &ndash; *box_on_storage*<br>
+__.__	Lagerplats &ndash; *storage*<br>
+__#__	Vägg &ndash; *wall*
 
 Varje spelnivå (level) lagras som ett rutnät av dessa strängar.
 
@@ -1132,26 +1132,138 @@ def draw():
 
 # Kod för att starta appen här nedanför
 
-
 pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Flytta spelare från lagerplats
-Om spelaren är på lagerplats är spelarens nuvarande position inställd på lagerplats.
+
+Om spelaren är på en lagerplats, `player_on_storage`, sätts spelarens nuvarande position till &raquo;bara&laquo; `storage` när spelaren lämnar.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
-
+#nytt 🔲
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            if current == player: #nytt 🔲
+                level[player_y][player_x] = empty
+                level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+            elif current == player_on_storage: #nytt 🔲
+                level[player_y][player_x] = storage #nytt 🔲
+                level[player_y + dy][player_x + dx] = next_adjacent[adjacent] #nytt 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            if current == player:
+                level[player_y][player_x] = empty
+                level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+            elif current == player_on_storage:
+                level[player_y][player_x] = storage
+                level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -1164,38 +1276,284 @@ En ordbok skapas som returnerar nästa celltyp för spelarens tidigare position 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        next_current = { #nytt 🔲
+            player: empty, #nytt 🔲
+            player_on_storage: storage, #nytt 🔲
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current] #nytt 🔲
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
+
 ## Putta lådan till tom plats
 Cellen bortom den intilliggande cellen lagras i en variabel.
 
-player_y + dy + dy kontrolleras för att se om det är större än eller lika med 0 och mindre än len ( level ) , dvs det är inom nivån höjdmässigt, och player_x + dx + dx kontrolleras för att se om det är större än eller lika med 0 och mindre än len ( nivå [ player_y + dy + dy ] ) , dvs det är inom nivån breddmässigt.
+`player_y + dy + dy` kontrolleras för att se om det är större än eller lika med 0 och mindre än `len(level)`, dvs det är inom nivån höjdmässigt, och `player_x + dx + dx` kontrolleras för att se om det är större än eller lika med 0 och mindre än `len(level[player_y + dy + dy])`, dvs det är inom nivån breddmässigt.
 
-(Den intilliggande positionen är inte markerad på samma sätt eftersom det alltid finns en kant av väggar runt varje nivå, så player_y + dy eller player_x + dx kommer aldrig att vara utanför nivån.)
+(Den intilliggande positionen är inte markerad på samma sätt eftersom det alltid finns en kant av väggar runt varje nivå, så `player_y + dy` eller `player_x + dx` kommer aldrig att vara utanför nivån.)
 
-Om den intilliggande cellen är en ruta och den bortom cellen är tom, är den intilliggande positionen inställd på spelare och positionen bortom är satt till låda.
+Om den intilliggande cellen är en ruta och den bortom cellen är tom, är den intilliggande positionen inställd på `player` och positionen bortom är satt till `box`.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        beyond = '' #nytt 🔲
+        if ( #nytt 🔲
+            0 <= player_y + dy + dy < len(level) #nytt 🔲
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy]) #nytt 🔲
+        ): #nytt 🔲
+            beyond = level[player_y + dy + dy][player_x + dx + dx] #nytt 🔲
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif adjacent == box and beyond == empty: #nytt 🔲
+            level[player_y][player_x] = next_current[current] #nytt 🔲
+            level[player_y + dy][player_x + dx] = player #nytt 🔲
+            level[player_y + dy + dy][player_x + dx + dx] = box #nytt 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif adjacent == box and beyond == empty:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = player
+            level[player_y + dy + dy][player_x + dx + dx] = box
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
