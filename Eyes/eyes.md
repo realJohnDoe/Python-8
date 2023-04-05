@@ -4,7 +4,7 @@
 
 Vi vill göra en animering där ögonen följer muspekaren.
 
-# Innehåll
+## Innehåll
 [Rita ett öga](#rita-ett-öga)
 &bull; [Räkna ut avståndet mellan muspekaren och ögat](#räkna-ut-avståndet-mellan-muspekaren-och-ögat)
 &bull; [Räkna ut avståndet mellan muspekaren och ögat](#räkna-ut-avståndet-mellan-muspekaren-och-ögat)
