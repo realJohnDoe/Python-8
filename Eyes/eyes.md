@@ -1,5 +1,10 @@
 # Ögon
 
+![image](https://user-images.githubusercontent.com/4598641/223815678-2c97174e-578c-4df4-9f8a-d8764f0b2424.png)
+
+Vi vill göra en animering där ögonen följer muspekaren.
+
+# Innehåll
 [Rita ett öga](#rita-ett-öga)
 &bull; [Räkna ut avståndet mellan muspekaren och ögat](#räkna-ut-avståndet-mellan-muspekaren-och-ögat)
 &bull; [Räkna ut avståndet mellan muspekaren och ögat](#räkna-ut-avståndet-mellan-muspekaren-och-ögat)
@@ -8,12 +13,6 @@
 &bull; [Två ögon](#två-ögon)
 &bull; [Utmaningar](#utmaningar)
 &bull; [Källor](#källor)
-
----
-
-![image](https://user-images.githubusercontent.com/4598641/223815678-2c97174e-578c-4df4-9f8a-d8764f0b2424.png)
-
-Vi vill göra en animering där ögonen följer muspekaren.
 
 # Rita ett öga
 Ögat ritas med en vit cirkel och en lite mindre, mörkblå cirkel för pupillen.
