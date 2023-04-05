@@ -1,5 +1,15 @@
 # Hur många dagar fyller du?
 
+Har du fyllt 5000 dagar? Vilket datum fyller eller fyllde du 5555 dagar?
+
+**Uppgift:** Gör en app som räknar ut hur många dagar det är mellan två datum. Använd den för att räkna ut hur många **dagar** du fyller idag!
+
+**Idé:** vi låter appen räkna ut hur många dagar det har gått sen ett visst startdatum, t.ex. 1 januari 2000. Den dagen kallar vi dag nummer 1.
+Hur kan du använda den informationen för att räkna ut hur många dagar du fyller idag?
+
+![image](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)
+
+## Innehåll
 [Steg 1: Prata med användaren](#steg-1-prata-med-användaren)
 &bull; [Steg 2: Förbered test](#steg-2-förbered-test)
 &bull; [Steg 3: Testa januari](#steg-3-testa-januari)
@@ -11,16 +21,6 @@
 &ndash; [Nästan klara](#nästan-klara)
 &ndash; [Testa en förenkling](#testa-en-förenkling)
 &bull; [Hjälp på traven](#hjälp-på-traven)
-
-
-Har du fyllt 5000 dagar? Vilket datum fyller eller fyllde du 5555 dagar?
-
-**Uppgift:** Gör en app som räknar ut hur många dagar det är mellan två datum. Använd den för att räkna ut hur många **dagar** du fyller idag!
-
-**Idé:** vi låter appen räkna ut hur många dagar det har gått sen ett visst startdatum, t.ex. 1 januari 2000. Den dagen kallar vi dag nummer 1.
-Hur kan du använda den informationen för att räkna ut hur många dagar du fyller idag?
-
-![image](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)
 
 ## STEG 1: Prata med användaren
 <img src=https://user-images.githubusercontent.com/4598641/222922745-103d7a53-2f51-4ac9-9191-0282fa095f6e.png width="400px">
