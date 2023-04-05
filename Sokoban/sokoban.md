@@ -1271,7 +1271,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442123-828097c9-b89f-449a-9de0-e83d8a774464.png)
 
 ## Förenkla koden
-En ordbok skapas som returnerar nästa celltyp för spelarens tidigare position när den indexeras av den aktuella spelarens celltyp.
+En ordlista skapas som returnerar nästa celltyp för spelarens tidigare position när den indexeras av den aktuella spelarens celltyp.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
@@ -1564,16 +1564,145 @@ pgzrun.go()  # måste vara sista raden
 Om den bortomstående positionen är `storage`, så ställs bortom positionen till `box_on_storage`.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
-
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif adjacent == box:
+            if beyond == empty: #nytt 🔲
+                level[player_y][player_x] = next_current[current]
+                level[player_y + dy][player_x + dx] = player
+                level[player_y + dy + dy][player_x + dx + dx] = box
+            elif beyond == storage: #nytt 🔲
+                level[player_y][player_x] = next_current[current] #nytt 🔲
+                level[player_y + dy][player_x + dx] = player #nytt 🔲
+                level[player_y + dy + dy][player_x + dx + dx] = box_on_storage #nytt 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif adjacent == box:
+            if beyond == empty:
+                level[player_y][player_x] = next_current[current]
+                level[player_y + dy][player_x + dx] = player
+                level[player_y + dy + dy][player_x + dx + dx] = box
+            elif beyond == storage:
+                level[player_y][player_x] = next_current[current]
+                level[player_y + dy][player_x + dx] = player
+                level[player_y + dy + dy][player_x + dx + dx] = box_on_storage
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -1587,34 +1716,293 @@ Om den bortomstående positionen är `storage`, så ställs bortom positionen ti
 Vi gör en ordlista som returnerar nästa celltyp när den indexeras av den aktuella celltypen.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
-
+#nytt 🔲
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        next_beyond = { #nytt 🔲
+            empty: box, #nytt 🔲
+            storage: box_on_storage, #nytt 🔲
+        } #nytt 🔲
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif adjacent == box and beyond in next_beyond: #nytt 🔲
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = player
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond] #nytt 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif adjacent == box and beyond in next_beyond:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = player
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Putta lådan till en lagerplats
-Om den intilliggande cellen är en ruta på lagring, så sätts den intilliggande positionen till box_on_storage .
+Om den intilliggande cellen är en ruta på lagring, så sätts den intilliggande positionen till `box_on_storage`.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
-
+#nytt 🔲
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond:
+            level[player_y][player_x] = next_current[current]
+
+            if adjacent == box: #nytt 🔲
+                level[player_y + dy][player_x + dx] = player
+            elif adjacent == box_on_storage: #nytt 🔲
+                level[player_y + dy][player_x + dx] = player_on_storage #nytt 🔲
+
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif adjacent == box and beyond in next_beyond:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = player
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -1625,21 +2013,157 @@ Om den intilliggande cellen är en ruta på lagring, så sätts den intilliggand
 En ordlista skapas som returnerar nästa intilliggande celltyp när en ruta trycks när den indexeras av den aktuella intilliggande celltypen.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
-
+#nytt 🔲
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        next_adjacent_push = { #nytt 🔲
+            box: player, #nytt 🔲
+            box_on_storage: player_on_storage, #nytt 🔲
+        } #nytt 🔲
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push: #nytt 🔲
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent] #nytt 🔲
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+
+# Globala variabler här nedanför
+level = [
+    ['#', '#', '#', '#', '#'],
+    ['#', '@', ' ', '.', '#'],
+    ['#', ' ', '$', ' ', '#'],
+    ['#', '.', '$', ' ', '#'],
+    ['#', ' ', '$', '.', '#'],
+    ['#', '.', '$', '.', '#'],
+    ['#', '.', '*', ' ', '#'],
+    ['#', ' ', '*', '.', '#'],
+    ['#', ' ', '*', ' ', '#'],
+    ['#', '.', '*', '.', '#'],
+    ['#', '#', '#', '#', '#'],
+]
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        next_adjacent_push = {
+            box: player,
+            box_on_storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
-## Laddar spelnivåer från en lista
+## Ladda spelnivåer från en lista
 Nivåerna sparas i en lista.
 
 Numret på den aktuella nivån sparas också.
@@ -1650,16 +2174,199 @@ Kopieringsmodulen importeras så att `copy.deepcopy` kan användas.
 >Varför behövs deepcopy?
 
 ✏️ Uppdatera koden. Vad händer när du ...?
-
+#nytt 🔲
 ```python
-####
+import pgzrun
+import copy #nytt 🔲
+
+# Globala variabler här nedanför
+levels = [ #ny variabel 🔲
+    [
+        [' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', '.', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '$', ' ', '$', '.', '#'],
+        ['#', '.', ' ', '$', '@', '#', '#', '#'],
+        ['#', '#', '#', '#', '$', '#'],
+        [' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '@', '$', '$', '#', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '.', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '#', '$', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+]
+
+current_level = 0 #nytt 🔲
+
+level = copy.deepcopy(levels[current_level]) #nytt 🔲
+# etc.
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+import copy
+
+# Globala variabler här nedanför
+levels = [
+    [
+        [' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', '.', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '$', ' ', '$', '.', '#'],
+        ['#', '.', ' ', '$', '@', '#', '#', '#'],
+        ['#', '#', '#', '#', '$', '#'],
+        [' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '@', '$', '$', '#', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '.', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '#', '$', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+]
+
+current_level = 0
+
+level = copy.deepcopy(levels[current_level])
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        next_adjacent_push = {
+            box: player,
+            box_on_storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -1675,7 +2382,28 @@ Koden för att kopiera den aktuella nivån återanvänds, så en funktion görs.
 ✏️ Uppdatera koden. Vad händer när du ...?
 
 ```python
-####
+# etc.
+# Funktioner här nedanför
+def load_level(): #nytt 🔲
+    global level #nytt 🔲
+    level = copy.deepcopy(levels[current_level]) #nytt 🔲
+
+# etc.
+
+def on_key_down(key):
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+    elif key == keys.R: #nytt 🔲
+        load_level() #nytt 🔲
+
+# etc.
+# Kod för att starta appen här nedanför
+load_level() #nytt 🔲
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 <details>
