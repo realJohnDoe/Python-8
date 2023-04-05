@@ -2,8 +2,8 @@
 
 Välkommen till Pythonuppgifter för årskurs 8. Spelen är översatta från engelska och anpassade till [repl.it](https://replit.com/~).
 
-* **Lätta uppgifter att börja med:** [Hello](#hello---) &bull; Spökhuset, i Google Classroom &bull; Nio liv, i Google Classroom
-* **Matteuppgifter:** [Eyes](#eyes) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-)
+* **Lätta uppgifter att börja med:** [Hello](#hello---) &bull; Spökhuset; *se Google Classroom* &bull; Nio liv; *se Google Classroom*
+* **Matteuppgifter:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-)
 * **Speluppgifter:** 
    [Gem Catcher](#gem-catcher-)
   &bull; [Ninja Runner](#ninja-runner-)
@@ -16,6 +16,11 @@ Välkommen till Pythonuppgifter för årskurs 8. Spelen är översatta från eng
   &bull; [Snake](#snake-)
   &bull; [Sokoban](#sokoban-)
 
+### Gradering
+⭐: lättare uppgift &ndash; du ska göra minst en av dessa och får göra alla om du vill<br>
+⭐⭐: lite svårare uppgift<br>
+⭐⭐⭐: de svåraste uppgifterna
+
 ## Hello 🌍🌎🌏  ⭐
 [![Hello 🌍🌎🌏](https://user-images.githubusercontent.com/4598641/225109246-7ddecc59-4ac9-4b3d-91a8-9f393704e4f3.png)](https://github.com/coderdojolund/Python-8/blob/main/Hello-world/Hello-world.md)
 
@@ -25,7 +30,7 @@ https://github.com/coderdojolund/Python-8/blob/main/Hello-world/Hello-world.md
 
 Finns i Google Classroom.
 
-##  Eyes ⭐⭐
+## Eyes ⭐⭐
 [![](https://user-images.githubusercontent.com/4598641/225428635-1243d0e6-0dac-4fd4-9691-8860a452a4b0.png)](https://github.com/coderdojolund/Python-8/blob/main/Eyes/eyes.md)
 
 https://github.com/coderdojolund/Python-8/blob/main/Eyes/eyes.md
@@ -43,11 +48,6 @@ https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md
 
 https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md
 
-##  Att flytta över från Scratch: Flappy Bird ⭐⭐⭐
-[![](https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-top-start.png)](https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md)
-
-https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md
-
 ##  Blocks ⭐⭐⭐
 [![](https://user-images.githubusercontent.com/4598641/226103304-00173642-8a08-4ef3-a1b5-ae896b6d8c94.png)](https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md))
 
@@ -58,6 +58,11 @@ https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md
 [![](https://user-images.githubusercontent.com/4598641/226438128-2ee9720e-4128-4af2-aa04-5cc69daafd27.png)](https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md))
 
 https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md
+
+##  Att flytta över från Scratch: Flappy Bird ⭐⭐⭐
+[![](https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-top-start.png)](https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md)
+
+https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md
 
 ## Flowers ⭐⭐⭐
 
