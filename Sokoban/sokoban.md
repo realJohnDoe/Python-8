@@ -5,6 +5,41 @@
 
 [Spelnivåerna i den här handledningen är hämtade från Rockbox-projektet.](http://git.rockbox.org/?p=rockbox.git;a=blob_plain;f=apps/plugins/sokoban.levels)
 
+# Innehåll
+
+**[Regler](#regler)**
+   [Teckenförklaring](#teckenförklaring)
+  &bull; [Kontroller](#kontroller)
+
+**[Översikt](#översikt)**
+
+**[Kodning](#kodning)**
+   [Rita en nivå](#rita-en-nivå)
+  &bull; [Skriv celltypen i varje cell](#skriv-celltypen-i-varje-cell)
+  &bull; [Ställa in färger](#ställa-in-färger)
+  &bull; [Ge celltyperna namn](#ge-celltyperna-namn)
+  &bull; [Hitta spelarens cell](#hitta-spelarens-cell)
+  &bull; [Hitta celltyp i den riktning som piltangenten pekar](#hitta-celltyp-i-den-riktning-som-piltangenten-pekar)
+  &bull; [Skapa en testnivå](#skapa-en-testnivå)
+  &bull; [Flytta spelaren till en tom ruta](#flytta-spelaren-till-en-tom-ruta)
+  &bull; [Flytta spelaren till lagerplats](#flytta-spelaren-till-lagerplats)
+  &bull; [Förenkla koden](#förenkla-koden)
+  &bull; [Flytta spelare från lagerplats](#flytta-spelare-från-lagerplats)
+  &bull; [Förenkla koden](#förenkla-koden-1)
+  &bull; [Putta lådan till tom plats](#putta-lådan-till-tom-plats)
+  &bull; [Putta lådan till en lagerplats](#putta-lådan-till-en-lagerplats)
+  &bull; [Förenkla koden](#förenkla-koden-2)
+  &bull; [Putta lådan till en lagerplats](#putta-lådan-till-en-lagerplats-1)
+  &bull; [Förenkla koden](#förenkla-koden-3)
+  &bull; [Ladda spelnivåer från en lista](#ladda-spelnivåer-från-en-lista)
+  &bull; [Återställ nivån](#återställ-nivån)
+  &bull; [Nästa och föregående nivå](#nästa-och-föregående-nivå)
+  &bull; [Slå över när vi går till nästa och föregående nivå](#slå-över-när-vi-går-till-nästa-och-föregående-nivå)
+  &bull; [Gå till nästa nivå när en nivå är avklarad](#gå-till-nästa-nivå-när-en-nivå-är-avklarad)
+  &bull; [Fler nivåer](#fler-nivåer)
+
+**[Källor](#källor)**
+
 # Regler
 Skjut in alla lådorna på lagerplatserna.
 
