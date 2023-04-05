@@ -70,13 +70,13 @@ https://github.com/coderdojolund/Python-8/blob/main/Life/life.md
 https://github.com/coderdojolund/Python-8/blob/main/Repeat/repeat.md
 
 
-## ARBETE PÅGÅR: Snake ⭐⭐⭐
+## Snake ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md)
 
 https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md
 
-##  ARBETE PÅGÅR: Sokoban ⭐⭐⭐
+##  Sokoban ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438553-be7f0fc4-19b6-43b1-86ba-cc869b76dab4.png)](https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md)
 
