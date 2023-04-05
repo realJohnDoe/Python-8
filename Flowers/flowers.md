@@ -1,6 +1,12 @@
 # Flowers ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
+>Det här projektet använder bilder från [flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip). 
+>De filerna finns redan med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter.
+
+![image](https://user-images.githubusercontent.com/4598641/226450608-0fb4fbf9-c465-4d93-8acd-c3f38ac4225d.png)
+
+## Innehåll
 **[Regler](#regler)** [Kontroller](#kontroller)
 
 **[Översikt](#översikt)**
@@ -35,11 +41,6 @@
   &bull; [Hindra att man klickar på en blomma vid första klicket](#hindra-att-man-klickar-på-en-blomma-vid-första-klicket)
 
 **[Källor](#källor)**
-
->Det här projektet använder bilder från [flowers.zip](https://simplegametutorials.github.io/pygamezero/flowers/flowers.zip). 
->De filerna finns redan med i startprojektet på https://replit.com/@RobertStorlind/flowers-starter.
-
-![image](https://user-images.githubusercontent.com/4598641/226450608-0fb4fbf9-c465-4d93-8acd-c3f38ac4225d.png)
 
 # Regler
 Spelet börjar med ett rutnät av täckta celler. Under några av cellerna finns blommor. Spelet är över när en cell med blomma avtäcks.
