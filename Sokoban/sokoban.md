@@ -2386,7 +2386,7 @@ Koden för att kopiera den aktuella nivån återanvänds, så en funktion görs.
 # Funktioner här nedanför
 def load_level(): #nytt 🔲
     global level #nytt 🔲
-    level = copy.deepcopy(levels[current_level]) #nytt 🔲
+    level = copy.deepcopy(levels[current_level]) #flyttad 🔲
 
 # etc.
 
@@ -2410,7 +2410,156 @@ pgzrun.go()  # måste vara sista raden
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+import copy
+
+# Globala variabler här nedanför
+levels = [
+    [
+        [' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', '.', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '$', ' ', '$', '.', '#'],
+        ['#', '.', ' ', '$', '@', '#', '#', '#'],
+        ['#', '#', '#', '#', '$', '#'],
+        [' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '@', '$', '$', '#', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '.', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '#', '$', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+]
+
+current_level = 0
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+def load_level():
+    global level
+    level = copy.deepcopy(levels[current_level])
+
+
+def on_key_down(key):
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        next_adjacent_push = {
+            box: player,
+            box_on_storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+    elif key == keys.R:
+        load_level()
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+# Kod för att starta appen här nedanför
+load_level()
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
@@ -2419,79 +2568,4460 @@ pgzrun.go()  # måste vara sista raden
 När N-tangenten trycks in laddas nästa spelnivå och när P-tangenten trycks in laddas föregående spelnivå.
 
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Vad händer när du trycker på P eller N en eller flera gånger?
 
 ```python
-####
+def on_key_down(key):
+    global current_level #nytt 🔲
+
+    # etc.
+
+    elif key == keys.N: #nytt 🔲
+        current_level += 1 #nytt 🔲
+        load_level() #nytt 🔲
+
+    elif key == keys.P: #nytt 🔲
+        current_level -= 1 #nytt 🔲
+        load_level() #nytt 🔲
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+import copy
+
+# Globala variabler här nedanför
+levels = [
+    [
+        [' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', '.', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '$', ' ', '$', '.', '#'],
+        ['#', '.', ' ', '$', '@', '#', '#', '#'],
+        ['#', '#', '#', '#', '$', '#'],
+        [' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '@', '$', '$', '#', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '.', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '#', '$', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+]
+
+current_level = 0
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def load_level():
+    global level
+    level = copy.deepcopy(levels[current_level])
+
+
+def on_key_down(key):
+    global current_level
+
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        next_adjacent_push = {
+            box: player,
+            box_on_storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+    elif key == keys.R:
+        load_level()
+
+    elif key == keys.N:
+        current_level += 1
+        load_level()
+
+    elif key == keys.P:
+        current_level -= 1
+        load_level()
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+
+# Kod för att starta appen här nedanför
+load_level()
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 
-## Slå in nästa och föregående nivå
+## Slå över när vi går till nästa och föregående nivå
 Om nästa nivå är efter den sista nivån laddas den första nivån.
 
 Om den föregående nivån är före den första nivån laddas den sista nivån.
 
-
 ✏️ Uppdatera koden. Vad händer när du ...?
 
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+    elif key == keys.N:
+        current_level += 1
+        if current_level >= len(levels): #nytt 🔲
+            current_level = 0 #nytt 🔲
+        load_level()
+
+    elif key == keys.P:
+        current_level -= 1
+        if current_level < 0: #nytt 🔲
+            current_level = len(levels) - 1 #nytt 🔲
+        load_level()
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+import copy
+
+# Globala variabler här nedanför
+levels = [
+    [
+        [' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', '.', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '$', ' ', '$', '.', '#'],
+        ['#', '.', ' ', '$', '@', '#', '#', '#'],
+        ['#', '#', '#', '#', '$', '#'],
+        [' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '@', '$', '$', '#', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '.', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '#', '$', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+]
+
+current_level = 0
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def load_level():
+    global level
+    level = copy.deepcopy(levels[current_level])
+
+
+def on_key_down(key):
+    global current_level
+
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        next_adjacent_push = {
+            box: player,
+            box_on_storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+    elif key == keys.R:
+        load_level()
+
+    elif key == keys.N:
+        current_level += 1
+        if current_level >= len(levels):
+            current_level = 0
+        load_level()
+
+    elif key == keys.P:
+        current_level -= 1
+        if current_level < 0:
+            current_level = len(levels) - 1
+        load_level()
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+
+# Kod för att starta appen här nedanför
+load_level()
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
-## Gå till nästa nivå när du är klar
-Efter att spelaren har flyttat, går alla celler i nivån igenom, och om ingen av cellerna är lådor (dvs. alla lådor är lagrade), är nivån klar och nästa nivå laddas.
+## Gå till nästa nivå när en nivå är avklarad
+Efter varje drag går vi igenom alla cellerna. 
+Om ingen av cellerna är lådor,  dvs. alla lådor är på lagerplats, är nivån klar och nästa nivå laddas.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 
 ```python
-####
+def on_key_down(key):
+    # etc.
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+        complete = True #nytt 🔲
+
+        for y, row in enumerate(level): #nytt 🔲
+            for x, cell in enumerate(row): #nytt 🔲
+                if cell == box: #nytt 🔲
+                    complete = False #nytt 🔲
+
+        if complete: #nytt 🔲
+            current_level += 1 #nytt 🔲
+            if current_level >= len(levels): #nytt 🔲
+                current_level = 0 #nytt 🔲
+            load_level() #nytt 🔲 
+    
+    elif key == keys.R:
+        load_level()
+    # etc.
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+import copy
+
+# Globala variabler här nedanför
+levels = [
+    [
+        [' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', '.', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '$', ' ', '$', '.', '#'],
+        ['#', '.', ' ', '$', '@', '#', '#', '#'],
+        ['#', '#', '#', '#', '$', '#'],
+        [' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '@', '$', '$', '#', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '.', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '#', '$', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+]
+
+current_level = 0
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def load_level():
+    global level
+    level = copy.deepcopy(levels[current_level])
+
+
+def on_key_down(key):
+    global current_level
+
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        next_adjacent_push = {
+            box: player,
+            box_on_storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+        complete = True
+
+        for y, row in enumerate(level):
+            for x, cell in enumerate(row):
+                if cell == box:
+                    complete = False
+
+        if complete:
+            current_level += 1
+            if current_level >= len(levels):
+                current_level = 0
+            load_level()
+
+    elif key == keys.R:
+        load_level()
+
+    elif key == keys.N:
+        current_level += 1
+        if current_level >= len(levels):
+            current_level = 0
+        load_level()
+
+    elif key == keys.P:
+        current_level -= 1
+        if current_level < 0:
+            current_level = len(levels) - 1
+        load_level()
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+
+# Kod för att starta appen här nedanför
+load_level()
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
 
 ## Fler nivåer
 
-✏️ Uppdatera koden. Vad händer när du ...?
+Lägg till hela uppsättningen med nivåer och testkör.
+✏️ Klipp och klistra in &ndash; du behöver inte mata in alla nivåerna för hand. Testkör!
 
 ```python
-####
+import pgzrun
+import copy
+
+# Globala variabler här nedanför
+levels = [ #nytt 🔲
+    [
+        [' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', '.', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '$', ' ', '$', '.', '#'],
+        ['#', '.', ' ', '$', '@', '#', '#', '#'],
+        ['#', '#', '#', '#', '$', '#'],
+        [' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '@', '$', '$', '#', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '.', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '#', '$', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '.', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '*', '#'],
+        ['#', ' ', '$', '$', ' ', '$', '.', '#'],
+        ['#', '#', '@', '#', '#', '.', '.', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#'],
+        [' ', '#', '@', ' ', '#', '#', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '#', ' ', '#', '#'],
+        ['#', '.', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', '.', '$', ' ', ' ', '#', ' ', '#'],
+        ['#', '.', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', ' ', ' ', '#', ' ', '@', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', '$', ' ', '$', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', '$', '#', '#', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '$', ' ', '#', ' ', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '.', ' ', '$', '#', '#', ' ', '#', '#'],
+        ['#', '.', '.', '$', ' ', '$', ' ', ' ', '@', '#'],
+        ['#', '.', '.', ' ', '$', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '$', '$', '$', ' ', '#'],
+        ['#', '@', ' ', '$', '.', '.', ' ', '#'],
+        ['#', ' ', '$', '.', '.', '.', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', '.', '.', '#'],
+        [' ', '#', '#', ' ', '.', '#', '#'],
+        [' ', '#', ' ', ' ', '$', '.', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', '#', '$', '$', ' ', '#'],
+        ['#', ' ', ' ', '@', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', ' ', ' ', '@', '#'],
+        ['#', ' ', ' ', '$', '.', ' ', '#', '#'],
+        ['#', ' ', ' ', '.', '$', '.', ' ', '#'],
+        ['#', '#', '#', ' ', '*', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '.', '.', '$', ' ', '#'],
+        ['#', '@', '$', '.', '*', ' ', '#', '#'],
+        ['#', ' ', '$', '.', '.', '$', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '$', ' ', '#', '#', ' ', '#'],
+        ['#', '.', '.', '.', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '$', '#', '$', ' ', '#', '#'],
+        ['#', '#', '#', '#', ' ', '#', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '@', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '$', '#', '#'],
+        ['#', ' ', ' ', '#', '.', '.', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '.', '.', '$', ' ', '#'],
+        [' ', '#', ' ', '@', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '#', '.', ' ', '#'],
+        [' ', '#', '#', ' ', ' ', '$', '.', '.', '.', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', '#', '*', '.', '#'],
+        ['#', '#', ' ', '#', '#', '$', '#', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '@', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '.', '.', '.', '.', ' ', '#'],
+        ['#', '#', '#', '.', '.', '.', '$', '#', '#', '#'],
+        ['#', ' ', ' ', '$', '#', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '#', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '@', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '$', ' ', '$', '@', '#'],
+        ['#', '$', '#', '$', '$', '$', '#', '#'],
+        ['#', '.', '.', '$', ' ', '$', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', '$', '$', ' ', ' ', '#'],
+        ['#', ' ', '.', '.', '.', '#', ' ', '#'],
+        ['#', '#', '.', '.', '.', '$', ' ', '#', '#'],
+        [' ', '#', ' ', '#', '#', ' ', '$', ' ', '#'],
+        [' ', '#', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', '@', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '$', ' ', '@', '#'],
+        ['#', '#', '#', '$', '$', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '.', '.', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '*', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '.', '$', '.', ' ', '@', '#'],
+        ['#', ' ', '.', '$', '.', '$', '.', ' ', '#'],
+        ['#', ' ', '$', '.', '$', '.', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', '*', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '$', '#', '$', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '.', '$', '.', '#'],
+        ['#', ' ', '@', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '.', ' ', '.', '.', '#'],
+        [' ', '#', '.', ' ', '$', '.', '#'],
+        ['#', '#', '#', ' ', ' ', '$', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '#', '$', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '@', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', ' ', '#', '$', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', ' ', '#', '$', '#', '.', '*', '.', '#'],
+        ['#', ' ', ' ', ' ', '@', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '@', '#', '.', '*', '.', '#', ' ', '#'],
+        ['#', ' ', '#', '.', '*', '.', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '.', ' ', ' ', '#', '#'],
+        ['#', ' ', '$', '.', '$', '.', ' ', ' ', '#'],
+        ['#', '@', '$', '#', ' ', '#', '$', ' ', '#'],
+        ['#', ' ', '$', '.', ' ', '.', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '$', '#', '$', ' ', '#'],
+        [' ', ' ', '#', '.', ' ', '.', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', ' ', '.', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '$', ' ', '$', '.', ' ', '#'],
+        ['#', ' ', ' ', '.', '#', '#', '#', '#', '.', '#', '#'],
+        ['#', ' ', '$', '.', '$', ' ', '$', ' ', '@', '#'],
+        ['#', ' ', ' ', '.', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '.', '*', '.', ' ', '$', ' ', '#'],
+        ['#', '@', '$', '.', '*', ' ', '*', '.', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', '.', '*', '.', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', '*', '.', '.', '*', ' ', '#'],
+        ['#', ' ', '*', '.', '.', '*', '$', ' ', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', '@', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '.', ' ', ' ', '@', '#'],
+        ['#', ' ', ' ', '$', '$', '$', ' ', ' ', '#'],
+        ['#', '.', '#', '#', '.', '#', '#', '.', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '.', '#', ' ', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', ' ', ' ', '$', '.', ' ', '@', '#'],
+        ['#', ' ', '.', '$', '.', '$', ' ', ' ', '#'],
+        ['#', '#', '$', '.', '$', ' ', '$', '#', '#'],
+        ['#', ' ', '.', '$', '.', '$', ' ', ' ', '#'],
+        ['#', '.', ' ', ' ', '$', '.', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '@', ' ', ' ', '#'],
+        ['#', '#', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', '$', '$', '#', '#'],
+        ['#', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '$', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '@', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '$', ' ', '#'],
+        ['#', '#', '#', '.', '#', '#', ' ', '#', '#', '#'],
+        [' ', '#', '.', '.', '.', '$', ' ', '$', ' ', '#'],
+        [' ', '#', '#', '.', '.', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '.', '.', ' ', '#', '#'],
+        ['#', ' ', '$', '.', ' ', '$', '*', ' ', '#'],
+        ['#', ' ', ' ', '$', '@', '$', ' ', ' ', '#'],
+        ['#', ' ', '*', '$', ' ', '.', '$', ' ', '#'],
+        ['#', '#', ' ', '.', '.', '#', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '*', ' ', ' ', '#', '#'],
+        ['#', ' ', '.', ' ', '.', ' ', '.', ' ', '#'],
+        ['#', ' ', '$', ' ', '*', ' ', ' ', ' ', '#'],
+        ['#', '*', '$', '$', '*', '$', '$', '*', '#'],
+        ['#', ' ', ' ', ' ', '*', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', ' ', '.', '@', '.', ' ', '#'],
+        ['#', '#', ' ', ' ', '*', ' ', ' ', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '.', '$', ' ', '@', '#'],
+        ['#', ' ', '$', ' ', '*', ' ', '$', ' ', '#'],
+        ['#', '*', '.', '.', '.', '*', '.', '*', '#'],
+        ['#', ' ', '$', '$', '*', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '.', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '.', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '.', '.', '#', '#', ' ', '#'],
+        [' ', '#', ' ', ' ', '$', '.', '.', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', '.', '#', ' ', '#', '#'],
+        ['#', '#', '#', ' ', '#', '#', '$', '#', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', ' ', '#', '$', '#', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '@', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '$', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', '@', ' ', '$', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', '$', ' ', '#', '#', '#', ' ', '$', '#'],
+        [' ', '#', ' ', '#', '.', '.', '.', '#', ' ', '#'],
+        ['#', '#', ' ', '#', '.', '.', '.', '#', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '@', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', '#', '.', '$', '$', '$', ' ', '#'],
+        ['#', ' ', '#', '.', '*', '#', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '.', '.', '#', ' ', '#'],
+        ['#', '#', '#', '.', '.', '$', ' ', '#', '#'],
+        [' ', ' ', '#', '.', '#', ' ', '$', ' ', '#'],
+        [' ', '#', '#', ' ', '#', ' ', '#', '@', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '@', ' ', '$', '$', '$', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        [' ', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '#', ' ', '#', '#', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '#'],
+        ['#', '.', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', '#', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '#', '.', '#', ' ', '#'],
+        ['#', ' ', ' ', '.', '*', '.', '$', '#'],
+        ['#', '#', ' ', '#', '.', '#', ' ', '#'],
+        [' ', '#', ' ', '#', '.', ' ', ' ', '#', '#'],
+        ['#', '#', ' ', '$', '.', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '@', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '.', '#', '#', '#', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', '$', '#', '.', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', '*', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', '.', '#', '$', ' ', '$', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#'],
+        [' ', '#', ' ', '#', '#', '#', '.', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', '@', '#'],
+        ['#', '#', '#', '.', ' ', '#'],
+        [' ', ' ', '#', '.', '#', '#'],
+        [' ', ' ', '#', '.', ' ', '#'],
+        ['#', '#', '#', '.', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', '#', '#'],
+        [' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '.', ' ', ' ', '#', ' ', '#'],
+        ['#', '#', '$', '#', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', '#', '$', '#', ' ', '#'],
+        ['#', '#', '.', ' ', ' ', '.', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', '*', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', '#', '*', ' ', '@', '#'],
+        ['#', ' ', ' ', '#', '.', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '.', '$', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', '.', '.', '.', ' ', ' ', '#', '$', ' ', '#'],
+        [' ', '#', '.', '#', '#', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '#', '.', '$', ' ', '$', '#', '#', ' ', '#', '#'],
+        ['#', '.', '$', ' ', '#', ' ', '#', '#', ' ', '#'],
+        ['#', '.', '#', '$', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '$', ' ', ' ', '#', '$', ' ', '$', '#'],
+        ['#', '.', ' ', '$', '#', '#', ' ', '@', ' ', '#'],
+        ['#', '.', '$', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '.', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', ' ', ' ', '#', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', '.', '.', '#'],
+        ['#', '#', ' ', '$', '#', '*', '#', '$', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', '$', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '@', ' ', '$', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', '$', '.', '#'],
+        ['#', '#', '$', '$', '#', '*', '#', '$', '.', '#'],
+        [' ', '#', '.', ' ', ' ', '#', ' ', '.', '.', '#'],
+        [' ', '#', '#', '.', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', '#', '#', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '#', '#', '#', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '#', ' ', '#'],
+        ['#', '@', '$', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', '#', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '$', '#', ' ', '#'],
+        ['#', '.', '.', '.', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '#', '.', '#', '$', '#', '#', '#'],
+        ['#', '.', '.', '.', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '.', '#'],
+        ['#', ' ', '#', '$', '#', '.', '.', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', '.', '.', '.', '#'],
+        ['#', '#', ' ', '#', '#', '.', '$', '.', '#'],
+        [' ', '#', ' ', '#', '#', ' ', ' ', '#', '#'],
+        [' ', '#', '$', '#', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '$', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', ' ', ' ', '@', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '#', '.', '#', ' ', '#'],
+        ['#', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', '.', '$', '.', '$', '.', '#'],
+        ['#', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', '#', '.', '#', ' ', '#'],
+        ['#', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', '#', ' ', '@', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#'],
+        [' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '$', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', '.', '.', '.', ' ', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', '.', '.', '.', '#', '$', '#', '#'],
+        [' ', '#', ' ', '#', '.', '.', '.', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', '#', '#', '#', '@', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '#', '$', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', '$', ' ', '$', ' ', '*', '.', '#'],
+        ['#', '.', '*', ' ', '$', ' ', '$', '.', '.', '#'],
+        ['#', '#', '.', '$', ' ', '$', ' ', '*', '#', '#'],
+        [' ', '#', '*', ' ', '$', ' ', '$', '.', '#'],
+        [' ', '#', '.', '$', ' ', '$', ' ', '.', '#'],
+        [' ', '#', '.', ' ', '$', ' ', '$', '.', '#'],
+        [' ', '#', '.', '$', '@', '$', ' ', '*', '#'],
+        ['#', '#', '*', ' ', '$', ' ', '$', '.', '#', '#'],
+        ['#', '.', '.', '$', ' ', '$', ' ', '*', '.', '#'],
+        ['#', '.', '*', ' ', '$', ' ', '$', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '$', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', ' ', ' ', '$', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', '#',
+            '#', '#', '#', '#', ' ', ' ', '.', '.', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ',
+            '#', '@', '#', '#', ' ', ' ', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', '#', '$', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', ' ', '@', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', '#', ' ', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', '#', '#', '$', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', '$', ' ', ' ', '$', ' ', '$', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', ' ', ' ', '@', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '$', '#', '$', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '$', ' ', ' ', '$', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '$', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#',
+            ' ', '$', ' ', '#', ' ', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', '#', '#',
+            ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '.', '.', '.', ' ', ' ', ' ', ' ',
+            '$', ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '$', ' ',
+            '$', ' ', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', '$', '$', '$', '#', '$', ' ', ' ', '$',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', ' ', ' ', ' ', '$',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', '$', '$', ' ', '#', '$', ' ', '$', ' ',
+            '$', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '$', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', '$', '$', '#', '$', '$', ' ', ' ', '@', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', '#', '$', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#',
+            ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', '#', '#',
+            ' ', '$', ' ', ' ', '$', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', ' ',
+            ' ', '$', ' ', '$', '$', ' ', '#', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', '#',
+            '#', '$', ' ', ' ', '$', ' ', '@', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#',
+            '#', ' ', ' ', '$', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '$', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', ' ', '#', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', '#', '#', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', '#', '#', '@', '#', '#'],
+        ['#', '.', '.', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', '#', ' ', '$', ' ', '#'],
+        ['#', '.', '.', '#', '#', '#', ' ', '#', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '$', ' ', '#', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '$', '#', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', ' ', '#', ' ', '@', '#', '#', ' ', '$', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '$', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '#', '#', '$', '#', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '#', '#', '#', ' ', '.', '.', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', '$', ' ', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '$', '$', ' ', '#', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '$',
+            ' ', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', '$', '#', ' ', '$',
+            ' ', '#', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', '$',
+            ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '$', '#', ' ', '#',
+            ' ', ' ', '#', '#', '#', '#', ' ', '#'],
+        ['#', '@', '#', '$', ' ', '$', ' ', '$',
+            ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '$', ' ', '#',
+            '$', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', ' ', ' ',
+            ' ', '$', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '#', '#', ' ', ' ', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', ' ', ' ', '.', ' ', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            '#', '#', ' ', ' ', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', ' ',
+            '#', '#', ' ', ' ', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', ' ', '$', '$', '$', ' ', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', ' ', ' ', '$',
+            ' ', '$', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '$', ' ', '$',
+            ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '@', ' ', '$', ' ', ' ', '$', ' ', ' ',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', '$', '$',
+            ' ', '$', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', ' ', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '@', '#', '#', '#', '#', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', ' ', '$', '$', ' ',
+            ' ', '$', ' ', '$', ' ', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', '$', '$', '#', ' ', ' ', ' ',
+            ' ', '$', ' ', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', ' ', '$', '$',
+            ' ', '$', '$', ' ', '#', '.', '.', '.', '#'],
+        ['#', '#', '#', ' ', ' ', ' ', '#', ' ', ' ', '$',
+            ' ', ' ', ' ', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '$', ' ',
+            '$', ' ', '$', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            '#', ' ', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', '#', ' ', ' ', '$',
+            ' ', '$', ' ', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '#', ' ', '$', '$',
+            ' ', '$', ' ', '$', '#', '#', '.', '.', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '#', ' ', ' ', '$',
+            ' ', ' ', ' ', ' ', ' ', ' ', '#', '.', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '#', ' ', '$', '$',
+            '$', ' ', '$', '$', '$', ' ', '#', '.', '#'],
+        ['#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', ' ', ' ', '#', '#', '#', '$', ' ', '#'],
+        [' ', ' ', '#', '#', ' ', ' ', ' ', '@', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', '#', ' ', ' ', '$', ' ', '$', '$', '#', '#', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', '#', '$', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', ' ', '$', ' ', '$',
+            '$', ' ', '#', ' ', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '$', ' ', '#', ' ', ' ',
+            '#', ' ', '$', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', '$', '$', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ', '$', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', ' ', ' ', ' ', ' ', '#', '#', '#', ' ',
+            ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', ' ', '.', '.', '#', ' ', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '#', '.', '#'],
+        ['#', '.', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '#', '#', '#', '#',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', '$', ' ', '$',
+            ' ', '$', ' ', '$', '#', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '$', '@', '$',
+            ' ', ' ', ' ', '#', '#', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '#', '$', ' ', '$', ' ',
+            '$', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '$', ' ', '$',
+            ' ', ' ', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '#', '#', '#', '$', '$', '$', ' ',
+            '$', ' ', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#',
+            '#', ' ', '#', '#', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', ' ', '#',
+            '#', ' ', '#', '#', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', ' ', ' ', ' ', '#', '#',
+            ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', '#', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '$', ' ', '#', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', ' ', '#'],
+        ['#', ' ', '#', ' ', '$', '#', '@', '$', '#', '#',
+            ' ', '#', ' ', '#', '.', '#', '.', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', '$', ' ', ' ', '#',
+            ' ', ' ', ' ', ' ', '.', ' ', '.', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', ' ', '$', ' ', '#',
+            ' ', '#', ' ', '#', '.', '#', '.', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', ' ', ' ', '#', '#',
+            '$', ' ', '$', ' ', '.', ' ', '.', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', ' ', ' ', '#', ' ',
+            ' ', '#', '$', '#', '.', '#', '.', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '$', ' ', ' ', ' ',
+            '$', ' ', ' ', '$', '.', '.', '.', ' ', '#'],
+        [' ', '#', '$', ' ', '#', '#', '#', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '$', '@', '$', ' ', '#'],
+        [' ', '#', '$', '$', ' ', '#', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', '#', '#', '#', '.', '.', '.',
+            '.', '.', '.', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '$', '.', '.', '.',
+            '.', '.', '.', '#', '#', ' ', '#', ' ', '#'],
+        [' ', '#', ' ', '#', '#', '#', '.', '.', '.',
+            '.', '.', '.', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '#', '#', '#',
+            ' ', '#', '#', '#', ' ', '#', '$', '#', '#'],
+        ['#', ' ', ' ', '#', '$', ' ', ' ', ' ', '#',
+            ' ', ' ', '$', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '$', '$', '$', ' ',
+            ' ', '#', ' ', '$', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', '#',
+            '#', '#', '$', '$', ' ', '#', ' ', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', ' ', ' ',
+            ' ', '$', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#',
+            '#', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', ' ', '#', '$', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', ' ', '#', '#', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', '@', ' ', '$', ' ', '#', ' ', '$', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', '$', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', ' ', '#', '#', '#', '#', '$',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '$', '#', '.', '.', '.', '.',
+            '.', '#', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '$', '.', '.', '*', '*',
+            '.', ' ', '$', '#', ' ', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '#', '.', '.', '.',
+            '.', '.', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '#', ' ',
+            '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '$', ' ', '$', ' ', ' ', ' ', '$', '#'],
+        ['#', '#', '#', '@', ' ', '#', '$', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', '#', '#', ' ', ' ', '$', ' ', '$', ' ', '#', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#', '#', ' ', '#', '#', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', '#', '$', '#', '#', '$', ' ', ' ', '#', '.', '#'],
+        [' ', '#', '#', '#', ' ', ' ', ' ', '$', '.', '.', '#', '#', '.', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '.', '*', '.', '.', '.', '#'],
+        [' ', ' ', '#', ' ', '$', '$', ' ', '#', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '.', '.', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '.', '.', ' ', ' ',
+            '#', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#',
+            '#', ' ', ' ', '#', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', ' ', ' ',
+            '#', '#', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ',
+            ' ', '#', '#', '#', '#', ' ', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '#', '#',
+            '#', '#', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', ' ', '$',
+            ' ', ' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '@', '$', ' ', ' ', '$', ' ',
+            ' ', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ',
+            '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            '.', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', ' ', '#',
+            '.', ' ', ' ', ' ', ' ', '@', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', ' ', '#', '#',
+            '.', '.', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '#', ' ', '.', '.', '#', '#',
+            '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', '.', '.', '.', ' ', ' ',
+            ' ', '$', ' ', '#', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '.', '.', ' ', '#', '#',
+            ' ', ' ', '#', '#', ' ', '#', '#', ' ', '#'],
+        ['#', '#', '#', '#', '$', '#', '#', '$', '#', ' ',
+            '$', ' ', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', '#', '#', ' ', '#', ' ', ' ', ' ', ' ',
+            '#', '$', ' ', '$', '$', ' ', '#', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', '#', ' ', '#',
+            ' ', ' ', '#', ' ', '$', '#', '#', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '@', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', '$', ' ', '#', '#', '#', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', '$', ' ', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', '#', '$', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', ' ', ' ', ' ', '#',
+            ' ', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '#', '#', '#', '#',
+            ' ', '#', ' ', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '$', ' ', ' ', ' ', ' ',
+            '$', ' ', ' ', ' ', '.', '.', '#', '.', '#'],
+        ['#', '#', '#', '#', '$', ' ', ' ', '$', '#', ' ',
+            '$', ' ', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', '#', '#', ' ', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '$', ' ', ' ', '#', '@', ' ', '#'],
+        ['#', ' ', '#', '#', '#', '#', '#', '#', '#', '$',
+            '#', '#', '#', '#', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', '#', '#', ' ',
+            '#', ' ', ' ', '#', '$', ' ', '.', '.', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', ' ', '$', ' ', ' ',
+            '#', ' ', ' ', '#', ' ', ' ', '#', '.', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', ' ', '#', '$', ' ', '.', '.', '#'],
+        ['#', ' ', '#', ' ', ' ', '#', '#', '#', ' ', '#',
+            '#', ' ', ' ', ' ', ' ', ' ', '#', '.', '#'],
+        ['#', ' ', '#', '#', '#', ' ', ' ', '#', ' ', ' ',
+            '#', ' ', ' ', '#', '$', ' ', '.', '.', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '$',
+            '#', '#', '#', '#', ' ', ' ', '#', '.', '#'],
+        ['#', ' ', '#', '$', ' ', ' ', ' ', '$', ' ', ' ',
+            '$', ' ', ' ', '#', '*', ' ', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '$', ' ', '#', ' ', '$',
+            ' ', '$', ' ', '#', ' ', ' ', '#', '.', '#'],
+        ['#', '#', '#', '#', ' ', '$', '#', '#', '#', ' ',
+            ' ', ' ', ' ', '#', '*', ' ', '.', '.', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '$', '$',
+            ' ', '#', '#', '#', '.', '.', '.', '.', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '@', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '$', ' ', '$', ' ', ' ', '$', '$', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', '#', ' ',
+            ' ', '$', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '$', '$',
+            '$', ' ', '$', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', ' ',
+            ' ', ' ', '.', '.', '.', '.', '#'],
+        [' ', '#', ' ', '#', ' ', ' ', ' ', '#',
+            ' ', '#', '.', '.', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', '#',
+            ' ', '#', '#', '.', '.', '.', '#'],
+        [' ', '#', '#', '#', '#', '#', ' ', '$',
+            ' ', ' ', '#', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', ' ',
+            ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            '#', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', '#', ' ', ' ', '#', ' ',
+            ' ', '$', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '$', ' ', ' ', '$',
+            ' ', '#', ' ', '$', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '$', ' ', '$', ' ', ' ', ' ', '#', ' ',
+            '@', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '#', '.', '.',
+            '.', '.', '.', '.', '.', '#', ' ', '$', '#'],
+        ['#', ' ', '#', '#', ' ', ' ', '#', ' ', '.',
+            '.', '.', '.', '.', '.', '#', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '$', '.', '.',
+            '.', '.', '.', '.', '.', '.', '$', ' ', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', '#', '.', '.',
+            '.', '.', ' ', '.', '.', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '$', '#', '#', '#',
+            '#', '$', '#', '#', '#', '#', ' ', '$', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', '#', '#', ' ',
+            '$', ' ', ' ', ' ', '$', ' ', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', ' ', ' ', '$', ' ',
+            '$', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', '#', '#', ' ',
+            '$', ' ', '#', '#', '#', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', '$', '#',
+            '$', ' ', '#', ' ', ' ', '#', '#'],
+        ['#', '.', '.', ' ', '#', ' ', ' ', '#',
+            ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', '#', ' ', '$', '#', '$',
+            ' ', '#', ' ', ' ', '$', '#', '#', '#', '#'],
+        ['#', '.', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', '#', '$', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', '$', '#', ' ',
+            ' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '@', '#', ' ', ' ', '#', '$',
+            ' ', '#', '$', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', '#', ' ', '$', '#', ' ',
+            ' ', ' ', ' ', ' ', '$', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', '#', ' ', ' ', '#', '$', '$',
+            '#', '$', ' ', ' ', '#', ' ', ' ', '#', '#'],
+        ['#', '.', '.', ' ', '#', ' ', '$', '#', ' ', ' ',
+            '#', ' ', ' ', '$', '#', '$', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', '#', ' ', ' ', '#', ' ', ' ',
+            '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '.', ' ', '#', '#', '#', '#', ' ', ' ',
+            '#', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', ' ', ' ', '#', '#', '#',
+            '#', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '.', '.',
+            '.', '.', ' ', ' ', '.', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '.', '.',
+            '.', '.', '$', '$', '.', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '$', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '$', ' ', ' ',
+            '$', ' ', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', ' ', ' ', ' ',
+            '#', ' ', ' ', '$', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', '#', ' ', ' ', '#', ' ', '#', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', ' ', '#', ' ',
+            '#', '#', ' ', ' ', '#', '#', '#', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', '$', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', '#', '#', ' ', ' ', '$', ' ', '#', ' ',
+            ' ', '#', ' ', ' ', '#', '#', '#', ' ', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '$', ' ', '#',
+            '#', ' ', '#', ' ', ' ', '#', ' ', '#', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#', ' ', ' ', '$',
+            ' ', ' ', '$', ' ', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', ' ', '$', '#', '$',
+            '$', '$', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', '$', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', '@', '#', '#', ' ', ' ',
+            '#', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '.', '.',
+            '#', '.', '.', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', ' ', '#', '#',
+            '#', '#', '#', ' ', '.', '.', '.', '#'],
+        ['#', '#', '$', '#', ' ', ' ', ' ', ' ', '.',
+            '.', '.', '.', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '$', '#', '#', '#',
+            '#', '#', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '@', ' ', '#'],
+        ['#', '#', '$', ' ', '#', ' ', '$', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '$', '$', '$', '#',
+            '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', '#', '$', '#', '$', '#', '#', '#'],
+        ['#', ' ', '#', '#', '#', '#', ' ', '#', '$',
+            '$', '$', '$', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', '$', ' ',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', '#',
+            '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', '#', '#', '#', '#', '#', '#', '$', '#',
+            '#', '#', '#', '#', '#', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '#', ' ', ' ', '#', '.', '.', '.', '#', '#', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', ' ', '#', '.', '.', '.', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', '$', '$', ' ', '.', '.', '.', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', ' ', '#', '.', '.', '.', ' ', '.', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '$', '#',
+            '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '$', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', ' ', ' ', '#', ' ', ' ', '$',
+            '$', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', ' ',
+            ' ', '#', '#', '$', '$', '@', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '.', '.', '.', ' ', ' ', ' ', '#', ' ',
+            ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', '.', '.', '.', '.', '.', ' ', ' ', '$',
+            '#', '#', ' ', '#', ' ', '#', '$', ' ', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '#', ' ', ' ',
+            '$', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '#', ' ', ' ',
+            '#', ' ', ' ', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', ' ',
+            '$', ' ', ' ', '$', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '$',
+            '#', '#', '$', ' ', '#', '#', '$', '#', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', '$', ' ', ' ', ' ',
+            ' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', ' ', '#', '#', '#',
+            ' ', '#', ' ', ' ', '#', '#', '$', ' ', '#'],
+        [' ', '#', ' ', '$', ' ', '$', '$', ' ', ' ', ' ',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '$', '#',
+            '#', '$', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '@', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', ' ', '$', ' ',
+            ' ', '$', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', '$', ' ', ' ',
+            '$', ' ', '$', ' ', '#', '#', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '$',
+            '$', ' ', ' ', '#', '#', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#', '#',
+            ' ', '#', '#', '#', '.', '.', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', '#', '.', '.', '.', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', '#', '.', '.', '.', ' ', '#'],
+        ['#', '@', ' ', '#', '$', ' ', '#', '#', ' ',
+            '#', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '$', ' ', '$',
+            '$', ' ', ' ', '#', '#', '.', '.', '#'],
+        [' ', ' ', ' ', '#', '#', ' ', ' ', '$', ' ',
+            '$', ' ', ' ', '$', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', '$', '$', ' ',
+            ' ', '$', ' ', '#', ' ', ' ', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '$',
+            ' ', '$', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', ' ', '$', '#', '$',
+            '#', '@', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ',
+            '$', ' ', '#', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', ' ', '#', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '.', '.', '*', '.',
+            '.', '.', '.', '.', ' ', '#', ' ', '#', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '*', '.', '*', '.',
+            '.', '*', '.', '*', ' ', '#', ' ', '#', '#'],
+        ['#', ' ', '$', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', ' ', '#', '#', '$', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', ' ', '$', ' ', ' ',
+            '$', ' ', ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', '#', ' ',
+            ' ', ' ', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            ' ', '$', '#', '#', ' ', '#', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', '#', '#', ' ', ' ', ' ',
+            '#', ' ', '#', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '@', '$', '$', ' ',
+            '#', ' ', '#', '#', '$', '$', '$', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', ' ', ' ', ' ',
+            '#', ' ', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', ' ', '#', '#',
+            '#', ' ', '#', '#', '#', '#', '#', '$', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            '$', ' ', ' ', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', '#', '#', ' ',
+            '$', ' ', '#', '.', '.', '.', '.', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '$', ' ', '#', ' ',
+            ' ', ' ', '#', '.', '.', '$', '.', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '$', ' ', '#', ' ',
+            ' ', '#', '#', '.', '.', '.', '.', ' ', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', ' ', '#', '#',
+            '#', '#', '#', '#', '.', '.', '.', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', ' ', ' ', '#', '#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '$', '#', ' ', '$', '@',
+            '$', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '$', ' ', ' ', '$', ' ', ' ', '#',
+            ' ', '$', ' ', '$', '#', ' ', ' ', '#', '#'],
+        ['#', '#', ' ', ' ', '$', '#', '#', ' ', '#',
+            '$', ' ', '$', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', '#', ' ', '#',
+            ' ', ' ', ' ', '$', '$', '$', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', ' ', '$', ' ',
+            ' ', '$', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', '#', '$',
+            '#', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', '#', '#', '#', ' ',
+            ' ', '#', '#', '#', '$', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '.', '.', '.',
+            '.', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '.', '.', '.',
+            '.', '.', '.', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', '.', '.', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', '.', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', ' ', '$', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '#', '#', ' ', '#', '#', '#'],
+        ['#', '@', '$', ' ', '$', ' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ', ' ', ' ', '$', '#'],
+        [' ', '#', '.', '.', '.', '.', '#', '$', ' ', '$', ' ', '#'],
+        [' ', '#', '.', '.', '.', '.', '#', ' ', ' ', ' ', '$', '#'],
+        [' ', '#', '.', '.', '.', '.', ' ', ' ', '$', '$', ' ', '#', '#'],
+        [' ', '#', '.', '.', '.', ' ', '#', ' ', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '$', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '$', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '$', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ', '$', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '$', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '#', ' ', '$', ' ', '#', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', '#', ' ', '$', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '.', '.', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '.', '.', ' ', '$', ' ', '#', '@', '#'],
+        ['#', '.', '.', '.', '.', '.', '#', ' ', '$', '#', ' ', '#'],
+        ['#', '#', '.', '.', '.', '.', '#', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '.', '.', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '.', '.', '.', '.', ' ', ' ', ' ', '#', '#'],
+        [' ', '#', '.', '#', '.', '#', ' ', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '.', '.', '#', ' ', '#', ' ', '@', '#', '#'],
+        ['#', ' ', '.', '.', '.', '.', '#', ' ', ' ', '#', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', '$', ' ', '#', '#', '$', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '$', ' ', ' ', '$', ' ', '$', ' ', '$', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', ' ', ' ', '$', ' ', '$', ' ', '#', '#', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', '#', '#', ' ', '#', '#', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', '#', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '$', ' ', '$', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#',
+            ' ', '#', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', '$', '$', '#', ' ', ' ', ' ',
+            '@', ' ', ' ', '.', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', ' ',
+            ' ', ' ', '#', ' ', '.', '.', '.', '.', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '#', '#', '#', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        [' ', '#', ' ', '$', ' ', '$', ' ', ' ', ' ', ' ',
+            ' ', '#', ' ', '#', ' ', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', '$', '#', '#', ' ',
+            ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', ' ', ' ', '#', '#',
+            '#', '#', ' ', '#', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', '$', ' ', ' ', ' ',
+            '#', '#', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', ' ', '#', ' ',
+            '#', '#', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', '$', ' ', ' ',
+            ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '#', ' ', '#',
+            '#', ' ', '#', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', ' ', ' ', ' ', '$', '$', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '#', '#', '#', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', '#', '#',
+            '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '#', '#', ' ',
+            ' ', '$', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', '#', ' ',
+            '#', '#', ' ', '#', '#', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', ' ',
+            ' ', ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', ' ', '$', ' ', ' ', '#', '#', ' ',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ',
+            '#', '#', '#', '#', '#', '$', '$', ' ', '#'],
+        [' ', '#', '#', '$', '#', '#', '#', '#', '#', ' ',
+            '@', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#', '#', '#', '$',
+            '#', '#', '#', ' ', '$', ' ', ' ', '#', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', '#', '#', ' ', ' ', '#', '#', '#'],
+        [' ', '#', ' ', '$', '$', ' ', '$', ' ',
+            '#', ' ', ' ', ' ', '$', '$', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#',
+            '.', '.', ' ', '.', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '.', '.', '.',
+            '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', '.', '.', '.',
+            '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', ' ', ' ', ' ',
+            '#', ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '#', '#', '#', ' ', '$', ' ', ' ',
+            ' ', ' ', '$', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', ' ', '$', ' ', '$', ' ', '#',
+            ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '#', '$', '#', '#', '#', '#',
+            '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', '$', ' ', ' ', '#', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', '$', ' ', '$', ' ',
+            '$', ' ', ' ', '$', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', ' ', ' ', '#',
+            '$', '#', '$', ' ', '#', '#', '$', ' ', '#'],
+        [' ', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#',
+            ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '$', ' ', '$', ' ',
+            '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            '$', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', ' ', ' ', ' ',
+            '#', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#',
+            '#', '@', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', ' ', '@', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', '#', '#', ' ', '$', '#'],
+        ['#', '#', '$', '#', '.', '.', '.', '#', ' ', '#'],
+        [' ', '#', ' ', '$', '.', '.', '.', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', '.', ' ', '.', '#', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', '#', '$', ' ', '#'],
+        [' ', '#', '$', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ',
+            ' ', ' ', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', '$', '#', '#', ' ', ' ', '$',
+            ' ', '@', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '$', '$', ' ',
+            '$', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '#', ' ', '$', '$',
+            ' ', '#', ' ', '#', ' ', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '#', ' ', '$', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#',
+            '#', '#', ' ', '#', '#', '.', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', '$', ' ', ' ', '$', ' ',
+            '#', '#', ' ', ' ', ' ', '.', ' ', ' ', '#'],
+        ['#', ' ', '$', '#', '#', '#', ' ', ' ', '#', ' ',
+            '#', '#', '#', '#', '#', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '$', ' ', '$',
+            ' ', '$', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '$', '#', ' ', '$', ' ',
+            ' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ',
+            '#', '$', '$', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '$', ' ', '#', '$',
+            '#', ' ', ' ', '#', '#', ' ', '@', '#'],
+        [' ', ' ', ' ', '#', '#', ' ', '#', '#', ' ',
+            '#', ' ', '$', ' ', '#', ' ', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', '$',
+            ' ', '#', '$', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', '#',
+            ' ', '$', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', ' ', '$', ' ',
+            '$', ' ', ' ', ' ', '#', '#', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '#', ' ',
+            ' ', '#', '#', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            '#', '#', ' ', '$', '$', '#', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '$', '$',
+            ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', '#', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '#', '.', '.', '.', ' ', '#', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', '#', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            '#', ' ', ' ', '$', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#',
+            ' ', '$', '$', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            '$', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '$', '$', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#',
+            '#', ' ', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '$', '$', '$', '@', '#'],
+        ['#', '.', '#', ' ', '#', '#', '#', '#', '#', '#',
+            '#', ' ', '#', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', '.', '#', ' ', '#', '#', '#', '#', '#', '#',
+            '#', '.', ' ', '#', '$', ' ', '$', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '.', '.', '.',
+            '.', '.', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#',
+            ' ', '$', ' ', '$', ' ', ' ', ' ', '@', '#'],
+        [' ', ' ', '#', ' ', '#', '#', ' ', '#', '#',
+            '$', '#', '$', ' ', '$', ' ', '$', '#', '#'],
+        ['#', '#', '#', ' ', '.', '.', '.', '.', '.',
+            '.', '#', ' ', ' ', '$', '$', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', '.', '.', '.', '.', '.',
+            '.', '#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '.', '.', '.', '.', '.',
+            '.', '#', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '.', '.', '.', '.', '.',
+            '.', ' ', '$', '$', '#', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', '#', '#', ' ', '#',
+            '#', '#', '$', ' ', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '#', ' ', ' ', '$', ' ', ' ', '$',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', ' ', '$',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', ' ',
+            ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', ' ', '#', '$', '$',
+            ' ', '#', '#', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            '#', ' ', ' ', '#', '#', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', '$', '#', '$',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '.', '.', '.', ' ', ' ', ' ', ' ', '#', ' ',
+            '#', '#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '#', ' ', ' ', ' ', ' ', '@',
+            ' ', '#', ' ', '#', '#', '#', ' ', '#', '#'],
+        ['#', '.', '.', '.', '#', ' ', ' ', '#', '#', '#',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', ' ', '#',
+            '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', ' ',
+            '$', '@', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', '$', ' ', '#', '#', '$',
+            ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', '#', '#', '#', ' ',
+            '$', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        [' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#',
+            ' ', ' ', '#', '$', ' ', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '#', '#', '#', '#', ' ', '#',
+            '#', '$', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', ' ', '$', ' ', ' ',
+            '#', ' ', '#', '#', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '#', '.', '.', '.', '#', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', '#', '#',
+            '#', ' ', ' ', '.', '.', '.', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', ' ',
+            '#', ' ', '#', '.', '.', '.', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '#', '#', '#', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '#', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '#', '#', '#', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', '#', '#', ' ',
+            '$', ' ', ' ', '$', '#', '#', '#'],
+        ['#', '#', '.', '.', '.', '.', '#', '#',
+            ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', '.', '.', '.', ' ', '#',
+            '#', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', '#', '#', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '#', ' ',
+            '#', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '$',
+            ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '@', ' ', '$',
+            ' ', ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '$', ' ',
+            '$', '$', ' ', '$', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', '#', '#', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', '$', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '$', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '$', ' ', ' ', '$', '$', '#', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', ' ', '#', ' ', '$', '#', '#'],
+        [' ', ' ', '#', '#', '$', '#', ' ', ' ', ' ', '$', ' ', '@', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '$', ' ', '$', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', '#', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', '#', '#', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '.', '#', '#', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '#', '#'],
+        ['#', '#', ' ', ' ', '$', ' ', ' ', ' ', ' ',
+            ' ', ' ', '$', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', ' ', '#', '#',
+            ' ', ' ', ' ', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '#', '$', '$', ' ', '$', ' ', '$',
+            '$', '#', '$', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', '@', ' ',
+            ' ', '#', ' ', ' ', ' ', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', '#', '#', '#',
+            '$', '$', ' ', ' ', ' ', '.', '.', '.', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', '$', ' ', ' ',
+            '$', ' ', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '$', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '*', '.', '*', '#', '*', '.', '*', '#'],
+        [' ', ' ', '#', '.', '*', '.', '*', '.', '*', '.', '#'],
+        [' ', ' ', '#', '*', '.', '*', '.', '*', '.', '*', '#'],
+        [' ', ' ', '#', '.', '*', '.', '*', '.', '*', '.', '#'],
+        [' ', ' ', '#', '*', '.', '*', '.', '*', '.', '*', '#'],
+        [' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', '$', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', '$', ' ', '$', ' ', '$', ' ', '#', '#'],
+        [' ', '#', '$', ' ', '$', ' ', '$', ' ', '$', ' ', '$', '#'],
+        [' ', '#', ' ', ' ', ' ', '$', '@', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '$', '$', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '$', ' ', ' ', '$', ' ', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', ' ',
+            ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', ' ', '#', ' ', '#',
+            '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', '#',
+            '.', '.', '.', '.', '$', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '$', ' ',
+            '.', '.', '.', '.', '#', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', '#',
+            '.', '*', '.', '.', '#', ' ', '#'],
+        ['#', '#', '#', ' ', ' ', '#', '#', '#',
+            '#', ' ', '#', '#', '#', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', '@',
+            '$', ' ', ' ', '#', '#', '$', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            ' ', '$', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '.', '.',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '.', '.', '*',
+            ' ', '$', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '.', '.', '*', '.',
+            '#', ' ', '#', ' ', '#', '$', ' ', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', '*', '.', '#',
+            ' ', '#', ' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '.', '.', '.', '#', ' ',
+            ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '#', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', '$', ' ', '$', ' ', '#', '#',
+            '#', ' ', ' ', '#', ' ', '#', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '$', ' ', ' ',
+            ' ', '#', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '$', '$', ' ', ' ', ' ', '#',
+            ' ', '#', ' ', '#', ' ', '#', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '$', ' ', ' ', ' ',
+            '#', ' ', '#', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', '$', '#', ' ', '#', '#', '#',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '$', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', ' ', ' ',
+            ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', '#', '$', ' ', '$', ' ', ' ', '#',
+            ' ', '$', '$', ' ', '#', ' ', '$', ' ', '#'],
+        ['#', '.', '#', ' ', '.', ' ', '.', '$', ' ', '#',
+            ' ', '#', '.', '.', '#', ' ', '#', '.', '#'],
+        ['#', '.', '#', '#', '#', '#', '.', '#', ' ', '#',
+            ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ',
+            ' ', '#', ' ', '#', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', '#', ' ', '#',
+            '#', '#', ' ', '#', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', '#',
+            '.', '$', ' ', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '.', '#', ' ', '#', ' ', '#',
+            '#', ' ', ' ', '#', ' ', '#', '#', ' ', '#'],
+        ['#', '$', ' ', '#', ' ', '#', ' ', '#', ' ', ' ',
+            '#', ' ', '#', '#', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', '.', '#', ' ', '#', ' ', '#', '#', ' ',
+            '#', ' ', '#', ' ', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ',
+            '#', ' ', '#', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '#', ' ', '#', ' ',
+            '#', ' ', '#', ' ', '#', ' ', '$', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', ' ', '$', '.',
+            '#', ' ', '$', '.', '#', ' ', '$', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', '#', ' ', ' ', '@', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+]
 ```
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
 ```python
-####
+import pgzrun
+import copy
+
+# Globala variabler här nedanför
+levels = [
+    [
+        [' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', '.', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '$', ' ', '$', '.', '#'],
+        ['#', '.', ' ', '$', '@', '#', '#', '#'],
+        ['#', '#', '#', '#', '$', '#'],
+        [' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '@', '$', '$', '#', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '.', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '#', '$', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '.', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '*', '#'],
+        ['#', ' ', '$', '$', ' ', '$', '.', '#'],
+        ['#', '#', '@', '#', '#', '.', '.', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#'],
+        [' ', '#', '@', ' ', '#', '#', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '#', ' ', '#', '#'],
+        ['#', '.', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', '.', '$', ' ', ' ', '#', ' ', '#'],
+        ['#', '.', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', ' ', ' ', '#', ' ', '@', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', '$', ' ', '$', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', '$', '#', '#', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '$', ' ', '#', ' ', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '.', ' ', '$', '#', '#', ' ', '#', '#'],
+        ['#', '.', '.', '$', ' ', '$', ' ', ' ', '@', '#'],
+        ['#', '.', '.', ' ', '$', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '$', '$', '$', ' ', '#'],
+        ['#', '@', ' ', '$', '.', '.', ' ', '#'],
+        ['#', ' ', '$', '.', '.', '.', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', '.', '.', '#'],
+        [' ', '#', '#', ' ', '.', '#', '#'],
+        [' ', '#', ' ', ' ', '$', '.', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', '#', '$', '$', ' ', '#'],
+        ['#', ' ', ' ', '@', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', ' ', ' ', '@', '#'],
+        ['#', ' ', ' ', '$', '.', ' ', '#', '#'],
+        ['#', ' ', ' ', '.', '$', '.', ' ', '#'],
+        ['#', '#', '#', ' ', '*', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '.', '.', '$', ' ', '#'],
+        ['#', '@', '$', '.', '*', ' ', '#', '#'],
+        ['#', ' ', '$', '.', '.', '$', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '$', ' ', '#', '#', ' ', '#'],
+        ['#', '.', '.', '.', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '$', '#', '$', ' ', '#', '#'],
+        ['#', '#', '#', '#', ' ', '#', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '@', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '$', '#', '#'],
+        ['#', ' ', ' ', '#', '.', '.', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '.', '.', '$', ' ', '#'],
+        [' ', '#', ' ', '@', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '#', '.', ' ', '#'],
+        [' ', '#', '#', ' ', ' ', '$', '.', '.', '.', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', '#', '*', '.', '#'],
+        ['#', '#', ' ', '#', '#', '$', '#', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '@', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '.', '.', '.', '.', ' ', '#'],
+        ['#', '#', '#', '.', '.', '.', '$', '#', '#', '#'],
+        ['#', ' ', ' ', '$', '#', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '#', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '@', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '$', ' ', '$', '@', '#'],
+        ['#', '$', '#', '$', '$', '$', '#', '#'],
+        ['#', '.', '.', '$', ' ', '$', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', '$', '$', ' ', ' ', '#'],
+        ['#', ' ', '.', '.', '.', '#', ' ', '#'],
+        ['#', '#', '.', '.', '.', '$', ' ', '#', '#'],
+        [' ', '#', ' ', '#', '#', ' ', '$', ' ', '#'],
+        [' ', '#', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', '@', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '$', ' ', '@', '#'],
+        ['#', '#', '#', '$', '$', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '.', '.', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '*', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '.', '$', '.', ' ', '@', '#'],
+        ['#', ' ', '.', '$', '.', '$', '.', ' ', '#'],
+        ['#', ' ', '$', '.', '$', '.', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', '*', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '$', '#', '$', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '.', '$', '.', '#'],
+        ['#', ' ', '@', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '.', ' ', '.', '.', '#'],
+        [' ', '#', '.', ' ', '$', '.', '#'],
+        ['#', '#', '#', ' ', ' ', '$', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '#', '$', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '@', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', ' ', '#', '$', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', ' ', '#', '$', '#', '.', '*', '.', '#'],
+        ['#', ' ', ' ', ' ', '@', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '@', '#', '.', '*', '.', '#', ' ', '#'],
+        ['#', ' ', '#', '.', '*', '.', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '.', ' ', ' ', '#', '#'],
+        ['#', ' ', '$', '.', '$', '.', ' ', ' ', '#'],
+        ['#', '@', '$', '#', ' ', '#', '$', ' ', '#'],
+        ['#', ' ', '$', '.', ' ', '.', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '$', '#', '$', ' ', '#'],
+        [' ', ' ', '#', '.', ' ', '.', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', ' ', '.', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '$', ' ', '$', '.', ' ', '#'],
+        ['#', ' ', ' ', '.', '#', '#', '#', '#', '.', '#', '#'],
+        ['#', ' ', '$', '.', '$', ' ', '$', ' ', '@', '#'],
+        ['#', ' ', ' ', '.', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '.', '*', '.', ' ', '$', ' ', '#'],
+        ['#', '@', '$', '.', '*', ' ', '*', '.', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', '.', '*', '.', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', '*', '.', '.', '*', ' ', '#'],
+        ['#', ' ', '*', '.', '.', '*', '$', ' ', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', '@', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '.', ' ', ' ', '@', '#'],
+        ['#', ' ', ' ', '$', '$', '$', ' ', ' ', '#'],
+        ['#', '.', '#', '#', '.', '#', '#', '.', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '.', '#', ' ', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', ' ', ' ', '$', '.', ' ', '@', '#'],
+        ['#', ' ', '.', '$', '.', '$', ' ', ' ', '#'],
+        ['#', '#', '$', '.', '$', ' ', '$', '#', '#'],
+        ['#', ' ', '.', '$', '.', '$', ' ', ' ', '#'],
+        ['#', '.', ' ', ' ', '$', '.', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '@', ' ', ' ', '#'],
+        ['#', '#', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', '$', '$', '#', '#'],
+        ['#', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '$', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '@', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '$', ' ', '#'],
+        ['#', '#', '#', '.', '#', '#', ' ', '#', '#', '#'],
+        [' ', '#', '.', '.', '.', '$', ' ', '$', ' ', '#'],
+        [' ', '#', '#', '.', '.', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '.', '.', ' ', '#', '#'],
+        ['#', ' ', '$', '.', ' ', '$', '*', ' ', '#'],
+        ['#', ' ', ' ', '$', '@', '$', ' ', ' ', '#'],
+        ['#', ' ', '*', '$', ' ', '.', '$', ' ', '#'],
+        ['#', '#', ' ', '.', '.', '#', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '*', ' ', ' ', '#', '#'],
+        ['#', ' ', '.', ' ', '.', ' ', '.', ' ', '#'],
+        ['#', ' ', '$', ' ', '*', ' ', ' ', ' ', '#'],
+        ['#', '*', '$', '$', '*', '$', '$', '*', '#'],
+        ['#', ' ', ' ', ' ', '*', ' ', '$', ' ', '#'],
+        ['#', ' ', '.', ' ', '.', '@', '.', ' ', '#'],
+        ['#', '#', ' ', ' ', '*', ' ', ' ', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '.', '$', ' ', '@', '#'],
+        ['#', ' ', '$', ' ', '*', ' ', '$', ' ', '#'],
+        ['#', '*', '.', '.', '.', '*', '.', '*', '#'],
+        ['#', ' ', '$', '$', '*', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '.', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '.', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '.', '.', '#', '#', ' ', '#'],
+        [' ', '#', ' ', ' ', '$', '.', '.', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', '.', '#', ' ', '#', '#'],
+        ['#', '#', '#', ' ', '#', '#', '$', '#', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', ' ', '#', '$', '#', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '@', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '$', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', '@', ' ', '$', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', '$', ' ', '#', '#', '#', ' ', '$', '#'],
+        [' ', '#', ' ', '#', '.', '.', '.', '#', ' ', '#'],
+        ['#', '#', ' ', '#', '.', '.', '.', '#', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '@', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', '#', '.', '$', '$', '$', ' ', '#'],
+        ['#', ' ', '#', '.', '*', '#', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '.', '.', '#', ' ', '#'],
+        ['#', '#', '#', '.', '.', '$', ' ', '#', '#'],
+        [' ', ' ', '#', '.', '#', ' ', '$', ' ', '#'],
+        [' ', '#', '#', ' ', '#', ' ', '#', '@', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '@', ' ', '$', '$', '$', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        [' ', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '#', ' ', '#', '#', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '#'],
+        ['#', '.', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', ' ', '$', '#', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '#', '.', '#', ' ', '#'],
+        ['#', ' ', ' ', '.', '*', '.', '$', '#'],
+        ['#', '#', ' ', '#', '.', '#', ' ', '#'],
+        [' ', '#', ' ', '#', '.', ' ', ' ', '#', '#'],
+        ['#', '#', ' ', '$', '.', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '@', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '.', '#', '#', '#', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', '$', '#', '.', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', '*', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', '.', '#', '$', ' ', '$', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#'],
+        [' ', '#', ' ', '#', '#', '#', '.', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', '@', '#'],
+        ['#', '#', '#', '.', ' ', '#'],
+        [' ', ' ', '#', '.', '#', '#'],
+        [' ', ' ', '#', '.', ' ', '#'],
+        ['#', '#', '#', '.', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', '#', '#'],
+        [' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '.', ' ', ' ', '#', ' ', '#'],
+        ['#', '#', '$', '#', ' ', ' ', '.', '#'],
+        [' ', '#', ' ', '#', '$', '#', ' ', '#'],
+        ['#', '#', '.', ' ', ' ', '.', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', '*', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', '#', '*', ' ', '@', '#'],
+        ['#', ' ', ' ', '#', '.', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '.', '$', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', '.', '.', '.', ' ', ' ', '#', '$', ' ', '#'],
+        [' ', '#', '.', '#', '#', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '#', '.', '$', ' ', '$', '#', '#', ' ', '#', '#'],
+        ['#', '.', '$', ' ', '#', ' ', '#', '#', ' ', '#'],
+        ['#', '.', '#', '$', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '$', ' ', ' ', '#', '$', ' ', '$', '#'],
+        ['#', '.', ' ', '$', '#', '#', ' ', '@', ' ', '#'],
+        ['#', '.', '$', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '.', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', ' ', ' ', '#', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', '.', '.', '#'],
+        ['#', '#', ' ', '$', '#', '*', '#', '$', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', '$', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '@', ' ', '$', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', '$', '.', '#'],
+        ['#', '#', '$', '$', '#', '*', '#', '$', '.', '#'],
+        [' ', '#', '.', ' ', ' ', '#', ' ', '.', '.', '#'],
+        [' ', '#', '#', '.', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', '#', '#', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '#', '#', '#', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '#', ' ', '#'],
+        ['#', '@', '$', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', '#', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '$', '#', ' ', '#'],
+        ['#', '.', '.', '.', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '#', '.', '#', '$', '#', '#', '#'],
+        ['#', '.', '.', '.', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '.', '#'],
+        ['#', ' ', '#', '$', '#', '.', '.', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', '.', '.', '.', '#'],
+        ['#', '#', ' ', '#', '#', '.', '$', '.', '#'],
+        [' ', '#', ' ', '#', '#', ' ', ' ', '#', '#'],
+        [' ', '#', '$', '#', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '$', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', ' ', ' ', '@', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '#', '.', '#', ' ', '#'],
+        ['#', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', '.', '$', '.', '$', '.', '#'],
+        ['#', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', '#', '.', '#', ' ', '#'],
+        ['#', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', '#', ' ', '@', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#'],
+        [' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '$', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', '.', '.', '.', ' ', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', '.', '.', '.', '#', '$', '#', '#'],
+        [' ', '#', ' ', '#', '.', '.', '.', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', '#', '#', '#', '@', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '#', '$', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', '$', ' ', '$', ' ', '*', '.', '#'],
+        ['#', '.', '*', ' ', '$', ' ', '$', '.', '.', '#'],
+        ['#', '#', '.', '$', ' ', '$', ' ', '*', '#', '#'],
+        [' ', '#', '*', ' ', '$', ' ', '$', '.', '#'],
+        [' ', '#', '.', '$', ' ', '$', ' ', '.', '#'],
+        [' ', '#', '.', ' ', '$', ' ', '$', '.', '#'],
+        [' ', '#', '.', '$', '@', '$', ' ', '*', '#'],
+        ['#', '#', '*', ' ', '$', ' ', '$', '.', '#', '#'],
+        ['#', '.', '.', '$', ' ', '$', ' ', '*', '.', '#'],
+        ['#', '.', '*', ' ', '$', ' ', '$', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '$', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', ' ', ' ', '$', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', '#',
+            '#', '#', '#', '#', ' ', ' ', '.', '.', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ',
+            '#', '@', '#', '#', ' ', ' ', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', '#', '$', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', ' ', '@', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', '#', ' ', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', '#', '#', '$', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', '$', ' ', ' ', '$', ' ', '$', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', ' ', ' ', '@', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '$', '#', '$', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '$', ' ', ' ', '$', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '$', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#',
+            ' ', '$', ' ', '#', ' ', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', '#', '#',
+            ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '.', '.', '.', ' ', ' ', ' ', ' ',
+            '$', ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '$', ' ',
+            '$', ' ', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', '$', '$', '$', '#', '$', ' ', ' ', '$',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', ' ', ' ', ' ', '$',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', '$', '$', ' ', '#', '$', ' ', '$', ' ',
+            '$', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '$', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', '$', '$', '#', '$', '$', ' ', ' ', '@', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', '#', '$', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#',
+            ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', '#', '#',
+            ' ', '$', ' ', ' ', '$', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', ' ',
+            ' ', '$', ' ', '$', '$', ' ', '#', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', '#',
+            '#', '$', ' ', ' ', '$', ' ', '@', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#',
+            '#', ' ', ' ', '$', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '$', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', ' ', '#', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', '#', '#', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', '#', '#', '@', '#', '#'],
+        ['#', '.', '.', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', '#', ' ', '#', ' ', '$', ' ', '#'],
+        ['#', '.', '.', '#', '#', '#', ' ', '#', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '$', ' ', '#', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '$', '#', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', ' ', '#', ' ', '@', '#', '#', ' ', '$', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '$', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', '#', '#', '$', '#', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '#', '#', '#', ' ', '.', '.', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', '$', ' ', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '$', '$', ' ', '#', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '$',
+            ' ', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', '$', '#', ' ', '$',
+            ' ', '#', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', '$',
+            ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', '$', '#', ' ', '#',
+            ' ', ' ', '#', '#', '#', '#', ' ', '#'],
+        ['#', '@', '#', '$', ' ', '$', ' ', '$',
+            ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '$', ' ', '#',
+            '$', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', ' ', ' ',
+            ' ', '$', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '#', '#', ' ', ' ', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', ' ', ' ', '.', ' ', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            '#', '#', ' ', ' ', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', ' ',
+            '#', '#', ' ', ' ', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', ' ', '$', '$', '$', ' ', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', ' ', ' ', '$',
+            ' ', '$', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '$', ' ', '$',
+            ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '@', ' ', '$', ' ', ' ', '$', ' ', ' ',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', '$', '$',
+            ' ', '$', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', ' ', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '@', '#', '#', '#', '#', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', ' ', '$', '$', ' ',
+            ' ', '$', ' ', '$', ' ', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', '$', '$', '#', ' ', ' ', ' ',
+            ' ', '$', ' ', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', ' ', '$', '$',
+            ' ', '$', '$', ' ', '#', '.', '.', '.', '#'],
+        ['#', '#', '#', ' ', ' ', ' ', '#', ' ', ' ', '$',
+            ' ', ' ', ' ', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '$', ' ',
+            '$', ' ', '$', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            '#', ' ', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', '#', ' ', ' ', '$',
+            ' ', '$', ' ', ' ', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '#', ' ', '$', '$',
+            ' ', '$', ' ', '$', '#', '#', '.', '.', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '#', ' ', ' ', '$',
+            ' ', ' ', ' ', ' ', ' ', ' ', '#', '.', '#'],
+        ['#', ' ', '.', '.', '#', ' ', '#', ' ', '$', '$',
+            '$', ' ', '$', '$', '$', ' ', '#', '.', '#'],
+        ['#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', '#', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', ' ', ' ', '#', '#', '#', '$', ' ', '#'],
+        [' ', ' ', '#', '#', ' ', ' ', ' ', '@', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', '#', ' ', ' ', '$', ' ', '$', '$', '#', '#', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', '#', '$', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', ' ', '$', ' ', '$',
+            '$', ' ', '#', ' ', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '$', ' ', '#', ' ', ' ',
+            '#', ' ', '$', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', '$', '$', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ', '$', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', ' ', ' ', ' ', ' ', '#', '#', '#', ' ',
+            ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', ' ', '.', '.', '#', ' ', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '#', '.', '#'],
+        ['#', '.', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '#', '#', '#', '#',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', '$', ' ', '$',
+            ' ', '$', ' ', '$', '#', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '$', '@', '$',
+            ' ', ' ', ' ', '#', '#', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '#', '$', ' ', '$', ' ',
+            '$', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '$', ' ', '$',
+            ' ', ' ', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '#', '#', '#', '$', '$', '$', ' ',
+            '$', ' ', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#',
+            '#', ' ', '#', '#', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', ' ', '#',
+            '#', ' ', '#', '#', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', ' ', ' ', ' ', '#', '#',
+            ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', '#', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '$', ' ', '#', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', ' ', '#'],
+        ['#', ' ', '#', ' ', '$', '#', '@', '$', '#', '#',
+            ' ', '#', ' ', '#', '.', '#', '.', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', '$', ' ', ' ', '#',
+            ' ', ' ', ' ', ' ', '.', ' ', '.', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', ' ', '$', ' ', '#',
+            ' ', '#', ' ', '#', '.', '#', '.', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', ' ', ' ', '#', '#',
+            '$', ' ', '$', ' ', '.', ' ', '.', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', ' ', ' ', '#', ' ',
+            ' ', '#', '$', '#', '.', '#', '.', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '$', ' ', ' ', ' ',
+            '$', ' ', ' ', '$', '.', '.', '.', ' ', '#'],
+        [' ', '#', '$', ' ', '#', '#', '#', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '$', '@', '$', ' ', '#'],
+        [' ', '#', '$', '$', ' ', '#', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', '#', '#', '#', '.', '.', '.',
+            '.', '.', '.', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '$', '.', '.', '.',
+            '.', '.', '.', '#', '#', ' ', '#', ' ', '#'],
+        [' ', '#', ' ', '#', '#', '#', '.', '.', '.',
+            '.', '.', '.', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '#', '#', '#',
+            ' ', '#', '#', '#', ' ', '#', '$', '#', '#'],
+        ['#', ' ', ' ', '#', '$', ' ', ' ', ' ', '#',
+            ' ', ' ', '$', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '$', '$', '$', ' ',
+            ' ', '#', ' ', '$', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', '#',
+            '#', '#', '$', '$', ' ', '#', ' ', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', ' ', ' ',
+            ' ', '$', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#',
+            '#', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', ' ', '#', '$', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', ' ', '#', '#', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', '@', ' ', '$', ' ', '#', ' ', '$', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', '$', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', ' ', '#', '#', '#', '#', '$',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '$', '#', '.', '.', '.', '.',
+            '.', '#', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '$', '.', '.', '*', '*',
+            '.', ' ', '$', '#', ' ', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '#', '.', '.', '.',
+            '.', '.', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '#', ' ',
+            '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '$', ' ', '$', ' ', ' ', ' ', '$', '#'],
+        ['#', '#', '#', '@', ' ', '#', '$', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', '#', '#', ' ', ' ', '$', ' ', '$', ' ', '#', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#', '#', ' ', '#', '#', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', '#', '$', '#', '#', '$', ' ', ' ', '#', '.', '#'],
+        [' ', '#', '#', '#', ' ', ' ', ' ', '$', '.', '.', '#', '#', '.', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '.', '*', '.', '.', '.', '#'],
+        [' ', ' ', '#', ' ', '$', '$', ' ', '#', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '.', '.', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '.', '.', ' ', ' ',
+            '#', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#',
+            '#', ' ', ' ', '#', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', ' ', ' ',
+            '#', '#', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ',
+            ' ', '#', '#', '#', '#', ' ', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '#', '#',
+            '#', '#', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', ' ', '$',
+            ' ', ' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '@', '$', ' ', ' ', '$', ' ',
+            ' ', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ',
+            '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            '.', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', ' ', '#',
+            '.', ' ', ' ', ' ', ' ', '@', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', ' ', '#', '#',
+            '.', '.', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '#', ' ', '.', '.', '#', '#',
+            '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', '.', '.', '.', ' ', ' ',
+            ' ', '$', ' ', '#', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '.', '.', ' ', '#', '#',
+            ' ', ' ', '#', '#', ' ', '#', '#', ' ', '#'],
+        ['#', '#', '#', '#', '$', '#', '#', '$', '#', ' ',
+            '$', ' ', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', '#', '#', ' ', '#', ' ', ' ', ' ', ' ',
+            '#', '$', ' ', '$', '$', ' ', '#', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', '#', ' ', '#',
+            ' ', ' ', '#', ' ', '$', '#', '#', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '@', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', '$', ' ', '#', '#', '#', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', '$', ' ', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', '#', '$', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', ' ', ' ', ' ', '#',
+            ' ', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '#', '#', '#', '#',
+            ' ', '#', ' ', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '$', ' ', ' ', ' ', ' ',
+            '$', ' ', ' ', ' ', '.', '.', '#', '.', '#'],
+        ['#', '#', '#', '#', '$', ' ', ' ', '$', '#', ' ',
+            '$', ' ', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', '#', '#', ' ', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '$', ' ', ' ', '#', '@', ' ', '#'],
+        ['#', ' ', '#', '#', '#', '#', '#', '#', '#', '$',
+            '#', '#', '#', '#', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', '#', '#', ' ',
+            '#', ' ', ' ', '#', '$', ' ', '.', '.', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', ' ', '$', ' ', ' ',
+            '#', ' ', ' ', '#', ' ', ' ', '#', '.', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', ' ', '#', '$', ' ', '.', '.', '#'],
+        ['#', ' ', '#', ' ', ' ', '#', '#', '#', ' ', '#',
+            '#', ' ', ' ', ' ', ' ', ' ', '#', '.', '#'],
+        ['#', ' ', '#', '#', '#', ' ', ' ', '#', ' ', ' ',
+            '#', ' ', ' ', '#', '$', ' ', '.', '.', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '$',
+            '#', '#', '#', '#', ' ', ' ', '#', '.', '#'],
+        ['#', ' ', '#', '$', ' ', ' ', ' ', '$', ' ', ' ',
+            '$', ' ', ' ', '#', '*', ' ', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', '$', ' ', '#', ' ', '$',
+            ' ', '$', ' ', '#', ' ', ' ', '#', '.', '#'],
+        ['#', '#', '#', '#', ' ', '$', '#', '#', '#', ' ',
+            ' ', ' ', ' ', '#', '*', ' ', '.', '.', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '$', '$',
+            ' ', '#', '#', '#', '.', '.', '.', '.', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '@', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '$', ' ', '$', ' ', ' ', '$', '$', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', '#', ' ',
+            ' ', '$', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '$', '$',
+            '$', ' ', '$', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', '#', ' ',
+            ' ', ' ', '.', '.', '.', '.', '#'],
+        [' ', '#', ' ', '#', ' ', ' ', ' ', '#',
+            ' ', '#', '.', '.', ' ', '.', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', '#',
+            ' ', '#', '#', '.', '.', '.', '#'],
+        [' ', '#', '#', '#', '#', '#', ' ', '$',
+            ' ', ' ', '#', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', ' ',
+            ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            '#', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', '#', ' ', ' ', '#', ' ',
+            ' ', '$', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', '$', ' ', ' ', '$',
+            ' ', '#', ' ', '$', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '$', ' ', '$', ' ', ' ', ' ', '#', ' ',
+            '@', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '#', '.', '.',
+            '.', '.', '.', '.', '.', '#', ' ', '$', '#'],
+        ['#', ' ', '#', '#', ' ', ' ', '#', ' ', '.',
+            '.', '.', '.', '.', '.', '#', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '$', '.', '.',
+            '.', '.', '.', '.', '.', '.', '$', ' ', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', '#', '.', '.',
+            '.', '.', ' ', '.', '.', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '$', '#', '#', '#',
+            '#', '$', '#', '#', '#', '#', ' ', '$', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', '#', '#', ' ',
+            '$', ' ', ' ', ' ', '$', ' ', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', ' ', ' ', '$', ' ',
+            '$', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', '#', '#', ' ',
+            '$', ' ', '#', '#', '#', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', '$', '#',
+            '$', ' ', '#', ' ', ' ', '#', '#'],
+        ['#', '.', '.', ' ', '#', ' ', ' ', '#',
+            ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', '#', ' ', '$', '#', '$',
+            ' ', '#', ' ', ' ', '$', '#', '#', '#', '#'],
+        ['#', '.', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', '#', '$', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', ' ', ' ', '$', '#', ' ',
+            ' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '@', '#', ' ', ' ', '#', '$',
+            ' ', '#', '$', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', '#', ' ', '$', '#', ' ',
+            ' ', ' ', ' ', ' ', '$', '#', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', '#', ' ', ' ', '#', '$', '$',
+            '#', '$', ' ', ' ', '#', ' ', ' ', '#', '#'],
+        ['#', '.', '.', ' ', '#', ' ', '$', '#', ' ', ' ',
+            '#', ' ', ' ', '$', '#', '$', ' ', ' ', '#'],
+        ['#', '.', '.', ' ', '#', ' ', ' ', '#', ' ', ' ',
+            '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '.', ' ', '#', '#', '#', '#', ' ', ' ',
+            '#', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', ' ', ' ', '#', '#', '#',
+            '#', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '.', '.',
+            '.', '.', ' ', ' ', '.', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '.', '.',
+            '.', '.', '$', '$', '.', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '$', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '$', ' ', ' ',
+            '$', ' ', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', ' ', ' ', ' ',
+            '#', ' ', ' ', '$', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', '#', ' ', ' ', '#', ' ', '#', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', ' ', '#', ' ',
+            '#', '#', ' ', ' ', '#', '#', '#', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', '$', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#'],
+        ['#', '#', '#', ' ', ' ', '$', ' ', '#', ' ',
+            ' ', '#', ' ', ' ', '#', '#', '#', ' ', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', '$', ' ', '#',
+            '#', ' ', '#', ' ', ' ', '#', ' ', '#', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#', ' ', ' ', '$',
+            ' ', ' ', '$', ' ', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', ' ', '$', '#', '$',
+            '$', '$', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', '$', ' ', ' ',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', '@', '#', '#', ' ', ' ',
+            '#', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '.', '.',
+            '#', '.', '.', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', ' ', '#', '#',
+            '#', '#', '#', ' ', '.', '.', '.', '#'],
+        ['#', '#', '$', '#', ' ', ' ', ' ', ' ', '.',
+            '.', '.', '.', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '$', '#', '#', '#',
+            '#', '#', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '@', ' ', '#'],
+        ['#', '#', '$', ' ', '#', ' ', '$', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '$', '$', '$', '#',
+            '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', '#', '$', '#', '$', '#', '#', '#'],
+        ['#', ' ', '#', '#', '#', '#', ' ', '#', '$',
+            '$', '$', '$', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', '$', ' ',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', '#',
+            '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', '#', '#', '#', '#', '#', '#', '$', '#',
+            '#', '#', '#', '#', '#', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '#', ' ', ' ', '#', '.', '.', '.', '#', '#', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', ' ', '#', '.', '.', '.', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', '$', '$', ' ', '.', '.', '.', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', ' ', '#', '.', '.', '.', ' ', '.', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '$', '#',
+            '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', '$', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', ' ', ' ', '#', ' ', ' ', '$',
+            '$', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', ' ',
+            ' ', '#', '#', '$', '$', '@', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '.', '.', '.', ' ', ' ', ' ', '#', ' ',
+            ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', '#', '.', '.', '.', '.', '.', ' ', ' ', '$',
+            '#', '#', ' ', '#', ' ', '#', '$', ' ', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '#', ' ', ' ',
+            '$', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '#', ' ', ' ',
+            '#', ' ', ' ', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', ' ',
+            '$', ' ', ' ', '$', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '$',
+            '#', '#', '$', ' ', '#', '#', '$', '#', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', '$', ' ', ' ', ' ',
+            ' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', ' ', '#', '#', '#',
+            ' ', '#', ' ', ' ', '#', '#', '$', ' ', '#'],
+        [' ', '#', ' ', '$', ' ', '$', '$', ' ', ' ', ' ',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', ' ', ' ', '$', '#',
+            '#', '$', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '@', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', ' ', '$', ' ',
+            ' ', '$', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', '$', ' ', ' ',
+            '$', ' ', '$', ' ', '#', '#', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '$',
+            '$', ' ', ' ', '#', '#', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#', '#',
+            ' ', '#', '#', '#', '.', '.', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', '#', '.', '.', '.', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', ' ', '#', '.', '.', '.', ' ', '#'],
+        ['#', '@', ' ', '#', '$', ' ', '#', '#', ' ',
+            '#', '#', '#', '#', '.', '.', '.', '#'],
+        ['#', '#', '#', '#', ' ', ' ', '$', ' ', '$',
+            '$', ' ', ' ', '#', '#', '.', '.', '#'],
+        [' ', ' ', ' ', '#', '#', ' ', ' ', '$', ' ',
+            '$', ' ', ' ', '$', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', '$', '$', ' ',
+            ' ', '$', ' ', '#', ' ', ' ', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '$',
+            ' ', '$', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', ' ', '$', '#', '$',
+            '#', '@', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ',
+            '$', ' ', '#', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', ' ', '#', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '.', '.', '*', '.',
+            '.', '.', '.', '.', ' ', '#', ' ', '#', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '*', '.', '*', '.',
+            '.', '*', '.', '*', ' ', '#', ' ', '#', '#'],
+        ['#', ' ', '$', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', ' ', '#', '#', '$', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', ' ', ' ', '$', ' ', ' ',
+            '$', ' ', ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', '#', ' ',
+            ' ', ' ', ' ', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            ' ', '$', '#', '#', ' ', '#', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', '#', '#', ' ', ' ', ' ',
+            '#', ' ', '#', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '@', '$', '$', ' ',
+            '#', ' ', '#', '#', '$', '$', '$', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', ' ', ' ', ' ',
+            '#', ' ', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', ' ', '#', '#',
+            '#', ' ', '#', '#', '#', '#', '#', '$', '#'],
+        ['#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ',
+            '$', ' ', ' ', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', '#', '#', ' ',
+            '$', ' ', '#', '.', '.', '.', '.', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '$', ' ', '#', ' ',
+            ' ', ' ', '#', '.', '.', '$', '.', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '$', ' ', '#', ' ',
+            ' ', '#', '#', '.', '.', '.', '.', ' ', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', ' ', '#', '#',
+            '#', '#', '#', '#', '.', '.', '.', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', ' ', ' ', '#', '#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '$', '#', ' ', '$', '@',
+            '$', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '$', ' ', ' ', '$', ' ', ' ', '#',
+            ' ', '$', ' ', '$', '#', ' ', ' ', '#', '#'],
+        ['#', '#', ' ', ' ', '$', '#', '#', ' ', '#',
+            '$', ' ', '$', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', '#', ' ', '#',
+            ' ', ' ', ' ', '$', '$', '$', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', ' ', '$', ' ',
+            ' ', '$', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', '#', '$',
+            '#', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', '#', '#', '#', ' ',
+            ' ', '#', '#', '#', '$', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '.', '.', '.',
+            '.', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '.', '.', '.',
+            '.', '.', '.', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', '.', '.', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', '.', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', '.', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', '#', '#', ' ', ' ', ' ', ' ', ' ', '$', '#'],
+        ['#', '#', ' ', '$', ' ', ' ', '#', '#', ' ', '#', '#', '#'],
+        ['#', '@', '$', ' ', '$', ' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ', ' ', ' ', '$', '#'],
+        [' ', '#', '.', '.', '.', '.', '#', '$', ' ', '$', ' ', '#'],
+        [' ', '#', '.', '.', '.', '.', '#', ' ', ' ', ' ', '$', '#'],
+        [' ', '#', '.', '.', '.', '.', ' ', ' ', '$', '$', ' ', '#', '#'],
+        [' ', '#', '.', '.', '.', ' ', '#', ' ', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '$', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '$', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '$', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', '#', ' ', '$', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '$', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '#', ' ', '$', ' ', '#', '#'],
+        ['#', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', '#', ' ', '$', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '.', '.', '#', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '.', '.', ' ', '$', ' ', '#', '@', '#'],
+        ['#', '.', '.', '.', '.', '.', '#', ' ', '$', '#', ' ', '#'],
+        ['#', '#', '.', '.', '.', '.', '#', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '.', '.', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '.', '.', '.', '.', ' ', ' ', ' ', '#', '#'],
+        [' ', '#', '.', '#', '.', '#', ' ', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '.', '.', '.', '.', '#', ' ', '#', ' ', '@', '#', '#'],
+        ['#', ' ', '.', '.', '.', '.', '#', ' ', ' ', '#', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '#', '$', ' ', '#', '#', '$', ' ', '#'],
+        ['#', '#', ' ', '#', '#', '#', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '$', ' ', ' ', '$', ' ', '$', ' ', '$', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', ' ', ' ', '$', ' ', '$', ' ', '#', '#', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', '#', '#', ' ', '#', '#', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', '#', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '$', ' ', '$', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#',
+            ' ', '#', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', '$', '$', '#', ' ', ' ', ' ',
+            '@', ' ', ' ', '.', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', ' ',
+            ' ', ' ', '#', ' ', '.', '.', '.', '.', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '#', '#', '#', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        [' ', '#', ' ', '$', ' ', '$', ' ', ' ', ' ', ' ',
+            ' ', '#', ' ', '#', ' ', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', '$', ' ', '$', '#', '#', ' ',
+            ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', ' ', '#', ' ', ' ', '#', '#',
+            '#', '#', ' ', '#', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', '$', ' ', ' ', ' ',
+            '#', '#', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', ' ', ' ', '#', ' ',
+            '#', '#', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', '$', ' ', ' ',
+            ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '#', ' ', '#',
+            '#', ' ', '#', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', '$', '$', ' ', ' ', ' ', ' ', ' ', '$', '$', ' ', ' ', '#'],
+        ['#', '#', ' ', '#', '#', ' ', '#', '#', '#', ' ', '$', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', ' ', ' ', '#', '#',
+            '#', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', '#', '#', ' ',
+            ' ', '$', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '#', '#', ' ',
+            '#', '#', ' ', '#', '#', ' ', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', '$', ' ', ' ',
+            ' ', ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', ' ', '$', ' ', ' ', '#', '#', ' ',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ',
+            '#', '#', '#', '#', '#', '$', '$', ' ', '#'],
+        [' ', '#', '#', '$', '#', '#', '#', '#', '#', ' ',
+            '@', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#', '#', '#', '$',
+            '#', '#', '#', ' ', '$', ' ', ' ', '#', '#'],
+        [' ', '#', ' ', '$', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', '#', '#', ' ', ' ', '#', '#', '#'],
+        [' ', '#', ' ', '$', '$', ' ', '$', ' ',
+            '#', ' ', ' ', ' ', '$', '$', ' ', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#',
+            '.', '.', ' ', '.', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '.', '.', '.',
+            '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', '.', '.', '.',
+            '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', ' ', ' ', ' ',
+            '#', ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '#', '#', '#', ' ', '$', ' ', ' ',
+            ' ', ' ', '$', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', ' ', '$', ' ', '$', ' ', '#',
+            ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '#', '$', '#', '#', '#', '#',
+            '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', '$', ' ', ' ', '#', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', '$', ' ', '$', ' ',
+            '$', ' ', ' ', '$', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', ' ', ' ', '#',
+            '$', '#', '$', ' ', '#', '#', '$', ' ', '#'],
+        [' ', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#',
+            ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '$', ' ', '$', ' ',
+            '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            '$', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', ' ', ' ', ' ',
+            '#', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#',
+            '#', '@', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', ' ', '@', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '$', '#', '#', ' ', '$', '#'],
+        ['#', '#', '$', '#', '.', '.', '.', '#', ' ', '#'],
+        [' ', '#', ' ', '$', '.', '.', '.', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', '.', ' ', '.', '#', ' ', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '#', ' ', '#', '$', ' ', '#'],
+        [' ', '#', '$', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ',
+            ' ', ' ', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', '$', '#', '#', ' ', ' ', '$',
+            ' ', '@', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '$', '$', ' ',
+            '$', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '#', ' ', '$', '$',
+            ' ', '#', ' ', '#', ' ', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '#', ' ', '$', ' ',
+            ' ', '#', ' ', ' ', '.', '.', '.', '.', '#'],
+        ['#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#',
+            '#', '#', ' ', '#', '#', '.', '#', '#', '#'],
+        ['#', '#', ' ', ' ', ' ', '$', ' ', ' ', '$', ' ',
+            '#', '#', ' ', ' ', ' ', '.', ' ', ' ', '#'],
+        ['#', ' ', '$', '#', '#', '#', ' ', ' ', '#', ' ',
+            '#', '#', '#', '#', '#', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '$', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', '$', ' ', '$',
+            ' ', '$', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '$', '#', ' ', '$', ' ',
+            ' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '$', '$', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ',
+            '#', '$', '$', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '$', ' ', '#', '$',
+            '#', ' ', ' ', '#', '#', ' ', '@', '#'],
+        [' ', ' ', ' ', '#', '#', ' ', '#', '#', ' ',
+            '#', ' ', '$', ' ', '#', ' ', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', '$',
+            ' ', '#', '$', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', '#',
+            ' ', '$', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', ' ', '$', ' ',
+            '$', ' ', ' ', ' ', '#', '#', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '#', ' ',
+            ' ', '#', '#', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            '#', '#', ' ', '$', '$', '#', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '$', '$',
+            ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', '#', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', '.', '#', '.', '.', '.', ' ', '#', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', '#', '#', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            '#', ' ', ' ', '$', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#',
+            ' ', '$', '$', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            '$', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        ['#', '#', '#', '#', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '$', '$', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#',
+            '#', ' ', '#', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '.', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', '$', '$', '$', '@', '#'],
+        ['#', '.', '#', ' ', '#', '#', '#', '#', '#', '#',
+            '#', ' ', '#', '#', ' ', ' ', ' ', '#', '#'],
+        ['#', '.', '#', ' ', '#', '#', '#', '#', '#', '#',
+            '#', '.', ' ', '#', '$', ' ', '$', '#', '#'],
+        ['#', '.', '.', '.', '.', '.', '.', '.', '.', '.',
+            '.', '.', ' ', '#', ' ', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#',
+            ' ', '$', ' ', '$', ' ', ' ', ' ', '@', '#'],
+        [' ', ' ', '#', ' ', '#', '#', ' ', '#', '#',
+            '$', '#', '$', ' ', '$', ' ', '$', '#', '#'],
+        ['#', '#', '#', ' ', '.', '.', '.', '.', '.',
+            '.', '#', ' ', ' ', '$', '$', ' ', '#', '#'],
+        ['#', ' ', ' ', ' ', '.', '.', '.', '.', '.',
+            '.', '#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '.', '.', '.', '.', '.',
+            '.', '#', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', '.', '.', '.', '.', '.',
+            '.', ' ', '$', '$', '#', ' ', '$', ' ', '#'],
+        ['#', ' ', '$', ' ', '#', '#', '#', ' ', '#',
+            '#', '#', '$', ' ', ' ', '$', ' ', '#', '#'],
+        ['#', '#', '#', ' ', ' ', '$', ' ', ' ', '$',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '$', ' ', ' ', '$',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', ' ',
+            ' ', ' ', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '#', '#', '#',
+            ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#',
+            ' ', ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', ' ', '#', '$', '$',
+            ' ', '#', '#', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ',
+            '#', ' ', ' ', '#', '#', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', ' ', '$', '#', '$',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '.', '.', '.', ' ', ' ', ' ', ' ', '#', ' ',
+            '#', '#', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '#', ' ', ' ', ' ', ' ', '@',
+            ' ', '#', ' ', '#', '#', '#', ' ', '#', '#'],
+        ['#', '.', '.', '.', '#', ' ', ' ', '#', '#', '#',
+            ' ', ' ', '$', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', ' ', '#',
+            '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', ' ', ' ', ' ', ' ', ' ',
+            '$', '@', '#', '#', '#', '#', '#', '#'],
+        [' ', '#', ' ', '$', ' ', '#', '#', '$',
+            ' ', '#', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', '#', '#', '#', '#', ' ',
+            '$', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        [' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#',
+            ' ', ' ', '#', '$', ' ', '#', '#', '#', '#'],
+        ['#', '#', ' ', ' ', '#', '#', '#', '#', ' ', '#',
+            '#', '$', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', ' ', '$', ' ', ' ',
+            '#', ' ', '#', '#', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '#', '.', '.', '.', '#', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', ' ', '#', '#',
+            '#', ' ', ' ', '.', '.', '.', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', ' ',
+            '#', ' ', '#', '.', '.', '.', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', '#', '#', '#', ' ', '#', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '#', ' ', '#', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '.', '.', '.', '#', '#', '#', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '.', '.', '.', '.', '#', '#', ' ',
+            '$', ' ', ' ', '$', '#', '#', '#'],
+        ['#', '#', '.', '.', '.', '.', '#', '#',
+            ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', '.', '.', '.', ' ', '#',
+            '#', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', ' ', '#', '#', ' ', ' ', ' ', ' ',
+            '#', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '#', ' ',
+            '#', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '$', ' ', '#', ' ', '#', '$',
+            ' ', ' ', '$', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '@', ' ', '$',
+            ' ', ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '$', ' ',
+            '$', '$', ' ', '$', ' ', '#', '#', '#'],
+        ['#', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', ' ', '#', '#', '#'],
+        ['#', ' ', '#', '#', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', '#', '#'],
+        ['#', ' ', '#', ' ', '$', ' ', '$', ' ', '$', ' ', ' ', '$', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '$', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '$', ' ', ' ', '$', '$', '#', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', ' ', '#', ' ', '$', '#', '#'],
+        [' ', ' ', '#', '#', '$', '#', ' ', ' ', ' ', '$', ' ', '@', '#'],
+        [' ', ' ', ' ', '#', ' ', ' ', '$', ' ', '$', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', '$', ' ', ' ', '#'],
+        [' ', ' ', ' ', '#', ' ', '#', '#', ' ', ' ', ' ', '#', ' ', '#'],
+        [' ', ' ', '#', '#', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '.', '#', '#', '#'],
+        [' ', ' ', '#', '.', '.', '.', '.', '.', '.', '.', '#'],
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '#', '#'],
+        ['#', '#', ' ', ' ', '$', ' ', ' ', ' ', ' ',
+            ' ', ' ', '$', ' ', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', '#', '#', ' ', '#', '#',
+            ' ', ' ', ' ', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '#', '$', '$', ' ', '$', ' ', '$',
+            '$', '#', '$', '#', '#', '.', '.', '.', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', '@', ' ',
+            ' ', '#', ' ', ' ', ' ', '.', '.', '.', '#'],
+        ['#', ' ', ' ', '$', '#', ' ', '#', '#', '#',
+            '$', '$', ' ', ' ', ' ', '.', '.', '.', '#'],
+        ['#', ' ', '$', ' ', ' ', '$', '$', ' ', ' ',
+            '$', ' ', '#', '#', '.', '.', '.', '.', '#'],
+        ['#', '#', '#', '$', ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', '*', '.', '*', '#', '*', '.', '*', '#'],
+        [' ', ' ', '#', '.', '*', '.', '*', '.', '*', '.', '#'],
+        [' ', ' ', '#', '*', '.', '*', '.', '*', '.', '*', '#'],
+        [' ', ' ', '#', '.', '*', '.', '*', '.', '*', '.', '#'],
+        [' ', ' ', '#', '*', '.', '*', '.', '*', '.', '*', '#'],
+        [' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '$', ' ', '$', ' ', '$', ' ', '$', ' ', '$', ' ', '#'],
+        ['#', '#', ' ', '$', ' ', '$', ' ', '$', ' ', '$', ' ', '#', '#'],
+        [' ', '#', '$', ' ', '$', ' ', '$', ' ', '$', ' ', '$', '#'],
+        [' ', '#', ' ', ' ', ' ', '$', '@', '$', ' ', ' ', ' ', '#'],
+        [' ', '#', ' ', ' ', '#', '#', '#', '#', '#', ' ', ' ', '#'],
+        [' ', '#', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '$', '$', ' ', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '$', ' ', ' ', '$', ' ', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', ' ',
+            ' ', ' ', '$', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', ' ', ' ', '#', ' ', '#',
+            '#', '#', '#', '#', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', '#',
+            '.', '.', '.', '.', '$', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '$', ' ',
+            '.', '.', '.', '.', '#', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', '#',
+            '.', '*', '.', '.', '#', ' ', '#'],
+        ['#', '#', '#', ' ', ' ', '#', '#', '#',
+            '#', ' ', '#', '#', '#', ' ', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', '@',
+            '$', ' ', ' ', '#', '#', '$', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            ' ', '$', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            ' ', ' ', '#', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        [' ', ' ', ' ', ' ', ' ', '#', '#', '.', '.',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        [' ', ' ', ' ', ' ', '#', '#', '.', '.', '*',
+            ' ', '$', ' ', ' ', ' ', ' ', '$', ' ', '#'],
+        [' ', ' ', ' ', '#', '#', '.', '.', '*', '.',
+            '#', ' ', '#', ' ', '#', '$', ' ', '#', '#'],
+        [' ', ' ', ' ', '#', '.', '.', '*', '.', '#',
+            ' ', '#', ' ', '#', ' ', '$', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '.', '.', '.', '#', ' ',
+            ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', '#', '#', ' ', '#', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '@', '$', ' ', '$', ' ', '#', '#',
+            '#', ' ', ' ', '#', ' ', '#', ' ', '#', '#'],
+        ['#', ' ', '$', ' ', ' ', ' ', '$', ' ', ' ',
+            ' ', '#', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '$', '$', ' ', ' ', ' ', '#',
+            ' ', '#', ' ', '#', ' ', '#', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', ' ', '$', ' ', ' ', ' ',
+            '#', ' ', '#', ' ', '#', '#', '#', '#', '#'],
+        [' ', ' ', '#', ' ', '$', '#', ' ', '#', '#', '#',
+            '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', '$', ' ', ' ', ' ', '#', ' ', ' ',
+            ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', '#', '#', ' ', ' ',
+            ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'],
+        [' ', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ',
+            ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#'],
+        [' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ',
+            ' ', ' ', ' ', '#', '#', '#', '#', '#', '#'],
+    ],
+    [
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['#', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#',
+            ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', '#', '$', ' ', '$', ' ', ' ', '#',
+            ' ', '$', '$', ' ', '#', ' ', '$', ' ', '#'],
+        ['#', '.', '#', ' ', '.', ' ', '.', '$', ' ', '#',
+            ' ', '#', '.', '.', '#', ' ', '#', '.', '#'],
+        ['#', '.', '#', '#', '#', '#', '.', '#', ' ', '#',
+            ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ',
+            ' ', '#', ' ', '#', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', ' ', '$', ' ', '#', ' ', '#', ' ', '#',
+            '#', '#', ' ', '#', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', '#',
+            '.', '$', ' ', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', '$', '$', '.', '#', ' ', '#', ' ', '#',
+            '#', ' ', ' ', '#', ' ', '#', '#', ' ', '#'],
+        ['#', '$', ' ', '#', ' ', '#', ' ', '#', ' ', ' ',
+            '#', ' ', '#', '#', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', '.', '#', ' ', '#', ' ', '#', '#', ' ',
+            '#', ' ', '#', ' ', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ',
+            '#', ' ', '#', ' ', '#', '#', ' ', ' ', '#'],
+        ['#', '#', ' ', ' ', ' ', '#', '#', ' ', '#', ' ',
+            '#', ' ', '#', ' ', '#', ' ', '$', '.', '#'],
+        ['#', '#', '#', ' ', '#', '#', '#', ' ', '$', '.',
+            '#', ' ', '$', '.', '#', ' ', '$', '.', '#'],
+        ['#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ',
+            '#', ' ', ' ', ' ', '#', ' ', ' ', '@', '#'],
+        [' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#',
+            '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ],
+]
+
+current_level = 0
+
+player = '@'
+player_on_storage = '+'
+box = '$'
+box_on_storage = '*'
+storage = '.'
+wall = '#'
+empty = ' '
+
+# Funktioner här nedanför
+
+
+def load_level():
+    global level
+    level = copy.deepcopy(levels[current_level])
+
+
+def on_key_down(key):
+    global current_level
+
+    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
+        for test_y, row in enumerate(level):
+            for test_x, cell in enumerate(row):
+                if cell == player or cell == player_on_storage:
+                    player_x = test_x
+                    player_y = test_y
+
+        dx = 0
+        dy = 0
+        if key == keys.LEFT:
+            dx = -1
+        elif key == keys.RIGHT:
+            dx = 1
+        elif key == keys.UP:
+            dy = -1
+        elif key == keys.DOWN:
+            dy = 1
+
+        current = level[player_y][player_x]
+        adjacent = level[player_y + dy][player_x + dx]
+
+        beyond = ''
+        if (
+            0 <= player_y + dy + dy < len(level)
+            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        ):
+            beyond = level[player_y + dy + dy][player_x + dx + dx]
+
+        next_adjacent = {
+            empty: player,
+            storage: player_on_storage,
+        }
+
+        next_current = {
+            player: empty,
+            player_on_storage: storage,
+        }
+
+        next_beyond = {
+            empty: box,
+            storage: box_on_storage,
+        }
+
+        next_adjacent_push = {
+            box: player,
+            box_on_storage: player_on_storage,
+        }
+
+        if adjacent in next_adjacent:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+
+        elif beyond in next_beyond and adjacent in next_adjacent_push:
+            level[player_y][player_x] = next_current[current]
+            level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
+            level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+
+        complete = True
+
+        for y, row in enumerate(level):
+            for x, cell in enumerate(row):
+                if cell == box:
+                    complete = False
+
+        if complete:
+            current_level += 1
+            if current_level >= len(levels):
+                current_level = 0
+            load_level()
+
+    elif key == keys.R:
+        load_level()
+
+    elif key == keys.N:
+        current_level += 1
+        if current_level >= len(levels):
+            current_level = 0
+        load_level()
+
+    elif key == keys.P:
+        current_level -= 1
+        if current_level < 0:
+            current_level = len(levels) - 1
+        load_level()
+
+
+def draw():
+    screen.fill((255, 255, 190))
+
+    for y, row in enumerate(level):
+        for x, cell in enumerate(row):
+            if cell != empty:
+                cell_size = 23
+
+                colors = {
+                    player: (167, 135, 255),
+                    player_on_storage: (158, 119, 255),
+                    box: (255, 201, 126),
+                    box_on_storage: (150, 255, 127),
+                    storage: (156, 229, 255),
+                    wall: (255, 147, 209),
+                }
+
+                screen.draw.filled_rect(
+                    Rect(
+                        (x * cell_size, y * cell_size),
+                        (cell_size, cell_size)
+                    ),
+                    color=colors[cell]
+                )
+
+                screen.draw.text(
+                    cell,
+                    (x * cell_size, y * cell_size),
+                    color=(255, 255, 255)
+                )
+
+
+# Kod för att starta appen här nedanför
+load_level()
+
+pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
-
-Kod: XXXX
 
 # Källor
 Engelska originalprojektet: https://simplegametutorials.github.io/pygamezero/sokoban/
