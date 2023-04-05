@@ -2,6 +2,20 @@
 
 Välkommen till Pythonuppgifter för årskurs 8. Spelen är översatta från engelska och anpassade till [repl.it](https://replit.com/~).
 
+* **Lätta uppgifter att börja med:** [Hello](#hello---) &bull; Spökhuset, i Google Classroom &bull; Nio liv, i Google Classroom
+* **Matteuppgifter:** [Eyes](#eyes) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-)
+* **Speluppgifter:** 
+   [Gem Catcher](#gem-catcher-)
+  &bull; [Ninja Runner](#ninja-runner-)
+  &bull; [Blocks](#blocks-)
+  &bull; [Fifteen](#fifteen-)
+  &bull; [Att flytta över från Scratch: Flappy Bird](#att-flytta-över-från-scratch-flappy-bird-)
+  &bull; [Flowers](#flowers-)
+  &bull; [Life](#life-)
+  &bull; [Repeat](#repeat-)
+  &bull; [Snake](#snake-)
+  &bull; [Sokoban](#sokoban-)
+
 ## Hello 🌍🌎🌏  ⭐
 [![Hello 🌍🌎🌏](https://user-images.githubusercontent.com/4598641/225109246-7ddecc59-4ac9-4b3d-91a8-9f393704e4f3.png)](https://github.com/coderdojolund/Python-8/blob/main/Hello-world/Hello-world.md)
 
