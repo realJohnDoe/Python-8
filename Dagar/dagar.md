@@ -65,7 +65,9 @@ def fråga_och_svara():
 fråga_och_svara()
 ```
 
-✏️ Testa koden med gröna knappen Run i repl.it. Vad tror du att resultatet kommer att bli?
+✏️ Testa koden med gröna knappen Run i repl.it. Mata in dina svar i det svarta terminalfönstret.
+
+🤔 Vad tror du att resultatet kommer att bli?
 
 ## STEG 2: Förbered test
 
@@ -81,12 +83,46 @@ När man skriver en app kan man testa den på olika sätt.
 ✏️ Ändra appen så att det längst ner blir så här. Du kan stänga av frågorna till användaren och istället anropa funktionen `testa`. Då slipper du mata in olika datum hela tiden när du testar.
 
 ```
-### Här börjar appen köra
-testa()
-#fråga_och_svara()
+# Skriv vanliga funktioner här under
+def dagnummer(år, månad, dag):
+    return 1
+
+# Skriv testkod här under
+
+
+def testa():
+    print("Vi testar")
+    print("Slut på tester")
+
+# Skriv kod som pratar med användaren här under
+
+
+def fråga_datum(rubrik):
+    print(rubrik)
+    år = int(input('År, fyra siffror: '))
+    månad = int(input('Månad, 1--12: '))
+    dag = int(input('Dag, 1--31: '))
+    return (år, månad, dag)
+
+
+def fråga_och_svara():
+    print('Hur många dagar är det?')
+    (från_år, från_månad, från_dag) = fråga_datum('Från vilket datum?')
+    (till_år, till_månad, till_dag) = fråga_datum('Till vilket datum?')
+
+    dagar = dagnummer(till_år, till_månad, till_dag) - \
+        dagnummer(från_år, från_månad, från_dag)
+
+    print(f"Det är {dagar} dagar mellan datumen")
+
+
+# Här börjar appen köra
+testa() # ändra 📆
+# fråga_och_svara() # ändra 📆
 ```
 
-✏️ Vad händer om du kör appen nu?
+✏️ Vad händer om du kör appen nu? Vad står det i terminalfönstret?
+
 
 ## STEG 3: Testa januari
 Vi vill att funktionen `dagnummer` ska ge oss antalet dagar från den 1 januari 2000, som vi kan kalla dag 1.
@@ -100,25 +136,54 @@ def testa():
   if d != 1: print(f"Dagnumret blev fel: {d}") #nyrad
   print("Slut på tester")
 ```
+
 ✏️ Vad tror du resultatet blir? Kör koden i repl.it. Blev det som du tänkte dig?
 
 ✏️ Lägg till ett testfall längst ner i `testa()`. Det ska kolla om den 31 januari 2000 är dag 31.
+
 ```python
-### Skriv testkod här under
+# Skriv vanliga funktioner här under
+def dagnummer(år, månad, dag):
+    return 1
+
+# Skriv testkod här under
 def testa():
-  print("Vi testar")
-  d = dagnummer(2000, 1, 1)
-  if d != 1: print(f"Dagnumret blev fel: {d}")
-  d = dagnummer(2000, 1, 31) #nyrad
-  if d != 31: print(f"Dagnumret blev fel: {d}") #nyrad
-  print("Slut på tester")
+    print("Vi testar")
+    d = dagnummer(2000, 1, 1)  # nyrad 📆
+    if d != 1: print(f"Dagnumret blev fel: {d}")  # nyrad 📆
+    print("Slut på tester")
+
+# Skriv kod som pratar med användaren här under
+def fråga_datum(rubrik):
+    print(rubrik)
+    år = int(input('År, fyra siffror: '))
+    månad = int(input('Månad, 1--12: '))
+    dag = int(input('Dag, 1--31: '))
+    return (år, månad, dag)
+
+
+def fråga_och_svara():
+    print('Hur många dagar är det?')
+    (från_år, från_månad, från_dag) = fråga_datum('Från vilket datum?')
+    (till_år, till_månad, till_dag) = fråga_datum('Till vilket datum?')
+
+    dagar = dagnummer(till_år, till_månad, till_dag) - \
+        dagnummer(från_år, från_månad, från_dag)
+
+    print(f"Det är {dagar} dagar mellan datumen")
+
+
+# Här börjar appen köra
+testa()
+# fråga_och_svara()
 ```
 
-✏️ Vad tror du resultatet blir nu? Kör koden i repl.it. Blev det som du tänkte dig?
+✏️ Vad tror du resultatet blir nu? Kör koden i repl.it. Vad står det i terminalfönstret? Blev det som du tänkte dig?
 
 Kan du hitta på ett sätt att ändra funktionen `dagnummer` så att våra två tester fungerar?[^1]
 
 ## Testa februari också
+
 ✏️ Lägg till ett nytt testfall längst ner i `testa()`. Vi vill testa att den 28 februari 2000 är dag 59. De nya raderna är markerade med `#nyrad` men det behöver du inte skriva in.
 
 **main.py**
@@ -129,7 +194,7 @@ def testa():
   if d != 31: print(f"Dagnumret blev fel: {d}")
   d = dagnummer(2000, 2, 28) #nyrad
   if d != 59: print(f"Dagnumret blev fel: {d}") #nyrad
-  print("Slut på tester") #nyrad
+  print("Slut på tester")
 ```
 
 För att komma vidare behöver vi en funktion som kan räkna ut vilken dag på året det är.
