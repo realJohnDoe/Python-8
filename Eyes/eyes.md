@@ -321,7 +321,8 @@ def draw():
 pgzrun.go()
 ```
 :pencil2: **Uppdatera och testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
-
+>Tänk på att justera indragen i koden när du lägger till funktionen `draw_eye()`.
+    
 # Utmaningar
 Kan du göra det ännu mer spännande? Kan du förbättra koden?
 
