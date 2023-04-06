@@ -341,6 +341,6 @@ pygame.mouse.get_pos()
 
 Detta är en anpassning till repl.it av originalprojektet https://simplegametutorials.github.io/pygamezero/eyes/
 
-[1]: Vad kan du sätta `scale` till när `distance < radius`?
+[^1]:Vad kan du sätta `scale` till när `distance < radius`?
 
                             
