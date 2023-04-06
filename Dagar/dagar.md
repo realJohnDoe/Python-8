@@ -411,4 +411,4 @@ def dagar_före(år):
 ```
 
 # Hjälp på traven
-[^1]: `return dag` istället för `return 0`
+[^1]: `return dag` istället för `return 1`
