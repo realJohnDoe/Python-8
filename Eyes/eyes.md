@@ -340,6 +340,6 @@ Kan du göra det ännu mer spännande? Kan du förbättra koden?
 
 Detta är en anpassning till repl.it av originalprojektet https://simplegametutorials.github.io/pygamezero/eyes/
 
-[^1]:Vad kan du sätta `scale` till när `distance < radius`?
+[^1]:Vad kan du sätta `scale` till när `distance < radius`? Hur kan du använda det för att räkna ut `pupil_x` och `pupil_y` med samma kod?
 
                             
