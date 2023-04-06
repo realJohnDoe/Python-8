@@ -329,13 +329,11 @@ Kan du göra det ännu mer spännande? Kan du förbättra koden?
 * Kan du få ögonen att byta färg, försvinna eller röra sig?
 * Kan du lägga in någon annan slags figur och få ögonen att följa den figuren istället för muspekaren?
 
-# Mer om Pygame Zero 
+# Mer om koden i Pygame Zero och Pygame, förklarat på engelska
 
-screen.draw()
+**[screen.draw(), screen.fill()](https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen)**: https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen
 
-screen.fill()
-
-pygame.mouse.get_pos()
+**[pygame.mouse.get_pos()](https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pos)**: https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pos
 
 # Källor
 
