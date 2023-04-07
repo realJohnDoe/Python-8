@@ -181,11 +181,12 @@ testa()
 ✏️ Vad tror du resultatet blir nu? Kör koden i repl.it. Vad står det i terminalfönstret? Blev det som du tänkte dig?
 
 Kan du hitta på ett sätt att ändra funktionen `dagnummer` så att våra två tester fungerar? 
-`dagnummer(1)` ska bli 1 och `dagnummer(31)` ska ge svaret 31.[^1]
+`dagnummer(2000, 1, 1)` ska ge svaret 1 och `dagnummer(2000, 1, 31)` ska ge svaret 31.[^1]
 
 ## Testa februari också
 
-✏️ Lägg till ett nytt testfall längst ner i `testa()`. Vi vill testa att den 28 februari 2000 är dag 59. De nya raderna är markerade med `#nyrad` men det behöver du inte skriva in.
+✏️ Lägg till ett nytt testfall längst ner i `testa()`. Vi vill testa att den 28 februari 2000 är dag 59, alltså 31 + 28.
+De nya raderna är markerade med `#nyrad` men det behöver du inte skriva in.
 
 **main.py**
 ```python
