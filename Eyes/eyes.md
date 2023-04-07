@@ -191,14 +191,14 @@ pgzrun.go()  # måste vara sist
 
 # Pupillen ska inte smita när muspekaren är utanför ögat
 
-🤔 Hur vet vi att muspekaren är i ögat? Eftersom vi räknat ut avståndet från ögats centrum till muspekaren så kan vi använda ögats radie som en gräns, till exempel 30 pixlar. Vi ska ju plats att rita pupillen också.
+🤔 Hur vet vi att muspekaren är i ögat? Vi har ju räknat ut avståndet från ögats centrum till muspekaren i variabeln `distance` så vi använder ögats radie som en gräns, till exempel 30 pixlar. Det ska ju finnas lite plats att rita pupillen också.
 
 Om muspekaren är mer än 30 pixlar från ögats centrum, placerar vi pupillen i kanten av ögat. Se bilden.
 
 ![image](https://user-images.githubusercontent.com/4598641/224125785-ee2eedc9-2155-4508-9fc2-d8518bfdfe32.png)
 
 - Den streckade triangeln har hypotenusan 30 pixlar och den är likformig med den större triangeln med muspekaren i ena hörnet.
-- Proportionen mellan den större och den streckade triangeln är `30 / distance` när muspekaren är utanför ögat.
+- Proportionen mellan den streckade triangeln och den stora triangeln är `30 / distance` när muspekaren är utanför ögat. Om t.ex. `distance` är 60 så är den lilla streckade triangeln 30/60 = 1/2 av den stora triangeln.
 - Vi får därför skala `distance_x` och `distance_y` med den skalfaktorn när vi ska räkna ut pupillens x- och y-koordinater.
 - Då kommer vi att kunna rita pupillen så att den alltid hamnar innanför ögats cirkel.
 
