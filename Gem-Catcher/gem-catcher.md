@@ -34,6 +34,10 @@ Bilden med rymdskeppet behöver ligger i mappen **images** i projektet.
 
 ![image](https://user-images.githubusercontent.com/4598641/222978313-4661f08c-e673-40be-87be-5fa1d8d06de8.png)
 
+Så här ser det ut i repl.it. Du kan klicka på bildfilen så visas den längst ner till höger i repl.it.
+
+![image](https://user-images.githubusercontent.com/4598641/230603082-7fa56b41-2f85-4845-8d36-b35420eb2e49.png)
+
 >**Frivilligt:** Det finns andra bilder om du vill byta. Ladda ner ZIP-arkivet, packa upp och ladda sen upp önskad bild till ditt projekt.
 >Här finns ZIP-arkivet med bilder: https://www.aposteriori.com.sg/wp-content/uploads/2020/02/image_pack.zip.
 >**Obs!** Bildens filnamn kan bara innehålla små bokstäver, siffror och understrykning `_`.
@@ -67,9 +71,11 @@ Detta är vad raderna gör:
 
 `ship.draw()` : Talar om för skeppets Actor att rita sig på skärmen. Koden behöver vara indragen under `def draw():` så att den körs när Pygame Zero anropar funktionen `draw()`.
 
+Så här ser koordinatsystemet ut i Pygame Zero:
+
 ![image](https://user-images.githubusercontent.com/4598641/222978372-85be8781-e6fe-414e-9fb1-b7847dfc8b5f.png)
 
-# Funktionen update()
+# Funktionen `update()`
 
 Vi la till funktionen `draw()` innan. Det är en speciell funktion som Pygame Zero kör regelbundet för att rita det du ser på skärmen. En annan speciell funktion är `update()`. Pygame Zero anrop regelbundet vår `update()`-funktion för att uppdatera/rita om de olika figurerna i spelet.
 
