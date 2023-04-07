@@ -335,7 +335,7 @@ Kan du göra appen mer intressant eller förbättra koden?
 
 **[pygame.mouse.get_pos()](https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pos)**: https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pos
 
-**[update()](https://pygame-zero.readthedocs.io/en/stable/hooks.html#game-loop-hooks)**: https://pygame-zero.readthedocs.io/en/stable/hooks.html#game-loop-hooks
+**[draw(), update()](https://pygame-zero.readthedocs.io/en/stable/hooks.html#game-loop-hooks)**: https://pygame-zero.readthedocs.io/en/stable/hooks.html#game-loop-hooks
     
 # Källor
 
