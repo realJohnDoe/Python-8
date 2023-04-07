@@ -691,8 +691,8 @@ def fråga_och_svara():
 
 
 # Här börjar appen köra
-testa()
-# fråga_och_svara()
+# testa()
+fråga_och_svara()
 ```
 
 </details>
