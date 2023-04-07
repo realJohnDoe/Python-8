@@ -173,7 +173,6 @@ def fråga_och_svara():
 
     print(f"Det är {dagar} dagar mellan datumen")
 
-
 # Här börjar appen köra
 testa()
 # fråga_och_svara()
