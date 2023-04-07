@@ -109,13 +109,13 @@ def fråga_och_svara():
     (från_år, från_månad, från_dag) = fråga_datum('Från vilket datum?')
     (till_år, till_månad, till_dag) = fråga_datum('Till vilket datum?')
 
-    dagar = dagnummer(till_år, till_månad, till_dag) - \
-        dagnummer(från_år, från_månad, från_dag)
+    dagar = dagnummer(till_år, till_månad, till_dag) - dagnummer(från_år, från_månad, från_dag)
 
     print(f"Det är {dagar} dagar mellan datumen")
 
 
 # Här börjar appen köra
+
 testa() # ändra 📆
 # fråga_och_svara() # ändra 📆
 ```
