@@ -84,7 +84,7 @@ Avståndet, `distance`, kan vi räkna ut med Pythagoras sats. Se figuren.
 ![image](https://user-images.githubusercontent.com/4598641/224125785-ee2eedc9-2155-4508-9fc2-d8518bfdfe32.png)
 
 Avståndet i pixlar är roten ur (antalet pixlar i X-led i kvadrat + antalet pixlar i Y-led i kvadrat).
-- Operatorn `**2` är upphöjt till 2, alltså kvadraten
+- Operatorn `**2` betyder upphöjt till 2, alltså kvadraten
 - Vi importerar mattemodulen `math` för att räkna roten ur med `math.sqrt()`.
 
 ```python
@@ -198,9 +198,9 @@ Om muspekaren är mer än 30 pixlar från ögats centrum, placerar vi pupillen i
 ![image](https://user-images.githubusercontent.com/4598641/224125785-ee2eedc9-2155-4508-9fc2-d8518bfdfe32.png)
 
 - Den streckade triangeln har hypotenusan 30 pixlar och den är likformig med den större triangeln med muspekaren i ena hörnet.
-- Proportionen mellan den streckade triangeln och den stora triangeln är `30 / distance` när muspekaren är utanför ögat. Om t.ex. `distance` är 60 så är den lilla streckade triangeln 30/60 = 1/2 av den stora triangeln.
+- Proportionen mellan den streckade triangeln och den stora triangeln är `30 / distance` när muspekaren är utanför ögat. Om t.ex. `distance` är 60 så är sidorna på den lilla streckade triangeln 30/60 = 1/2 av den stora triangeln.
 - Vi får därför skala `distance_x` och `distance_y` med den skalfaktorn när vi ska räkna ut pupillens x- och y-koordinater.
-- Då kommer vi att kunna rita pupillen så att den alltid hamnar innanför ögats cirkel.
+- Då kommer pupillen att ritas innanför ögats cirkel, som vi vill.
 
 Så här kan `draw()` se ut nu:
 
