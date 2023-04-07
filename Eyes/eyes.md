@@ -207,7 +207,7 @@ Så här kan `draw()` se ut nu:
 ```python
 # behåll resten av koden
 
-def draw(): #uppdaterad 👀
+def draw():
     screen.fill((0, 0, 0))
 
     mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -219,13 +219,13 @@ def draw(): #uppdaterad 👀
     distance_y = mouse_y - eye_y
     distance = math.sqrt(distance_x**2 + distance_y**2) # Pythagoras
     
-    if distance < radius: # innanför ögat
-        pupil_x = eye_x + distance_x
-        pupil_y = eye_y + distance_y
-    else: # utanför ögat
-        scale = radius / distance # se bilden
-        pupil_x = eye_x + distance_x * scale
-        pupil_y = eye_y + distance_y * scale
+    if distance < radius: # innanför ögat # ändrat 👀
+        pupil_x = eye_x + distance_x # ändrat 👀
+        pupil_y = eye_y + distance_y # ändrat 👀
+    else: # utanför ögat # ändrat 👀
+        scale = radius / distance # se bilden # ändrat 👀
+        pupil_x = eye_x + distance_x * scale # ändrat 👀
+        pupil_y = eye_y + distance_y * scale # ändrat 👀
 
     screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255))
     screen.draw.filled_circle((pupil_x, pupil_y), 15, color=(0, 0, 100))
@@ -244,10 +244,8 @@ import math
 
 WIDTH, HEIGHT = 530, 400
 
-
 def update():
     pass
-
 
 def draw():  # uppdaterad 👀
     screen.fill((0, 0, 0))
@@ -279,7 +277,8 @@ pgzrun.go()  # måste vara sist
 </details>
 
 # Två ögon
-Vi vill ha två ögon som följer muspekaren. Vi kan återanvända samma kod. Därför lägger vi ögats kod
+Vi vill ha två ögon som följer muspekaren. Vi kan återanvända samma kod.
+Därför lägger vi ögats kod
 i funktionen `draw_eye` som har ögats x- och y-koordinat som indata/parametrar.
 
 Så här kan koden se ut nu:
@@ -297,23 +296,23 @@ def update():
 def draw():
     screen.fill((0, 0, 0))
 
-    def draw_eye(eye_x, eye_y): # vi återanvänder denna 👀 
-        radius = 30
-        mouse_x, mouse_y = pygame.mouse.get_pos()
+    def draw_eye(eye_x, eye_y): # ändrat 👀
+        radius = 30 # ändrat 👀 -- kom ihåg att ha fyra extra mellanslag före
+        mouse_x, mouse_y = pygame.mouse.get_pos() # ändrat 👀
 
-        distance_x = mouse_x - eye_x
-        distance_y = mouse_y - eye_y
-        distance = math.sqrt(distance_x**2 + distance_y**2)
-        if distance < radius:
-            pupil_x = eye_x + distance_x
-            pupil_y = eye_y + distance_y
-        else:
-            scale = radius / distance # se bilden
-            pupil_x = eye_x + distance_x * scale
-            pupil_y = eye_y + distance_y * scale
+        distance_x = mouse_x - eye_x # ändrat 👀
+        distance_y = mouse_y - eye_y # ändrat 👀
+        distance = math.sqrt(distance_x**2 + distance_y**2) # ändrat 👀
+        if distance < radius: # ändrat 👀
+            pupil_x = eye_x + distance_x # ändrat 👀
+            pupil_y = eye_y + distance_y # ändrat 👀
+        else: # ändrat 👀
+            scale = radius / distance # se bilden # ändrat 👀
+            pupil_x = eye_x + distance_x * scale # ändrat 👀
+            pupil_y = eye_y + distance_y * scale # ändrat 👀
 
-        screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255))
-        screen.draw.filled_circle((pupil_x, pupil_y), 15, color=(0, 0, 100))
+        screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255)) # ändrat 👀
+        screen.draw.filled_circle((pupil_x, pupil_y), 15, color=(0, 0, 100)) # ändrat 👀
 
     draw_eye(200, 200) # första ögat 👀
     draw_eye(330, 200) # andra ögat 👀
@@ -324,7 +323,7 @@ pgzrun.go()
 >Tänk på att justera indragen i koden när du lägger till funktionen `draw_eye()`.
     
 # Utmaningar
-Kan du göra det ännu mer spännande? Kan du förbättra koden?
+Kan du göra appen mer intressant eller förbättra koden?
 
 * Uträkningen av scale går att göra om så att vi får ännu färre kodrader. Kan du komma på hur?[^1]                          
 * Kan du få ögonen att byta färg, försvinna eller röra sig?
@@ -341,5 +340,3 @@ Kan du göra det ännu mer spännande? Kan du förbättra koden?
 Detta är en anpassning till repl.it av originalprojektet https://simplegametutorials.github.io/pygamezero/eyes/
 
 [^1]:Vad kan du sätta `scale` till när `distance < radius`? Hur kan du använda det för att räkna ut `pupil_x` och `pupil_y` med samma kod?
-
-                            
