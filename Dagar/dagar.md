@@ -724,5 +724,5 @@ def dagar_före(år):
     return int(365.25 * (år - 2000)) # ändrad uträkning
 ```
 
-# Hjälp på traven
+
 [^1]: `return dag` istället för `return 1`
