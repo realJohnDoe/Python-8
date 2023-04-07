@@ -331,11 +331,11 @@ Kan du göra appen mer intressant eller förbättra koden?
 
 # Mer om koden i Pygame Zero och Pygame, förklarat på engelska
 
-**[screen.draw(), screen.fill()](https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen)**: https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen
-
+**[draw(), update()](https://pygame-zero.readthedocs.io/en/stable/hooks.html#game-loop-hooks)**: https://pygame-zero.readthedocs.io/en/stable/hooks.html#game-loop-hooks
+    
 **[pygame.mouse.get_pos()](https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pos)**: https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pos
 
-**[draw(), update()](https://pygame-zero.readthedocs.io/en/stable/hooks.html#game-loop-hooks)**: https://pygame-zero.readthedocs.io/en/stable/hooks.html#game-loop-hooks
+**[screen.draw(), screen.fill()](https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen)**: https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen
     
 # Källor
 
