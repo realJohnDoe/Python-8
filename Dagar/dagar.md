@@ -605,9 +605,9 @@ def testa():
 
 **main.py**
 ```python
-def dagar_före(år): # hur många dagar från 1 januari 2000 till 31 december (år - 1)
+def dagar_före(år): # hur många dagar från 1 januari 2000 till 31 december (år - 1)?
     dagar = 0
-    for å in range(2000, år):
+    for å in range(2000, år): # å får värdena 2000, 2001, ..., år - 1
       dagar += 365 + skottdag(å)
     return dagar
 ```
