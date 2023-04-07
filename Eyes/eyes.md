@@ -53,8 +53,8 @@ import pgzrun
 import pygame #nyrad 👀
 WIDTH, HEIGHT = 530, 400
 
-def update():
-    pass
+def update(): #nyrad 👀
+    pass #nyrad 👀
 
 def draw():
     screen.fill((0, 0, 0))
