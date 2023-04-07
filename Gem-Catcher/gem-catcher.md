@@ -1,3 +1,6 @@
+# Gem Catcher ⭐⭐
+
+## Innehåll
 [Första koden](#första-koden) &bull;
 [Funktionen update()](#funktionen-update) &bull;
 [Lägga till en ädelsten](#lägga-till-en-ädelsten) &bull;
