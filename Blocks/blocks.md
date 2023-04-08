@@ -48,7 +48,9 @@ Det finns sju typer av bitar. Varje bit innehåller fyra rutor.
 
 ![image](https://user-images.githubusercontent.com/4598641/226001342-33230a9a-d8a3-4218-9a37-3cc579827ad0.png)
 
-Bitar faller från toppen av spelplanen. Spelaren kan flytta bitar åt vänster och höger och rotera dem. När en bit landar, faller nästa bit.
+Bitar faller från toppen av spelplanen. 
+Spelaren kan flytta bitar åt vänster och höger och rotera dem. 
+När en bit landar, faller nästa bit.
 
 Hur nästa bit ser ut visas ovanför spelplanen som en hjälp till spelaren.
 
@@ -68,6 +70,9 @@ Spelet slutar när en bit har landat och nästa bit skulle omedelbart överlappa
 
 
 # Översikt
+
+*Detta är ungefär vad vi behöver göra. Vi kommer att göra det i små steg. Du behöver inte förstå alla detaljerna från början.*
+
 Ett rutnät lagrar de orörliga rutorna från nerfallna bitar.
 
 En ruta är antingen tom eller fylld med en viss färg.
@@ -86,19 +91,22 @@ Den fallande biten lagras som
 - ett tal som representerar vilken rotation den befinner sig i
 - och så X- och Y-koordinaten för biten på spelplanen.
 
-En ny bit skapas längst upp på skärmen, om den inte skulle överlappa ett orörligt block, i vilket fall spelet är över.
+En ny bit skapas längst upp på skärmen. Skulle den hamna direkt på orörligt block är spelet över.
 
 Spelaren kan flytta biten åt vänster och höger, om inte den nya positionen överlappar ett orörligt block eller är utanför spelplanen.
 
-Efter en liten fördröjning flyttas biten nedåt. Om den nya positionen överlappar ett orörligt block eller är utanför spelplanen så landar biten.
+Efter en liten fördröjning flyttas biten nedåt. 
+Om den nya positionen överlappar ett orörligt block eller är utanför spelplanen så landar biten.
 
 När någon av rotationsknapparna trycks, ändrar biten sin rotation, om inte den rotationen överlappar ett orörligt block eller är utanför spelplanen.
 
-När släppknappen trycks in, flyttas biten neråt så långt det går utan att den överlappar ett orörligt block är vara utanför spelplanen. Sen landar biten.
+När spelaren trycker på släppknappen (c), flyttas biten neråt så långt det går utan att den överlappar ett orörligt block eller hamnar utanför spelplanen.
+Sen landar biten.
 
 När en bit landar, läggs bitens block till de orörliga blocken och nästa bit skapas.
 
-En sekvens av en av var och en av de sju bitarna i en slumpmässig ordning skapas, och nästa bit tas från denna sekvens. 
+En sekvens av en av var och en av de sju bitarna i en slumpmässig ordning skapas. 
+Nästa bit tas alltid från denna sekvens. 
 När alla bitar har tagits, skapas en ny slumpmässig ordning.
 
 # Kodning
@@ -144,9 +152,10 @@ pgzrun.go()  # måste vara sista raden
 
 ## Lagring av orörliga block
 
-Rutnätet för de orörliga blocken skapas och varje block sätts till ett mellanslag, `' '`. Det representerar ett tomt block. Variabeln heter `inert`.
+Vi skapar ett variabel `inert` som håller reda på rutnätet för de orörliga blocken. 
+Varje block sätts till ett mellanslag, `' '`. Det representerar ett tomt block.
 
-Bredden och höjden på rutnätet i block återanvänds från ritning av blocken. Vi gör bredden och höjden till variabler.
+Bredden och höjden på rutnätet räknat i block behöver vi på flera ställen i koden. Därför gör vi bredden och höjden till variabler.
 
 ✏️ Uppdatera koden och testkör. Nya och ändrade rader är markerade.
 
@@ -157,17 +166,17 @@ import pgzrun
 WIDTH = 20 * 14
 HEIGHT = 20 * 25
 
-grid_x_count = 10 #nyrad
-grid_y_count = 18 #nyrad
+grid_x_count = 10 #nyrad 🟦
+grid_y_count = 18 #nyrad 🟦
 
-inert = [] #nyrad
+inert = [] #nyrad 🟦
 
 # Funktioner (def) här nedanför
 def draw():
     screen.fill((255, 255, 255))
 
-    for y in range(grid_y_count): #ändrad
-        for x in range(grid_x_count): #ändrad
+    for y in range(grid_y_count): #ändrad 🟦
+        for x in range(grid_x_count): #ändrad 🟦
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
@@ -181,14 +190,14 @@ def draw():
 # Kod för att starta appen här nedanför
 for y in range(grid_y_count): #nyrad
     inert.append([]) #nyrad
-        inert[y] = [' '] * grid_x_count #nyrad
+        inert[y] = [' '] * grid_x_count #nyrad 🟦
 
 pgzrun.go()  # måste vara sista raden
 ```
 
 ## Färglägg blocken
 
-Blocken ska ritas med olika färg, beroende på blocktypen.
+Varje blocktyp ska ha sin unika färg.
 
 För att testa det, sätter vi några block i det orörliga nätet till att ha olika typ.
 
@@ -201,18 +210,18 @@ def draw():
 
     for y in range(grid_y_count):
         for x in range(grid_x_count):
-            colors = { #nyrad
-                ' ': (222, 222, 222), #nyrad
-                'i': (120, 195, 239), #nyrad
-                'j': (236, 231, 108), #nyrad
-                'l': (124, 218, 193), #nyrad
-                'o': (234, 177, 121), #nyrad
-                's': (211, 136, 236), #nyrad
-                't': (248, 147, 196), #nyrad
-                'z': (169, 221, 118), #nyrad
-            } #nyrad
-            block = inert[y][x] #nyrad
-            color = colors[block] #nyrad
+            colors = { #nyrad 🟦
+                ' ': (222, 222, 222), #nyrad 🟦
+                'i': (120, 195, 239), #nyrad 🟦
+                'j': (236, 231, 108), #nyrad 🟦
+                'l': (124, 218, 193), #nyrad 🟦
+                'o': (234, 177, 121), #nyrad 🟦
+                's': (211, 136, 236), #nyrad 🟦
+                't': (248, 147, 196), #nyrad 🟦
+                'z': (169, 221, 118), #nyrad 🟦
+            } #nyrad 🟦
+            block = inert[y][x] #nyrad 🟦
+            color = colors[block] #nyrad 🟦
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
@@ -220,26 +229,27 @@ def draw():
                     x * block_size, y * block_size,
                     block_draw_size, block_draw_size
                 ),
-                color=color #ändra
+                color=color #ändra 🟦
             )
 
 
 # Kod för att starta appen här nedanför
-for y in range(grid_y_count): #nyrad
-    inert.append([]) #nyrad
-        inert[y] = [' '] * grid_x_count #nyrad
+for y in range(grid_y_count): #nyrad 🟦
+    inert.append([]) #nyrad 🟦
+        inert[y] = [' '] * grid_x_count #nyrad 🟦
 
 # Tillfälligt
-inert[17][0] = 'i' #nyrad
-inert[16][1] = 'j' #nyrad
-inert[15][2] = 'l' #nyrad
-inert[14][3] = 'o' #nyrad
-inert[13][4] = 's' #nyrad
-inert[12][5] = 't' #nyrad
-inert[11][6] = 'z' #nyrad
+inert[17][0] = 'i' #nyrad 🟦
+inert[16][1] = 'j' #nyrad 🟦
+inert[15][2] = 'l' #nyrad 🟦
+inert[14][3] = 'o' #nyrad 🟦
+inert[13][4] = 's' #nyrad 🟦
+inert[12][5] = 't' #nyrad 🟦
+inert[11][6] = 'z' #nyrad 🟦
 
 pgzrun.go()  # måste vara sista raden
 ```
+
 ![image](https://user-images.githubusercontent.com/4598641/226006718-62e1013b-99f3-427b-b095-4cda85184e19.png)
 
 <details>
@@ -559,7 +569,7 @@ pgzrun.go()  # måste vara sista
 
 Biten som faller just nu representeras av
 - dels ett tal som anger vilken typ av bit det är &ndash; vi behöver använda det för att indexera i listan över med olika bitar
-- dels ett tal som anger vilken rotation biten har &ndash; vi behöver det för att indexera i listan med rotationer.
+- dels ett tal som anger vilken rotation biten har &ndash; vi behöver det för att indexera i listan med rotationer för biten.
 
 ✏️ Lägg till och testkör att allt fungerar som innan.
 
@@ -639,7 +649,8 @@ pgzrun.go()  # måste vara sista
 
 ## Rita biten
 
-Biten ritas genom att loopa genom dess struktur. Om en viss ruta är fylld så ritar vi en fyrkant med den färg som bestäms av blocktypen.
+Biten ritas genom att loopa genom listan som representerar biten.
+Om en viss ruta är fylld så ritar vi en fyrkant med den färg som bestäms av blocktypen.
 
 ✏️ Uppdatera koden och testkör! Lägg till koden i slutet av `draw()` och ta bort den tillfälliga ritkoden längst ner.
 
@@ -836,14 +847,15 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Rotation
-När vi trycker på X, ökas bitens rotationsnummer med 1 och biten roteras medurs.
+När vi trycker på `X`, ökas bitens rotationsnummer med 1 och biten roteras medurs.
 >Om rotationstalet är större än antalet möjliga rotationer sätts rotationstalet till 0. Vi går alltså tillbaks till bitens första rotation.
 
-När vi trycker på Z så minskas rotationstalet med 1 och biten roterar moturs.
+När vi trycker på `Z` så minskas rotationstalet med 1 och biten roterar moturs.
 >Om rotationstalet är mindre än 0, sätts rotationstalet till antalet rotationer minus 1, alltså bitens sista rotation.
 
 
 ✏️ Lägg till funktionen `on_key_down()` och testkör!
+>Starta spelet med Run och klicka sen i spelfönstret. Då kan din kod fånga upp tangenttryckningarna.
 
 ```python
 def on_key_down(key):
@@ -944,11 +956,12 @@ pgzrun.go()  # måste vara sista raden
 
 </details>
 
+  
 ## Testa bitar
 
 För att göra det lätt att testa, låter vi upp- och och neråtpil byta mellan olika bitar.
 
-✏️ Uppdatera funktionen `on_key_down()` och testkör! Fungerar upp- och neråtpil och tangenterna X och C som du tänkt?
+✏️ Uppdatera funktionen `on_key_down()` och testkör! Fungerar upp- och neråtpil och tangenterna `X` och `C` som du tänkt?
 
 ```python
 def on_key_down(key):
@@ -1080,7 +1093,7 @@ pgzrun.go()  # måste vara sista raden
 
 Bitens position på spelplanen sparas och biten ritas på den positionen.
 
-✏️ Lägg till de två globala variablerna och ändra en rad i `draw()`. Testkör sen med pil upp, pil ner, X och C.
+✏️ Lägg till de två globala variablerna och ändra en rad i `draw()`. Testkör sen med pil upp, pil ner, `X` och `C`.
 
 ```python
 # Läggs bland de globala variablerna
@@ -1347,7 +1360,7 @@ En timervariabel börjar vid 0 och ökar med `dt` för varje bildruta.
 
 När timern har passerat 0.5, återställs den till 0.
 
-För att se hur det fungerar skriver vi just nu ut 'tick' ut varje gång biten faller.
+För att se hur det fungerar skriver vi just nu 'tick' ut varje gång biten faller.
 
 ✏️ Uppdatera koden med den globala variabeln `timer`. Lägg till funktionen `update` och testkör sen! Ser du utskriften i terminalfönstret med text?
 
@@ -1622,17 +1635,17 @@ pgzrun.go()  # måste vara sista raden
 
 ## Begränsa rörelsefriheten
 
-För att förhindra att biten hamnar till vänster eller höger om spelplanen när den flyttas eller roteras, 
-kontrollerar vi vart och ett av dess block för att se om de är inom spelplanen innan biten flyttas eller roteras.
+Vi vill hindra att biten hamnar till vänster eller höger om spelplanen när den flyttas eller roteras.
+Därför kontrollerar vi bitens alla block för att se om de är inom spelplanen innan biten flyttas eller roteras.
 
 Eftersom den här kontrollen kommer att göras på flera ställen, gör vi en funktion med den koden.
-Funktionen `can_piece_move` ska kontrollera bitens position och rotation och svara True om biten kan röra sig eller rotera, annars False.
+Funktionen `can_piece_move` ska kontrollera bitens position och rotation. Den ska svara `True` om biten kan röra sig eller rotera, annars `False`.
 
 Till att börja med kommer funktionen alltid att returnera True, så att vi alltid kan flytta och rotera medan vi testar.
 
 Vi behöver ändra koden från att omedelbart uppdatera bitens position/rotation.
 Istället skapar vi variabler för de ändrade värdena.
-Om kontrollfunktionen returnerar True ställs den faktiska positionen/rotationen till de ändrade värdena, annars inte.
+Om `can_piece_move` svarar `True`, ställs den faktiska positionen/rotationen till de ändrade värdena, annars inte.
 
 ✏️ Uppdatera koden. Funktionen `can_piece_move()` är ny. Funktionerna `update()` och `on_key_down` har ändringar. Testkör!
 
@@ -1857,7 +1870,6 @@ piece_structures = pieces.get_piece_structures()
 timer = 0
 
 # Funktioner (def) här nedanför
-
 
 def draw():
     screen.fill((255, 255, 255))
@@ -2965,7 +2977,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Återställa biten
 
-Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position, rotation och sin ursprungliga typ. 
+Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position, rotation och typ. 
 Vi ska ändra det sen.
 
 ✏️ Uppdatera koden i `update(dt)` och testkör!
@@ -3562,7 +3574,7 @@ pgzrun.go()  # måste vara sista raden
 ## Nästa bit från listan
 När en ny bit behöver skapas tar vi bort det sista talet från listan och använder det för att bestämma typen av bit.
 
-När listan med blocknummer är tom skapas en ny sådan lista.
+När listan med bitar är tom skapas en ny sådan lista.
 
 ✏️ Uppdatera koden i `new_piece()` och testkör!
 
@@ -3980,7 +3992,7 @@ pgzrun.go()  # måste vara sista raden
 När en bit släpps ner, sätter vi timern så att den löper ut direkt.
 Då kommer nästa bit att skapas direkt istället för att vänta på timern.
 
-Timergränsen återanvänds, så vi gör den till en variabel.
+Timergränsen behöver vi på fler ställen, så vi gör den till en variabel.
 
 ✏️ Uppdatera koden i `update()` och `on_key_down()` och testkör! Det behövs också en ny global variabel.
 
