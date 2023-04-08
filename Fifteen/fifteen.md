@@ -4,6 +4,36 @@
 
 ![image](https://user-images.githubusercontent.com/4598641/226436083-7b0b90b9-9c13-4b83-bfd8-3534ac8291c0.png)
 
+## Innehåll
+**[Regler](#regler)**
+ [Kontroller](#kontroller)
+ &bull;
+**[Översikt](#översikt)**
+&bull;
+**[Kodning](#kodning)**
+ [Rita bitarna](#rita-bitarna)
+ &bull; [Rita siffrorna](#rita-siffrorna)
+ &bull; [Skapa rutnätet](#skapa-rutnätet)
+ &bull; [Rita inte den tomma rutan](#rita-inte-den-tomma-rutan)
+ &bull; [Hitta den tomma rutans position](#hitta-den-tomma-rutans-position)
+ &bull; [Flytta en bit neråt](#flytta-en-bit-neråt)
+ &bull; [Flytta en bit uppåt](#flytta-en-bit-uppåt)
+ &bull; [Flytta bitar åt vänster och höger](#flytta-bitar-åt-vänster-och-höger)
+ &bull; [Blanda bitarna](#blanda-bitarna)
+ &bull; [Förenkla koden](#förenkla-koden)
+ &bull; [Gör den nedre högra rutan tom](#gör-den-nedre-högra-rutan-tom)
+ &bull; [Återställa spelet](#återställa-spelet)
+ &bull; [Kolla om vi är klara](#kolla-om-vi-är-klara)
+ &bull; [Förenkla koden](#förenkla-koden-1)
+ &bull; [Blanda igen om det råkar vara klart direkt efter blandningen](#blanda-igen-om-det-råkar-vara-klart-direkt-efter-blandningen)
+&bull;
+**[Uppgifter](#uppgifter)**
+   [1. Vad tyckte du var svårt med uppgiften? Ge ett par exempel.](#1-vad-tyckte-du-var-svårt-med-uppgiften-ge-ett-par-exempel)
+   &bull; [2. Pröva att göra några ändringar eller tillägg.](#2-pröva-att-göra-några-ändringar-eller-tillägg)
+   &bull; [3. Varför kan vi inte blanda bitarna helt slumpmässigt?](#3-varför-kan-vi-inte-blanda-bitarna-helt-slumpmässigt)
+&bull;
+**[Källor](#källor)**
+
 # Regler
 
 Det finns en tavla med 15 bitar och en tom ruta. 
