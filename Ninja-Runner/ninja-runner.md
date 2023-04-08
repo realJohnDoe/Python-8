@@ -237,13 +237,7 @@ Det här gör raderna:
 
 `runner.y += velocity_y` :  Ändra vår ninjas position baserat på hastigheten. Operatorn `+=` betyder att vi ökar `runner.y` med värdet i `velocity_y`.
 
-# Tips
-```python
-a += 1      # Den här raden gör samma sak som ...
-a = a + 1   # ... den här raden.
-```
-
-Testa det! Om du programmerat rätt, bör ninjan flyga upp i himlen när du trycker uppåtpil. Det är för att vi inte har lagt till någon gravitation än!
+✏️ Testa det! Om du programmerat rätt, bör ninjan flyga upp i himlen när du trycker uppåtpil. Det är för att vi inte har lagt till någon gravitation än!
 
 ## Gravitation
 Graviationen ändrar ninjans hastighet. 
