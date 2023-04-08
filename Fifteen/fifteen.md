@@ -239,7 +239,8 @@ Det första steget i att flytta en bit är att hitta positionen för den tomma r
 När en tangent trycks in, loopar vi igenom rutnätet. Om en bit är lika med antalet bitar på varje axel multiplicerat med varandra (dvs det är den tomma rutan), så skrivs dess position för närvarande ut.
 
 ✏️ Lägg till funktionen `on_key_down()` och testkör genom att klicka på tangentbordet. Utskriften kommer i det svarta konsollfönstret.
-
+>Klicka på Run för att starta och klicka sen var som helst i spelfönstret. Då kan din kod fånga upp tangenttryckningarna.
+ 
 ```python
 def on_key_down(key): #
     for y in range(grid_y_count):
@@ -1731,7 +1732,14 @@ pgzrun.go()  # Ska alltid vara sist
 </details>
 
 # Uppgifter
-### Varför kan vi inte blanda bitarna helt slumpmässigt? 
+### 1. Vad tyckte du var svårt med uppgiften? Ge ett par exempel.
+
+### 2. Pröva att göra några ändringar eller tillägg.
+- Beskriv kort med ord eller bilder vad förändringen är och hur den ska fungera.
+- Beskriv hur du fick ändra koden för att göra ändringen.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
+
+### 3. Varför kan vi inte blanda bitarna helt slumpmässigt? 
 I funktionen `reset()` har vi den här koden:
 ```
     for move_number in range(1000):
@@ -1739,7 +1747,6 @@ I funktionen `reset()` har vi den här koden:
 ```
 
 Varför behöver vi göra så när vi ställer upp brickorna på spelplanen?
-
 
 # Källor
 
