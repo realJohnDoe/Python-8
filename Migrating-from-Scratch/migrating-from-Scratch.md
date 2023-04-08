@@ -235,6 +235,9 @@ Det var lätt att kontrollera om ett rör försvann ut från skärmen genom att 
 `pipe_top.right < 0` istället för `if x position < -240`.
 
 # Uppgifter
+
+**När du har gått igenom och testkört koden här ovanför:**
+     
 ### 1. Pröva att göra några ändringar eller tillägg till Flappy Bird-spelet i Pygame Zero
 - Beskriv kort vad förändringen är och hur den ska fungera.
 - Beskriv hur du fick ändra koden för att göra ändringen.
