@@ -31,7 +31,7 @@ Det är en tradition att skriva ett program som säger "Hej världen" när man l
 - Se till att du är inloggad i repl.it.
 - Öppna startprojektet i en ny flik i webbläsaren genom att högerklicka eller långklicka här: 
 https://replit.com/@RobertStorlind/Hello-Starter
-- Spara en egen kopia av startprojektet med knappen
+- Spara en egen kopia av startprojektet med knappen "Fork":<br>
 ![image](https://user-images.githubusercontent.com/4598641/225108391-32f24ead-3eb1-4ffb-ad3a-9c18ce5849bb.png)
 
 ---
@@ -198,8 +198,8 @@ Definiera en ny funktion som heter `roll_dice()` som använder funktionen `randi
 # Definiera funktioner här nedanför
 
 def roll_dice(): # Glöm inte kolon i slutet av den här raden
-  print(f"{python} kan kasta {dice}")
-  print(f"Du rullade {randint(1, 6)}")
+    print(f"{python} kan kasta {dice}")
+    print(f"Du rullade {randint(1, 6)}")
 ```
 
 Raderna under `def roll_dice():` är indragna. För att göra indrag kan du använda Tab-tangenten på tangentbordet; den finns oftast ovanför Caps Lock till vänster. Indraget talar om för Python att raderna med indrag hör till funktionen.
@@ -244,10 +244,10 @@ Hmm, hur kan du göra så att du använder samma slumptal?
 # Definiera funktioner här nedanför
 
 def roll_dice():
-  print(f"{python} kan kasta {dice}")
-  roll = randint(1, 6) # Generera ett slumptal mellan 1 och 6
-  print(f"Du kastade {roll}") # Skriv ut variabelns värde
-  print(fire * roll) # Upprepa eld-emojin så det stämmer med tärningskastet
+    print(f"{python} kan kasta {dice}")
+    roll = randint(1, 6) # Generera ett slumptal mellan 1 och 6
+    print(f"Du kastade {roll}") # Skriv ut variabelns värde
+    print(fire * roll) # Upprepa eld-emojin så det stämmer med tärningskastet
 ```
 
 Du kan använda en stjärna eller ett hjärta istället för eld om du så vill.
@@ -275,12 +275,12 @@ Lägg till kod för att
 # Definiera funktioner här nedanför
 
 def roll_dice():
-  print(f"{python} kan kasta {dice}")
-  max = input('Hur många sidor?:') # Vänta på inmatning från användaren
-  print(f"Det är en D{max}") # Använd värdet som matades in
-  roll = randint(1, 6)
-  print(f"Du kastade {roll}")
-  print(fire * roll)
+    print(f"{python} kan kasta {dice}")
+    max = input('Hur många sidor?:') # Vänta på inmatning från användaren
+    print(f"Det är en D{max}") # Använd värdet som matades in
+    roll = randint(1, 6)
+    print(f"Du kastade {roll}")
+    print(fire * roll)
 ```
 
 ✏️ Ändra din `roll`-variabel så att koden använder `max` som största värdet i `randint` när vi genererar ett slumptal.
@@ -292,12 +292,12 @@ Funktionen `int` omvandlar användarens input till ett heltal.
 # Definiera funktioner här nedanför
 
 def roll_dice():
-  print(f"{python} kan kasta {dice}")
-  max = input('Hur många sidor?:') # Vänta på inmatning från användaren
-  print(f"Det är en D{max}") # Använd värdet som matades in
-  roll = randint(1, int(max)) # randint behöver ett heltal max
-  print(f"Du kastade {roll}")
-  print(fire * roll)
+    print(f"{python} kan kasta {dice}")
+    max = input('Hur många sidor?:') # Vänta på inmatning från användaren
+    print(f"Det är en D{max}") # Använd värdet som matades in
+    roll = randint(1, int(max)) # randint behöver ett heltal max
+    print(f"Du kastade {roll}")
+    print(fire * roll)
 ```  
 
 🧪 **Testa:** Kör ditt projekt. När programmet når raden med input, kommer det att använda på att du matar in ett svar innan det fortsätter.
@@ -351,9 +351,9 @@ Här är ett exempel på en funktion som frågar om hobby:
 ```python
 # Definiera funktioner här nedanför
 def hobbies():
-  hobby = input('Vad gillar du?')
-  print(f"Det låter {fun}")
-  print(f"Du kan göra ett {python}-projekt om {hobby}")
+    hobby = input('Vad gillar du?')
+    print(f"Det låter {fun}")
+    print(f"Du kan göra ett {python}-projekt om {hobby}")
 ```
 
 **Tips:** Kom ihåg att du behöver anropa en funktion som du har definierat.
