@@ -1,6 +1,19 @@
 # Att flytta över från Scratch
 >Detta är en svensk översättning av Daniel Popes guide, https://pygame-zero.readthedocs.io/en/stable/from-scratch.html, lätt bearbetad.
 
+## Innehåll
+
+[Inledning](#inledning)
+&bull; [Scenen](#scenen)
+&bull; [Att förflytta rören](#att-förflytta-rören)
+&bull; [Fågeln](#fågeln)
+&bull; [Sammanfattning](#sammanfattning)
+&bull; [Uppgifter](#uppgifter) &ndash;
+     [1. Pröva att göra några ändringar eller tillägg till Flappy Bird-spelet i Pygame Zero](#1-pröva-att-göra-några-ändringar-eller-tillägg-till-flappy-bird-spelet-i-pygame-zero)
+    &ndash; [2. Ta ett enkelt spel i Scratch och koda det i Pygame Zero](#2-ta-ett-enkelt-spel-i-scratch-och-koda-det-i-pygame-zero)
+&bull;  [Källor](#källor)
+
+# Inledning
 Den här handledningen **jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero**. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
 
 - Här finns projektet i Scratch 3: https://scratch.mit.edu/projects/820017699
@@ -221,6 +234,20 @@ Fördelarna med Pygame Zeros aktörer (Actor) gör det också lättare att jobba
 Det var lätt att kontrollera om ett rör försvann ut från skärmen genom att ställa frågan
 `pipe_top.right < 0` istället för `if x position < -240`.
 
+# Uppgifter
+### 1. Pröva att göra några ändringar eller tillägg till Flappy Bird-spelet i Pygame Zero
+- Beskriv kort vad förändringen är och hur den ska fungera.
+- Beskriv hur du fick ändra koden för att göra ändringen.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel
 
+### 2. Ta ett enkelt spel i Scratch och koda det i Pygame Zero
+Förslag på spel att utgå från:
+- Bug Race: https://kodboken.se/start/kurser/spel/scratch/bug-race-intro
+- Labyrinten: https://kodboken.se/start/kurser/spel/scratch/labyrinten
+    
+Redovisa din kod och jämför.
+- Lista ett par för- och nackdelar med att koda spelet i Scratch, t.ex. funktionen kollisionsdetektering
+- Lista ett par för- och nackdelar med att koda spelet i Pygame Zero, t.ex. aspekten textprogrammering
+    
 # Källor
 https://pygame-zero.readthedocs.io/en/stable/from-scratch.html
