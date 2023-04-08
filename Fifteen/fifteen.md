@@ -22,7 +22,8 @@ Siffran 16 representerar den tomma rutan.
 
 Grannbiten flyttas till den tomma rutan när en piltangent trycks ned.
 
-I början av spelet är bitarna i stigande nummerordning och slumpmässiga drag görs för att blanda det. Om bitarnas position blandas helt slumpmässigt kan det resultera i en uppställning som inte går att lösa.
+I början av spelet är bitarna i stigande nummerordning och slumpmässiga drag görs för att blanda det. 
+>Om bitarnas position blandas helt slumpmässigt kan det resultera i en uppställning som inte går att lösa.
 
 Efter att en bit har flyttats, gås bitarna igenom. Om alla har sina ursprungliga värden i nummerordning är spelet över.
 
@@ -1729,6 +1730,15 @@ pgzrun.go()  # Ska alltid vara sist
   
 </details>
 
+# Uppgifter
+### Varför kan vi inte blanda bitarna helt slumpmässigt? 
+I funktionen `reset()` har vi den här koden:
+```
+    for move_number in range(1000):
+        move(random.choice(('down', 'up', 'right', 'left')))
+```
+
+Varför behöver vi göra så när vi ställer upp brickorna på spelplanen?
 
 
 # Källor
