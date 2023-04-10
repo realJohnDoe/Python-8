@@ -847,7 +847,7 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Rotation
-När vi trycker på `X`, ökas bitens rotationsnummer med 1 och biten roteras medurs.
+När vi trycker på `X`, ökas bitens rotationstal med 1 och biten roteras medurs.
 >Om rotationstalet är större än antalet möjliga rotationer sätts rotationstalet till 0. Vi går alltså tillbaks till bitens första rotation.
 
 När vi trycker på `Z` så minskas rotationstalet med 1 och biten roterar moturs.
