@@ -30,16 +30,16 @@
 **[Källor](#källor)**
 
 # Regler för minnesspelet Repeat
-Se på när en talsekvens blinkar och försök att komma ihåg ordningen på siffrorna.
+Se på när en siffersekvens blinkar och försök att komma ihåg ordningen på siffrorna.
 
 Upprepa sekvensen med sifferknapparna.
 
-Om du lyckas upprepa sekvensen läggs ett nytt tal till och sekvensen blinkar igen.
+Om du lyckas upprepa sekvensen läggs ett nytt tal till i slutet. Sen blinkar sekvensen igen.
 
 # Kodning
 
 ## Sekvens
-Vi skapar sekvenslistan. Till en början innehåller den en testsekvens med siffror mellan 1 och 4.
+Vi skapar sekvenslistan. Till en början innehåller den en testsekvens med siffrorna 1 och 4.
 
 ```python
 import pgzrun
@@ -68,7 +68,11 @@ Den aktuella sekvenspositionen börjar vid 1.
 
 Om spelaren trycker på knappen som motsvarar siffran i sekvensen vid den aktuella positionen, ökar vi positionen med 1.
 
-Detta blir fel när den aktuella positionen är större än längden på sekvenslistan.
+Detta blir fel när den aktuella positionen är större än längden på sekvenslistan. Vi rättar strax den buggen 🐛
+
+✏️ Uppdatera din kod så att den blir som här nedanför och testkör den. Du måste inte mata in kommentarerna &ndash; de förklarar vad koden gör.
+
+Klicka i terminalfönstret. Skriv sen 4 3 1 2 2 3 och se hur skärmen uppdateras. Vad händer om du fortsätter trycka fler siffror?
 
 ```python
 import pgzrun
@@ -102,18 +106,14 @@ def draw():
 pgzrun.go() # Ska alltid vara sist i programmet (längst ner)
 ```
 
-✏️ Uppdatera din kod så att den blir som här ovanför och testkör den. Du måste inte mata in kommentarerna &ndash; de förklarar vad koden gör.
-Klicka i terminalfönstret. Sedan kan du trycka på siffertangenterna 1 till 4 för att testa.
-
-Klicka i terminalfönstret. Skriv sen 4 3 1 2 2 3 och se hur skärmen uppdateras. Vad händer om du fortsätter trycka fler siffror?
 
 ![image](https://user-images.githubusercontent.com/4598641/225703318-26fb8e5b-9d98-4a9d-b740-fc220f938125.png)
 
 ## Återställ aktuell position
 
-När den aktuella positionen överskrider sekvenslängden återställs vi den till 0.
+När den aktuella positionen överskrider sekvenslängden återställer vi den till 0.
 
-✏️ Uppdatera koden i `on_key_down()` och testkör igen.
+✏️ Uppdatera koden i `on_key_down()` och testkör igen. Vad händer om du skriver många siffror nu?
 
 ```python
 def on_key_down(key):
@@ -175,7 +175,7 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 
 När den aktuella positionen återställs läggs ett slumptal mellan 1 och 4 till i sekvensen.
 
-Vi behöver importera random så att vi kan få slumptal från `random.randint`.
+Vi behöver importera modulen `random` så att vi kan få slumptal från `random.randint`.
 
 ```python
 import random # Lägg till högst upp bland importerna
@@ -427,7 +427,7 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 
 Den första rutan är mörkröd med en vit siffra.
 
-✏️ Uppdatera funktionen `draw()` och testkör.
+✏️ Uppdatera funktionen `draw()` och testkör. Ritas rutan med rätt färg?
 
 ```python
 def draw():
@@ -524,7 +524,7 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 ## Rita alla rutor
 Resten av rutorna kan vi rita på liknande sätt.
 
-✏️ Uppdatera funktionen `draw()` igen och testkör.
+✏️ Uppdatera funktionen `draw()` igen och testkör att rutorna har rätt färg för resp. siffra.
 
 ```python
 def draw():
@@ -657,7 +657,7 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 Koden för att rita varje ruta är likadan. 
 Vi flyttar den koden till funktionen `draw_square()` som vi kan använda flera gånger.
 
-✏️ Uppdatera funktionen `draw()` så att den blir så här. Testkör!
+✏️ Uppdatera funktionen `draw()` så att den blir så här. Testkör att det fungerar som innan vi förbättrade koden!
 
 ```python
 def draw():
@@ -759,12 +759,12 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 </details>
 
 ## Timer
-Siffrorna blinkar varje sekund.
+Siffrorna ska blinka varje sekund.
 
 En timervariabel börjar vid 0 och ökar med `dt` för varje bildruta. 
 >Variabeln `dt` talar om hur länge sen det var vi körde `update()` senast.
 
-När timern är på eller över 1 återställs den till 0.
+När timern är 1 eller mer, återställs den till 0.
 
 Till en början skriver vi 'tick' varje gång siffrorna blinkar.
 
@@ -788,7 +788,7 @@ def update(dt): # anropas 60 gånger i sekunden av Pygame
         # Temporary
         print("tick")
 ```
-✏️ Uppdatera och testkör koden.
+✏️ Uppdatera och testkör koden. Ser du utskriften i terminalfönstret i repl.it?
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -889,9 +889,9 @@ För närvarande ritas kvadraten som motsvarar siffran vid den aktuella sekvensp
 
 Testsekvensen från tidigare används igen.
 
-Detta kommer bli fel när `current` är större än längden av `sequence`.
+Detta kommer bli fel när `current` är större än längden på `sequence`, alltså listan med siffror.
 
-✏️ Uppdatera och testkör koden. En ruta i taget ska ha färgmarkering.
+✏️ Uppdatera och testkör koden. En ruta i taget ska ha färgmarkering. Funkar det?
 
 ```python3
 def reset():
@@ -1480,11 +1480,11 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 
 ## Game over-läge
 
-Om du trycker på fel tangent sätts tillståndet till `gameover`, istället för att återställa spelet meddetsamma. 
+Om spelaren trycker på fel tangent, sätts tillståndet till `gameover`, istället för att återställa spelet meddetsamma. 
 
 När en tangent trycks ned i "gameover"-tillståndet återställs spelet.
 
-✏️ Vi är nästan klara! Uppdatera din kod och testkör igen.
+✏️ Vi är nästan klara! Uppdatera din kod och testkör igen. Fungerar game over som det ska?
 
 ```python
 def on_key_down(key):
@@ -1630,7 +1630,7 @@ Den aktuella sekvenspositionen och längden på sekvensen visas bara när vi är
 
 Ett game over-meddelande visas om spelet är i *gameover*-läget.
 
-✏️ Uppdatera slutet av funktionen `draw()` så att den blir så här. Ta bort raderna som är markerade med "# borttagen"
+✏️ Uppdatera slutet av funktionen `draw()` så att den blir så här. Ta bort raderna som är markerade med "# borttagen". Testkör och se om det stämmer med beskrivningen här uppe!
 
 ```python
 def draw():
