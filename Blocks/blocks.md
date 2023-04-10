@@ -5270,13 +5270,15 @@ def on_key_down(key):
 # Kod för att starta appen här nedanför
 reset()
 
-# Tillfälligt
-# inert[7][4] = 'z'
-
 pgzrun.go()  # måste vara sista raden
 ```
 
 </details>
+
+# Uppgifter
+
+## 1. Vad var svårt med kodningen?
+Ge ett par exempel.
 
 
 # Källor
