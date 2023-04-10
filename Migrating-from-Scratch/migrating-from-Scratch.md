@@ -35,7 +35,7 @@ Versionen för Pygame Zero innehåller logik för poängräkning som vi utelämn
 
 Pythonkoden som visas här är omflyttad för att göra exemplen tydligare.
 
-✏️ Testkör koden i Scratch och repl.it. Ä
+✏️ Testkör koden i Scratch och repl.it. Fungerar spelen ungefär likadant?
 
 # Scenen
 Så här ser scenen ut i vårt Scratchprogram:
@@ -60,6 +60,8 @@ def draw():
     pipe_bottom.draw()
     bird.draw()
 ```
+
+✏️ Leta upp koden i repl.it.
 
 # Att förflytta rören
 Rören åker med konstant fart oberoende av fågeln. När de försvinner ut till vänster på scenen dyker de upp igen till höger och den vertikala placeringen ändras slumpmässigt.
@@ -246,7 +248,7 @@ Det var lätt att kontrollera om ett rör försvann ut från skärmen genom att 
 
 # Uppgifter
 
-**När du har gått igenom och testkört koden här ovanför:**
+**När du har läst igenom och testkört koden här ovanför:**
      
 ### 1. Pröva att göra några ändringar eller tillägg till Flappy Bird-spelet i Pygame Zero
 - Beskriv kort vad förändringen är och hur den ska fungera.
