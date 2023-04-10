@@ -40,9 +40,10 @@
   &bull; [Göm antalet blomgrannar för täckta celler](#göm-antalet-blomgrannar-för-täckta-celler)
   &bull; [Hindra att man klickar på en blomma vid första klicket](#hindra-att-man-klickar-på-en-blomma-vid-första-klicket)
 
+**[Uppgifter](uppgifter)**
+
 **[Källor](#källor)**
 
-**[Uppgifter](uppgifter)**
 
 # Regler
 Spelet börjar med ett rutnät av täckta celler. Under några av cellerna finns blommor. Spelet är över när en cell med blomma avtäcks.
