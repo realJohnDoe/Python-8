@@ -5280,7 +5280,19 @@ pgzrun.go()  # måste vara sista raden
 ## 1. Vad var svårt med kodningen?
 Ge ett par exempel.
 
+## 2. Varför förenklar vi koden ibland?
+Vad tycker du är de viktigaste anledningarna till att vi ibland stannar upp och förenklar koden? Försök hitta några olika svar.
 
+Koden fungerar ju lika bra som innan utan att spelaren märker något.
+
+## 3. Gör spelet ännu bättre
+
+Pröva att göra några ändringar eller tillägg som du saknar. T.ex. kan du lägga till någon mer bit eller ha en poängräknare?
+- Beskriv kort vad ändringen är och hur den ska fungera.
+- Beskriv hur du fick ändra koden. Glöm inte kodexempel.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
+  
+  
 # Källor
 
 Översatt och bearbetat för repl.it baserat på originalet: https://simplegametutorials.github.io/pygamezero/blocks/
