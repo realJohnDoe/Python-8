@@ -333,9 +333,11 @@ Uträkningen av scale går att göra om så att vi får ännu färre kodrader. K
     
 ## Extrauppgift
 Kan du få ögonen att byta färg, försvinna eller röra sig?
-
+- Glöm inte kodexempel när du redovisar
+    
 ## Extrauppgift
 Kan du lägga in någon annan slags figur och få ögonen att följa den figuren istället för muspekaren?
+- Glöm inte kodexempel när du redovisar
 
 # Mer om koden i Pygame Zero och Pygame, förklarat på engelska
 
