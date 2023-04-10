@@ -147,13 +147,13 @@ runner.images = run_images
 
 Det här gör de olika raderna:
 
-`runner = Actor('run__000')` : This creates a new Actor using the first run image. It's the same as what we have done in our gem catcher game.
+`runner = Actor('run__000')` : Skapar en ny aktör (Actor) med första bildfilen som heter `run`. Det är samma som i spelet Gem Catcher.
 
-`run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']` : This creates a new list in the variable run_images. The list is filled with the names of the run images. If you are not using the ninja, you will need to change these names.
+`run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']` : Skapar en ny lista med namnet `run_images`. Listan har namnet med de olika utseendena för figuren. Om du inte använder ninjan, behöver du uppdatera namnen till vad dina bilder heter.
 
-`runner.images = run_images` : This tells our Actor to use the images in run_images for its animation.
+`runner.images = run_images` : Talar om att `Actor` ska använda bildfilerna som listas `run_images` för animeringen.
 
-We'll also need to add runner.draw() into the draw() function. Once completed, your program should look like this...
+Vi behöver också lägga till `runner.draw()` i funktionen `draw()`. När det är gjort bör din kod se ut så här:
 
 ```python
 import pgzrun
@@ -405,7 +405,7 @@ Vi ökar poängen varje gång ett hinder försvinner ut åt vänster. Ändra det
   for actor in obstacles:
     actor.x -= 8
 ```
-... till detta: .
+… till detta: .
 ```python
   for actor in obstacles:
     actor.x -= 8
@@ -415,7 +415,7 @@ Vi ökar poängen varje gång ett hinder försvinner ut åt vänster. Ändra det
 ```
 Detta är vad raderna betyder:
 
-`if actor.x < -50` : När x-koordinaten är mindre än &ndash;50 är figuren förmodligen utanför skärmen. Då kommer vi att ...
+`if actor.x < -50` : När x-koordinaten är mindre än &ndash;50 är figuren förmodligen utanför skärmen. Då kommer vi att …
 
 `obstacles.remove(actor)` : ta bort figuren från listan `obstacles` och sen
 
@@ -548,7 +548,7 @@ pgzrun.go() # Måste vara sista raden
 Det är vanligt att program har buggar. Jag har avsiktligt lämnat kvar ett par buggar i vårt ninjaspel. Har du hittat några än? Pröva att rätta dem!
 
 ## Uppgift 1: Buggfix 1. Game Over-poäng
-Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren efter game over ... Såg du att poängen fortsatte öka? Det händer eftersom vi fortsätter lägga till kaktusar i hinderlistan efter game over. Kan du fixa det?
+Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren efter game over … Såg du att poängen fortsatte öka? Det händer eftersom vi fortsätter lägga till kaktusar i hinderlistan efter game over. Kan du fixa det?
 
 ## Uppgift 2: Buggfix 2. Multihopp
 Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ovanför det som syns på skärmen? Ninjan ska bara kunna hoppa när hon är på marken och inte i luften. Kan du fixa det?
