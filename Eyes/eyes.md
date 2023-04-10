@@ -323,7 +323,6 @@ pgzrun.go()
 >Tänk på att justera indragen i koden när du lägger till funktionen `draw_eye()`.
     
 # Uppgifter
-Kan du göra appen mer intressant eller förbättra koden?
 
 ## Uppgift 1
 Vad tyckte du var svårt med kodningen? Ge ett par exempel.
