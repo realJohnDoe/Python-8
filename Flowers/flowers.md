@@ -42,6 +42,8 @@
 
 **[Källor](#källor)**
 
+**[Uppgifter](uppgifter)**
+
 # Regler
 Spelet börjar med ett rutnät av täckta celler. Under några av cellerna finns blommor. Spelet är över när en cell med blomma avtäcks.
 
@@ -217,7 +219,7 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Markera celler
-Den markerade cellen ritas med grafiken som heter 'covered_highlighted'. Du kan se hur den ser ut i mappen `images` i repl.it, till vänster i fönstret.
+Den markerade cellen ritas med grafiken som heter `covered_highlighted`. Du kan se hur den ser ut i mappen `images` i repl.it, till vänster i fönstret.
 
 ✏️ Uppdatera koden för `draw()` och testkör. Ritas markeringen rätt?
 
@@ -4026,7 +4028,6 @@ grid_y_count = 14
 
 # Funktioner här nedanför
 
-
 def reset():
     global grid, game_over, first_click
     grid = []
@@ -4194,14 +4195,19 @@ def on_key_down():
 reset()
 
 pgzrun.go()  # måste vara sista raden
-
 ```
   
 </details>
 
+# Uppgifter
+## 1. Vad var svårt med kodningen?
+Ge ett par exempel.
 
-
-
+## 2. Gör spelet ännu bättre
+Pröva att göra några ändringar eller tillägg som du saknar. T.ex. kan du lägga till en timer, en poängräknare eller något annat som du saknar i spelet?
+- Beskriv kort vad ändringen är och hur den ska fungera för spelaren.
+- Beskriv hur du fick ändra koden. Glöm inte kodexempel.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
 
 # Källor
 https://simplegametutorials.github.io/pygamezero/flowers/
