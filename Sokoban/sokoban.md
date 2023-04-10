@@ -38,6 +38,8 @@
   &bull; [Gå till nästa nivå när en nivå är avklarad](#gå-till-nästa-nivå-när-en-nivå-är-avklarad)
   &bull; [Fler nivåer](#fler-nivåer)
 
+**[Uppgifter](#uppgifter)**
+
 **[Källor](#källor)**
 
 # Regler
@@ -7059,5 +7061,15 @@ pgzrun.go()  # måste vara sista raden
 
 </details>
 
+# Uppgifter
+## 1. Vad tyckte du var svårt med kodningen?
+Ge ett par exempel. Glöm inte kodexempel!
+
+## 2. Gör det ännu bättre
+- Beskriv kort vad förändringen är och hur den ska fungera. Kanske bättre grafik, en introskärm med förklaringar eller poängräknare?
+- Beskriv hur du fick ändra koden för att göra ändringen. Glöm inte kodexempel.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
+
+   
 # Källor
 Engelska originalprojektet: https://simplegametutorials.github.io/pygamezero/sokoban/
