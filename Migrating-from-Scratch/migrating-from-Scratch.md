@@ -22,7 +22,7 @@
 [Källor](#källor)
 
 # Inledning
-Den här handledningen **jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero**. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
+Den här uppgiften börjar med att **jämföra en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero**. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
 
 - Här finns projektet i Scratch 3: https://scratch.mit.edu/projects/820017699
 - Här finns versionen i repl.it: https://replit.com/@RobertStorlind/flappy-bird-pope
@@ -34,6 +34,8 @@ Den här handledningen **jämför en version av Flappy Bird skriven i Scratch me
 Versionen för Pygame Zero innehåller logik för poängräkning som vi utelämnar i kodexemplen på den här sidan för att ge en mer rättvis jämförelse.
 
 Pythonkoden som visas här är omflyttad för att göra exemplen tydligare.
+
+✏️ Testkör koden i Scratch och repl.it. Ä
 
 # Scenen
 Så här ser scenen ut i vårt Scratchprogram:
