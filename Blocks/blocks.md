@@ -4206,7 +4206,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Hitta fyllda rader
  
-Varje rad med orörliga blocke loopas igenom. 
+Varje rad med orörliga block loopas igenom. 
 Om ingen av kolumnerna i raden är ett tomt block så är raden fylld.
 
 För att göra det lättare att testa, skrivs de fullständiga radnumren ut just nu.
