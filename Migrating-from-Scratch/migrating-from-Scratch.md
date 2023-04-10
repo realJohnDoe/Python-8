@@ -217,7 +217,7 @@ Du kan nog hitta många paralleller mellan Python-koden och den här Scratch-kod
 
 <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-bird-start.png"/> <img src="https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-bird-space.png"/>
 
-De största skillnaderna mellan Scratch och Pygame Zero är dessa:
+De största skillnaderna mellan Scratch och Pygame Zero är de här:
 - Du kan inte loopa för evigt i Pygame Zero &ndash; du uppdaterar för en bildruta i taget.
 - Koordinatsystemen är olika. I Pygame Zero är skärmens övre vänstra hörn (x, y) = (0, 0). x-axeln går från vänster till höger som innan men y-axeln går nerför skärmen. Det är därför som `GRAVITY` har ett positivt värde och `FLAP_VELOCITY` ett negativt värde i Python-koden.
 - `bird.dead` är en logisk variabel så jag kan skriva kod som `if not bird.dead` istället för `dead = 0` som i Scratch.
@@ -250,12 +250,14 @@ Det var lätt att kontrollera om ett rör försvann ut från skärmen genom att 
 
 **När du har läst igenom och testkört koden här ovanför:**
      
-### 1. Pröva att göra några ändringar eller tillägg till Flappy Bird-spelet i Pygame Zero
+## 1. Pröva att göra några ändringar eller tillägg till Flappy Bird-spelet i Pygame Zero
 - Beskriv kort vad förändringen är och hur den ska fungera.
 - Beskriv hur du fick ändra koden för att göra ändringen.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel
-
-### 2. Ta ett enkelt spel i Scratch och koda det i Pygame Zero
+- Hur lätt är det att hitta i koden i Scratch resp. Python?
+- Var finns grafiken (de olika bildelementen) i Python? 
+    
+## 2. Ta ett enkelt spel i Scratch och koda det i Pygame Zero
 Förslag på spel att utgå från:
 - Bug Race: https://kodboken.se/start/kurser/spel/scratch/bug-race-intro
 - Labyrinten: https://kodboken.se/start/kurser/spel/scratch/labyrinten
