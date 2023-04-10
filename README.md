@@ -9,7 +9,7 @@ Välkommen till Pythonuppgifter för årskurs 8 🐍 Spelen är översatta från
   &bull; [Ninja Runner](#ninja-runner-)
   &bull; [Blocks](#blocks-)
   &bull; [Fifteen](#fifteen-)
-  &bull; [Att flytta över från Scratch &ndash; Flappy Bird](#att-flytta-över-från-scratch-flappy-bird-)
+  &bull; [Att flytta över från Scratch &ndash; Flappy Bird](#att-flytta-över-från-scratch--flappy-bird-)
   &bull; [Flowers](#flowers-)
   &bull; [Life](#life-)
   &bull; [Repeat](#repeat-)
