@@ -36,7 +36,7 @@ När ormen äter mat, växer den. När en matbit är uppäten, dyker det upp en 
 
 Ormen kommer att slå över till andra sidan skärmen när den går utanför kanten.
 
-Spelet är över när ormen kraschar in i sig själv.
+Spelet är över när ormen slingrar in i sig själv.
 
 ## Kontroller
 **Piltangenter**	Byt riktning
@@ -46,13 +46,14 @@ Ormen representeras av en sekvens av X- och Y-koordinater.
 
 Maten representeras av en X- och Y-koordinat.
 
-När ormen rör sig, tas det sista föremålet i sekvensen (dvs. dess gamla svansposition) bort, och ett föremål läggs till framtill (dvs. dess nya huvudposition) i den riktning som ormen går.
+När ormen rör sig, tas det sista elementet i sekvensen, alltså den gamla svanspositionen, bort.
+Ett nytt element läggs till först i sekvensen. Det är den nya positionen för huvudet i den riktning som ormen ringlar.
 
 ![image](https://user-images.githubusercontent.com/4598641/226439258-020b4582-5409-448b-99e6-55cf6a4bbcdc.png)
 
 ![image](https://user-images.githubusercontent.com/4598641/226439284-599e5e4f-6987-4eea-8b79-f39d5a2d850a.png)
 
-Om den nya huvudpositionen är i samma position som matens position tas inte ormens svans bort, och maten flyttas till en slumpmässig position som inte upptas av ormen.
+Om den nya huvudpositionen är i samma position som matens position tas inte ormens svans bort och maten flyttas till en slumpmässig position som inte upptas av ormen.
 
 ![image](https://user-images.githubusercontent.com/4598641/226439323-b54bc813-62f2-49d5-ac3b-1002ba0de713.png)
 
@@ -97,7 +98,7 @@ pgzrun.go() # måste vara sista raden
 ## Rita ormen
 Ormens segment lagras som X- och Y-koordinater och ritas som rutor.
 
-Uppdatera funktionen `draw` och testkör!
+Uppdatera funktionen `draw` och testkör! Ritas ormen rätt?
 
 ```python
 import pgzrun
@@ -154,13 +155,13 @@ pgzrun.go()  # måste vara sista raden
 ## Timer
 Ormen kommer att röra sig var 0,15:e sekund.
 
-En timervariabel börjar på 0 och ökar med dt för varje bildruta.
+En timervariabel börjar på 0 och ökar med `dt` för varje bildruta.
 
 När timern är större eller lika med 0,15 återställs den till 0.
 
 För närvarande skrivs 'tick' ut varje gång ormen ska röra sig.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden. Testkör och kolla utskriften i terminalfönstret.
 
 ```python
 import pgzrun
@@ -242,13 +243,14 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Flytta ormen åt höger
-Nästa position för ormens huvud beräknas genom att lägga till 1 till den nuvarande X-koordinat för ormens huvud (dvs. det första elementet i segmentlistan). Detta nya segment läggs till i början av segmentlistan.
+Nästa position för ormens huvud beräknas genom att öka  den nuvarande X-koordinaten för ormens huvud med 1. Det är första elementet i listan med ormens segment.
+Detta nya segment läggs till i början av segmentlistan.
 
-Det sista elementet i segmentlistan (ormens svans) tas bort.
+Det sista elementet i segmentlistan, ormens svans, tas bort.
 
 Segmentlistan ändras i funktionen `update()`, så den flyttas till att vara global.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden. Testkör! Flyttar ormens i X-led?
 
 ```python
 import pgzrun
@@ -363,9 +365,10 @@ pgzrun.go()  # måste vara sista raden
 ## Flytta ormen i alla fyra riktningar
 Ormens nuvarande riktning lagras i en variabel och ändras med hjälp av piltangenterna.
 
-Ormens nästa huvudposition ställs in beroende på denna riktning.
+Ormens nästa huvudposition ska ställas in beroende på denna riktning.
 
-✏️ Uppdatera koden så här. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden så här. Testkör med piltangenterna.
+>Kom ihåg att först klicka i spelfönstret så kan din kod fånga upp tangenterna.
 
 ```python
 import pgzrun
@@ -507,9 +510,9 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Hindra att ormen rör sig rakt bakåt
-Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går i (t.ex. när den går åt höger ska den inte direkt gå åt vänster), så detta kontrolleras innan riktningen ställs in.
+Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går. När den t.ex. går åt höger ska den inte direkt gå åt vänster. Detta kontrolleras innan riktningen ställs in.
 
-✏️ Uppdatera funktionen `on_key_down()`. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera funktionen `on_key_down()`. Testkör svängar med piltangenterna och kolla om det blev rätt!
 
 ```python
 def on_key_down(key):
@@ -613,17 +616,18 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Använd en kö för riktningarna
-För närvarande kan ormen fortfarande gå bakåt om en annan riktning och sedan den motsatta riktningen trycks in inom ett enda tick på timern. Till exempel, om ormen flyttade höger på den sista ticket, och sedan spelaren trycker ner och sedan vänster före nästa tick, kommer ormen att flytta åt vänster på nästa tick.
+Just nu kan ormen fortfarande gå bakåt om en annan riktning och sedan den motsatta riktningen trycks in inom ett enda tick på timern.
+Om ormen t.ex. slingrade åt höger på den sista ticket och spelaren trycker neråtpil och sedan vänsterpil före nästa tick, kommer ormen att flytta åt vänster på nästa tick.
 
-Dessutom kan spelaren vilja ge flera anvisningar inom ett enda tick. I exemplet ovan kan spelaren ha velat att ormen skulle flytta ner för nästa tick, och sedan lämnat på ticket efter.
+Dessutom kan spelaren vilja ge flera anvisningar inom ett enda tick. I exemplet ovan kan spelaren ha velat att ormen skulle flytta neråt ett tick och sen vänster nästa tick.
 
-En riktningskö skapas. Det första objektet i kön är riktningen som ormen kommer att röra sig vid nästa tick.
+Därför behöver vi en riktningskö. Det första elementet i kön är riktningen som ormen kommer att röra sig vid nästa tick.
 
-Om vägbeskrivningskön har mer än en post tas den första posten bort från den vid varje tick.
+Om  riktningskön har mer än ett element, tas det första elementet bort vid varje tick.
 
-När en knapp trycks ned läggs riktningen till i slutet av vägbeskrivningskön.
+När en knapp trycks ned läggs riktningen till i slutet av riktningskön.
 
-Den sista posten i riktningskön (dvs. den senast tryckta riktningen) kontrolleras för att se om den inte är i motsatt riktning mot den nya riktningen innan den nya riktningen läggs till i riktningskön.
+Den sista posten i riktningskön, alltså den senast tryckta riktningen, kontrolleras för att se om att inte är i motsatt riktning mot den nya riktningen innan den nya riktningen läggs till i riktningskön.
 
 ✏️ Uppdatera koden. Testkör &ndash; vad händer när du trycker snabbt på de olika piltangenterna?
 
@@ -823,9 +827,9 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Hindra att lägga till samma riktning två gånger
-Om den sista riktningen är i samma riktning som den nya riktningen läggs den nya riktningen inte till i riktningskön.
+Om den senaste riktningen är samma som den nya riktningen, ska den nya riktningen inte läggas till i riktningskön.
 
-✏️ Uppdatera `on_key_down()`. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera `on_key_down()`. Testkör &ndash; vad händer när du  snabbt trycker på olika piltangenter, eller samma piltangent?
 
 ```python
 def on_key_down(key):
@@ -955,11 +959,11 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Slå över vid skärmkanten
-Om nästa position skulle vara utanför nätet, slår vi över till motsatta sidan på skärmen.
+Om nästa position skulle vara utanför rutnätet, slår vi över till motsatta sidan på skärmen.
 
-Rutnätets X/Y-antal återanvänds från att rita bakgrunden, så de flyttas till att vara globala.
+Rutnätets X/Y-storlek återanvänds från att rita bakgrunden, så de variablerna flyttas till att vara globala.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ormen når kanten?
 
 ```python
 # etc.
@@ -1118,11 +1122,11 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Rita maten
-Maten lagras som ett par av X- och Y-värden och ritas som en kvadrat.
+Maten lagras som ett talpar med X- och Y-koordinater. Maten ritas som en kvadrat.
 
 Slumpmodulen importeras så att `random.randint` kan användas.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden. Testkör &ndash; fungerar maten?
 
 ```python
 import pgzrun
@@ -1278,9 +1282,9 @@ pgzrun.go()  # måste vara sista raden
 
 ## Förenkla koden
 
-Koden för att rita en orms segment och rita maten är densamma förutom färgen. Vi gör det till en funktion med färgen som parameter.
+Koden för att rita en orms segment och rita maten är samma, förutom färgen. Vi gör det till en funktion med färgen som parameter.
 
-✏️ Uppdatera koden i `draw`. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden i `draw`. Testkör &ndash; fungerar koden som innan vi städade den?
 
 ```python
 def draw():
@@ -1436,11 +1440,11 @@ pgzrun.go()  # måste vara sista raden
 
 ## Äta maten
     
-Om ormens nya huvudposition är samma som matens position tas inte ormens svans bort, och maten får en ny slumpmässig position. 
+Om ormens nya huvudposition är samma som matens position, tas inte ormens svans bort och maten får en ny slumpmässig position. 
     
 På så vis blir ormen en ruta längre.
 
-✏️ Uppdatera koden i `update()`. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden i `update()`. Testkör &ndash; vad händer när ormen äter?
 
 ```python
 def update(dt):
@@ -1619,9 +1623,9 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Förenkla koden
-Koden för att ställa maten på en slumpmässig position återanvänds. Vi gör en funktion för det.
+Koden för att lägga maten på en slumpmässig position återanvänds. Vi gör en funktion för det.
     
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden. Testkör &ndash; fungerar koden lika bra som innan?
 
 ```python
 def move_food(): #nytt 🐍
@@ -1787,9 +1791,9 @@ pgzrun.go()  # måste vara sista raden
     
 Istället för att flytta maten till en slumpmässig plats, flyttar den till en plats där ormen inte är just nu.
     
-Alla positioner i rutnätet loopas igenom, och för varje rutnätsposition slingras alla segment av ormen, och om inga segment av ormen är i samma position som rutnätspositionen läggs rutnätspositionen till till en lista över möjliga matpositioner. Nästa matposition väljs slumpmässigt från denna lista.
+Alla positioner i rutnätet loopas igenom. För varje rutnätsposition loopar vi igenom alla ormens segment. Om inga ormsegment är på en viss rutnätsposition, läggs rutnätspositionen till till en lista över möjliga matpositioner. Nästa matposition väljs sen slumpmässigt från denna lista.
 
-✏️ Uppdatera koden i `move_food`. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden i `move_food`. Testkör &ndash; vad händer när ormen äter?
 
 ```python
 def move_food():
@@ -1954,13 +1958,13 @@ pgzrun.go()  # måste vara sista raden
 
 ## Game over
     
-Ormens segment loopas igenom. Om något av dem förutom det sista är i samma position som ormens nya huvudposition, så har ormen kraschat in i sig själv.
+Ormens segment loopas igenom. Om något av dem &ndash; förutom det sista &ndash; är i samma position som ormens nya huvudposition, så har ormen kraschat in i sig själv.
 
 Det sista segmentet på ormen ska inte kollas eftersom det kommer att tas bort inom samma tick.
 
-För närvarande skrivs 'collision' ut när ormen kraschar in i sig själv.
+För närvarande skrivs `collision` ut när ormen kraschar in i sig själv.
 
-✏️ Uppdatera i funktionen `update`. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera i funktionen `update`. Testkör &ndash; vad händer när ormen kraschar in sig själv?
 
 ```python
 def update(dt):
@@ -2142,11 +2146,11 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Återställa spelet
-En funktion skapas som ställer in spelets startläge.
+Vi gör en funktion som ställer in spelets startläge.
 
-Denna funktion anropas innan spelet börjar och när ormen kraschar.
+Funktionen anropas innan spelet börjar och när ormen kraschar.
 
-✏️ Lägg till funktionen `reset()` och gör de andra småändringarna. Testkör &ndash; vad händer när ...?
+✏️ Lägg till funktionen `reset()` och gör de andra småändringarna. Testkör &ndash; vad händer när ormen kraschar?
 
 ```python
 grid_x_count = 20
@@ -2351,7 +2355,7 @@ En variabel används för att lagra om ormen är vid liv eller inte. Om den är 
 
 Om ormen är död, väntar timern i 2 sekunder innan den anropar `reset()` för att starta om spelet.
     
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ormen kraschar?
 
 ```python
 def reset():
@@ -2548,7 +2552,7 @@ pgzrun.go()  # måste vara sista raden
 ## Ändra ormens färg när den är död
 Ormens färg ändras beroende på om den är vid liv eller inte.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ...?
+✏️ Uppdatera koden. Testkör &ndash; vad händer när ormen dör?
 
 ```python
 def draw():
