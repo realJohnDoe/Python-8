@@ -371,5 +371,12 @@ hobbies()
 
 💾 **Spara** ditt projekt!
 
+# Uppgifter
+1. Vilka tillägg gjorde du i ditt projekt?
+- Beskriv kort vad du gjorde. Glöm inte kodexempel.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel
+
+2. Vad tyckte du om repl.it? Något du retade dig på? Något som var bra?
+
 
 [^1]: This is a Swedish translation of the Raspberry Pi Foundation project https://projects.raspberrypi.org/en/projects/hello-world, with minor adaptations.
