@@ -3218,8 +3218,9 @@ pgzrun.go()  # måste vara sista raden
 
 Lägg till hela uppsättningen med nivåer och testkör.
 
-✏️ Klipp och klistra in &ndash; du behöver inte mata in alla nivåerna för hand. Testkör!
-
+<details>
+  <summary>✏️ Klipp och klistra in variabeln `levels` med alla nivåerna &ndash; du behöver inte mata in det för hand. Testkör!</summary>
+   
 ```python
 import pgzrun
 import copy
@@ -5066,6 +5067,8 @@ levels = [ #nytt 🔲
 ]
 ```
 
+</details>
+   
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
   
