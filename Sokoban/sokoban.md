@@ -45,7 +45,7 @@
 # Regler
 Skjut in alla lådorna på lagerplatserna.
 
-Lådor kan endast flyttas om det finns ett ledigt utrymme bredvid den (inte en vägg eller annan låda).
+En låda kan bara flyttas om det finns ett ledigt utrymme bredvid den &ndash; inte en vägg eller annan låda.
 
 ## Teckenförklaring
 
