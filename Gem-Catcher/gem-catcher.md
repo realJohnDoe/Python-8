@@ -10,7 +10,7 @@
 [Räkna poäng](#räkna-poäng) &bull;
 [Mus och händelser](#mus-och-händelser) &bull;
 [Game Over](#game-over) &bull;
-[Uppgifter och utmaningar](#utmaningar)
+[Uppgifter och utmaningar](#uppgifter-och-utmaningar)
 
 # Första koden
 
