@@ -4,14 +4,20 @@
 ## Innehåll
 
 [Inledning](#inledning)
-&bull; [Scenen](#scenen)
-&bull; [Att förflytta rören](#att-förflytta-rören)
-&bull; [Fågeln](#fågeln)
-&bull; [Sammanfattning](#sammanfattning)
-&bull; [Uppgifter](#uppgifter) &ndash;
-     [1. Pröva att göra några ändringar eller tillägg till Flappy Bird-spelet i Pygame Zero](#1-pröva-att-göra-några-ändringar-eller-tillägg-till-flappy-bird-spelet-i-pygame-zero)
-    &ndash; [2. Ta ett enkelt spel i Scratch och koda det i Pygame Zero](#2-ta-ett-enkelt-spel-i-scratch-och-koda-det-i-pygame-zero)
-&bull;  [Källor](#källor)
+<br>
+[Scenen](#scenen)
+<br>
+[Att förflytta rören](#att-förflytta-rören)
+<br>
+[Fågeln](#fågeln)
+<br>
+[Sammanfattning](#sammanfattning)
+<br>
+[Uppgifter](#uppgifter)
+- [1. Pröva att göra några ändringar eller tillägg till Flappy Bird-spelet i Pygame Zero](#1-pröva-att-göra-några-ändringar-eller-tillägg-till-flappy-bird-spelet-i-pygame-zero)
+- [2. Ta ett enkelt spel i Scratch och koda det i Pygame Zero](#2-ta-ett-enkelt-spel-i-scratch-och-koda-det-i-pygame-zero)
+
+[Källor](#källor)
 
 # Inledning
 Den här handledningen **jämför en version av Flappy Bird skriven i Scratch med en skriven i Pygame Zero**. Programmen i Scratch och Pygame Zero är förvånansvärt lika.
