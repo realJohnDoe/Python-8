@@ -68,9 +68,9 @@ Detta är vad raderna gör:
 
 `ship = Actor('playership1_blue')` : Skapar en ny figur (Actor) med utseende enligt filen *playership1_blue*. Om du använder en annan bildfil behöver du ändra namnet här.
 
-`ship.x = WIDTH / 2 - 30` : Sätter skeppets x-position till att vara ungefär mitt på x-axeln. Pröva att ändra värdet!
+`ship.x = WIDTH / 2 - 30` : Sätter skeppets x-koordinat till att vara ungefär mitt på x-axeln. Pröva att ändra värdet!
 
-`ship.y = HEIGHT - 50` : Sätter skeppets y-position till en bit ovanför undre kanten. Pröva att ändra värdet!
+`ship.y = HEIGHT - 50` : Sätter skeppets y-koordinat till en bit ovanför undre kanten. Pröva att ändra värdet!
 
 `def draw():` : Detta är en specialfunktion. Vi behöver inte anropa den själva; Pygamze Zero kör den åt oss när det behövs.
 
@@ -80,9 +80,12 @@ Så här ser koordinatsystemet ut i Pygame Zero:
 
 ![image](https://user-images.githubusercontent.com/4598641/222978372-85be8781-e6fe-414e-9fb1-b7847dfc8b5f.png)
 
+✏️ Testkör! Visas rymdskeppet?
+
+
 # Funktionen `update()`
 
-Vi la till funktionen `draw()` innan. Det är en speciell funktion som Pygame Zero kör regelbundet för att rita det du ser på skärmen. En annan speciell funktion är `update()`. Pygame Zero anrop regelbundet vår `update()`-funktion för att uppdatera/rita om de olika figurerna i spelet.
+Vi la till funktionen `draw()` innan. Det är en speciell funktion som Pygame Zero kör väldigt ofta för att rita det du ser på skärmen. En annan speciell funktion är `update()`. Pygame Zero anropar regelbundet vår `update()`-funktion för att uppdatera/rita om de olika figurerna i spelet.
 
 ✏️ Vi lägger till kod i `update()` så att den kan reagera på tangentnertryckningar, i vårt fall vänster- och högerpil.
 
@@ -116,23 +119,27 @@ def update():
         ship.x += 5
 ```
 Varje gång Pygame Zero kör vår funktion `update()` kontrollerar den om vänsterpilen är nertryckt.
-Om den är det, minskar vi rymdskeppets x-position med 5. Om högerpilen är nertryckt, ökar vi x med 5.
+Om den är det, minskar vi rymdskeppets x-koordinat med 5. Om högerpilen är nertryckt, ökar vi x med 5.
 
-**Testa** programmet med gröna "Run"-knappen i repl.it. Funkar koden som du väntade dig?
+✏️ Uppdatera koden och testa programmet med gröna "Run"-knappen i repl.it. Funkar koden som du väntade dig när du trycker på vänster- och högerpil?
+>Kom ihåg att klicka i spelfönstret så att din kod kan ta emot tangenttryckningarna.
 
 ## Radera skärmen
 
-Om du testade programmet så här långt, fick du något knasigt i den här stilen:
+Om du har kört programmet så här långt, fick du något knasigt i den här stilen:
 
 ![image](https://user-images.githubusercontent.com/4598641/222978681-7aa59c8e-4b41-49ae-8415-e5df0db6b51d.png)
 
-Det är för att koden talar om för Pygame Zero att uppdatera skeppets position och rita det på skärmen, men vi bad aldrig om att sudda ut det som redan var ritat på skärmen.
+Det är för att koden talar om för Pygame Zero att uppdatera skeppets position och rita det på skärmen. 
+Vi bad aldrig om att sudda ut det som redan var ritat på skärmen.
 
-✏️För att sudda skärmen, fyller vi hela skärmen med en färg. Det gör vi i `draw()`-funktionen så här:
+✏️ För att sudda skärmen, fyller vi hela skärmen med en färg. Det gör vi i `draw()`-funktionen så här:
 ```python
 screen.fill((80, 0, 70))
 ```
-Det som står inom parenteser, `(80, 0, 70)`, kallas i Python för *tuple*; det fungerar som en lista med värden som inte går att ändra och talar om vilken färgblandning vi vill ha. Det första talet (80) är för färgen rött, det andra (0) för grönt och det tredje (70) är för blått. Det största värdet man kan ha för någon färgkomponent är 255 och det minsta värdet är 0. **Testa olika värden och se vad du får!**
+Det som står inom parenteser, `(80, 0, 70)`, kallas i Python för *tuple*; det fungerar som en lista med värden som inte går att ändra och talar om vilken färgblandning vi vill ha. Det första talet (80) är för färgen rött, det andra (0) för grönt och det tredje (70) är för blått. Det största värdet man kan ha för någon färgkomponent är 255 och det minsta värdet är 0. 
+
+✏️ Uppdatera koden, testa olika färgvärden och se vad du får!
 
 >**Frivilligt:**
 >I Chrome kan du öppna en färgväljare genom att trycka tangentkombinationen ctrl+shift+I och sedan klicka på en av de små kvadratikonerna som du kan se i fliken Styles. Se bilden!
@@ -168,17 +175,20 @@ Spelet kan ju inte heta *Gem Catcher* om det inte finns en ädelsten! Det finns 
 
 ![image](https://user-images.githubusercontent.com/4598641/222978860-59fdc056-ee3c-4d15-bca8-09b80051d3c9.png)
 
-✏️ Lägg nu till en ny *Actor* som representerar ädelstenen:
+✏️ Uppdatera koden och lägg till en ny *Actor* som representerar ädelstenen:
 ```python
 gem = Actor('gemgreen')
 gem.x = WIDTH / 2 - 50
 gem.y = 0
 ```
+
 Det här värdet på x placerar den ungefär i mitten horisontellt. Att sätta y till 0 placerar den högst upp i fönstret. Glöm inte att också rita ädelstenen i funktionen `draw()`.
 
 ```python
 gem.draw()
 ```
+
+✏️ Testkör. Visas ädelstenen på rätt plats?
 
 Din kod ska nu se ut så här:
 
@@ -210,22 +220,25 @@ pgzrun.go() # Måste vara sista raden
 ```
 
 ## Flytta ädelstenen
-Tidigare skrev vi kod i funktionen `update()` för att få skeppet att ändra x-position när vi trycker på vänster- eller högerpil.
 
-Vi låter ädelstenen åka nerför skärmen genom att ändra y-positionen för den.
+Tidigare skrev vi kod i funktionen `update()` för att få skeppet att ändra x-koordinat när vi trycker på vänster- eller högerpil.
+
+Vi låter ädelstenen åka nerför skärmen genom att ändra y-koordinaten för den.
 
 ```python
 gem.y += 4
 ```
 
-Vi vill också att ädelstenen ska återgå till toppen av fönstret när den nått nedre kanten. För att göra det, sätter vi y-positionen till 0 (topp) när den är större än HEIGHT (underkanten).
+Vi vill också att ädelstenen ska hoppa till toppen av fönstret när den nått underkanten.
+För att göra det, sätter vi y-positionen till 0 (topp) när den är större än HEIGHT (underkanten).
+>Kolla Pygames koordinatsystem högre upp på sidan. Där ser du att y-axeln är upp- och nervänd mot hur den brukar ritas. Större y-värden är längre ner på skärmen.
 
 ```python
 if gem.y > HEIGHT:
     gem.y = 0
 ```
 
-✏️ Lägg till det i din kod!
+✏️ Lägg till det i din kod och testkör! Rör sig ädelstenen som du tänkte dig?
 
 ```python
 import pgzrun
@@ -276,7 +289,7 @@ eller
 if ship.colliderect(gem):
     gem.y = 0
 ```
-**✏️ Testa det i din kod!**
+✏️ Uppdatera din kod och testkör! Går det att fånga ädelstenen med rymdskeppet?
 
 ## Slumptal med `random()`
 
@@ -284,20 +297,23 @@ Det är inte så spännande av låta ädelstenen falla från samma ställe varje
 I tidigare Python-projekt har du förmodligen redan använt modulen `random` för slumptal.
 Här ska vi använda den för att slumpa fram ädelstenens x-position.
 
-✏️ Innan vi kan använda modulen, behöver vi importera den.
+✏️ Innan vi kan använda modulen, behöver vi importera den. Lägg till detta högst upp.
 ```python
 import random
 ```
 
-✏️ För att ge ädelstenen en slumpmässig x-position använder vi
+✏️ För att ge ädelstenen en slumpmässig x-koordinat använder vi
 ```python
 gem.x = random.randint(20, WIDTH - 20)
 ```
 Anropet `random.randint(20, WIDTH - 20)` ger ett slumptal mellan 20 och WIDTH - 20. Det här behövs varje gång ädelstenen ska börja om högst upp på skärmen.
 
+✏️ Uppdatera koden och testkör. Flyttar sig ädelstenen till olika x-koordinater mellan varje fall?
+
 Nu bör din kod se ut så här:
 ```python
 import pgzrun
+import random
 
 WIDTH, HEIGHT = 800, 600
 
@@ -336,7 +352,7 @@ pgzrun.go() # Måste vara sista raden
 
 Vi kan lätt hålla reda på poängen med en variabel.
 
-✏️ Lägg till en variabel som heter `score` (poäng går också bra) och sätt den till 0 i början av programmet.
+✏️ Lägg till en variabel som heter `score` och sätt den till 0 i början av programmet.
 
 ```python
 score = 0
@@ -350,19 +366,24 @@ if gem.colliderect(ship):
     score += 1
 ```
 
-Om du testkör programmet nu, får du ett fel:
+✏️ Uppdatera din kod. Om du testkör programmet nu, får du ett fel:
 
 ```python
 UnboundLocalError: local variable 'score' referenced before assignment
 ```
 
-Det är för att variabeln `score` är deklarerad utanför funktionen `update()`, men vi försöker ändra värdet inne i funktionen `update()`.
+Det är för att variabeln `score` är deklarerad utanför funktionen `update()`, men vi försöker ändra värdet på den inne i funktionen `update()`.
 
-✏️ I Python kan vi *läsa* variabler som finns utanför funktionen &ndash; de kallas globala variabler. Men vi kan inte skriva (ändra) dem om vi inte har deklarerat dem som `global` inuti funktionen.
+✏️ I Python kan vi *läsa* variabler som finns utanför funktionen &ndash; de kallas globala variabler. 
+Men vi kan inte skriva (ändra) dem om vi inte har deklarerat dem som `global` inuti funktionen.
 
 ```python
-global score
+def update():
+    global score # ny rad
 ```
+
+✏️ Testkör nu! Fungerar det att köra?
+>Poängen visas inte än. Det är nästa steg.
 
 Efter den ändringen, bör din `update()`-funktion se ut så här:
 ```python
@@ -392,7 +413,7 @@ screen.draw.text(f"Score: {score}", (15, 10), color=(255, 255, 255), fontsize=30
 ```
 Parametrarna är så här:
 
-`f"Score: {score}"` : Detta är texten (strängen) vi vill skriva.
+`f"Score: {score}"` : Detta är texten (strängen) vi vill skriva, alltså texten Score följt av variabelns värde.
 
 `(15, 10)` : Detta är koordinaterna där vi vill skriva: x=15 och y=10.
 
@@ -400,9 +421,13 @@ Parametrarna är så här:
 
 `fontsize=30` : Textens storlek.
 
-Som med de andra ritfunktionerna, behöver vi lägga detta inuti funktionen `draw()`. När du har gjort det, bör din kod se ut så här:
+Som med de andra ritfunktionerna, behöver vi lägga detta inuti funktionen `draw()`. 
+
+✏️ Uppdatera din kod och testkör. När du har gjort det, bör din kod se ut så här:
+
 ```python
 import pgzrun
+import random
 
 WIDTH, HEIGHT = 800, 600
 
@@ -447,7 +472,9 @@ Vi kan också ändra vårt spel så att det fungerar med mus.
 Precis som Scratch så är Pygame Zero händelsebaserat.
 Det betyder att när en viss händelse inträffar, t.ex. att en musknapp trycks ner, så anropar Pygame Zero motsvarande funktion, t.ex. `on_mouse_down`.
 
-✏️ För att känna av när musen rör sig, kan vi använda funktionen `on_mouse_move(pos, rel, buttons)` function. Pröva att lägga till det här i ditt spel:
+För att känna av när musen rör sig, kan vi använda funktionen `on_mouse_move(pos, rel, buttons)` function.
+
+✏️ Pröva att lägga till det här i ditt spel och testkör!
 
 ```
 def on_mouse_move(pos, rel, buttons):
@@ -467,25 +494,21 @@ def on_mouse_move(pos, rel, buttons):
     if mouse.LEFT in buttons:
         print('left click')
 ```
-**Detta är bara ett exempel. Lägg inte till det i ditt spel just nu**
+Detta är bara ett exempel. **Lägg inte till det i ditt spel just nu**
 
 ## Andra händelser
 
-Förutom musrörelser, finns det också andra funktioner som PygameZero kör när motsvarande händelse inträffar. De här händelserna finns:
+Förutom musrörelser, finns det också andra funktioner som Pygame Zero kör när motsvarande händelse inträffar. De här händelserna finns:
 
 `on_mouse_down(pos, buttons)` : Körs när en musknapp klickas på.
 
-`on_mouse_up(pos, buttons)` : Körs när man släpper en musknapp.
-
-Parametrar:
+`on_mouse_up(pos, buttons)` : Körs när man släpper en musknapp. Parametrar:
 - `pos` : Ger musens position. x-koordinaten ges av `pos[0]` och y-koordinaten av `pos[1]`.
 - `buttons` : Ger en lista med de musknapper som är nertryckta.
 
 `on_key_down(key, mod, unicode)` : Körs när en tangent trycks ner på tangentbordet.
 
-`on_key_up(key, mod)` : Körs när man släpper en tangent.
-
-Parametrar:
+`on_key_up(key, mod)` : Körs när man släpper en tangent. Parametrar:
 - key : Ett heltal som talar om vilken tangent som trycktes ner. Se Pygame Zeros hemsida för en fullständig lista över tangenter.
 - mod : En lista (bitmask) med vilka specialtangenter som trycktes ner. Du kan läsa av dem så här:
 
@@ -519,6 +542,7 @@ gem.y += 4 + score / 5
 ```
 Detta kommer att öka fallhastigheten när poängen går upp. När du har noll poäng, faller ädelstenen med hastighet 4. När din poäng är 10, kommer ädelstenen att falla med hastigheten 6 (4 + 10 / 5).
 
+✏️ Testkör. Är det rätt svårighetsgrad? Testa att ändra värdena 4 och 5 till andra värden.
 
 ## Game Over
 Det är inte så värst kul att spela ett spel som man inte kan förlora.
@@ -530,6 +554,7 @@ Om ädelstenen rör vi skärmens underkant, avslutas spelet.
 ```python
 game_over = False
 ```
+
 Leta upp de här raderna i funktionen `update()`:
 ```python
 if gem.y > HEIGHT:
@@ -566,9 +591,12 @@ else:
 ```
 Det gör att Game Over-texten visas när variabeln `game_over` är satt till True; annars kommer ädelstenen och skeppet att ritas som innan.
 
+✏️ Testkör nu! Blir det Game Over som väntat?
+
 Till slut bör din kod se ut så här:
 ```python
 import pgzrun
+import random
 
 WIDTH, HEIGHT = 800, 600
 
@@ -619,9 +647,9 @@ pgzrun.go() # Måste vara sista raden
 
 # Uppgifter och utmaningar
 
-Här är några utmaningar du kan pröva för att göra spelet ännu bättre.
+Här är några utmaningar för att göra spelet ännu bättre.
 
-✏️ Gör minst en av dessa eller hitta på en egen utmaning/förbättring.
+✏️ **Gör minst en av utmaningarna eller hitta på en egen utmaning/förbättring.**
 - Beskriv kort vilken förbättringen är och hur den ska fungera, sett ut spelarens perspektiv.
 - Beskriv hur du fick ändra koden för att göra ändringen. Glöm inte att redovisa din kod.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel och förklara vad som hände.
