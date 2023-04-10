@@ -60,7 +60,7 @@ En cell ritas som en kvadrat.
 
 ✏️ Logga in i repl.it. Klona startprojektet https://replit.com/@RobertStorlind/life-starter så att du får en egen kopia
 
-Mata in koden och testkör!
+Mata in koden och testkör! Blir det som i exempelbilden?
 
 ```python
 import pgzrun
@@ -87,7 +87,7 @@ pgzrun.go()
 ## Rita en rad med celler
 En rad med celler ritas, med en pixel mellan varje cell.
 
-✏️ Mata in koden och testkör! Du behöver uppdatera funktionen `draw()`
+✏️ Mata in koden och testkör! Du behöver uppdatera funktionen `draw()`.
 >Tänk på att dra in koden som ritar när du lägger till `for`.
 
 ```python
@@ -152,8 +152,7 @@ pgzrun.go()  # måste vara sista raden
 
 Vi ritar alla raderna.
 
-✏️ Uppdatera funktionen `draw()` och testkör din kod.
-
+✏️ Uppdatera funktionen `draw()` och testkör din kod. Liknar det exempelbilden?
 >Glöm inte att dra in raderna under `for y`.
 
 ```python
@@ -275,7 +274,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/225734422-569de346-61f2-4246-905c-1838b95ff534.png)
 
 ## Begränsa vald cell till rutnätet
-`min` används för att ge den valda positionen ett maximalt värde, så att den inte kommer att vara utanför rutnätet även om muspekaren är utanför rutnätet.
+`min` används för att ge den valda positionen ett största(!) värde, så att den inte kommer att vara utanför rutnätet även om muspekaren är utanför rutnätet.
 
 Rutnätets bredd/höjd i celler återanvänds från att när vi ritar cellerna, så vi sparar bredden och höjden i variabler.
 
@@ -649,7 +648,7 @@ För att uppdatera rutnätet efter ett tidssteg behöver vi veta hur många leva
 
 Just nu låter vi högerklick på en cell att skriva ut hur många levande grannar den har.
 
-✏️ Lägg till funktionen `on_mouse_down()` och testkör! Ser du utskriften i det svarta konsolfönstret? Testa att göra två grannceller levande och testa sen högerklick.
+✏️ Lägg till funktionen `on_mouse_down()` och testkör! Ser du utskriften i det svarta konsolfönstret? Testa att göra två grannceller levande och  sen högerklicka.
 
 ```python
 # Tillfälligt
@@ -794,7 +793,7 @@ När en tangent trycks, skapas ett nytt rutnät och det gamla rutnätet ersätts
 
 Till en början kommer alla celler i det nya rutnätet att vara levande.
 
-✏️ Lägg till funktionen och testkör!
+✏️ Lägg till funktionen och testkör! Blir alla cellerna levande?
 >Glöm inte att klicka i appfönstret innan du trycker på någon knapp för att testa.
 
 ```python
@@ -926,7 +925,7 @@ pgzrun.go()  # måste vara sista raden
 ## Uppdatera varje cell baserat på antalet grannar
 Koden för att hitta antalet levande grannar en cell har flyttats hit.
 
-En cell i det nya rutnätet är vid liv 
+En cell i det nya rutnätet är vid liv
 - om den har tre grannar
 - eller om den levde i det gamla rutnätet och hade två grannar.
 
@@ -1070,7 +1069,7 @@ pgzrun.go()  # måste vara sista raden
 ## Döda celler med högerklick
 När en cell högerklickas dör den.
 
-✏️ Uppdatera koden i `update()` och testkör!
+✏️ Uppdatera koden i `update()` och testkör. Dör cellerna som förväntat?
 
 ```python
 def update():
@@ -1199,7 +1198,7 @@ Leta upp minst ett mönster, provkör det och förklara hur det beter sig.
 Vad tyckte du var intressant med mönstret du valde?
 
 ## 2. Intressanta mönster med en knapptryckning
-🤔 Kan du lägga in kod så att du automatiskt kan få mönstren när du trycker på någon speciell knapp?
+🤔 Kan du lägga in kod så att du automatiskt kan få ett eller flera mönster när du trycker på någon speciell knapp?
 
 ## 3. Vad var svårast med kodningen?
 Ge ett par exempel där ni körde fast eller har svårt att förstå vad koden gör. Förklara med ett par meningar och glöm inte kodexempel!
