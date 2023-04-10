@@ -11,7 +11,7 @@ Vi vill göra en animering där ögonen följer muspekaren.
 &bull; [Rörlig pupill](#rörlig-pupill)
 &bull; [Pupillen ska inte smita när muspekaren är utanför ögat](#pupillen-ska-inte-smita-när-muspekaren-är-utanför-ögat)
 &bull; [Två ögon](#två-ögon)
-&bull; [Utmaningar](#utmaningar)
+&bull; [Uppgifter](#uppgifter)
 &bull; [Källor](#källor)
 
 # Rita ett öga
@@ -322,12 +322,21 @@ pgzrun.go()
 :pencil2: **Uppdatera och testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
 >Tänk på att justera indragen i koden när du lägger till funktionen `draw_eye()`.
     
-# Utmaningar
+# Uppgifter
 Kan du göra appen mer intressant eller förbättra koden?
 
-* Uträkningen av scale går att göra om så att vi får ännu färre kodrader. Kan du komma på hur?[^1]                          
-* Kan du få ögonen att byta färg, försvinna eller röra sig?
-* Kan du lägga in någon annan slags figur och få ögonen att följa den figuren istället för muspekaren?
+## Uppgift 1
+Vad tyckte du var svårt med kodningen? Ge ett par exempel.
+
+## Uppgift 2
+Uträkningen av scale går att göra om så att vi får ännu färre kodrader. Kan du komma på hur?[^1]                          
+- Glöm inte kodexempel när du redovisar
+    
+## Extrauppgift
+Kan du få ögonen att byta färg, försvinna eller röra sig?
+
+## Extrauppgift
+Kan du lägga in någon annan slags figur och få ögonen att följa den figuren istället för muspekaren?
 
 # Mer om koden i Pygame Zero och Pygame, förklarat på engelska
 
