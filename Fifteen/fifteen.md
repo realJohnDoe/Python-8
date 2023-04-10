@@ -149,7 +149,7 @@ Ett rutnät skapas med varje bits nummer lagrat på sin plats på rutnätet, och
 
 Antalet bitar på X- och Y-axlarna återanvänds från att rita bitarna, så de görs till variabler.
 
-✏️ Uppdatera koden och testkör. Ser det ut som i bilden här under?
+✏️ Uppdatera koden och testkör. Ritas bitarna rätt?
 
 ```python
 import pgzrun
@@ -193,7 +193,7 @@ pgzrun.go()  # Ska alltid vara sist
 ```
 
 ## Rita inte den tomma rutan
-Antalet bitar på varje axel multiplicerat tillsammans ger det totala antalet bitar (dvs. 4 gånger 4 betyder 16 bitar), och en bit ritas bara om numret är skilt från 16.
+Om vi multiplicerar antalet bitar på varje axel får vi totala antalet bitar (dvs. 4 gånger 4 betyder 16 bitar). En bit ritas bara om numret är skilt från 16.
 
 ✏️ Uppdatera koden och testkör. Blir det en tom ruta nu?
 
@@ -266,9 +266,9 @@ pgzrun.go()  # Ska alltid vara sist
 ## Hitta den tomma rutans position
 Det första steget i att flytta en bit är att hitta positionen för den tomma rutan.
 
-När en tangent trycks in, loopar vi igenom rutnätet. Om en bit är lika med antalet bitar på varje axel multiplicerat med varandra (dvs det är den tomma rutan), så skrivs dess position för närvarande ut.
+När en tangent trycks ner, loopar vi igenom rutnätet. Om en bit är lika med antalet bitar på varje axel multiplicerat med varandra så är det den tomma rutan. Positionen ut för närvarande. Kolla i terminalfönstret.
 
-✏️ Lägg till funktionen `on_key_down()` och testkör genom att klicka i spelfönstret och sen trycka någon tangent på tangentbordet. Utskriften kommer i det svarta konsollfönstret.
+✏️ Lägg till funktionen `on_key_down()` och testkör genom att klicka i spelfönstret och sen trycka någon tangent på tangentbordet. Utskriften kommer i det svarta terminalfönstret.
 >Klicka på Run för att starta och klicka sen var som helst i spelfönstret. Då kan din kod fånga upp tangenttryckningarna.
  
 ```python
@@ -388,7 +388,6 @@ grid_y_count = 4
 grid = []
 
 # Funktioner (def) här under
-
 
 def on_key_down(key):
     for y in range(grid_y_count):
@@ -1113,7 +1112,7 @@ Vi gör en funktion som ställer in spelets startläge.
 
 Den funktionen anropas innan spelet börjar och när vi trycker på tangenten `R`.
 
-✏️ Uppdatera koden och testkör. Blir det en ny spelplan när man trycker på `R`?
+✏️ Uppdatera koden och testkör. Blir det en ny spelplan när du trycker på `R`?
 
 ```python
 import pgzrun
@@ -1277,7 +1276,7 @@ pgzrun.go()  # Ska alltid vara sist
 
 
 ## Kolla om vi är klara
-Efter att ett drag har gjorts, loopar vi genom bitarna. Om alla bitarna är på rätt position i nummerordning så återställs spelet.
+Efter varje drag loopar vi genom bitarna. Om alla bitarna är på rätt position i nummerordning så återställs spelet.
 
 ✏️ Uppdatera koden i `on_key_down()` och testkör. Vad händer om du lägger alla bitarna i nummerordning?
 
@@ -1425,7 +1424,7 @@ pgzrun.go()  # Ska alltid vara sist
 
 ## Förenkla koden
 Koden för att beräkna startvärdet för en bit återanvänds.
-Vi gör den till en funktion.
+Vi gör den koden till en egen funktion.
 
 ✏️ Uppdatera koden och testkör! Lägg till funktionen `get_initial_value` och anropa den i funktionerna `reset` och `on_key_down`. Fungerar spelet som innan?
 
@@ -1578,7 +1577,7 @@ pgzrun.go()  # Ska alltid vara sist
 
 ## Blanda igen om det råkar vara klart direkt efter blandningen
 
-Om bitarna fortfarande är i rätt ordning efter att de har blandats, försöker vi igen.
+Om bitarna skulle råka hamna i rätt ordning efter att de har blandats, försöker vi igen.
     
 Koden för att kontrollera om bitarna är i sin ursprungliga ordning återanvänds. Vi gör det till en funktion.
 
@@ -1761,9 +1760,10 @@ pgzrun.go()  # Ska alltid vara sist
 </details>
 
 # Uppgifter
-### 1. Vad tyckte du var svårt med uppgiften? Ge ett par exempel.
+### 1. Vad tyckte du var svårt med uppgiften? 
+Ge ett par exempel. Glöm inte att ha med kodexempel.
 
-### 2. Pröva att göra några ändringar eller tillägg.
+### 2. Pröva att göra några ändringar eller tillägg
 - Beskriv kort med ord eller bilder vad förändringen är och hur den ska fungera.
 - Beskriv hur du fick ändra koden för att göra ändringen.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
@@ -1775,7 +1775,7 @@ I funktionen `reset()` har vi den här koden:
         move(random.choice(('down', 'up', 'right', 'left')))
 ```
 
-Varför behöver vi göra så när vi ställer upp brickorna på spelplanen?
+Varför behöver vi göra så när vi ställer upp brickorna på spelplanen? Kan vi inte bara slumpa fram vilken position som helst?
 
 # Källor
 
