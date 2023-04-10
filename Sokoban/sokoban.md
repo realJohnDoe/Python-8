@@ -2209,11 +2209,11 @@ Numret på den aktuella nivån sparas också.
 
 Den aktuella nivån kopieras från listan som innehåller alla nivåer.
 
-Kopieringsmodulen importeras så att `copy.deepcopy` kan användas.
->Varför behövs deepcopy?
+Kopieringsmodulen importeras så att [Pythons `copy.deepcopy`](https://docs.python.org/3/library/copy.html) kan användas.
+>Varför behövs deepcopy? För att kunna återställa nivån till sitt ursprungliga utseende behöver vi en egen kopia av nivån och det får vi med hjälp av Pythons `deepcopy`-funktion. 
 
-✏️ Uppdatera koden. Vad händer när du ...?
-#nytt 🔲
+✏️ Uppdatera koden. Kommer du till första nivån när du testkör?
+
 ```python
 import pgzrun
 import copy #nytt 🔲
@@ -2415,10 +2415,10 @@ pgzrun.go()  # måste vara sista raden
 ## Återställ nivån
 När R-tangenten trycks ned återställs nivån.
 
-Koden för att kopiera den aktuella nivån återanvänds, så en funktion görs.
+Koden för att kopiera den aktuella nivån återanvänds, så vi gör en funktion av det.
 
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Vad händer när du trycker på `R`?
 
 ```python
 # etc.
@@ -2604,10 +2604,9 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Nästa och föregående nivå
-När N-tangenten trycks in laddas nästa spelnivå och när P-tangenten trycks in laddas föregående spelnivå.
+När spelaren trycker `N`, laddas nästa spelnivå. När `P`-tangenten trycks, laddas föregående spelnivå.
 
-
-✏️ Uppdatera koden. Vad händer när du trycker på P eller N en eller flera gånger?
+✏️ Uppdatera koden. Vad händer när du trycker på `P` eller `N` en eller flera gånger?
 
 ```python
 def on_key_down(key):
@@ -2801,7 +2800,7 @@ Om nästa nivå är efter den sista nivån laddas den första nivån.
 
 Om den föregående nivån är före den första nivån laddas den sista nivån.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Vad händer när du startar spelet och försöker backa en nivå med `P`?
 
 ```python
 def on_key_down(key):
@@ -2997,9 +2996,10 @@ pgzrun.go()  # måste vara sista raden
 
 ## Gå till nästa nivå när en nivå är avklarad
 Efter varje drag går vi igenom alla cellerna. 
+   
 Om ingen av cellerna är lådor,  dvs. alla lådor är på lagerplats, är nivån klar och nästa nivå laddas.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Vad händer när du klarar en nivå?
 
 ```python
 def on_key_down(key):
