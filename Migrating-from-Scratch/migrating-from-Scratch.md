@@ -265,6 +265,17 @@ Förslag på spel att utgå från:
 Redovisa din kod och jämför.
 - Lista ett par för- och nackdelar med att koda spelet i Scratch, t.ex. funktionen kollisionsdetektering
 - Lista ett par för- och nackdelar med att koda spelet i Pygame Zero, t.ex. aspekten textprogrammering
-    
+
+### Här finns mer information om Pygame Zero
+[Händelser i Pygame Zero beskrivs här](https://pygame-zero.readthedocs.io/en/stable/hooks.html): 
+https://pygame-zero.readthedocs.io/en/stable/hooks.html
+
+- Händelselooparna skriver man i funktionerna `draw()` och `update()`. Se exempel i koden för Flappy Bird.
+- Händelser som kan fångas är `on_mouse_down`, `on_mouse_up`, `on_mouse_move`, `on_key_down`, `on_key_up` och `on_music_end`.
+
+[Inbyggda objekt i Pygame Zero beskrivs här](https://pygame-zero.readthedocs.io/en/stable/hooks.html): https://pygame-zero.readthedocs.io/en/stable/hooks.html
+- De inbyggda objekten är `Screen`, `Rect`, `Surface`, `Sound`, `Clock` och `Animation`. Det finns några exempel i koden för Flappy Bird.
+
 # Källor
-https://pygame-zero.readthedocs.io/en/stable/from-scratch.html
+
+Detta material är översatt och bearbetat från det engelska originalet https://pygame-zero.readthedocs.io/en/stable/from-scratch.html
