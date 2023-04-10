@@ -66,10 +66,10 @@ Vägg
 **Piltangenter**	Flytta<br>
 **R**	Återställ nivån<br>
 **N**	Nästa nivå<br>
-**P**	Tidigare nivå<br>
+**P**	Förra nivån<br>
 
 # Översikt
-De olika tillstånden en ruta kan vara i representeras av följande strängar:
+De olika tillstånden en ruta kan ha motsvaras av följande tecken/strängar:
 
 __@__	Spelare &ndash; *player*<br>
 __+__	Spelare på lagerplats &ndash; *player_on_storage*<br>
@@ -99,7 +99,7 @@ Om det inte finns några lådor kvar som inte finns på lagerplatser är nivån 
 # Kodning
 ## Rita en nivå
 Varje nivå lagras som ett rutnät av strängar. 
-För närvarande lagras en enstaka nivå och en kvadrat ritas för varje cell som inte är ett mellanslag (dvs. tom).
+För närvarande har vi en enda nivå och en kvadrat ritas för varje cell som inte är ett mellanslag, dvs. tom.
 
 ✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/sokoban-starter
 och spara en egen kopia med knappen "Fork". Testkör!
@@ -147,7 +147,7 @@ pgzrun.go() # måste vara sista raden
 ## Skriv celltypen i varje cell
 Rutans sträng visas i varje ruta.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Ser det ut som i exempelbilden här nere?
 
 ```python
 def draw():
@@ -221,7 +221,7 @@ pgzrun.go() # måste vara sista raden
 ## Ställa in färger
 Bakgrundsfärgen ändras och färgen på varje cell ställs in baserat på dess typ.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Testkör. Ser det rimligt ut?
 
 
 ```python
@@ -322,7 +322,7 @@ pgzrun.go()  # måste vara sista raden
 ## Ge celltyperna namn
 För att slippa komma ihåg vilken symbol som motsvarar en viss celltyp, lagrar vi typerna i variabler.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Testkör och se att det fungerar som innan vi städade koden.
 
 ```python
 import pgzrun
@@ -431,14 +431,14 @@ pgzrun.go()  # måste vara sista raden
 ## Hitta spelarens cell
 Det första steget i att flytta spelaren är att hitta vilken cell spelaren är i.
 
-Cellerna på varje nivå loopas igenom, och om celltypen är en spelare eller en spelare på lagerplats, så skrivs spelarens position ut för närvarande.
+Cellerna på varje nivå loopas igenom. Om celltypen är en spelare eller en spelare på lagerplats, så skrivs spelarens position ut för tillfället.
 Så här ser det ut i konsollfönstret:
 
 ```
 4 4
 ```
 
-✏️ Lägg till funktionen `on_key_down()`. Vad händer när du ...?
+✏️ Lägg till funktionen `on_key_down()`. Ser du utskriften i konsollfönstret i repl.it?
 
 ```python
 # Funktioner här nedanför
@@ -534,11 +534,12 @@ pgzrun.go()  # måste vara sista raden
 
 </details>
 
-## Hitta celltyp i den riktning som piltangenten pekar
+## Hitta celltypen i den riktning som piltangenten pekar
 
 Celltypen för spelarens nuvarande position och celltypen för den intilliggande positionen i riktningen för den nedtryckta piltangenten lagras i variabler och skrivs  ut just nu.
 
-✏️ Uppdatera koden i `on_key_down`. Vad händer när du ...?
+✏️ Uppdatera koden i `on_key_down`. Vad händer när du trycker på piltangenterna? Ser du utskriften i konsollfönstret?
+>Kom ihåg att klicka i spelfönstret när du klickat på Run. Då kan din kod fånga upp tangenttryckningarna.
 
 ```python
 # Funktioner här nedanför
@@ -685,7 +686,7 @@ adjacent = level[4][3] ($)
 ## Skapa en testnivå
 Vi gör en testnivå för att lättare kunna testa spelarens rörelse.
 
-✏️ Uppdatera variabeln `level`. Vad händer när du ...?
+✏️ Uppdatera variabeln `level`. Testkör. Ritas testnivån på skärmen?
 
 ```python
 import pgzrun
@@ -809,9 +810,9 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Flytta spelaren till en tom ruta
-Om värdet på spelarens nuvarande position är `player`, alltså inte `player_on_storage` cellen intill är tom, flyttar vi spelaren till den tomma cellen.
+Om värdet på spelarens nuvarande position är `player`, alltså inte `player_on_storage` *och* cellen intill är tom, flyttar vi spelaren till den tomma cellen.
 
-✏️ Uppdatera koden i `on_key_down`. Vad händer när du ...?
+✏️ Uppdatera koden i `on_key_down`. Vad händer när du går runt med piltangenterna?
 
 ```python
 # Funktioner här nedanför
@@ -925,11 +926,11 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442037-607ab9cd-4a59-47de-a13e-6ea0b696a3da.png)
 
 ## Flytta spelaren till lagerplats
-Om den rutan bredvid är av typen `storage`, blir den nya rutan `player_on_storage`.
+Om rutan dit spelaren vill gå är av typen `storage`, blir den nya rutan `player_on_storage`.
 
-För närvarande kan spelaren gå till en lagerplats, men inte lämna den.
+Just nu kan spelaren gå till en lagerplats, men inte lämna den. Vi ska fixa den buggen om en liten stund 🐛
 
-✏️ Uppdatera koden i `on_key_down`. Vad händer när du ...?
+✏️ Uppdatera koden i `on_key_down`. Vad händer när spelaren går till en lagerplats?
 
 ```python
 def on_key_down(key):
@@ -1051,12 +1052,13 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442060-dddc88af-c52b-4d75-bafc-d202d9069ae1.png)
 
 ## Förenkla koden
-Den nya grannrutan, antingen `player` eller `player_on_storage` ställs in baserat på typen av `adjacent`. Därför skapar vi en ordlista som ger nästa intilliggande celltyp när den indexeras av den aktuella intilliggande celltypen.
+Den nya grannrutan &ndash; antingen `player` eller `player_on_storage` &ndash; ställs in baserat på typen av `adjacent`.
+Därför skapar vi en ordlista som ger nästa intilliggande celltyp när den indexeras av den aktuella intilliggande celltypen.
 
 Den används också för att kontrollera om spelaren kan flytta till den intilliggande positionen genom att kontrollera om den har en nyckel med värdet `adjacent` .
 
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Testkör. Fungerar det som innan?
 
 ```python
 def on_key_down(key):
@@ -1178,8 +1180,8 @@ pgzrun.go()  # måste vara sista raden
 
 Om spelaren är på en lagerplats, `player_on_storage`, sätts spelarens nuvarande position till &raquo;bara&laquo; `storage` när spelaren lämnar.
 
-✏️ Uppdatera koden. Vad händer när du ...?
-#nytt 🔲
+✏️ Uppdatera koden. Vad händer när du går till och från en lagerplats?
+
 ```python
 def on_key_down(key):
     # etc.
@@ -1308,9 +1310,9 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442123-828097c9-b89f-449a-9de0-e83d8a774464.png)
 
 ## Förenkla koden
-En ordlista skapas som returnerar nästa celltyp för spelarens tidigare position när den indexeras av den aktuella spelarens celltyp.
+Vi gör en ordlista som ger nästa celltyp för spelarens tidigare position när den indexeras av celltypen där spelaren är just nu.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Fungerar koden som innan?
 
 ```python
 def on_key_down(key):
@@ -1436,15 +1438,15 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Putta lådan till tom plats
-Cellen bortom den intilliggande cellen lagras i en variabel.
+Cellen bortom den intilliggande cellen lagras i en variabel. Vi behöver hålla reda på om vi nära någon av kanterna på rutnätet.
+- `player_y + dy + dy` kontrolleras för att se om det är större än eller lika med 0 och mindre än `len(level)`, dvs det är inom nivån i y-led.
+- `player_x + dx + dx` kontrolleras för att se om det är större än eller lika med 0 och mindre än `len(level[player_y + dy + dy])`, dvs det är inom nivån i x-led.
 
-`player_y + dy + dy` kontrolleras för att se om det är större än eller lika med 0 och mindre än `len(level)`, dvs det är inom nivån höjdmässigt, och `player_x + dx + dx` kontrolleras för att se om det är större än eller lika med 0 och mindre än `len(level[player_y + dy + dy])`, dvs det är inom nivån breddmässigt.
+Den intilliggande rutan kollas inte på samma sätt eftersom det alltid finns en kant av väggar runt varje nivå, så `player_y + dy` eller `player_x + dx` kommer aldrig att vara utanför spelområdet.
 
-(Den intilliggande positionen är inte markerad på samma sätt eftersom det alltid finns en kant av väggar runt varje nivå, så `player_y + dy` eller `player_x + dx` kommer aldrig att vara utanför nivån.)
+Om den intilliggande cellen är en låda och cellen bortom lådan är tom, sätter vi den intilliggande cellen till `player` och positionen bortom till `box`. Spelaren har alltså puttat lådan ett steg i den valda riktningen.
 
-Om den intilliggande cellen är en ruta och den bortom cellen är tom, är den intilliggande positionen inställd på `player` och positionen bortom är satt till `box`.
-
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Vad händer när spelaren puttar en låda?
 
 ```python
 def on_key_down(key):
@@ -1598,9 +1600,9 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442221-e7c86311-2b78-4175-94f7-29befecbb32e.png)
 
 ## Putta lådan till en lagerplats
-Om den bortomstående positionen är `storage`, så ställs bortom positionen till `box_on_storage`.
+Om positionen två steg bort är `storage`, så ställs den positionen till `box_on_storage`.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Vad händer när spelaren försöker putta en låda till en lagerplats?
 ```python
 def on_key_down(key):
     # etc.
@@ -1750,10 +1752,10 @@ pgzrun.go()  # måste vara sista raden
 
 ## Förenkla koden
 
-Vi gör en ordlista som returnerar nästa celltyp när den indexeras av den aktuella celltypen.
+Vi gör en ordlista som ger nästa celltyp när den indexeras av den aktuella celltypen.
 
-✏️ Uppdatera koden. Vad händer när du ...?
-#nytt 🔲
+✏️ Uppdatera koden. Fungerar koden som innan?
+
 ```python
 def on_key_down(key):
     # etc.
@@ -1898,10 +1900,10 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Putta lådan till en lagerplats
-Om den intilliggande cellen är en ruta på lagring, så sätts den intilliggande positionen till `box_on_storage`.
+Om den intilliggande cellen är en låda på lagerplats, så sätts den intilliggande cellen till `player_on_storage`. Spelaren står då på en (tom) lagerplats.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
-#nytt 🔲
+
 ```python
 def on_key_down(key):
     # etc.
