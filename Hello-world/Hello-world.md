@@ -5,8 +5,8 @@
 - [Summor och datum](#summor-och-datum)
 - [Kasta en tärning](#kasta-en-tärning)
 - [Påbörja en mening](#påbörja-en-mening)
-- [Kunskapsquiz](#kunskapsquiz)
 - [Levla upp ditt projekt](#levla-upp-ditt-projekt)
+- [Uppgifter](#uppgifter)
 
 # Inledning
 Detta är projekt nr 1 ur kursen *Introduction to Python: Variables, functions, and loops* från Raspberry Pi Foundation[^1].
@@ -376,7 +376,9 @@ hobbies()
 - Beskriv kort vad du gjorde. Glöm inte kodexempel.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel
 
-2. Vad tyckte du om repl.it? Något du retade dig på? Något som var bra?
+2. Vad är ditt bästa Python-tips till en kompis som är nybörjare på Python eller programmering?
+
+3. Vad tyckte du om repl.it? Något du retade dig på? Något som var bra?
 
 
 [^1]: This is a Swedish translation of the Raspberry Pi Foundation project https://projects.raspberrypi.org/en/projects/hello-world, with minor adaptations.
