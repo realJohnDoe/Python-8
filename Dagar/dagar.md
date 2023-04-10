@@ -20,7 +20,7 @@ Hur kan du använda den informationen för att räkna ut hur många dagar du fyl
 &ndash; [Räkna rätt på antalet dagar](#räkna-rätt-på-antalet-dagar)
 &ndash; [Nästan klara](#nästan-klara)
 &ndash; [Testa en förenkling](#testa-en-förenkling)
-&bull; [Hjälp på traven](#hjälp-på-traven)
+&bull; [Uppgifter](#uppgifter)
 
 ## STEG 1: Prata med användaren
 <img src=https://user-images.githubusercontent.com/4598641/222922745-103d7a53-2f51-4ac9-9191-0282fa095f6e.png width="400px">
@@ -724,5 +724,17 @@ def dagar_före(år):
     return int(365.25 * (år - 2000)) # ändrad uträkning
 ```
 
+# Uppgifter
+1. När fyller/fyllde du 5000 dagar?
+
+2. Vad tyckte du var svårt med uppgiften? Ge ett par exempel.
+
+3. Pröva att göra någon ändring eller förbättring. Se uppgift 4 för en idé.
+- Beskriv kort vad ändringen är och hur den ska fungera.
+- Beskriv hur du fick ändra koden för att göra ändringen. Glöm inte kodexempel.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
+
+4. *(Frivillig extrauppgift)* Ändra så att koden fungerar för datum på 1900-talet också. Räkna ut antalet dagar som en äldre bekant eller släkting fyller.
+- Glöm inte kodexempel och att förklara hur du testade din ändring.
 
 [^1]: `return dag` istället för `return 1`
