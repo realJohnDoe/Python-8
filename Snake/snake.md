@@ -1,28 +1,33 @@
 # Snake ⭐⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
-- [Regler](#regler)
-- [Översikt](#översikt)
-- [Kodning](#kodning)
-  - [Rita bakgrunden](#rita-bakgrunden)
-  - [Rita ormen](#rita-ormen)
-  - [Timer](#timer)
-  - [Flytta ormen åt höger](#flytta-ormen-åt-höger)
-  - [Flytta ormen i alla fyra riktningar](#flytta-ormen-i-alla-fyra-riktningar)
-  - [Hindra att ormen rör sig rakt bakåt](#hindra-att-ormen-rör-sig-rakt-bakåt)
-  - [Använd en kö för riktningarna](#använd-en-kö-för-riktningarna)
-  - [Hindra att lägga till samma riktning två gånger](#hindra-att-lägga-till-samma-riktning-två-gånger)
-  - [Slå över vid skärmkanten](#slå-över-vid-skärmkanten)
-  - [Rita maten](#rita-maten)
-  - [Förenkla koden](#förenkla-koden)
-  - [Äta maten](#äta-maten)
-  - [Förenkla koden](#förenkla-koden-1)
-  - [Flytta maten till en ledig ruta](#flytta-maten-till-en-ledig-ruta)
-  - [Game over](#game-over)
-  - [Återställa spelet](#återställa-spelet)
-  - [Pausa efter att ormen har kraschat](#pausa-efter-att-ormen-har-kraschat)
-  - [Ändra ormens färg när den är död](#ändra-ormens-färg-när-den-är-död)
-- [Källor](#källor)
+**[Regler](#regler)**
+
+**[Översikt](#översikt)**
+
+**[Kodning](#kodning)**
+  [Rita bakgrunden](#rita-bakgrunden)
+  &bull; [Rita ormen](#rita-ormen)
+  &bull; [Timer](#timer)
+  &bull; [Flytta ormen åt höger](#flytta-ormen-åt-höger)
+  &bull; [Flytta ormen i alla fyra riktningar](#flytta-ormen-i-alla-fyra-riktningar)
+  &bull; [Hindra att ormen rör sig rakt bakåt](#hindra-att-ormen-rör-sig-rakt-bakåt)
+  &bull; [Använd en kö för riktningarna](#använd-en-kö-för-riktningarna)
+  &bull; [Hindra att lägga till samma riktning två gånger](#hindra-att-lägga-till-samma-riktning-två-gånger)
+  &bull; [Slå över vid skärmkanten](#slå-över-vid-skärmkanten)
+  &bull; [Rita maten](#rita-maten)
+  &bull; [Förenkla koden](#förenkla-koden)
+  &bull; [Äta maten](#äta-maten)
+  &bull; [Förenkla koden](#förenkla-koden-1)
+  &bull; [Flytta maten till en ledig ruta](#flytta-maten-till-en-ledig-ruta)
+  &bull; [Game over](#game-over)
+  &bull; [Återställa spelet](#återställa-spelet)
+  &bull; [Pausa efter att ormen har kraschat](#pausa-efter-att-ormen-har-kraschat)
+  &bull; [Ändra ormens färg när den är död](#ändra-ormens-färg-när-den-är-död)
+
+**[Uppgifter](#uppgifter)**
+
+**[Källor](#källor)**
 
 ![image](https://user-images.githubusercontent.com/4598641/226439115-c9800ff9-c916-406c-9efb-39407658988a.png)
 
@@ -2717,7 +2722,6 @@ def draw():
 
     draw_cell(food_position['x'], food_position['y'], (255, 76, 76))
 
-
 # Kod för att starta appen här nedanför
 reset()
 
@@ -2725,6 +2729,15 @@ pgzrun.go()  # måste vara sista raden
 ```
 </details>
 
+# Uppgifter
+## 1.  Vad tyckte du var svårt med kodningen? 
+Ge ett par exempel där du/ni körde fast eller hade svårt att förstå koden.
+
+## 2. Gör spelet ännu bättre
+Pröva att göra några ändringar eller tillägg. Det kan vara en poängräknare för ormens längd, high score, roligare game over, en introskärm eller något annat som är standard i den här typen av spel.
+- Beskriv kort vad förändringen är och hur den ska fungera.
+- Beskriv hur du fick ändra koden för att göra ändringen. Glöm inte kodexempel.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
 
 # Källor
 
