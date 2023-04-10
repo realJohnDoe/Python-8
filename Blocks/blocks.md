@@ -91,7 +91,7 @@ Den fallande biten lagras som
 - ett tal som representerar vilken rotation den befinner sig i
 - och så X- och Y-koordinaten för biten på spelplanen.
 
-En ny bit skapas längst upp på skärmen. Skulle den hamna direkt på orörligt block är spelet över.
+En ny bit skapas längst upp på skärmen. Skulle den hamna direkt på ett orörligt block är spelet över.
 
 Spelaren kan flytta biten åt vänster och höger, om inte den nya positionen överlappar ett orörligt block eller är utanför spelplanen.
 
@@ -105,9 +105,9 @@ Sen landar biten.
 
 När en bit landar, läggs bitens block till de orörliga blocken och nästa bit skapas.
 
-En sekvens av en av var och en av de sju bitarna i en slumpmässig ordning skapas. 
-Nästa bit tas alltid från denna sekvens. 
-När alla bitar har tagits, skapas en ny slumpmässig ordning.
+Vi gör en lista med var och en av de sju olika bitarna i slumpmässig ordning. 
+Nästa bit tas alltid från den listan.
+När alla bitar har tagits, skapas en ny listan i slumpmässig ordning.
 
 # Kodning
 
@@ -157,7 +157,7 @@ Varje block sätts till ett mellanslag, `' '`. Det representerar ett tomt block.
 
 Bredden och höjden på rutnätet räknat i block behöver vi på flera ställen i koden. Därför gör vi bredden och höjden till variabler.
 
-✏️ Uppdatera koden och testkör. Nya och ändrade rader är markerade.
+✏️ Uppdatera koden och testkör. Nya och ändrade rader är markerade. 
 
 ```python
 import pgzrun
@@ -201,7 +201,7 @@ Varje blocktyp ska ha sin unika färg.
 
 För att testa det, sätter vi några block i det orörliga nätet till att ha olika typ.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera koden och testkör! Ritas blocken som i bilden här under?
 
 ```python
 # Funktioner (def) här nedanför
@@ -568,8 +568,8 @@ pgzrun.go()  # måste vara sista
 ## Lagra biten som faller just nu
 
 Biten som faller just nu representeras av
-- dels ett tal som anger vilken typ av bit det är &ndash; vi behöver använda det för att indexera i listan över med olika bitar
-- dels ett tal som anger vilken rotation biten har &ndash; vi behöver det för att indexera i listan med rotationer för biten.
+- dels ett tal som anger vilken **typ av bit** det är &ndash; vi behöver  det för att indexera i listan med olika bitar
+- dels ett tal som anger vilken **rotation** biten har &ndash; vi behöver det för att indexera i listan med rotationer för biten.
 
 ✏️ Lägg till och testkör att allt fungerar som innan.
 
@@ -851,7 +851,7 @@ När vi trycker på `X`, ökas bitens rotationstal med 1 och biten roteras medur
 >Om rotationstalet är större än antalet möjliga rotationer sätts rotationstalet till 0. Vi går alltså tillbaks till bitens första rotation.
 
 När vi trycker på `Z` så minskas rotationstalet med 1 och biten roterar moturs.
->Om rotationstalet är mindre än 0, sätts rotationstalet till antalet rotationer minus 1, alltså bitens sista rotation.
+>Om rotationstalet är mindre än 0, sätts rotationstalet till antalet rotationer minus 1. Det är bitens sista rotation.
 
 
 ✏️ Lägg till funktionen `on_key_down()` och testkör!
@@ -961,7 +961,7 @@ pgzrun.go()  # måste vara sista raden
 
 För att göra det lätt att testa, låter vi upp- och och neråtpil byta mellan olika bitar.
 
-✏️ Uppdatera funktionen `on_key_down()` och testkör! Fungerar upp- och neråtpil och tangenterna `X` och `C` som du tänkt?
+✏️ Uppdatera funktionen `on_key_down()` och testkör! Fungerar upp- och neråtpil och tangenterna `X` och `C` som du tänkt för att byta mellan olika bitar?
 
 ```python
 def on_key_down(key):
@@ -1213,7 +1213,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Flytta biten
 
-Vänster- och högerpilarna minskar eller ökar bitens X-koordinat med 1.
+Vänster- ⬅️ och högerpilarna ➡️ minskar eller ökar bitens X-koordinat med 1.
 
 ✏️ Uppdatera `on_key_down()` med regler för `keys.LEFT` och `keys.RIGHT` och testkör! Flyttar sig biten med höger- o vänsterpil?
 
@@ -1501,7 +1501,7 @@ pgzrun.go()  # måste vara sista raden
 ## Fallande bit
 Timern används för att öka bitens Y-koordinat var 0.5:e sekund.
 
-✏️ Uppdatera funktionen `update()` och testkör!
+✏️ Uppdatera funktionen `update()` och testkör! Faller biten som den ska?
 
 ```python
 def update(dt):
@@ -1647,7 +1647,7 @@ Vi behöver ändra koden från att omedelbart uppdatera bitens position/rotation
 Istället skapar vi variabler för de ändrade värdena.
 Om `can_piece_move` svarar `True`, ställs den faktiska positionen/rotationen till de ändrade värdena, annars inte.
 
-✏️ Uppdatera koden. Funktionen `can_piece_move()` är ny. Funktionerna `update()` och `on_key_down` har ändringar. Testkör!
+✏️ Uppdatera koden. Funktionen `can_piece_move()` är ny. Funktionerna `update()` och `on_key_down` har ändringar. Testkör att det fungerar som innan!
 
 ```python
 def can_piece_move(test_x, test_y, test_rotation): # ny funktion
@@ -1830,7 +1830,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Kolla vänsterkanten
 Om något block inte är tomt och X-koordinaten är mindre än 0, returnerar funktionen `can_piece_move` False. 
-Det är när blocket är utanför spelplanens vänstra sida.
+Det är när blocket är utanför spelplanens vänstra sida. Någon del av biten sticker alltså ut till vänster och det får den inte.
 
 ✏️ Uppdatera funktionen och testkör! Blir det stopp när du trycker vänsterpil flera gånger?
 
@@ -1982,7 +1982,7 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Förenkla koden
-Storleken på varje bit i X- och Y-led återanvänds från att rita bitarna, så vi gör variabler för det.
+Storleken på varje bit i X- och Y-led återanvänds från att rita bitarna. Vi gör variabler för de värdena.
 
 ✏️ Uppdatera koden. Du ska lägga till två globala variabler och sen använda dem i `can_piece_move()` och `draw()`. Testkör sen att det fungerar lika bra som innan!
 
@@ -2312,14 +2312,14 @@ pgzrun.go()  # måste vara sista raden
 
 ## Kolla underkanten
   
-Om något blocks Y-koordinat är större än eller lika med höjden på spelplanen är det nedanför botten av spelplanen.
-Då returnerar funktionen `can_piece_move()` också False.
+Om något blocks Y-koordinat är större än eller lika med höjden på spelplanen är det nedanför underkanten av spelplanen.
+Då svarar funktionen `can_piece_move()` också False.
 
 Vi delar upp frågan i två rader för att göra det lättare att läsa koden.
 - Den första delen, `if piece_structures[piece_type][test_rotation][y][x] != ' '`, frågar om biten har något block i rutan (y, x) med rotationen `test_rotation` 
 - Den andra delen, `test_x + x not in range(grid_x_count) or test_y + y >= grid_y_count` frågar om biten får plats i x-led (höger/vänster) och i underkant
   
-✏️ Uppdatera `can_piece_move()` och testkör! Fungerar det med underkanten nu?
+✏️ Uppdatera `can_piece_move()` och testkör! Fungerar det med underkanten nu när du försöker rotera biten?
 
 ```python
 def can_piece_move(test_x, test_y, test_rotation):
@@ -2474,7 +2474,7 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Kolla orörliga block
-Om det finns ett orörligt block någonstans där biten skulle hamna, returnerar funktionen `can_piece_move` också False.
+Om det finns ett orörligt block någonstans där biten skulle hamna, svarar funktionen `can_piece_move` också False.
 
 För att testa detta lägger vi in ett orörligt block.
 
@@ -2811,9 +2811,9 @@ pgzrun.go()  # måste vara sista raden
 
 ## Släppa ner en bit
 
-När C-tangenten trycks, ska bitens Y-koordinat öka med 1 så länge som biten får plats.
+När C-tangenten trycks, ska bitens Y-koordinat öka med 1 så länge som biten får plats. Det gör att biten ramlar neråt och landar automatiskt.
 
-✏️ Uppdatera koden i `on_key_down()` och testkör!
+✏️ Uppdatera koden i `on_key_down()` och testkör med knappen `C`.
 
 ```python
 def on_key_down():
@@ -2978,9 +2978,9 @@ pgzrun.go()  # måste vara sista raden
 ## Återställa biten
 
 Om timern tickar och biten inte kan röra sig neråt, återställs biten till sin ursprungliga position, rotation och typ. 
-Vi ska ändra det sen.
+Vi ska justera det mer sen.
 
-✏️ Uppdatera koden i `update(dt)` och testkör!
+✏️ Uppdatera koden i `update(dt)` och testkör! Vad händer när en bit landar?
 
 ```python
 def update(dt):
@@ -3158,7 +3158,7 @@ pgzrun.go()  # måste vara sista raden
 
 Biten sätts till sitt startläge på två ställen. Vi gör en funktion för det, `new_piece`.
 
-✏️ Uppdatera koden och testkör! Lägg till `new_piece`, ändra i `update` och anropa `new_piece` längst ner.
+✏️ Uppdatera koden och testkör! Lägg till `new_piece`, ändra i `update` och anropa `new_piece` längst ner. Fungerar allt som innan?
 
 ```python
 def new_piece(): # lägg till funktionen
@@ -3354,16 +3354,16 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Håll reda på kommande bitar
-De kommande bitarna lagrar vi som en lista som innehåller numren som representerar bittyper i slumpmässig ordning.
+De kommande bitarna lagrar vi i en lista som innehåller numren som representerar bittyperna i slumpmässig ordning.
 
 Vi gör en lista med talen från 0 till `len(piece_structures) - 1`. 
 Sedan slumpar vi ordningen på den listan med `random.shuffle`.
 
-För att testa, skapar vi  en ny sekvens när S-tangenten trycks ned och skriver ut sekvensen.
+För att testa, skapar vi en ny sekvens när `S`-tangenten trycks ned och skriver ut sekvensen.
 
 Slumpmodulen importeras vi så att vi kan använda `random.shuffle`.
 
-✏️ Uppdatera koden och testkör!
+✏️ Uppdatera koden och testkör! Klicka i spelfönstret och tryck på `S`-tangenten. Ser du utskriften i terminalföntret?
 
 ```python
 import random # lägg till högt upp
@@ -3572,11 +3572,11 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Nästa bit från listan
-När en ny bit behöver skapas tar vi bort det sista talet från listan och använder det för att bestämma typen av bit.
+När en ny bit ska skapas, tar vi bort det sista talet från listan och använder det för att bestämma typen av bit.
 
-När listan med bitar är tom skapas en ny sådan lista.
+När listan med bitar är tom skapar vi en ny sådan lista.
 
-✏️ Uppdatera koden i `new_piece()` och testkör!
+✏️ Uppdatera koden i `new_piece()` och testkör! Kommer det nya bitar efter hand?
 
 ```python
 def new_piece():
@@ -3778,7 +3778,7 @@ När en bit har landat läggs bitens block till de orörliga blocken.
 Bitens block gås igenom. 
 Om ett block inte är tomt, sätter vi det orörliga blocket på den positionen till värdet som vi hämtar från biten.
 
-✏️ Uppdatera koden i `update()` och testkör!
+✏️ Uppdatera koden i `update()` och testkör! Landar bitarna rätt och blir orörliga?
 
 ```python
 def update(dt):
@@ -4211,7 +4211,7 @@ Om ingen av kolumnerna i raden är ett tomt block så är raden fylld.
 
 För att göra det lättare att testa, skrivs de fullständiga radnumren ut just nu.
 
-✏️ Lägg till i funktionen `update()` och testkör!
+✏️ Lägg till i funktionen `update()` och testkör! Ser du utskriften i terminalfönstret?
 
 ```python
 def update(dt):
@@ -4454,7 +4454,7 @@ Eftersom det inte finns något ovanför den översta raden behöver den inte loo
 
 Den översta raden kommer då att vara helt tom.
 
-✏️ Uppdatera koden i `update()` och testkör!
+✏️ Uppdatera koden i `update()` och testkör! Försvinner fyllda rader som de ska?
 
 ```python
 def update(dt):
@@ -4687,7 +4687,7 @@ Om en nyskapad bit är i en orörlig position är spelet över.
 Vi gör en funktion som ställer in spelets startläge.
 Den anropas innan spelet börjar och när spelet är över.
 
-✏️ Uppdatera koden och testkör! Lägg till funktionen `reset()`, anropa den i `update()` och förenkla koden längst ner där appen startar.
+✏️ Uppdatera koden och testkör! Lägg till funktionen `reset()`, anropa den i `update()` och förenkla koden längst ner där appen startar. Blir det game over?
 
 ```python
 def new_sequence():
@@ -4952,7 +4952,7 @@ pgzrun.go()  # måste vara sista raden
 ## Förskjutning av spelplanen
 Spelplanen ritas 2 block från vänster på skärmen och 5 block från toppen av skärmen.
 
-✏️ Uppdatera koden i `draw()` och testkör!
+✏️ Uppdatera koden i `draw()` och testkör! Ser grafiken bra ut? 
 
 ```python
 def draw():
@@ -4995,7 +4995,7 @@ def draw():
 ```
 
 ![image](https://user-images.githubusercontent.com/4598641/226016663-cb1d5333-1bd0-4943-91e7-8d22d195f2ef.png)
-
+**XXXFATTAS KOD!**
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -5007,10 +5007,10 @@ import pgzrun
 
 ## Rita nästa bit
 
-Den sista biten i sekvensen, alltså nästa bit som faller, ritas med sin första rotationsstil.
+Den sista biten i listan, alltså nästa bit som faller, ritas med sin första rotationsstil.
 Den är förskjuten fem rutor från vänster och en ruta uppifrån.
 
-✏️ Uppdatera koden i `draw()` och testkör!
+✏️ Uppdatera koden i `draw()` och testkör! Ser grafiken för den fallande biten bra ut?
 
 ```python
 def draw():
