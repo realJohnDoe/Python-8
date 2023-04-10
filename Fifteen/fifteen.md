@@ -104,7 +104,7 @@ Numren ritas ovanpå bitarna.
 
 Bitens nummer beräknas genom att addera Y-koordinaten (dvs. radnummer) multiplicerat med antalet bitar i en rad till X-koordinaten plus 1.
 
-Till exempel, på den första raden är Y-koordinaten 0, så ingenting läggs till varje X-koordinat, så den första siffran på den första raden är 1.
+Exempel: på den första raden är Y-koordinaten 0, så ingenting läggs till varje X-koordinat, så den första siffran på den första raden är 1.
 På den andra raden läggs 4 till varje X-koordinat, så den första nummer på andra raden är 5.
 
 Tänk på att koordinatsystemet för våra rutor är upp och ner och att (x, y) = (0, 0) är i övre högra hörnet. Kolla bilden!
@@ -149,7 +149,7 @@ Ett rutnät skapas med varje bits nummer lagrat på sin plats på rutnätet, och
 
 Antalet bitar på X- och Y-axlarna återanvänds från att rita bitarna, så de görs till variabler.
 
-✏️ Uppdatera koden och testkör.
+✏️ Uppdatera koden och testkör. Ser det ut som i bilden här under?
 
 ```python
 import pgzrun
@@ -195,7 +195,7 @@ pgzrun.go()  # Ska alltid vara sist
 ## Rita inte den tomma rutan
 Antalet bitar på varje axel multiplicerat tillsammans ger det totala antalet bitar (dvs. 4 gånger 4 betyder 16 bitar), och en bit ritas bara om numret är skilt från 16.
 
-✏️ Uppdatera koden och testkör.
+✏️ Uppdatera koden och testkör. Blir det en tom ruta nu?
 
 ```python
 # etc.
@@ -268,7 +268,7 @@ Det första steget i att flytta en bit är att hitta positionen för den tomma r
 
 När en tangent trycks in, loopar vi igenom rutnätet. Om en bit är lika med antalet bitar på varje axel multiplicerat med varandra (dvs det är den tomma rutan), så skrivs dess position för närvarande ut.
 
-✏️ Lägg till funktionen `on_key_down()` och testkör genom att klicka på tangentbordet. Utskriften kommer i det svarta konsollfönstret.
+✏️ Lägg till funktionen `on_key_down()` och testkör genom att klicka i spelfönstret och sen trycka någon tangent på tangentbordet. Utskriften kommer i det svarta konsollfönstret.
 >Klicka på Run för att starta och klicka sen var som helst i spelfönstret. Då kan din kod fånga upp tangenttryckningarna.
  
 ```python
@@ -665,7 +665,7 @@ Ett slumptal mellan 1 och 4 genereras och ett drag görs i en av de fyra rörels
 
 Slumpmodulen importeras så att `random.randint` kan användas.
 
-✏️ Uppdatera koden och testkör. Vi återanvänder kod från `on_key_down()`.
+✏️ Uppdatera koden och testkör. Vi återanvänder kod från `on_key_down()`. Blandas bitarna?
 
 ```python
 import pgzrun
@@ -983,8 +983,7 @@ Den tomma rutan ska vara längst ner till höger när spelet börjar. Därför f
 Antalet bitar på en axel minus 1 är det maximala antalet drag det skulle ta för att flytta den tomma rutan från ena sidan till den andra.
 
 ✏️ Den nya koden gör samma sak som tre tryck på vänsterpil och tre på uppåtpil. Testa med piltangenterna. Hamnar den tomma rutan längst ner till höger?
-
-✏️ Uppdatera sedan koden och testkör.
+Uppdatera koden och testkör.
 
 ```python
 # etc.
@@ -1280,7 +1279,7 @@ pgzrun.go()  # Ska alltid vara sist
 ## Kolla om vi är klara
 Efter att ett drag har gjorts, loopar vi genom bitarna. Om alla bitarna är på rätt position i nummerordning så återställs spelet.
 
-✏️ Uppdatera koden i `on_key_down()` och testkör.
+✏️ Uppdatera koden i `on_key_down()` och testkör. Vad händer om du lägger alla bitarna i nummerordning?
 
 ```python
 def on_key_down(key):
@@ -1428,7 +1427,7 @@ pgzrun.go()  # Ska alltid vara sist
 Koden för att beräkna startvärdet för en bit återanvänds.
 Vi gör den till en funktion.
 
-✏️ Uppdatera koden och testkör! Lägg till funktionen `get_initial_value` och anropa den i funktionerna `reset` och `on_key_down`.
+✏️ Uppdatera koden och testkör! Lägg till funktionen `get_initial_value` och anropa den i funktionerna `reset` och `on_key_down`. Fungerar spelet som innan?
 
 ```python
 def get_initial_value(x, y): #nyrad 🔲
@@ -1583,7 +1582,7 @@ Om bitarna fortfarande är i rätt ordning efter att de har blandats, försöker
     
 Koden för att kontrollera om bitarna är i sin ursprungliga ordning återanvänds. Vi gör det till en funktion.
 
-✏️ Uppdatera koden för `is_complete`, `reset` och `on_key_down` och testkör. Vad händer när alla brickorna är i nummerordning?
+✏️ Uppdatera koden för `is_complete`, `reset` och `on_key_down` och testkör. Vad händer när du lagt alla brickorna i nummerordning?
 
 ```python
 def is_complete(): #nyrad 🔲
