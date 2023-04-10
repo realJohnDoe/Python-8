@@ -543,18 +543,25 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-# Utmaningar och buggar
-## Fixa buggar!
+# Uppgifter &ndash; buggar och utmaningar!
+
 Det är vanligt att program har buggar. Jag har avsiktligt lämnat kvar ett par buggar i vårt ninjaspel. Har du hittat några än? Pröva att rätta dem!
 
-### Buggfix 1. Game Over-poäng
+## Uppgift 1: Buggfix 1. Game Over-poäng
 Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren efter game over ... Såg du att poängen fortsatte öka? Det händer eftersom vi fortsätter lägga till kaktusar i hinderlistan efter game over. Kan du fixa det?
 
-### Bug Fix 2. Multihopp
+## Uppgift 2: Buggfix 2. Multihopp
 Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ovanför det som syns på skärmen? Ninjan ska bara kunna hoppa när hon är på marken och inte i luften. Kan du fixa det?
 
-## Utmaningar!
-Här är några utmaningar för att göra spelet bättre.
+## Uppgift 3: Vad tyckte du var svårt med uppgiften?
+Ge ett par exempel.
+
+## Uppgift 4
+
+Välj och gör minst en av utmaningarna 1, 2, 3 här nedanför. Redovisa så här:
+- Beskriv kort vad förändringen är och hur den ska fungera.
+- Beskriv hur du fick ändra koden för att göra ändringen.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel. 
 
 ### Utmaning 1. Glidande ninja
 Kan du ändra ninjabilden till en glidande ninja när hon hoppar? Om du använder en annan figur så har de flesta en liknande bild med hopp som du kan använda:
