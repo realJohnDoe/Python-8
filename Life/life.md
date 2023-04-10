@@ -24,7 +24,7 @@ Game of Life uppfanns av John Conway år 1970. Det är ett spel utan spelare &nd
 &bull; [Uppdatera varje cell baserat på antalet grannar](#uppdatera-varje-cell-baserat-på-antalet-grannar)
 &bull; [Döda celler med högerklick](#döda-celler-med-högerklick)
 
-[**Testa intressanta mönster**](#testa-intressanta-mönster)
+[**Uppgifter**](#uppgifter)
 
 
 # Regler
@@ -1190,12 +1190,19 @@ pgzrun.go()  # måste vara sista raden
 
 </details>
 
-# Testa intressanta mönster
+# Uppgifter
+## 1. Testa intressanta mönster
 Det finns många intressanta mönster att testa med: se t.ex. https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns
 
+Leta upp minst ett mönster, provkör det och förklara hur det beter sig.
+
+Vad tyckte du var intressant med mönstret du valde?
+
+## 2. Intressanta mönster med en knapptryckning
 🤔 Kan du lägga in kod så att du automatiskt kan få mönstren när du trycker på någon speciell knapp?
 
-✋ Räck upp handen och be att få visa något intressant mönster som du hittat!
+## 3. Vad var svårast med kodningen?
+Ge ett par exempel där ni körde fast eller har svårt att förstå vad koden gör. Förklara med ett par meningar och glöm inte kodexempel!
 
 # Källor
 Efter originalet på https://simplegametutorials.github.io/pygamezero/life/
