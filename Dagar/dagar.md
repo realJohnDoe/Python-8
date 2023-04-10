@@ -729,7 +729,7 @@ def dagar_före(år):
 # Uppgifter
 1. När fyller/fyllde du 5000 dagar?
 
-2. Vad tyckte du var svårt med uppgiften? Ge ett par exempel.
+2. Vad tyckte du var svårt med kodningen? Ge ett par exempel.
 
 3. Pröva att göra någon ändring eller förbättring. Se uppgift 4 för en idé.
 - Beskriv kort vad ändringen är och hur den ska fungera.
