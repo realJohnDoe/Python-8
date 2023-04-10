@@ -32,14 +32,14 @@
 &bull; [Förenkla koden](#förenkla-koden-3)
 &bull; [Håll reda på kommande bitar](#håll-reda-på-kommande-bitar)
 &bull; [Nästa bit från listan](#nästa-bit-från-listan)
-&bull; [Lägg till orörliga block](#lägg-till-orörliga-block)
+&bull; [Lägg bitens block till de orörliga blocken](#lägg-bitens-block-till-de-orörliga-blocken)
 &bull; [Ny bit direkt efter släpp](#ny-bit-direkt-efter-släpp)
 &bull; [Hitta fyllda rader](#hitta-fyllda-rader)
 &bull; [Ta bort fyllda rader](#ta-bort-fyllda-rader)
 &bull; [Game over](#game-over)
 &bull; [Förskjutning av spelplanen](#förskjutning-av-spelplanen)
 &bull; [Rita nästa bit](#rita-nästa-bit)
-
+&bull; **[Uppgifter](#uppgifter)**
   
 
 # Regler
