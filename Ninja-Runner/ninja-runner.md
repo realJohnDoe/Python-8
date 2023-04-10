@@ -553,7 +553,7 @@ Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren 
 ## Uppgift 2: Buggfix 2. Multihopp
 Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ovanför det som syns på skärmen? Ninjan ska bara kunna hoppa när hon är på marken och inte i luften. Kan du fixa det?
 
-## Uppgift 3: Vad tyckte du var svårt med uppgiften?
+## Uppgift 3: Vad tyckte du var svårt med kodningen?
 Ge ett par exempel.
 
 ## Uppgift 4
