@@ -1,4 +1,4 @@
-# Att flytta över från Scratch: Flappy Bird
+# Att flytta över från Scratch &ndash; Flappy Bird
 >Detta är en svensk översättning av Daniel Popes guide, https://pygame-zero.readthedocs.io/en/stable/from-scratch.html, lätt bearbetad.
 
 ## Innehåll
