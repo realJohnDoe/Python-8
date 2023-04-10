@@ -4,6 +4,31 @@
 
 ![image](https://user-images.githubusercontent.com/4598641/225698865-f394ffdb-6b0c-4731-8763-915c93b7b965.png)
 
+### Innehåll
+**[Regler för minnesspelet Repeat](#regler-för-minnesspelet-repeat)**
+
+**[Kodning](#kodning)**
+   [Sekvens](#sekvens)
+  &bull; [Nuvarande position i sekvensen](#nuvarande-position-i-sekvensen)
+  &bull; [Återställ aktuell position](#återställ-aktuell-position)
+  &bull; [Lägg till nästa tal att komma ihåg i sekvensen](#lägg-till-nästa-tal-att-komma-ihåg-i-sekvensen)
+  &bull; [Startsekvens med ett enda tal](#startsekvens-med-ett-enda-tal)
+  &bull; [Återställa spelet](#återställa-spelet)
+  &bull; [Rita första rutan](#rita-första-rutan)
+  &bull; [Rita alla rutor](#rita-alla-rutor)
+  &bull; [Förenkla koden](#förenkla-koden)
+  &bull; [Timer](#timer)
+  &bull; [Blinkande rutor](#blinkande-rutor)
+  &bull; [Blinkande färg](#blinkande-färg)
+  &bull; [Se och upprepa](#se-och-upprepa)
+  &bull; [Tillfälligt blinkande](#tillfälligt-blinkande)
+  &bull; [Game over-läge](#game-over-läge)
+  &bull; [Visa text baserat på vilket läge vi är i](#visa-text-baserat-på-vilket-läge-vi-är-i)
+
+**[Uppgifter](#uppgifter)**
+
+**[Källor](#källor)**
+
 # Regler för minnesspelet Repeat
 Se på när en talsekvens blinkar och försök att komma ihåg ordningen på siffrorna.
 
@@ -1646,10 +1671,8 @@ flashing = False
 
 # Funktioner här nedanför
 
-
 def add_to_sequence():
     sequence.append(random.randint(1, 4))
-
 
 def reset():  # nyrad
     global sequence, current, timer, state, flashing
@@ -1739,9 +1762,20 @@ pgzrun.go()  # Ska alltid vara sist i programmet (längst ner)
 
 </details>
 
-# Utmaningar
-## High Score
+# Uppgifter
+## 1. Vad var svårt med kodningen?
+Vad tyckte du var svårt? Ge ett par exempel.
+
+## 2. Pröva att göra några ändringar eller tillägg, t.ex. High Score
+- Beskriv kort vad förändringen är och hur den ska fungera.
+- Beskriv hur du fick ändra koden för att göra ändringen.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel
+
+### High Score
 Lägg till en variabel för High Score. Visa den på skärmen
+
+### Gör spelet snyggare grafiskt
+Vad skulle göra spelet ännu bättre grafiskt?
 
 # Källor
 Översatt till svenska och anpassad till repl.it baserat på https://simplegametutorials.github.io/pygamezero/repeat/
