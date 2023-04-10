@@ -1,4 +1,4 @@
-**Navigering:** [Infinite Runner](#infinite-runner) &bull;
+**Innehåll:** [Infinite Runner](#infinite-runner) &bull;
 [Bakgrund](#bakgrund) &bull;
 [Ninjan](#ninjan) &bull;
 [Hoppa](#hoppa) &bull;
