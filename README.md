@@ -9,7 +9,7 @@ Välkommen till Pythonuppgifter för årskurs 8 🐍 Spelen är översatta från
   &bull; [Ninja Runner](#ninja-runner-)
   &bull; [Blocks](#blocks-)
   &bull; [Fifteen](#fifteen-)
-  &bull; [Att flytta över från Scratch: Flappy Bird](#att-flytta-över-från-scratch-flappy-bird-)
+  &bull; [Att flytta över från Scratch &ndash; Flappy Bird](#att-flytta-över-från-scratch-flappy-bird-)
   &bull; [Flowers](#flowers-)
   &bull; [Life](#life-)
   &bull; [Repeat](#repeat-)
@@ -65,7 +65,7 @@ https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md
 
 https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md
 
-##  Att flytta över från Scratch: Flappy Bird ⭐⭐⭐
+##  Att flytta över från Scratch &ndash; Flappy Bird ⭐⭐⭐
 [![](https://pygame-zero.readthedocs.io/en/stable/_images/flappybird-top-start.png)](https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md)
 
 https://github.com/coderdojolund/Python-8/blob/main/Migrating-from-Scratch/migrating-from-Scratch.md
