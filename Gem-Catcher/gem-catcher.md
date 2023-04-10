@@ -10,7 +10,7 @@
 [Räkna poäng](#räkna-poäng) &bull;
 [Mus och händelser](#mus-och-händelser) &bull;
 [Game Over](#game-over) &bull;
-[Utmaningar](#utmaningar)
+[Uppgifter och utmaningar](#utmaningar)
 
 # Första koden
 
@@ -617,24 +617,28 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-# Utmaningar
+# Uppgifter och utmaningar
 
 Här är några utmaningar du kan pröva för att göra spelet ännu bättre.
+
+✏️ Gör minst en av dessa eller hitta på en egen utmaning/förbättring.
+- Beskriv kort vilken förbättringen är och hur den ska fungera, sett ut spelarens perspektiv.
+- Beskriv hur du fick ändra koden för att göra ändringen. Glöm inte att redovisa din kod.
+- Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel och förklara vad som hände.
 
 ## Utmaning 1. Tre liv
 Ändra spelet så att du har tre liv. Spelet ska sluta när spelaren använt alla tre liven.
 
 ## Utmaning 2. Olika ädelstenar
-Det finns ädelstenar med flera olika färger i mediefilen (ZIP). Gör så att ädelstenar av olika färg kan dyka upp när den ska börja falla uppifrån
+Det finns ädelstenar med flera olika färger i mediefilen https://www.aposteriori.com.sg/wp-content/uploads/2020/02/image_pack.zip. Gör så att ädelstenar av olika färg kan dyka upp när den ska börja falla uppifrån
 
 ## Utmaning 3. Välja skepp
-
-Mediefilen (ZIP) har flera olika slags rymdskepp. Fråga användaren vilket rymdskepp den vill ha när den ska spela.
+Mediefilen https://www.aposteriori.com.sg/wp-content/uploads/2020/02/image_pack.zip har flera olika slags rymdskepp. Fråga användaren vilket rymdskepp den vill ha när den ska spela.
 
 ## Utmaning 4. Flera ädelstenar
 Just nu är det bara en fallande ädelsten åt gången. Ändra spelet så att flera kan falla samtidigt.
 
-## Utmanming 5. Multi-player
+## Utmaning 5. Multi-player
 Lägg till en andra spelare och tävla om vem som får högst poäng!
 
 # Källor/Sources
