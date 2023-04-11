@@ -1,14 +1,13 @@
-**Innehåll:** [Infinite Runner](#infinite-runner) &bull;
-[Bakgrund](#bakgrund) &bull;
+**Innehåll:** [Bakgrund](#bakgrund) &bull;
 [Ninjan](#ninjan) &bull;
 [Hoppa](#hoppa) &bull;
 [Hinder](#hinder) &bull;
 [Poängräkning](#poängräkning) &bull;
 [Game Over](#game-over) &bull;
-[Utmaningar och buggar](#utmaningar-och-buggar) &bull;
+[Uppgifter](#uppgifter) &bull;
 [Källor](#källor)
 
-# Infinite Runner
+# Infinite Runner ⭐⭐
 
 ![image](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/google-runner.gif)
 
@@ -543,7 +542,7 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-# Uppgifter &ndash; buggar och utmaningar!
+# Uppgifter
 
 Det är vanligt att program har buggar. Jag har avsiktligt lämnat kvar ett par buggar i vårt ninjaspel. Har du hittat några än? Pröva att rätta dem!
 
