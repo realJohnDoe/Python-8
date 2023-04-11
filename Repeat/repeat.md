@@ -1,12 +1,11 @@
-# Repeat
+# Repeat ⭐⭐⭐
 
 ### En handledning för Python och Pygame Zero 1.2
 
 ![image](https://user-images.githubusercontent.com/4598641/225698865-f394ffdb-6b0c-4731-8763-915c93b7b965.png)
 
 ### Innehåll
-**[Regler för minnesspelet Repeat](#regler-för-minnesspelet-repeat)**
-
+**[Regler för minnesspelet Repeat](#regler-för-minnesspelet-repeat)** &bull;
 **[Kodning](#kodning)**
    [Sekvens](#sekvens)
   &bull; [Nuvarande position i sekvensen](#nuvarande-position-i-sekvensen)
@@ -24,10 +23,8 @@
   &bull; [Tillfälligt blinkande](#tillfälligt-blinkande)
   &bull; [Game over-läge](#game-over-läge)
   &bull; [Visa text baserat på vilket läge vi är i](#visa-text-baserat-på-vilket-läge-vi-är-i)
-
-**[Uppgifter](#uppgifter)**
-
-**[Källor](#källor)**
+&bull;
+**[Uppgifter](#uppgifter)** &bull; **[Källor](#källor)**
 
 # Regler för minnesspelet Repeat
 Se på när en siffersekvens blinkar och försök att komma ihåg ordningen på siffrorna.
