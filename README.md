@@ -119,5 +119,6 @@ https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md
 | [ | `alt gr` + `8` |
 | ] | `alt gr` + `9` |
 | @ | `alt gr` + `2` |
+| _ | `⬆️` + `–` |
 
 
