@@ -15,6 +15,8 @@ Välkommen till Pythonuppgifter för årskurs 8 🐍 Spelen är översatta från
   &bull; [Repeat](#repeat-)
   &bull; [Snake](#snake-)
   &bull; [Sokoban](#sokoban-)
+  
+[**Hitta symboler på tangentbordet**](#var-hittar-jag-symbolerna-på-tangentbordet)
 
 ### Gradering
 ⭐: lättare uppgift &ndash; du ska göra minst en av dessa och får göra alla om du vill<br>
@@ -107,10 +109,8 @@ https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md
 
 https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md
 
-# Vanliga frågor
 
-* Var hittar jag symbolerna på tangentbordet?
-
+# Var hittar jag symbolerna på tangentbordet?
 
 | Symbol | Tangent på Chromebook, svenskt tangentbord |
 | ------------- | ------------- |
