@@ -111,3 +111,13 @@ https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md
 
 * Var hittar jag symbolerna på tangentbordet?
 
+
+| Symbol | Tangent på Chromebook, svenskt tangentbord |
+| ------------- | ------------- |
+| { | `alt gr` + `7` |
+| } | `alt gr` + `0` |
+| [ | `alt gr` + `8` |
+| ] | `alt gr` + `9` |
+| @ | `alt gr` + `2` |
+
+
