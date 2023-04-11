@@ -2,7 +2,7 @@
 
 Välkommen till Pythonuppgifter för årskurs 8 🐍 Spelen är översatta från engelska och anpassade till [repl.it](https://replit.com/~).
 
-* **Lätta uppgifter att börja med:** [Hello 🌍🌎🌏](#hello---) &bull; Spökhuset; *se Google Classroom* &bull; Nio liv; *se Google Classroom*
+* **Lätta uppgifter att börja med:** [Hello 🌍🌎🌏](#hello---) &bull; Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*
 * **Matteuppgifter:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-)
 * **Speluppgifter:** 
    [Gem Catcher](#gem-catcher-)
