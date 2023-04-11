@@ -1,4 +1,4 @@
-# Game of Life
+# Game of Life ⭐⭐
 ## En handledning för Python och Pygame Zero 1.2
 
 Game of Life uppfanns av John Conway år 1970. Det är ett spel utan spelare &ndash; allt är bestämt när du valt startuppställningen.
