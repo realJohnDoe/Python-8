@@ -1,4 +1,4 @@
-# Hello 🌍🌎🌏
+# Hello 🌍🌎🌏  ⭐
 
 ## Detta kommer du att göra
 - [Säga hej](#säg-hej)
