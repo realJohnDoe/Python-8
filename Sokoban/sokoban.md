@@ -2049,7 +2049,10 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442358-30a184b9-f44a-4b1f-b418-b73c8b0cd8b9.png)
 
 ## Förenkla koden
-Vi gör en ordlista där vi kan slå upp vilken typ granncellen ska ha, beroende på vilken typ granncellen har just nu.
+A dictionary is made which returns the next adjacent cell type when a box is pushed when indexed by the current adjacent cell type.
+
+Vi gör en ordlista där vi kan slå upp vilken typ granncellen ska när vi har puttat lådan ett steg, beroende på vilken typ granncellen har just nu.
+>Om t.ex. granncellen är en låda (box) och spelaren puttar lådan så kommer ju spelaren (player) att hamna på granncellen. Därför är första raden i ordlistan `next_adjacent_push[box]` lika med `player`.
 
 ✏️ Uppdatera koden. Fungerar den som innan?
 #nytt 🔲
