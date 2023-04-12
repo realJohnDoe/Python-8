@@ -1310,7 +1310,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442123-828097c9-b89f-449a-9de0-e83d8a774464.png)
 
 ## Förenkla koden
-Vi gör en ordlista som ger nästa celltyp för spelarens tidigare position när den indexeras av celltypen där spelaren är just nu.
+Vi gör en ordlista där vi kan slå upp nästa celltyp för spelarens tidigare position när den indexeras av celltypen där spelaren är just nu.
 
 ✏️ Uppdatera koden. Fungerar koden som innan?
 
@@ -1752,7 +1752,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Förenkla koden
 
-Vi gör en ordlista som ger nästa celltyp när den indexeras av den aktuella celltypen.
+Vi gör en ordlista där vi kan slå upp nästa celltyp när vi vet den aktuella celltypen.
 
 ✏️ Uppdatera koden. Fungerar koden som innan?
 
@@ -2049,7 +2049,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442358-30a184b9-f44a-4b1f-b418-b73c8b0cd8b9.png)
 
 ## Förenkla koden
-En ordlista skapas som returnerar nästa intilliggande celltyp när en ruta trycks när den indexeras av den aktuella intilliggande celltypen.
+Vi gör en ordlista där vi kan slå upp nästa intilliggande celltyp när en låda puttas dit, givet vilken typ den intilliggande cellen har just nu.
 
 ✏️ Uppdatera koden. Vad händer när du ...?
 #nytt 🔲
@@ -2210,7 +2210,7 @@ Numret på den aktuella nivån sparas också.
 Den aktuella nivån kopieras från listan som innehåller alla nivåer.
 
 Kopieringsmodulen importeras så att [Pythons `copy.deepcopy`](https://docs.python.org/3/library/copy.html) kan användas.
->Varför behövs deepcopy? För att kunna återställa nivån till sitt ursprungliga utseende behöver vi en egen kopia av nivån och det får vi med hjälp av Pythons `deepcopy`-funktion. 
+>Varför behövs deepcopy? För att kunna återställa nivån till sitt ursprungliga utseende behöver vi jobba med en kopia så att vi inte skriver över originalet. En sån kopia kan vi göra med Pythons `deepcopy`-funktion. 
 
 ✏️ Uppdatera koden. Kommer du till första nivån när du testkör?
 
