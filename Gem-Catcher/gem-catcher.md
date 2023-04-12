@@ -81,13 +81,13 @@ Så här ser koordinatsystemet ut i Pygame Zero:
 ![image](https://user-images.githubusercontent.com/4598641/222978372-85be8781-e6fe-414e-9fb1-b7847dfc8b5f.png)
 
 ✏️ Testkör! Visas rymdskeppet?
-
+>Du behöver ha bildfilen *playership1_blue* som ingår i startprojektet för att det ska fungera. Den bilden ligger i mappen *images* som finns till vänster i repl.it-fönstret.
 
 # Funktionen `update()`
 
 Vi la till funktionen `draw()` innan. Det är en speciell funktion som Pygame Zero kör väldigt ofta för att rita det du ser på skärmen. En annan speciell funktion är `update()`. Pygame Zero anropar regelbundet vår `update()`-funktion för att uppdatera/rita om de olika figurerna i spelet.
 
-✏️ Vi lägger till kod i `update()` så att den kan reagera på tangentnertryckningar, i vårt fall vänster- och högerpil.
+✏️ Vi lägger till kod i `update()` så att den kan reagera på tangentbordet, i vårt fall vänster- och högerpil.
 
 ```python
 import pgzrun
