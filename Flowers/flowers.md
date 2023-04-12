@@ -48,7 +48,7 @@
 # Regler
 Spelet börjar med ett rutnät av täckta celler. Under några av cellerna finns blommor. Spelet är över när en cell med blomma avtäcks.
 
-När man klickar på en cell så avtäcks den. Om ingen av de intilliggande cellerna innehåller blommor, avtäcks de också och för de avtäckta cellerna, om ingen av deras intilliggande celler innehåller blommor, avtäcks de också, och så vidare.
+När man klickar på en cell så avtäcks den. Om ingen av granncellerna innehåller blommor, avtäcks de också. De avtäckta celler som saknar blomgrannar avtäcks också, och så vidare.
 
 Att högerklicka på en cell växlar mellan en flagga, ett frågetecken eller ingenting. 
 - Flaggor förhindrar att en cell avtäckas med ett vänsterklick. 
@@ -83,7 +83,7 @@ När en cell klickas läggs dess position till i listan "avtäckningsstacken".
 Så länge finns något kvar i avtäckningsstacken:
 - Tar vi bort ett element från slutet av stacken.
 - Denna position (x, y) sätts till att vara avtäckt.
-- Om det inte finns några blommor som omger denna position läggs de omgivande täckta och frågemarkerade positionerna  till avtäckningsstacken. Celler som redan är avtäcka eller har en flagga läggs inte till avtäckningsstacken.
+- Om det inte finns några blommor som omger denna position läggs de grannar som är täckta och frågemarkerade till avtäckningsstacken. Celler som redan är avtäckta eller har en flagga läggs inte till avtäckningsstacken.
 
 Cellerna ritas genom att sätta ihop följande bilder:
 
@@ -696,7 +696,7 @@ pgzrun.go()  # måste vara sista raden
 För att räkna antalet blommor runt en cell, loopar vi igenom de åtta grannarna runt varje cell. 
 Om någon av de positionerna är inuti rutnätet och cellen vid den positionen har en blomma, ökar vi antalet blommor med 1.
 
-Om det omgivande antalet blommor är större än 0, så ritar vi rätt siffra (bild) över cellen.
+Om antalet blomgrannar är större än 0, så ritar vi rätt siffra (bild) över cellen.
 
 ✏️ Uppdatera funktionen `draw` genom att lägga till kod i slutet. Testkör! Räknar koden rätt?
 
@@ -1634,7 +1634,7 @@ Som koden ser ut just nu kommer den att avtäcka alla cellerna. Vi behöver rät
 
 När vi tar en ruta från avtäckningsstacken ska vi lägga till granncellerna. Vi vill bara lägga till de grannceller som *inte* har någon blomgranne i sin tur.
 
-Vi behöver kunna räkna ut antalet omgivande blommor på flera ställen. Därför lägger vi den koden i en egen funktion, `get_surrounding_flower_count(x, y)`.
+Vi behöver kunna räkna ut antalet blomgrannar på flera ställen. Därför lägger vi den koden i en egen funktion, `get_surrounding_flower_count(x, y)`.
 
 ```python
 def get_surrounding_flower_count(x, y): #nytt 🌻
