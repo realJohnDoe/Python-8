@@ -1375,7 +1375,7 @@ def update(dt):
     timer += dt
     if timer >= 0.5:
         timer = 0
-        # Temporary
+        # Tillfälligt
         print('tick')
 ```
 
@@ -1449,7 +1449,7 @@ def update(dt):
     timer += dt
     if timer >= 0.5:
         timer = 0
-        # Temporary
+        # Tillfälligt
         print('tick')
 
 
