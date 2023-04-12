@@ -13,7 +13,7 @@
 
 Ett spel av typen Infinite/Endless Runner tar aldrig slut. Målet är att överleva så långt som möjligt och ju längre, desto högre poäng får du.
 
-För att göra vårt spel ska vi använda vad vi lärt oss från spelet Gem Catcher och lägga till
+För att göra vårt spel ska vi använda vad vi lärt oss från spelet [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) och lägga till
 - ritning
 - animering
 - fysik
@@ -25,7 +25,7 @@ Använd knappen **Fork** för att spara en kopia.
 
 # Bakgrund
 ## Första steget
-Precis som i Gem Catcher börjar vi koda vårt spel genom att
+Precis som i [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) börjar vi koda vårt spel genom att
 
 - importera Pygame Zero
 - sätta grafikfönstrets bredd och höjd
@@ -37,6 +37,7 @@ WIDTH, HEIGHT = 800, 600
 
 pgzrun.go() # Måste vara sista raden
 ```
+
 Spara ditt projekt i din egen repl.it.
 
 ## Rita
@@ -146,7 +147,7 @@ runner.images = run_images
 
 Det här gör de olika raderna:
 
-`runner = Actor('run__000')` : Skapar en ny aktör (Actor) med första bildfilen som heter `run`. Det är samma som i spelet Gem Catcher.
+`runner = Actor('run__000')` : Skapar en ny aktör (Actor) med första bildfilen som heter `run`. Det är samma som i spelet [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md).
 
 `run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']` : Skapar en ny lista med namnet `run_images`. Listan har namnet med de olika utseendena för figuren. Om du inte använder ninjan, behöver du uppdatera namnen till vad dina bilder heter.
 
@@ -292,7 +293,7 @@ pgzrun.go() # Måste vara sista raden
 # Hinder
 ## En lista med figurer
 
-I vårt Gem Catcher-spel har vi bara en ädelsten i taget och den flyttar sig till toppen av skärmen varje gång vi fångar den.
+I vårt [Gem Catcher-spel](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) har vi bara en ädelsten i taget och den flyttar sig till toppen av skärmen varje gång vi fångar den.
 I vårt ninjaspel kommer vi att flera hinder på skärmen samtidigt.
 För att klara det behöver vi använda **listor**.
 
@@ -394,7 +395,7 @@ pgzrun.go() # Måste vara sista raden
 
 ## Poängen
 
-Precis som i Gem Catcher, använder vi en variabel `score` för att hålla reda på vår poängställning.
+Precis som i [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md), använder vi en variabel `score` för att hålla reda på  poängställningen.
 
 ```python
 score = 0
