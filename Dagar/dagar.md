@@ -225,7 +225,7 @@ def dagnummer(år, månad, dag):
 
 ✏️ Tror du att testet för februari (dag 59) fungerar nu? Testkör. 
 
-✏️ Lägg nu till ett fler tester. **Åtminstone behöver du ett test för nyårsafton.** Vi struntar i skottår så länge. Därför är nyårsafton dag 365.
+✏️ Lägg nu till fler tester. **Åtminstone behöver du ett test för nyårsafton.** Vi struntar i skottår så länge. Därför är nyårsafton dag 365.
 
 **main.py**
 ```
