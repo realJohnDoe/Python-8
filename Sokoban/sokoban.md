@@ -536,7 +536,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Hitta celltypen i den riktning som piltangenten pekar
 
-Celltypen för spelarens nuvarande position och celltypen för den intilliggande positionen i riktningen för den nedtryckta piltangenten lagras i variabler och skrivs  ut just nu.
+Celltypen för spelarens nuvarande position och celltypen för grannen i piltangentens riktning lagras i variabler och skrivs ut just nu.
 
 ✏️ Uppdatera koden i `on_key_down`. Vad händer när du trycker på piltangenterna? Ser du utskriften i konsollfönstret?
 >Kom ihåg att klicka i spelfönstret när du klickat på Run. Då kan din kod fånga upp tangenttryckningarna.
@@ -810,7 +810,7 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Flytta spelaren till en tom ruta
-Om värdet på spelarens nuvarande position är `player`, alltså inte `player_on_storage` *och* cellen intill är tom, flyttar vi spelaren till den tomma cellen.
+Om värdet på spelarens nuvarande position är `player`, alltså inte `player_on_storage` *och* granncellen är tom, flyttar vi spelaren till den tomma granncellen.
 
 ✏️ Uppdatera koden i `on_key_down`. Vad händer när du går runt med piltangenterna?
 
@@ -1053,9 +1053,9 @@ pgzrun.go()  # måste vara sista raden
 
 ## Förenkla koden
 Den nya grannrutan &ndash; antingen `player` eller `player_on_storage` &ndash; ställs in baserat på typen av `adjacent`.
-Därför skapar vi en ordlista som ger nästa intilliggande celltyp när den indexeras av den aktuella intilliggande celltypen.
+Därför skapar vi en ordlista där vi kan slå upp granncellens nya typ när vi vet vilken typ granncellen har just nu.
 
-Den används också för att kontrollera om spelaren kan flytta till den intilliggande positionen genom att kontrollera om den har en nyckel med värdet `adjacent` .
+Den används också för att kontrollera om spelaren kan flytta till den granncellen genom att kontrollera om den har en nyckel med värdet `adjacent` .
 
 
 ✏️ Uppdatera koden. Testkör. Fungerar det som innan?
@@ -1438,13 +1438,13 @@ pgzrun.go()  # måste vara sista raden
 
 
 ## Putta lådan till tom plats
-Cellen bortom den intilliggande cellen lagras i en variabel. Vi behöver hålla reda på om vi nära någon av kanterna på rutnätet.
+Cellen bortom den granncellen lagras i en variabel. Vi behöver hålla reda på om vi nära någon av kanterna på rutnätet.
 - `player_y + dy + dy` kontrolleras för att se om det är större än eller lika med 0 och mindre än `len(level)`, dvs det är inom nivån i y-led.
 - `player_x + dx + dx` kontrolleras för att se om det är större än eller lika med 0 och mindre än `len(level[player_y + dy + dy])`, dvs det är inom nivån i x-led.
 
-Den intilliggande rutan kollas inte på samma sätt eftersom det alltid finns en kant av väggar runt varje nivå, så `player_y + dy` eller `player_x + dx` kommer aldrig att vara utanför spelområdet.
+Grannrutan kollas inte på samma sätt eftersom det alltid finns en kant av väggar runt varje nivå, så `player_y + dy` eller `player_x + dx` kommer aldrig att vara utanför spelområdet.
 
-Om den intilliggande cellen är en låda och cellen bortom lådan är tom, sätter vi den intilliggande cellen till `player` och positionen bortom till `box`. Spelaren har alltså puttat lådan ett steg i den valda riktningen.
+Om granncellen är en låda och cellen bortom lådan är tom, sätter vi granncellen till `player` och positionen bortom till `box`. Spelaren har alltså puttat lådan ett steg i den valda riktningen.
 
 ✏️ Uppdatera koden. Vad händer när spelaren puttar en låda?
 
@@ -2049,7 +2049,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442358-30a184b9-f44a-4b1f-b418-b73c8b0cd8b9.png)
 
 ## Förenkla koden
-Vi gör en ordlista där vi kan slå upp nästa intilliggande celltyp när en låda puttas dit, givet vilken typ den intilliggande cellen har just nu.
+Vi gör en ordlista där vi kan slå upp vilken typ granncellen ska ha, beroende på vilken typ granncellen har just nu.
 
 ✏️ Uppdatera koden. Fungerar den som innan?
 #nytt 🔲
