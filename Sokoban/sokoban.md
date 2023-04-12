@@ -93,7 +93,7 @@ Om spelaren står vid en låda och rutan bredvid lådan är ledig, kan spelaren 
 
 ![image](https://user-images.githubusercontent.com/4598641/226441447-3953051d-e11b-4f3c-8f92-5589f177cd2d.png)
 
-Om det inte finns några lådor kvar som inte finns på lagerplatser är nivån klar.
+När alla lådor är på lagerplatser är nivån klar.
 
 
 # Kodning
