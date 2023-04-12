@@ -736,7 +736,9 @@ def dagar_före(år):
 - Beskriv hur du fick ändra koden för att göra ändringen. Glöm inte kodexempel.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
 
-4. *(Frivillig extrauppgift)* Ändra så att koden fungerar för datum på 1900-talet också. Räkna ut antalet dagar som en äldre bekant eller släkting fyller.
+4. I funktionen `dagnummer_på_året` finns det regler för alla månader till och med november. Varför behövs ingen regel för december?
+
+5. *(Frivillig extrauppgift)* Ändra så att koden fungerar för datum på 1900-talet också. Räkna ut antalet dagar som en äldre bekant eller släkting fyller.
 - Glöm inte kodexempel och att förklara hur du testade din ändring.
 
 [^1]: `return dag` istället för `return 1`
