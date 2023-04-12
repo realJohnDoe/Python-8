@@ -143,14 +143,6 @@ pgzrun.go()  # måste vara sista raden
 
 ![image](https://user-images.githubusercontent.com/4598641/226439469-a0bf9621-d2ff-4b38-810e-9a1be63b3324.png)
 
-<details>
-    <summary>📝 Så här kan koden se ut nu</summary>
-
-```python
-###
-```
-</details>
-
 
 ## Timer
 Ormen kommer att röra sig var 0,15:e sekund.
