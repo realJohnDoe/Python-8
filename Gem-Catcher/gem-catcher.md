@@ -517,6 +517,7 @@ def on_key_down(key, mod, unicode):
     if mod & keymods.LSHIFT:
         print('Left shift button pressed')
 ```
+Detta är bara ett exempel. **Lägg inte till det i ditt spel just nu**
 
 `unicode` : Vilket tecken som skrevs, om något. Du kan läsa av det så här:
 ```python
@@ -524,6 +525,7 @@ def on_key_down(key, mod, unicode):
     if unicode == 'e':
         print('e button pressed')
 ```
+Detta är bara ett exempel. **Lägg inte till det i ditt spel just nu**
 
 
 # Game Over
