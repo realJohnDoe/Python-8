@@ -1900,9 +1900,9 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Putta lådan till en lagerplats
-Om den intilliggande cellen är en låda på lagerplats, så sätts den intilliggande cellen till `player_on_storage`. Spelaren står då på en (tom) lagerplats.
+Om granncellen är en låda på lagerplats, så sätts den till `player_on_storage`. Spelaren står då på en (tom) lagerplats.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Vad händer när du puttar en låda till en lagerplats eller står på en lagerplats?
 
 ```python
 def on_key_down(key):
@@ -2051,7 +2051,7 @@ pgzrun.go()  # måste vara sista raden
 ## Förenkla koden
 Vi gör en ordlista där vi kan slå upp nästa intilliggande celltyp när en låda puttas dit, givet vilken typ den intilliggande cellen har just nu.
 
-✏️ Uppdatera koden. Vad händer när du ...?
+✏️ Uppdatera koden. Fungerar den som innan?
 #nytt 🔲
 ```python
 def on_key_down(key):
