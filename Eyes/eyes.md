@@ -232,7 +232,7 @@ def draw():
 
 # behåll resten av koden
 ```
-:pencil2: **Uppdatera och testa koden.** Fungerar den bra när muspekaren är innanför ögats cirkel?
+:pencil2: **Uppdatera och testa koden.** Fungerar den bra även när muspekaren är utanför ögats cirkel?
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
