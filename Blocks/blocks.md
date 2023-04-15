@@ -152,7 +152,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Lagring av orörliga block
 
-Vi skapar ett variabel `inert` som håller reda på rutnätet för de orörliga blocken. 
+Vi skapar en variabel `inert` som håller reda på rutnätet för de orörliga blocken. 
 Varje block sätts till ett mellanslag, `' '`. Det representerar ett tomt block.
 
 Bredden och höjden på rutnätet räknat i block behöver vi på flera ställen i koden. Därför gör vi bredden och höjden till variabler.
