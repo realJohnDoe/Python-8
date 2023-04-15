@@ -462,7 +462,7 @@ fråga_och_svara() # nytt 📆
 
 </details>
 
-✏️ Kan du använda din app för att svara på frågan när du fyller 5555 dagar? Kanske du har någon kompis eller släkt som fyller 12345 dagar?
+✏️ Kan du använda din app för att svara på frågan när du fyller 5555 dagar? Kanske du har någon kompis eller släkt som vill veta hur många dagar hen är?
 
 ✏️ Gör steg 6 för att få rätt på skottår eller hoppa direkt till [uppgifterna](#uppgifter) längst ner.
 
