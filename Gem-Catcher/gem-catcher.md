@@ -22,7 +22,7 @@ Skelettet för ett Pygame Zero-program ser ut så här:
 ```python
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 pgzrun.go() # Måste vara sista raden
 ```
@@ -52,7 +52,7 @@ Så här ser det ut i repl.it. Du kan klicka på bildfilen så visas den längst
 ```python
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -80,7 +80,7 @@ Så här ser koordinatsystemet ut i Pygame Zero:
 
 ![image](https://user-images.githubusercontent.com/4598641/222978372-85be8781-e6fe-414e-9fb1-b7847dfc8b5f.png)
 
-✏️ Testkör! Visas rymdskeppet?
+✏️ Testkör! Visas rymdskeppet? Du kan behöva göra ditt spelfönster (Output) större för att se rymdskeppet längst ner.
 >Du behöver ha bildfilen *playership1_blue* som ingår i startprojektet för att det ska fungera. Den bilden ligger i mappen *images* som finns till vänster i repl.it-fönstret.
 
 # Funktionen `update()`
@@ -92,7 +92,7 @@ Vi la till funktionen `draw()` innan. Det är en speciell funktion som Pygame Ze
 ```python
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -150,7 +150,7 @@ Nu ska ditt program se ut så här:
 ```
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -195,7 +195,7 @@ Din kod ska nu se ut så här:
 ```python
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -243,7 +243,7 @@ if gem.y > HEIGHT:
 ```python
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -315,7 +315,7 @@ Nu bör din kod se ut så här:
 import pgzrun
 import random
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -429,7 +429,7 @@ Som med de andra ritfunktionerna, behöver vi lägga detta inuti funktionen `dra
 import pgzrun
 import random
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
@@ -600,7 +600,7 @@ Till slut bör din kod se ut så här:
 import pgzrun
 import random
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 ship = Actor('playership1_blue')
 ship.x = WIDTH / 2 - 30
