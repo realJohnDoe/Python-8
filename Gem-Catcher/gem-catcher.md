@@ -496,7 +496,7 @@ def on_mouse_move(pos, rel, buttons):
 ```
 Detta är bara ett exempel. **Lägg inte till det i ditt spel just nu**
 
-## Andra händelser
+## Exempel på andra händelser
 
 Förutom musrörelser, finns det också andra funktioner som Pygame Zero kör när motsvarande händelse inträffar. De här händelserna finns:
 
