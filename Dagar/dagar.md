@@ -340,6 +340,7 @@ testa()
 ## STEG 4: Hantera olika år
 
 Nu ska vi göra klart funktionen `dagnummer` så att den klarar olika år. Just nu struntar den helt i vilket år det är.
+>Funktionen dagnummer ska ge oss antalet dagar räknat från den 1 januari 2000, som är dag 1.
 
 ✏️ Kan du skriva ett enkelt testfall som visar att funktionen `dagnummer` är trasig?
 >Ett sätt är att lägga till 1 januari 2001:
