@@ -339,7 +339,7 @@ Uträkningen av scale går att göra om så att vi får ännu färre kodrader. J
             pupil_x = eye_x + distance_x * scale 
             pupil_y = eye_y + distance_y * scale
 ```
-Kan du förenkla koden så att vi inte behöve två olika uträkningar av `pupil_x` resp. `pupil_y`?[^1]                          
+Kan du förenkla koden så att vi inte behöver två olika uträkningar av `pupil_x` resp. `pupil_y`?[^1]                          
 - Glöm inte kodexempel när du redovisar
     
 ## Extrauppgift 3
