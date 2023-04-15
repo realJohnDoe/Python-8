@@ -732,7 +732,7 @@ def dagar_före(år):
 
 2. Vad tyckte du var svårt med kodningen? Ge ett par exempel.
 
-3. Pröva att göra någon ändring eller förbättring. Se uppgift 4 för en idé.
+3. Pröva att göra någon ändring eller förbättring. Se uppgift 5 för en idé.
 - Beskriv kort vad ändringen är och hur den ska fungera.
 - Beskriv hur du fick ändra koden för att göra ändringen. Glöm inte kodexempel.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
