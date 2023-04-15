@@ -328,14 +328,25 @@ pgzrun.go()
 Vad tyckte du var svårt med kodningen? Ge ett par exempel.
 
 ## Uppgift 2
-Uträkningen av scale går att göra om så att vi får ännu färre kodrader. Kan du komma på hur?[^1]                          
+Uträkningen av scale går att göra om så att vi får ännu färre kodrader. Just nu har vi den här koden, där det är väldigt lite skillnad mellan de två kodblocken under `if`  respektive `else`:
+```python
+    # inuti funktionen draw():
+        if distance < radius: # fall 1: innanför ögat
+            pupil_x = eye_x + distance_x
+            pupil_y = eye_y + distance_y
+        else: # fall 2: utanför ögat
+            scale = radius / distance # se bilden
+            pupil_x = eye_x + distance_x * scale 
+            pupil_y = eye_y + distance_y * scale
+```
+Kan du förenkla koden så att vi inte behöve två olika uträkningar av `pupil_x` resp. `pupil_y`?[^1]                          
 - Glöm inte kodexempel när du redovisar
     
-## Extrauppgift
+## Extrauppgift 3
 Kan du få ögonen att byta färg, försvinna eller röra sig?
 - Glöm inte kodexempel när du redovisar
     
-## Extrauppgift
+## Extrauppgift 4
 Kan du lägga in någon annan slags figur och få ögonen att följa den figuren istället för muspekaren?
 - Glöm inte kodexempel när du redovisar
 
