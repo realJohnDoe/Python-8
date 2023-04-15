@@ -5481,7 +5481,7 @@ Koden fungerar ju lika bra som innan utan att spelaren märker något.
 
 ## 3. Gör spelet ännu bättre
 
-Pröva att göra några ändringar eller tillägg som du saknar. T.ex. kan du lägga till någon mer bit eller ha en poängräknare?
+Pröva att göra några ändringar eller tillägg som du saknar. T.ex. kan du lägga till någon mer bit, ha en poängräknare eller kanske göra grafiken snyggare eller roligare?
 - Beskriv kort vad ändringen är och hur den ska fungera för spelaren.
 - Beskriv hur du fick ändra koden. Glöm inte kodexempel.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
