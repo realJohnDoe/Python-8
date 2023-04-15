@@ -76,7 +76,8 @@ Detta är vad raderna gör:
 
 `ship.draw()` : Talar om för skeppets Actor att rita sig på skärmen. Koden behöver vara indragen under `def draw():` så att den körs när Pygame Zero anropar funktionen `draw()`.
 
-Så här ser koordinatsystemet ut i Pygame Zero:
+Så här ser koordinatsystemet ut i Pygame Zero med WIDTH = 800 och HEIGHT = 600.
+>I vårt fall kör vi med WIDTH = 600 och HEIGHT = 450 men du kan testa att ändra värdena. Du kan behöva justera storleken på spelfönstret (Output) uppe till höger i repl.it.
 
 ![image](https://user-images.githubusercontent.com/4598641/222978372-85be8781-e6fe-414e-9fb1-b7847dfc8b5f.png)
 
