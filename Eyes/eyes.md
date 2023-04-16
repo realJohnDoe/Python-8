@@ -6,7 +6,7 @@ Vi vill göra en animering där ögonen följer muspekaren.
 
 ## Innehåll
 [Rita ett öga](#rita-ett-öga)
-&bull; [Räkna ut avståndet mellan muspekaren och ögat](#räkna-ut-avståndet-mellan-muspekaren-och-ögat)
+&bull; [Räkna ut avståndet i X- och Y-led mellan muspekaren och ögat](#räkna-ut-avståndet-i-x--och-y-led-mellan-muspekaren-och-ögat)
 &bull; [Räkna ut avståndet mellan muspekaren och ögat](#räkna-ut-avståndet-mellan-muspekaren-och-ögat)
 &bull; [Rörlig pupill](#rörlig-pupill)
 &bull; [Pupillen ska inte smita när muspekaren är utanför ögat](#pupillen-ska-inte-smita-när-muspekaren-är-utanför-ögat)
@@ -37,7 +37,7 @@ pgzrun.go() # måste vara sist
 ✏️ Se till att du är inloggad i repl.it. Gör en kopia av startprojektet https://replit.com/@RobertStorlind/eyes-starter
 med knappen "Fork". Testkör!
 
-# Räkna ut avståndet mellan muspekaren och ögat
+# Räkna ut avståndet i X- och Y-led mellan muspekaren och ögat
 Vi lägger till kod så att avståndet mellan ögats mitt och muspekaren visas, räknat i pixlar.
 
 - Ögats x- och y-koordinater återanvänder vi från när vi ritar ögat och därför sparar vi koordinaterna i variabler.
