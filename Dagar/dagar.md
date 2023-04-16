@@ -736,7 +736,7 @@ def dagar_före(år):
 ```
 
 # Uppgifter
-1. När fyller/fyllde du 5000 dagar?
+1. När fyller/fyllde du 5000 dagar? Hur många dagar fyller du idag?
 
 2. Vad tyckte du var svårt med kodningen? Ge ett par exempel.
 
