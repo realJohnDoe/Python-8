@@ -120,8 +120,11 @@ testa() # ändra 📆
 # fråga_och_svara() # ändra 📆
 ```
 
-✏️ Vad händer om du kör appen nu? Vad står det i terminalfönstret?
+✏️ Vad händer om du kör appen nu? Vad står det i terminalfönstret? Verkar det rimligt?
 
+Så här ser det ut när jag kör:
+
+![image](https://user-images.githubusercontent.com/4598641/232322229-35ae5131-5a1f-4ca0-8f0a-01b83af2cc3b.png)
 
 ## STEG 3: Testa januari
 Vi vill att funktionen `dagnummer` ska ge oss antalet dagar från den 1 januari 2000, som vi kan kalla dag 1.
@@ -179,6 +182,10 @@ testa()
 ```
 
 ✏️ Vad tror du resultatet blir nu? Kör koden i repl.it. Vad står det i terminalfönstret? Blev det som du tänkte dig?
+
+Så här ser det ut när jag kör:
+
+![image](https://user-images.githubusercontent.com/4598641/232322377-507ed926-03d1-44d4-a4e2-8039bf758ab8.png)
 
 Kan du hitta på ett sätt att ändra funktionen `dagnummer` så att våra två tester fungerar? 
 `dagnummer(2000, 1, 1)` ska ge svaret 1 och `dagnummer(2000, 1, 31)` ska ge svaret 31.[^1]
