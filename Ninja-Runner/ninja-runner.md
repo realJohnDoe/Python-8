@@ -69,7 +69,7 @@ Det här gör de nya raderna:
 
 `screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254)` : Detta ritar en rektangel på skärmen med övre vänstra hörnet (0, 0), en bredd på WIDTH (800) och en höjd på HEIGHT - 200 (400). Färgen är en blandning av 163 delar röd, 232 grön och 254 blå.
 
-**Testa att experimentera med olika färger och se vad du får. Kom ihåg att varje färgkomponent ska vara mellan 0 och 255.**
+✏️ **Testa att experimentera med olika färger och se vad du får. Kom ihåg att varje färgkomponent ska vara mellan 0 och 255.**
 
 ## Marken
 Steget innan ritade himlen. Vi lägger till en andra rektangel för att rita marken.
@@ -89,7 +89,7 @@ Det här gör den nya raden:
 
 `screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))` : Den här gången börjar rektangeln 200 pixlar ovanför underkanten, alltså x=0 and y=400, om du inte ändrat på WIDTH och HEIGHT vilket du kan vilja göra. Vi har räknat med att marken behöver 200 pixlar.
 
-Mata in detta och kör din kod. Din skärm bör se ut så här:
+✏️ Mata in detta och kör din kod. Din skärm bör se ut så här:
 
 ![image](https://user-images.githubusercontent.com/4598641/223218919-66ee7ecf-043f-4c08-a775-074ff487bb3c.png)
 
@@ -139,7 +139,7 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-Sparar och kör din kod för att se att allt fungerar som det ska.
+✏️ Spara och kör din kod för att se att allt fungerar som det ska.
 
 ## Ninjabilder
 Det finns redan ett antal ninjabilder förberedda i startprojektet. De ligger i mappen *images*.
@@ -168,7 +168,7 @@ Det här gör de olika raderna:
 
 `runner.images = run_images` : Talar om att `Actor` ska använda bildfilerna som listas `run_images` för animeringen.
 
-Vi behöver också lägga till `runner.draw()` i funktionen `draw()`. När det är gjort bör din kod se ut så här:
+✏️ Vi behöver också lägga till `runner.draw()` i funktionen `draw()`. När det är gjort bör din kod se ut så här:
 
 ```python
 import pgzrun
@@ -196,6 +196,8 @@ def update():
 ```
 Detta talar om för Pygame Zero att byta till nästa bild varje gång den uppdaterar. Med detta ska du nu ha en springande ninja!
 
+✏️ Testkör!
+
 ### Justera placeringen
 
 Du kan justera ninjas placering med `runner.x` och `runner.y`. Pröva detta:
@@ -204,7 +206,7 @@ Du kan justera ninjas placering med `runner.x` och `runner.y`. Pröva detta:
 runner.x = 100
 runner.y = HEIGHT - 200
 ```
-**Pröva att justera ninjans position genom att ändra `runner.x` och `runner.y` tills hon är där du vill.**
+✏️ **Pröva att justera ninjans position genom att ändra `runner.x` och `runner.y` tills hon är där du vill.**
 
 # Hoppa
 
@@ -267,6 +269,8 @@ if runner.y > HEIGHT - 200:
   runner.y = HEIGHT - 200
 ```
 Här bestämmer vi att `HEIGHT - 200` är där marken börjar och om ninjan är på en y-koordinat som är större än `HEIGHT - 200` så sätter vi hennes `velocity_y` till 0 och y-koordinaten till `HEIGHT - 200`. Detta hindrar att hon faller igenom marken.
+
+✏️ Testkör!
 
 Ditt program bör nu se ut så här:
 ```python
@@ -351,6 +355,8 @@ Till slut behöver vi rita hindren på skärmen. Lägg till det här i `draw()`-
 for actor in obstacles:
   actor.draw()
 ```
+
+✏️ Uppdatera och testkör!
 
 Nu ska ditt program se ut ungefär så här:
 
@@ -449,7 +455,7 @@ Vi behöver också visa poängen på skärmen så här:
 ```python
 screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
 ```
-Ändra gärna färg, placering eller teckenstorleken.
+✏️ Ändra gärna färg, placering eller teckenstorleken.
 
 
 # Game Over
@@ -471,7 +477,7 @@ if runner.collidelist(obstacles) != -1:
 Frågan `runner.collidelist(obstacles)` kollar om ninjan har krockat med något av hindren i listan `obstacles`.
 Om hon inte gjorde det, ger funktionen `collidelist` värdet &ndash;1.
 
-Sen behöver vi skriva texten "Game over" inuti `draw()` genom att ändra från
+Sen behöver vi skriva texten *Game over* inuti `draw()` genom att ändra från
 ```python
   runner.draw()
   for actor in obstacles:
@@ -489,6 +495,8 @@ else:
     actor.draw()
   screen.draw.text(f"Score: {score}", (15, 10), color=(0, 0, 0), fontsize=30)
 ```
+
+✏️ Uppdatera och testkör!
 
 Ditt spel bör se ut så här till slut:
 
