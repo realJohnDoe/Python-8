@@ -66,6 +66,7 @@ fråga_och_svara()
 ```
 
 ✏️ Testa koden med gröna knappen Run i repl.it. Mata in dina svar i det svarta terminalfönstret.
+>Du kan avbryta programmet med tangentkombinationen `ctrl` + `C`.
 
 🤔 Vad tror du att resultatet kommer att bli?
 
