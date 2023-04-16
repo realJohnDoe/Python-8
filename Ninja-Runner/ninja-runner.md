@@ -27,7 +27,7 @@ Använd knappen **Fork** för att spara en kopia.
 ## Första steget
 Precis som i [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) börjar vi koda vårt spel genom att
 
-- importera Pygame Zero
+- importera Pygame Zero, spelmotorn vi ska använda
 - sätta grafikfönstrets bredd och höjd
 - anropa `pgzrun.go()`
 ```python
@@ -38,7 +38,7 @@ WIDTH, HEIGHT = 800, 600
 pgzrun.go() # Måste vara sista raden
 ```
 
-Spara ditt projekt i din egen repl.it.
+✏️ Spara ditt projekt i din egen repl.it. Testkör!
 
 ## Rita
 Vi kan rika olika figurer med hjälp av funktionerna i `screen.draw`. Vi har tidigare använt `screen.draw.text()` men det finns många fler funktioner, som till exempel
@@ -131,7 +131,9 @@ Sparar och kör din kod för att se att allt fungerar som det ska.
 ## Ninjabilder
 Det finns redan ett antal ninjabilder förberedda i startprojektet. De ligger i mappen *images*.
 
-![image](https://user-images.githubusercontent.com/4598641/223219964-a4109c3b-04be-4793-a600-dba2c386f297.png)
+![image](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/run__000.png)
+![image](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/run__002.png)
+![image](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/run__004.png)
 
 **Andra sätt: Det finns flera uppsättningar av bilder med springande figurer du kan använda. Testa 'dino', 'knight' eller 'zombies'.**
 
@@ -364,8 +366,8 @@ def update():
   obstacles_timeout += 1
   if obstacles_timeout > 50:
     actor = Actor('cactus')
-    actor.x = 850
-    actor.y = 430
+    actor.x = WIDTH + 50
+    actor.y = HEIGHT - 170
     obstacles.append(actor)
     obstacles_timeout = 0
 
@@ -405,7 +407,7 @@ Vi ökar poängen varje gång ett hinder försvinner ut åt vänster. Ändra det
   for actor in obstacles:
     actor.x -= 8
 ```
-… till detta: .
+… till detta:
 ```python
   for actor in obstacles:
     actor.x -= 8
