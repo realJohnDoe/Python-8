@@ -601,8 +601,9 @@ Det enda hindret just nu är kaktusen. Kan du göra så att programmet väljer b
 ![image](https://user-images.githubusercontent.com/4598641/223225631-7523def5-ca93-4bb9-a7d1-df6ad8b6e06c.png)
 ![image](https://user-images.githubusercontent.com/4598641/223225654-7930549a-1186-4d7e-8ae7-572e8670cd5d.png)
 
-### Utmaning 3. Varierande mellanrum
+### Utmaning 3. Sprid ut hindren
 Som spelet är nu dyker hindren alltid upp på samma avstånd från varann. Kan du slumpa till det så att hindren ibland är närmare och ibland längre från varann?
+>Kom ihåg att göra `import random` så kan du använda t.ex. `random.randint(min, max + 1)` för att få ett slumptal mellan `min` och `max`.
 
 # Källor
 Projektet är en översättning och anpassning till repl.it av originalet på https://aposteriori.trinket.io/game-development-with-pygame-zero#/ninja-runner/infinite-runner
