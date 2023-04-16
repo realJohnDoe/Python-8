@@ -750,6 +750,6 @@ def dagar_före(år):
 5. *(Frivillig extrauppgift)* Ändra så att koden fungerar för datum på 1900-talet också. Räkna ut antalet dagar som en äldre bekant eller släkting fyller.
 - Glöm inte kodexempel och att förklara hur du testade din ändring.
 
-6. *(Frivillig extrauppgift)* Användaren kan mata in datum som inte finns eller som programmet inte klarar av. Några exempel är 35 maj 2023 eller 31 januari 1910. Lägg in några kontroller så att koden säger till när år, månad eller dag eller fel. Låt sen användaren försöka igen.
+6. *(Frivillig extrauppgift)* Användaren kan mata in datum som inte finns eller som koden inte klarar av. Det kommer inga varningar. Några exempel är 35 maj 2023 eller 31 januari 1910. Lägg in några kontroller så att koden säger till när år, månad eller dag eller fel. Låt sen användaren försöka igen.
 
 [^1]: `return dag` istället för `return 1`
