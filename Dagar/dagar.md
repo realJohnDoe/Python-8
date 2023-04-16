@@ -10,17 +10,17 @@ Hur kan du använda den informationen för att räkna ut hur många dagar du fyl
 ![image](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)
 
 ## Innehåll
-[Steg 1: Prata med användaren](#steg-1-prata-med-användaren)
-&bull; [Steg 2: Förbered test](#steg-2-förbered-test)
-&bull; [Steg 3: Testa januari](#steg-3-testa-januari)
+[**Steg 1:** Prata med användaren](#steg-1-prata-med-användaren)
+&bull; [**Steg 2:** Förbered test](#steg-2-förbered-test)
+&bull; [**Steg 3:** Testa januari](#steg-3-testa-januari)
 &ndash; [Testa februari också](#testa-februari-också)
-&bull; [Steg 4: Hantera olika år](#steg-4-hantera-olika-år)
-&bull; [Steg 5: Testa användarupplevelsen](#steg-5-testa-användarupplevelsen)
-&bull; [Steg 6: EXTRAUPPGIFT: Men skottåren då?](#steg-6-extrauppgift-men-skottåren-då)
+&bull; [**Steg 4:** Hantera olika år](#steg-4-hantera-olika-år)
+&bull; [**Steg 5:** Testa användarupplevelsen](#steg-5-testa-användarupplevelsen)
+&bull; [**Steg 6:** EXTRAUPPGIFT: Men skottåren då?](#steg-6-extrauppgift-men-skottåren-då)
 &ndash; [Räkna rätt på antalet dagar](#räkna-rätt-på-antalet-dagar)
 &ndash; [Nästan klara](#nästan-klara)
 &ndash; [Testa en förenkling](#testa-en-förenkling)
-&bull; [Uppgifter](#uppgifter)
+&bull; **[Uppgifter](#uppgifter)**
 
 ## STEG 1: Prata med användaren
 <img src=https://user-images.githubusercontent.com/4598641/222922745-103d7a53-2f51-4ac9-9191-0282fa095f6e.png width="400px">
