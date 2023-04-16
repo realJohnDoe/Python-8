@@ -135,7 +135,7 @@ Vi vill att funktionen `dagnummer` ska ge oss antalet dagar från den 1 januari 
 def testa():
     print("Vi testar")
     d = dagnummer(2000, 1, 1) #nyrad 📆
-    if d != 1: print(f"Dagnumret blev fel: {d}") #nyrad 📆
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}") #nyrad 📆
     print("Slut på tester")
 ```
 
@@ -153,9 +153,9 @@ def dagnummer(år, månad, dag):
 def testa():
     print("Vi testar")
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     print("Slut på tester")
 
 # Skriv kod som pratar med användaren här under
@@ -201,11 +201,11 @@ De nya raderna är markerade med `#nyrad` men det behöver du inte skriva in.
 def testa():
     print("Vi testar")
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     d = dagnummer(2000, 2, 28) # nyrad 📆 
-    if d != 59: print(f"Dagnumret blev fel: {d}") # nyrad 📆 
+    if d != 59: print(f"Dagnummer 59 blev fel: {d}") # nyrad 📆 
     print("Slut på tester")
 ```
 
@@ -240,13 +240,13 @@ def dagnummer(år, månad, dag):
 def testa():
     print("Vi testar")
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)  
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     d = dagnummer(2000, 2, 28) 
-    if d != 59: print(f"Dagnumret blev fel: {d}")
+    if d != 59: print(f"Dagnummer 59 blev fel: {d}")
     d = dagnummer(2000, 12, 31) # nytt 📆 
-    if d != 365: print(f"Dagnumret blev fel: {d}") # nytt 📆
+    if d != 365: print(f"Dagnummer 365 blev fel: {d}") # nytt 📆
     print("Slut på tester")
 ```
 
@@ -260,15 +260,15 @@ def testa():
 def testa():
     print("Vi testar")
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     d = dagnummer(2000, 2, 28)
-    if d != 59: print(f"Dagnumret blev fel: {d}")
+    if d != 59: print(f"Dagnummer 59 blev fel: {d}")
     d = dagnummer(2000, 3, 1) # nytt 📆
-    if d != 60: print(f"Dagnumret blev fel: {d}") # nytt 📆
+    if d != 60: print(f"Dagnummer 60 blev fel: {d}") # nytt 📆
     d = dagnummer(2000, 12, 31)
-    if d != 365: print(f"Dagnumret blev fel: {d}")
+    if d != 365: print(f"Dagnummer 365 blev fel: {d}")
     print("Slut på tester")
 ```
 
@@ -304,15 +304,15 @@ def testa():
     print("Vi testar")
 
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     d = dagnummer(2000, 2, 28)
-    if d != 59: print(f"Dagnumret blev fel: {d}")
+    if d != 59: print(f"Dagnummer 59 blev fel: {d}")
     d = dagnummer(2000, 3, 1) 
-    if d != 60: print(f"Dagnumret blev fel: {d}") 
+    if d != 60: print(f"Dagnummer 60 blev fel: {d}") 
     d = dagnummer(2000, 12, 31)
-    if d != 365: print(f"Dagnumret blev fel: {d}")
+    if d != 365: print(f"Dagnummer 365 blev fel: {d}")
 
     print("Slut på tester")
 
@@ -358,17 +358,17 @@ def testa():
     print("Vi testar")
 
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     d = dagnummer(2000, 2, 28)
-    if d != 59: print(f"Dagnumret blev fel: {d}")
+    if d != 59: print(f"Dagnummer 59 blev fel: {d}")
     d = dagnummer(2000, 3, 1) 
-    if d != 60: print(f"Dagnumret blev fel: {d}") 
+    if d != 60: print(f"Dagnummer 60 blev fel: {d}") 
     d = dagnummer(2000, 12, 31)
-    if d != 365: print(f"Dagnumret blev fel: {d}")
+    if d != 365: print(f"Dagnummer 365 blev fel: {d}")
     d = dagnummer(2001, 1, 1) # nytt 📆
-    if d != 366: print(f"Dagnumret blev fel: {d}") # nytt 📆
+    if d != 366: print(f"Dagnummer 366 blev fel: {d}") # nytt 📆
 
     print("Slut på tester")
 ```
@@ -430,17 +430,17 @@ def testa():
     print("Vi testar")
 
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     d = dagnummer(2000, 2, 28)
-    if d != 59: print(f"Dagnumret blev fel: {d}")
+    if d != 59: print(f"Dagnummer 59 blev fel: {d}")
     d = dagnummer(2000, 3, 1) 
-    if d != 60: print(f"Dagnumret blev fel: {d}") 
+    if d != 60: print(f"Dagnummer 60 blev fel: {d}") 
     d = dagnummer(2000, 12, 31)
-    if d != 365: print(f"Dagnumret blev fel: {d}")
+    if d != 365: print(f"Dagnummer 365 blev fel: {d}")
     d = dagnummer(2001, 1, 1)
-    if d != 366: print(f"Dagnumret blev fel: {d}") 
+    if d != 366: print(f"Dagnummer 366 blev fel: {d}") 
 
     print("Slut på tester")
 
@@ -492,19 +492,19 @@ def testa():
     print("Vi testar")
 
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     d = dagnummer(2000, 2, 28)
-    if d != 59: print(f"Dagnumret blev fel: {d}")
+    if d != 59: print(f"Dagnummer 59 blev fel: {d}")
     d = dagnummer(2000, 2, 29) # ändrat 📆
-    if d != 60: print(f"Dagnumret blev fel: {d}") # ändrat 📆
+    if d != 60: print(f"Dagnummer 60 blev fel: {d}") # ändrat 📆
     d = dagnummer(2000, 3, 1) # ändrat 📆
-    if d != 61: print(f"Dagnumret blev fel: {d}") # ändrat 📆
+    if d != 61: print(f"Dagnummer 61 blev fel: {d}") # ändrat 📆
     d = dagnummer(2000, 12, 31)
-    if d != 366: print(f"Dagnumret blev fel: {d}") # ändrat 📆
+    if d != 366: print(f"Dagnummer 366 blev fel: {d}") # ändrat 📆
     d = dagnummer(2001, 1, 1)
-    if d != 367: print(f"Dagnumret blev fel: {d}") # ändrat 📆
+    if d != 367: print(f"Dagnummer 367 blev fel: {d}") # ändrat 📆
 
     print("Slut på tester")
 # etc.
@@ -608,7 +608,7 @@ Nu ska vi göra klart `dagar_före` så att skottåren/skottdagarna räknas rät
 def testa():
   # ... (som innan)
   d = dagar_före(2001)
-  if d != 366: print(f"Dagar före blev fel: {d}") 
+  if d != 366: print(f"Dagar före 2001 blev fel: {d}") 
 ```
 
 ✏️ Ändra `dagar_före` så här:
@@ -665,19 +665,19 @@ def testa():
     print("Vi testar")
 
     d = dagnummer(2000, 1, 1)
-    if d != 1: print(f"Dagnumret blev fel: {d}")
+    if d != 1: print(f"Dagnummer 1 blev fel: {d}")
     d = dagnummer(2000, 1, 31)
-    if d != 31: print(f"Dagnumret blev fel: {d}")
+    if d != 31: print(f"Dagnummer 31 blev fel: {d}")
     d = dagnummer(2000, 2, 28)
-    if d != 59: print(f"Dagnumret blev fel: {d}")
+    if d != 59: print(f"Dagnummer 59 blev fel: {d}")
     d = dagnummer(2000, 2, 29)
-    if d != 60: print(f"Dagnumret blev fel: {d}")
+    if d != 60: print(f"Dagnummer 60 blev fel: {d}")
     d = dagnummer(2000, 3, 1) 
-    if d != 61: print(f"Dagnumret blev fel: {d}")
+    if d != 61: print(f"Dagnummer 61 blev fel: {d}")
     d = dagnummer(2000, 12, 31)
-    if d != 366: print(f"Dagnumret blev fel: {d}")
+    if d != 366: print(f"Dagnummer 366 blev fel: {d}")
     d = dagnummer(2001, 1, 1)
-    if d != 367: print(f"Dagnumret blev fel: {d}")
+    if d != 367: print(f"Dagnummer 367 blev fel: {d}")
 
     print("Slut på tester")
 
