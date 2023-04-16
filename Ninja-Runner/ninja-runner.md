@@ -48,7 +48,8 @@ Vi kan rika olika figurer med hjälp av funktionerna i `screen.draw`. Vi har tid
 - `screen.draw.filled_circle()`
 - `screen.draw.rect()`
 - `screen.draw.filled_rect()`
-För att lära mer om de funktionerna kan du läsa i [dokumentationen för Pygame Zero](https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen).
+
+För att lära mer kan du läsa i [dokumentationen för Pygame Zero](https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen).
 
 För tillfället ska vi bara använda `screen.draw.filled_rect()`. Den ritar en rektangel på skärmen, så vi behöver lägga till anropet i funktionen `draw()`.
 ```python
@@ -91,6 +92,18 @@ Det här gör den nya raden:
 Mata in detta och kör din kod. Din skärm bör se ut så här:
 
 ![image](https://user-images.githubusercontent.com/4598641/223218919-66ee7ecf-043f-4c08-a775-074ff487bb3c.png)
+
+**Är det ont om plats på skärmen? Några tips**
+1. Försök att göra mer plats genom att minimera fönstret med filerna längst till vänster i repl.it.
+Använd knappen Close Sidebar uppe till vänster för att fälla in fillistan.
+![image](https://user-images.githubusercontent.com/4598641/232329210-328729ca-8ca8-487f-9d16-a5f7015c83d0.png)
+
+2. Gör spelfönstret större genom att dra i de små handtagen (strecken) som finns i mitten till vänster och under det svarta spelfönstret.
+
+3. Ändra spelfönstrets storlek med `WIDTH` och `HEIGHT` i koden, t.ex. `WIDTH, HEIGHT = 600, 450`. Du kan behövs justera markens storlek och ninjans koordinater för att det ska se bra ut.
+
+4. Gör mer plats i Chrome genom att klicka på de tre prickarna högst uppe till höger. Välj sen kvadrat-ikonen (helskärm) ![image](https://user-images.githubusercontent.com/4598641/232329741-2b9f94c8-32b1-42a8-8246-85bec9c80328.png)
+ 
 
 # Ninjan
 
@@ -240,7 +253,7 @@ Det här gör raderna:
 `runner.y += velocity_y` :  Ändra vår ninjas position baserat på hastigheten. Operatorn `+=` betyder att vi ökar `runner.y` med värdet i `velocity_y`.
 
 ✏️ Testa det! Om du programmerat rätt, bör ninjan flyga upp i himlen när du trycker uppåtpil. Det är för att vi inte har lagt till någon gravitation än!
->Funkar inte uppåtpil? Kom ihåg att klicka i spelfönstret när du startat spelet med Run.
+>Funkar inte uppåtpil? Kom ihåg att klicka i spelfönstret när du startat spelet med *Run*.
 
 ## Gravitation
 Graviationen ändrar ninjans hastighet. 
