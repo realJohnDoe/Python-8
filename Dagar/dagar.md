@@ -185,7 +185,7 @@ testa()
 
 Så här ser det ut när jag kör:
 
-![image](https://user-images.githubusercontent.com/4598641/232322377-507ed926-03d1-44d4-a4e2-8039bf758ab8.png)
+![image](https://user-images.githubusercontent.com/4598641/232322719-964ed2ae-8f1c-442c-90e8-f58b19d033c2.png)
 
 Kan du hitta på ett sätt att ändra funktionen `dagnummer` så att våra två tester fungerar? 
 `dagnummer(2000, 1, 1)` ska ge svaret 1 och `dagnummer(2000, 1, 31)` ska ge svaret 31.[^1]
