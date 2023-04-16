@@ -246,7 +246,7 @@ Det här gör raderna:
 
 `global velocity_y` : Vi behöver använda `global` om vi ändrar på en variabel som finns utanför funktionen.
 
-`if keyboard.up:` : När tangenten med uppåtpil trycks ner &ldots;
+`if keyboard.up:` : När tangenten med uppåtpil trycks ner …
 
 `velocity_y = -15` : Sätt hastigheten upp/ner till &ndash;15. Ett negativt värde betyder att den rör sig uppåt.
 
