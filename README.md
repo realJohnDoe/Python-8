@@ -114,11 +114,11 @@ https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md
 
 | Symbol | Tangent på Chromebook, svenskt tangentbord |
 | ------------- | ------------- |
-| { | `alt gr` + `7` |
-| } | `alt gr` + `0` |
-| [ | `alt gr` + `8` |
-| ] | `alt gr` + `9` |
+| { *vänster måsvinge* | `alt gr` + `7` |
+| } *höger måsvinge* | `alt gr` + `0` |
+| [ *vänsterklammer* | `alt gr` + `8` |
+| ] *högerklammer* | `alt gr` + `9` |
 | @ | `alt gr` + `2` |
-| _ | `⬆️` + `–` |
+| _ *understreck* | `⬆️` + `–` |
 
 
