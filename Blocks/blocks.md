@@ -136,11 +136,8 @@ def draw():
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
-                Rect(
-                    x * block_size, y * block_size,
-                    block_draw_size, block_draw_size
-                ),
-                color=(222, 222, 222)
+                Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
+                color=(222, 222, 222),
             )
 
 # Kod för att starta appen här nedanför
@@ -180,11 +177,8 @@ def draw():
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
-                Rect(
-                    x * block_size, y * block_size,
-                    block_draw_size, block_draw_size
-                ),
-                color=(222, 222, 222)
+                Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
+                color=(222, 222, 222),
             )
 
 # Kod för att starta appen här nedanför
@@ -225,10 +219,7 @@ def draw():
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
-                Rect(
-                    x * block_size, y * block_size,
-                    block_draw_size, block_draw_size
-                ),
+                Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
                 color=color #ändra 🟦
             )
 
@@ -236,7 +227,7 @@ def draw():
 # Kod för att starta appen här nedanför
 for y in range(grid_y_count): #nyrad 🟦
     inert.append([]) #nyrad 🟦
-        inert[y] = [' '] * grid_x_count #nyrad 🟦
+    inert[y] = [' '] * grid_x_count #nyrad 🟦
 
 # Tillfälligt
 inert[17][0] = 'i' #nyrad 🟦
@@ -288,18 +279,15 @@ def draw():
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
-                Rect(
-                    x * block_size, y * block_size,
-                    block_draw_size, block_draw_size
-                ),
-                color=color #ändra
+                Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
+                color=color
             )
 
 
 # Kod för att starta appen här nedanför
 for y in range(grid_y_count): #nyrad
     inert.append([]) #nyrad
-        inert[y] = [' '] * grid_x_count #nyrad
+    inert[y] = [' '] * grid_x_count #nyrad
 
 # Tillfälligt
 inert[17][0] = 'i' #nyrad
@@ -538,11 +526,8 @@ def draw():
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
-                Rect(
-                    x * block_size, y * block_size,
-                    block_draw_size, block_draw_size
-                ),
-                color=color #ändra
+                Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
+                color=color
             )
 
 # Kod för att starta appen här nedanför
@@ -620,11 +605,8 @@ def draw():
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
-                Rect(
-                    x * block_size, y * block_size,
-                    block_draw_size, block_draw_size
-                ),
-                color=color #ändra
+                Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
+                color=color #ändra 🟦
             )
 
 
@@ -675,11 +657,8 @@ def draw():
                 block_size = 20
                 block_draw_size = block_size - 1
                 screen.draw.filled_rect(
-                    Rect(
-                        x * block_size, y * block_size,
-                        block_draw_size, block_draw_size
-                    ),
-                    color=color
+                    Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
+                    color=color #ändra 🟦
                 )
 
 # Ta bort den tillfälliga koden nästan längst ner
@@ -728,11 +707,8 @@ def draw():
             block_size = 20
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
-                Rect(
-                    x * block_size, y * block_size,
-                    block_draw_size, block_draw_size
-                ),
-                color=color #ändra
+                Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
+                color=color
             )
             
     for y in range(4):
@@ -817,10 +793,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -915,10 +888,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -1034,10 +1004,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -1155,10 +1122,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -1289,10 +1253,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -1425,10 +1386,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -1561,10 +1519,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -1743,10 +1698,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -1890,10 +1842,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -2058,10 +2007,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -2219,10 +2165,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -2381,10 +2324,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -2547,10 +2487,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -2711,10 +2648,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -2873,10 +2807,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -3047,10 +2978,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -3240,10 +3168,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -3444,10 +3369,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -3641,10 +3563,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -3851,10 +3770,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -4067,10 +3983,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -4297,10 +4210,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -4536,10 +4446,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -4797,10 +4704,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -4974,10 +4878,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -5048,10 +4949,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -5227,10 +5125,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
@@ -5309,10 +5204,7 @@ def draw():
         block_size = 20
         block_draw_size = block_size - 1
         screen.draw.filled_rect(
-            Rect(
-                x * block_size, y * block_size,
-                block_draw_size, block_draw_size
-            ),
+            Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
             color=color
         )
 
