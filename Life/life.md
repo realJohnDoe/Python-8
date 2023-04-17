@@ -65,17 +65,13 @@ Mata in koden och testkör! Blir det som i exempelbilden?
 ```python
 import pgzrun
 
+
 # Funktioner här nedanför
 def draw():
-    screen.fill((255, 255, 255)) # vit färg
+    screen.fill((255, 255, 255))  # vit färg
 
-    screen.draw.filled_rect(
-        Rect(
-            (0, 0),
-            (4, 4)
-        ),
-        color=(220, 220, 220)
-    )
+    screen.draw.filled_rect(Rect((0, 0), (4, 4)), color=(220, 220, 220))
+
 
 # Kod för att starta appen
 pgzrun.go()
@@ -93,20 +89,21 @@ En rad med celler ritas, med en pixel mellan varje cell.
 ```python
 import pgzrun
 
-def draw():
-    screen.fill (( 255 , 255 , 255 ))
 
-    for x in range(70): #nyrad
-        cell_size = 5 #nyrad
-        cell_draw_size = cell_size - 1 #nyrad
+def draw():
+    screen.fill((255, 255, 255))
+
+    for x in range(70):  # nyrad
+        cell_size = 5  # nyrad
+        cell_draw_size = cell_size - 1  # nyrad
 
         screen.draw.filled_rect(
             Rect(
-                (x * cell_size, 0), #ändra
-                (cell_draw_size, cell_draw_size) #nyrad
+                (x * cell_size, 0), (cell_draw_size, cell_draw_size)  # ändra
             ),
-            color=(220, 220, 220)
+            color=(220, 220, 220),
         )
+
 
 pgzrun.go()
 ```
@@ -133,14 +130,12 @@ def draw():
 
         screen.draw.filled_rect(
             Rect(
-                (x * cell_size, 0), 
-                (cell_draw_size, cell_draw_size) 
+                (x * cell_size, 0), (cell_draw_size, cell_draw_size)  # ändra
             ),
             color=(220, 220, 220)
         )
 
 # Kod för att starta appen
-
 
 pgzrun.go()  # måste vara sista raden
 ```    
@@ -166,8 +161,7 @@ def draw():
 
             screen.draw.filled_rect(
                 Rect(
-                    (x * cell_size, y * cell_size), #nyrad
-                    (cell_draw_size, cell_draw_size)
+                    (x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size) # ändrad
                 ),
                 color=(220, 220, 220)
             )
@@ -185,21 +179,20 @@ import pgzrun
 
 # Funktioner här nedanför
 
+
 def draw():
     screen.fill((255, 255, 255))
 
-    for y in range(50):  
+    for y in range(50):
         for x in range(70):
             cell_size = 5
             cell_draw_size = cell_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),  
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=(220, 220, 220)
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=(220, 220, 220),
             )
+
 
 # Kod för att starta appen
 
@@ -252,13 +245,10 @@ def draw():
             cell_draw_size = cell_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=(220, 220, 220)
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=(220, 220, 220),
             )
-
+            
     # Tillfälligt #nytt
     screen.draw.text(
         f"selected x: {selected_x}, selected y: {selected_y}",
@@ -311,6 +301,7 @@ grid_x_count, grid_y_count = 70, 50
 
 # Funktioner här nedanför
 
+
 def update():
     global selected_x, selected_y
 
@@ -327,24 +318,21 @@ def draw():
             cell_draw_size = cell_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=(220, 220, 220)
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=(220, 220, 220),
             )
 
     # Tillfälligt
     screen.draw.text(
-        f"selected x: {selected_x}, selected y: {selected_y}",
-        (0, 0),
-        color=(0, 0, 0)
+        f"selected x: {selected_x}, selected y: {selected_y}", (0, 0), color=(0, 0, 0)
     )
+
 
 # Kod för att starta appen
 
 pgzrun.go()  # måste vara sista raden
 ```    
+
 </details>
 
 ## Markera celler
@@ -414,19 +402,15 @@ def draw():
                 color = (220, 220, 220)
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=color
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=color,
             )
 
     # Tillfälligt
     screen.draw.text(
-        f"selected x: {selected_x}, selected y: {selected_y}",
-        (0, 0),
-        color=(0, 0, 0)
+        f"selected x: {selected_x}, selected y: {selected_y}", (0, 0), color=(0, 0, 0)
     )
+
 
 # Kod för att starta appen
 
@@ -521,19 +505,15 @@ def draw():
                 color = (220, 220, 220)
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=color
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=color,
             )
 
     # Tillfälligt
     screen.draw.text(
-        f"selected x: {selected_x}, selected y: {selected_y}",
-        (0, 0),
-        color=(0, 0, 0)
+        f"selected x: {selected_x}, selected y: {selected_y}", (0, 0), color=(0, 0, 0)
     )
+
 
 # Kod för att starta appen
 
@@ -585,6 +565,7 @@ grid = []
 
 # Funktioner här nedanför
 
+
 def update():
     global selected_x, selected_y
 
@@ -611,19 +592,15 @@ def draw():
                 color = (220, 220, 220)
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=color
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=color,
             )
 
     # Tillfälligt
     screen.draw.text(
-        f"selected x: {selected_x}, selected y: {selected_y}",
-        (0, 0),
-        color=(0, 0, 0)
+        f"selected x: {selected_x}, selected y: {selected_y}", (0, 0), color=(0, 0, 0)
     )
+
 
 # Kod för att starta appen
 
@@ -732,19 +709,15 @@ def draw():
                 color = (220, 220, 220)
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=color
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=color,
             )
 
     # Tillfälligt
     screen.draw.text(
-        f"selected x: {selected_x}, selected y: {selected_y}",
-        (0, 0),
-        color=(0, 0, 0)
+        f"selected x: {selected_x}, selected y: {selected_y}", (0, 0), color=(0, 0, 0)
     )
+
 
 # Tillfälligt
 
@@ -757,19 +730,20 @@ def on_mouse_down(pos, button):
 
         for dy in range(-1, 2):
             for dx in range(-1, 2):
-
                 print(f" Checking grid[{selected_y + dy}][{selected_x + dx}]")
 
-                if (not (dy == 0 and dx == 0)
+                if (
+                    not (dy == 0 and dx == 0)
                     and 0 <= (selected_y + dy) < grid_y_count
                     and 0 <= (selected_x + dx) < grid_x_count
-                        and grid[selected_y + dy][selected_x + dx]):
-
-                    print('  Neighbor found')
+                    and grid[selected_y + dy][selected_x + dx]
+                ):
+                    print("  Neighbor found")
                     neighbor_count += 1
 
         print(f"Total neighbors: {neighbor_count}")
         print()
+
 
 # Kod för att starta appen
 
@@ -853,19 +827,15 @@ def draw():
                 color = (220, 220, 220)
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=color
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=color,
             )
 
     # Tillfälligt
     screen.draw.text(
-        f"selected x: {selected_x}, selected y: {selected_y}",
-        (0, 0),
-        color=(0, 0, 0)
+        f"selected x: {selected_x}, selected y: {selected_y}", (0, 0), color=(0, 0, 0)
     )
+
 
 # Tillfälligt
 
@@ -878,15 +848,15 @@ def on_mouse_down(pos, button):
 
         for dy in range(-1, 2):
             for dx in range(-1, 2):
-
                 print(f" Checking grid[{selected_y + dy}][{selected_x + dx}]")
 
-                if (not (dy == 0 and dx == 0)
+                if (
+                    not (dy == 0 and dx == 0)
                     and 0 <= (selected_y + dy) < grid_y_count
                     and 0 <= (selected_x + dx) < grid_x_count
-                        and grid[selected_y + dy][selected_x + dx]):
-
-                    print('  Neighbor found')
+                    and grid[selected_y + dy][selected_x + dx]
+                ):
+                    print("  Neighbor found")
                     neighbor_count += 1
 
         print(f"Total neighbors: {neighbor_count}")
@@ -903,6 +873,7 @@ def on_key_down():
             next_grid[y].append(True)
 
     grid = next_grid
+
 
 # Kod för att starta appen
 
@@ -1129,19 +1100,15 @@ def draw():
                 color = (220, 220, 220)
 
             screen.draw.filled_rect(
-                Rect(
-                    (x * cell_size, y * cell_size),
-                    (cell_draw_size, cell_draw_size)
-                ),
-                color=color
+                Rect((x * cell_size, y * cell_size), (cell_draw_size, cell_draw_size)),
+                color=color,
             )
 
     # Tillfälligt
     screen.draw.text(
-        f"selected x: {selected_x}, selected y: {selected_y}",
-        (0, 0),
-        color=(0, 0, 0)
+        f"selected x: {selected_x}, selected y: {selected_y}", (0, 0), color=(0, 0, 0)
     )
+
 
 # Tillfälligt
 
@@ -1158,19 +1125,20 @@ def on_key_down():
 
             for dy in range(-1, 2):
                 for dx in range(-1, 2):
-                    if (not (dy == 0 and dx == 0)
+                    if (
+                        not (dy == 0 and dx == 0)
                         and 0 <= (y + dy) < grid_y_count
                         and 0 <= (x + dx) < grid_x_count
-                            and grid[y + dy][x + dx]):
-
+                        and grid[y + dy][x + dx]
+                    ):
                         neighbor_count += 1
 
             next_grid[y].append(
-                neighbor_count == 3 or
-                (grid[y][x] and neighbor_count == 2)
+                neighbor_count == 3 or (grid[y][x] and neighbor_count == 2)
             )
 
     grid = next_grid
+
 
 # Kod för att starta appen
 
