@@ -81,10 +81,7 @@ def draw():
     cell_size = 15
     
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
         color=(70, 70, 70)
     )
   
@@ -114,11 +111,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     snake_segments = [ #nytt 🐍
@@ -193,7 +187,7 @@ def update(dt):
     if timer >= 0.15:
         timer = 0
         # Temporary
-        print('tick')
+        print("tick")
 
 
 def draw():
@@ -204,30 +198,29 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     snake_segments = [
-        {'x': 2, 'y': 0},
-        {'x': 1, 'y': 0},
-        {'x': 0, 'y': 0},
+        {"x": 2, "y": 0},
+        {"x": 1, "y": 0},
+        {"x": 0, "y": 0},
     ]
 
     for segment in snake_segments:
         screen.draw.filled_rect(
             Rect(
-                segment['x'] * cell_size, segment['y'] * cell_size,
-                cell_size - 1, cell_size - 1
+                segment["x"] * cell_size,
+                segment["y"] * cell_size,
+                cell_size - 1,
+                cell_size - 1,
             ),
-            color=(165, 255, 81)
+            color=(165, 255, 81),
         )
 
-# Kod för att starta appen här nedanför
 
+# Kod för att starta appen här nedanför
 
 pgzrun.go()  # måste vara sista raden
 ```
@@ -278,11 +271,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     # snake_segments har flyttat 🐍
@@ -332,13 +322,10 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
-
+  
     for segment in snake_segments:
         screen.draw.filled_rect(
             Rect(
@@ -478,11 +465,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     for segment in snake_segments:
@@ -583,13 +567,10 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
-
+  
     for segment in snake_segments:
         screen.draw.filled_rect(
             Rect(
@@ -664,16 +645,13 @@ def update(dt):
 
 
 def on_key_down(key):
-    if (key == keys.RIGHT #ändrat 🐍
-            and direction_queue[-1] != 'left'): #ändrat 🐍
+    if (key == keys.RIGHT and direction_queue[-1] != 'left'): #ändrat 🐍
         direction_queue.append('right') #nytt 🐍
 
-    elif (key == keys.LEFT #ändrat 🐍
-          and direction_queue[-1] != 'right'): #ändrat 🐍
+    elif (key == keys.LEFT and direction_queue[-1] != 'right'): #ändrat 🐍
         direction_queue.append('left') #nytt 🐍
 
-    elif (key == keys.DOWN #ändrat 🐍
-          and direction_queue[-1] != 'up'): #ändrat 🐍
+    elif (key == keys.DOWN and direction_queue[-1] != 'up'): #ändrat 🐍
         direction_queue.append('down') #nytt 🐍
 
     elif (key == keys.UP #ändrat 🐍
@@ -689,13 +667,10 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
-
+    
     for segment in snake_segments:
         screen.draw.filled_rect(
             Rect(
@@ -789,11 +764,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     for segment in snake_segments:
@@ -921,11 +893,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     for segment in snake_segments:
@@ -1082,11 +1051,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     for segment in snake_segments:
@@ -1285,11 +1251,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color): #nytt 🐍
@@ -1400,11 +1363,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color):
@@ -1586,11 +1546,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color):
@@ -1750,11 +1707,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color):
@@ -1919,11 +1873,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color):
@@ -2108,11 +2059,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color):
@@ -2311,11 +2259,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color):
@@ -2511,11 +2456,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color):
@@ -2694,11 +2636,8 @@ def draw():
     cell_size = 15
 
     screen.draw.filled_rect(
-        Rect(
-            0, 0,
-            grid_x_count * cell_size, grid_y_count * cell_size
-        ),
-        color=(70, 70, 70)
+        Rect(0, 0, grid_x_count * cell_size, grid_y_count * cell_size),
+        color=(70, 70, 70),
     )
 
     def draw_cell(x, y, color):
