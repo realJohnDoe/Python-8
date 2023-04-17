@@ -84,10 +84,7 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
 
@@ -124,12 +121,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+            
             screen.draw.text( #nyrad 🔲
                 str(y * 4 + x + 1), #nyrad 🔲
                 (x * piece_size, y * piece_size), #nyrad 🔲
@@ -170,12 +165,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]), #ändrad 🔲
                 (x * piece_size, y * piece_size),
@@ -237,12 +230,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -321,12 +312,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -416,12 +405,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -516,12 +503,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -628,12 +613,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -765,12 +748,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -948,12 +929,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -1070,12 +1049,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -1253,12 +1230,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -1401,12 +1376,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -1554,12 +1527,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
@@ -1738,12 +1709,10 @@ def draw():
             piece_draw_size = piece_size - 1
 
             screen.draw.filled_rect(
-                Rect(
-                    x * piece_size, y * piece_size,
-                    piece_draw_size, piece_draw_size
-                ),
+                Rect(x * piece_size, y * piece_size, piece_draw_size, piece_draw_size),
                 color=(100, 20, 150)
             )
+
             screen.draw.text(
                 str(grid[y][x]),
                 (x * piece_size, y * piece_size),
