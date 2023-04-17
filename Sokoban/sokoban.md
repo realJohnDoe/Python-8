@@ -131,12 +131,10 @@ def draw():
                 cell_size = 23
                 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=(255, 255, 255)
-                )  
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=(255, 255, 255),
+                )
+                
 # Kod för att starta appen här nedanför
 
 pgzrun.go() # måste vara sista raden
@@ -158,13 +156,8 @@ def draw():
             if cell != ' ':
                 # etc.
 
-                screen.draw.text( #nytt  🔲
-                    cell, #nytt 🔲
-                    (x * cell_size, y * cell_size), #nytt 🔲
-                    color=(0, 0, 0) #nytt 🔲
-                ) #nytt 🔲
+                screen.draw.text(cell, (x * cell_size, y * cell_size), color=(0, 0, 0)) #nytt 🔲
 ```
-
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
@@ -194,21 +187,14 @@ def draw():
         for x, cell in enumerate(row):
             if cell != ' ':
                 cell_size = 23
-                
+   
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=(255, 255, 255)
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=(255, 255, 255),
                 )
 
-                screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(0, 0, 0)
-                )
-
+                screen.draw.text(cell, (x * cell_size, y * cell_size), color=(0, 0, 0))
+                
 # Kod för att starta appen här nedanför
 
 pgzrun.go() # måste vara sista raden
@@ -243,18 +229,11 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
                     color=colors[cell] #nytt 🔲
                 )
 
-                screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255) #nytt 🔲
-                )
+                screen.draw.text(cell, (x * cell_size, y * cell_size), color=(255, 255, 255)) #nytt 🔲
 ```
 
 <details>
@@ -369,23 +348,24 @@ import pgzrun
 # Globala variabler här nedanför
 
 level = [
-    [' ', ' ', '#', '#', '#'],
-    [' ', ' ', '#', '.', '#'],
-    [' ', ' ', '#', ' ', '#', '#', '#', '#'],
-    ['#', '#', '#', '$', ' ', '$', '.', '#'],
-    ['#', '.', ' ', '$', '@', '#', '#', '#'],
-    ['#', '#', '#', '#', '$', '#'],
-    [' ', ' ', ' ', '#', '.', '#'],
-    [' ', ' ', ' ', '#', '#', '#'],
+    [" ", " ", "#", "#", "#"],
+    [" ", " ", "#", ".", "#"],
+    [" ", " ", "#", " ", "#", "#", "#", "#"],
+    ["#", "#", "#", "$", " ", "$", ".", "#"],
+    ["#", ".", " ", "$", "@", "#", "#", "#"],
+    ["#", "#", "#", "#", "$", "#"],
+    [" ", " ", " ", "#", ".", "#"],
+    [" ", " ", " ", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
+
 
 # Funktioner här nedanför
 def draw():
@@ -406,24 +386,19 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
 
 pgzrun.go()  # måste vara sista raden
-
 ```
 
 </details>
@@ -465,23 +440,24 @@ import pgzrun
 # Globala variabler här nedanför
 
 level = [
-    [' ', ' ', '#', '#', '#'],
-    [' ', ' ', '#', '.', '#'],
-    [' ', ' ', '#', ' ', '#', '#', '#', '#'],
-    ['#', '#', '#', '$', ' ', '$', '.', '#'],
-    ['#', '.', ' ', '$', '@', '#', '#', '#'],
-    ['#', '#', '#', '#', '$', '#'],
-    [' ', ' ', ' ', '#', '.', '#'],
-    [' ', ' ', ' ', '#', '#', '#'],
+    [" ", " ", "#", "#", "#"],
+    [" ", " ", "#", ".", "#"],
+    [" ", " ", "#", " ", "#", "#", "#", "#"],
+    ["#", "#", "#", "$", " ", "$", ".", "#"],
+    ["#", ".", " ", "$", "@", "#", "#", "#"],
+    ["#", "#", "#", "#", "$", "#"],
+    [" ", " ", " ", "#", ".", "#"],
+    [" ", " ", " ", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
+
 
 # Funktioner här nedanför
 def on_key_down(key):
@@ -491,9 +467,10 @@ def on_key_down(key):
                 if cell == player or cell == player_on_storage:
                     player_x = test_x
                     player_y = test_y
-        
+
         # Temporary
         print(player_x, player_y)
+
 
 def draw():
     screen.fill((255, 255, 190))
@@ -513,18 +490,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -565,7 +538,7 @@ def on_key_down(key):
         current = level[player_y][player_x]
         adjacent = level[player_y + dy][player_x + dx]
 
-        # Temporary
+        # Tillfälligt
         print(f"current = level[{player_y}][{player_x}] ({current})")
         print(f"adjacent = level[{player_y + dy}][{player_x + dx}] ({adjacent})")
         print()
@@ -582,23 +555,24 @@ import pgzrun
 # Globala variabler här nedanför
 
 level = [
-    [' ', ' ', '#', '#', '#'],
-    [' ', ' ', '#', '.', '#'],
-    [' ', ' ', '#', ' ', '#', '#', '#', '#'],
-    ['#', '#', '#', '$', ' ', '$', '.', '#'],
-    ['#', '.', ' ', '$', '@', '#', '#', '#'],
-    ['#', '#', '#', '#', '$', '#'],
-    [' ', ' ', ' ', '#', '.', '#'],
-    [' ', ' ', ' ', '#', '#', '#'],
+    [" ", " ", "#", "#", "#"],
+    [" ", " ", "#", ".", "#"],
+    [" ", " ", "#", " ", "#", "#", "#", "#"],
+    ["#", "#", "#", "$", " ", "$", ".", "#"],
+    ["#", ".", " ", "$", "@", "#", "#", "#"],
+    ["#", "#", "#", "#", "$", "#"],
+    [" ", " ", " ", "#", ".", "#"],
+    [" ", " ", " ", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
+
 
 # Funktioner här nedanför
 def on_key_down(key):
@@ -647,18 +621,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -717,26 +687,27 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
+
 
 # Funktioner här nedanför
 def on_key_down(key):
@@ -785,18 +756,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -835,26 +802,27 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
+
 
 # Funktioner här nedanför
 def on_key_down(key):
@@ -902,18 +870,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -956,26 +920,26 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
 
 # Funktioner här nedanför
 
@@ -1029,22 +993,19 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
 pgzrun.go()  # måste vara sista raden
+
 ```
 
 </details>
@@ -1055,8 +1016,7 @@ pgzrun.go()  # måste vara sista raden
 Den nya grannrutan &ndash; antingen `player` eller `player_on_storage` &ndash; ställs in baserat på typen av `adjacent`.
 Därför skapar vi en ordlista där vi kan slå upp granncellens nya typ när vi vet vilken typ granncellen har just nu.
 
-Den används också för att kontrollera om spelaren kan flytta till den granncellen genom att kontrollera om den har en nyckel med värdet `adjacent` .
-
+Den används också för att kontrollera om spelaren kan flytta till den granncellen genom att kontrollera om den har en nyckel med värdet `adjacent`.
 
 ✏️ Uppdatera koden. Testkör. Fungerar det som innan?
 
@@ -1082,26 +1042,26 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
 
 # Funktioner här nedanför
 
@@ -1156,18 +1116,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -1208,26 +1164,26 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
 
 # Funktioner här nedanför
 
@@ -1286,18 +1242,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -1310,7 +1262,7 @@ pgzrun.go()  # måste vara sista raden
 ![image](https://user-images.githubusercontent.com/4598641/226442123-828097c9-b89f-449a-9de0-e83d8a774464.png)
 
 ## Förenkla koden
-Vi gör en ordlista där vi kan slå upp nästa celltyp för spelarens tidigare position när den indexeras av celltypen där spelaren är just nu.
+Vi gör en ordlista där vi kan slå upp nästa celltyp för spelarens tidigare position när vi vet celltypen där spelaren är just nu.
 
 ✏️ Uppdatera koden. Fungerar koden som innan?
 
@@ -1336,26 +1288,26 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
 
 # Funktioner här nedanför
 
@@ -1415,18 +1367,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -1486,26 +1434,26 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
 
 # Funktioner här nedanför
 
@@ -1532,10 +1480,9 @@ def on_key_down(key):
         current = level[player_y][player_x]
         adjacent = level[player_y + dy][player_x + dx]
 
-        beyond = ''
-        if (
-            0 <= player_y + dy + dy < len(level)
-            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        beyond = ""
+        if 0 <= player_y + dy + dy < len(level) and 0 <= player_x + dx + dx < len(
+            level[player_y + dy + dy]
         ):
             beyond = level[player_y + dy + dy][player_x + dx + dx]
 
@@ -1576,18 +1523,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -1603,6 +1546,7 @@ pgzrun.go()  # måste vara sista raden
 Om positionen två steg bort är `storage`, så ställs den positionen till `box_on_storage`.
 
 ✏️ Uppdatera koden. Vad händer när spelaren försöker putta en låda till en lagerplats?
+
 ```python
 def on_key_down(key):
     # etc.
@@ -1630,26 +1574,26 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
 
 # Funktioner här nedanför
 
@@ -1676,10 +1620,9 @@ def on_key_down(key):
         current = level[player_y][player_x]
         adjacent = level[player_y + dy][player_x + dx]
 
-        beyond = ''
-        if (
-            0 <= player_y + dy + dy < len(level)
-            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        beyond = ""
+        if 0 <= player_y + dy + dy < len(level) and 0 <= player_x + dx + dx < len(
+            level[player_y + dy + dy]
         ):
             beyond = level[player_y + dy + dy][player_x + dx + dx]
 
@@ -1725,18 +1668,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
@@ -1783,26 +1722,26 @@ import pgzrun
 
 # Globala variabler här nedanför
 level = [
-    ['#', '#', '#', '#', '#'],
-    ['#', '@', ' ', '.', '#'],
-    ['#', ' ', '$', ' ', '#'],
-    ['#', '.', '$', ' ', '#'],
-    ['#', ' ', '$', '.', '#'],
-    ['#', '.', '$', '.', '#'],
-    ['#', '.', '*', ' ', '#'],
-    ['#', ' ', '*', '.', '#'],
-    ['#', ' ', '*', ' ', '#'],
-    ['#', '.', '*', '.', '#'],
-    ['#', '#', '#', '#', '#'],
+    ["#", "#", "#", "#", "#"],
+    ["#", "@", " ", ".", "#"],
+    ["#", " ", "$", " ", "#"],
+    ["#", ".", "$", " ", "#"],
+    ["#", " ", "$", ".", "#"],
+    ["#", ".", "$", ".", "#"],
+    ["#", ".", "*", " ", "#"],
+    ["#", " ", "*", ".", "#"],
+    ["#", " ", "*", " ", "#"],
+    ["#", ".", "*", ".", "#"],
+    ["#", "#", "#", "#", "#"],
 ]
 
-player = '@'
-player_on_storage = '+'
-box = '$'
-box_on_storage = '*'
-storage = '.'
-wall = '#'
-empty = ' '
+player = "@"
+player_on_storage = "+"
+box = "$"
+box_on_storage = "*"
+storage = "."
+wall = "#"
+empty = " "
 
 # Funktioner här nedanför
 
@@ -1829,10 +1768,9 @@ def on_key_down(key):
         current = level[player_y][player_x]
         adjacent = level[player_y + dy][player_x + dx]
 
-        beyond = ''
-        if (
-            0 <= player_y + dy + dy < len(level)
-            and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
+        beyond = ""
+        if 0 <= player_y + dy + dy < len(level) and 0 <= player_x + dx + dx < len(
+            level[player_y + dy + dy]
         ):
             beyond = level[player_y + dy + dy][player_x + dx + dx]
 
@@ -1878,18 +1816,14 @@ def draw():
                 }
 
                 screen.draw.filled_rect(
-                    Rect(
-                        (x * cell_size, y * cell_size),
-                        (cell_size, cell_size)
-                    ),
-                    color=colors[cell]
+                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
+                    color=colors[cell],
                 )
 
                 screen.draw.text(
-                    cell,
-                    (x * cell_size, y * cell_size),
-                    color=(255, 255, 255)
+                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
                 )
+
 
 # Kod för att starta appen här nedanför
 
