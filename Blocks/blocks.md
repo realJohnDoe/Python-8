@@ -137,7 +137,7 @@ def draw():
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
                 Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
-                color=(222, 222, 222),
+                color=(222, 222, 222)
             )
 
 # Kod för att starta appen här nedanför
@@ -178,7 +178,7 @@ def draw():
             block_draw_size = block_size - 1
             screen.draw.filled_rect(
                 Rect(x * block_size, y * block_size, block_draw_size, block_draw_size),
-                color=(222, 222, 222),
+                color=(222, 222, 222)
             )
 
 # Kod för att starta appen här nedanför
