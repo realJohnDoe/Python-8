@@ -18,7 +18,7 @@ och i projekten Gem Catcher och Ninja Runner.
 | `get_rect()` | Gör Actor till ett Rect-objekt |
 | `images`, `next_image()` | Bestäm klädslar för en Actor och byt till nästa klädsel |
 | `fps`, `animate()` | Bestäm hur ofta Actor ska byta klädsel |
-| `colliedpoint_pixel()`, `collide_pixel()`,<br>`colllidelist_pixel()`, `collidelistall_pixel()` | Upptäck kollisioner exakt men långsamt |
+| `collidepoint_pixel()`, `collide_pixel()`,<br>`colllidelist_pixel()`, `collidelistall_pixel()` | Upptäck kollisioner exakt men långsamt |
 | `obb_collidepoint()`, `obb_collidepoints()` | Upptäck kollisioner ungefär men snabbt |
 | `circle_collidepoint()`, `circle_collidepoints()` | Upptäck kollision för runda figurer, ungefär men snabbt |
 | `set_fulscreen()`, `set_windowed()`, `toggle_fullscreen()`,<br>`hide_mouse()`, `show_mouse()` | Byt till fullskärm eller fönster. Göm eller visa muspekare |
