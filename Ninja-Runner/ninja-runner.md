@@ -198,6 +198,18 @@ Detta talar om för Pygame Zero att byta till nästa bild varje gång den uppdat
 
 ✏️ Testkör!
 
+### Vill du använda egna bilder?
+
+* Använd bilder i PNG-format
+* Ladda upp bilden/bilderna i repl.it med funktionen "Upload" i filhanteraren till vänster. Se till att bilderna ligger i mappen *Images*
+* Du kan skala bilden genom att sätta egenskapen `scale`. T.ex. så här om vi bara har en enda bild:
+```python
+runner = Actor('min_egen_bild')
+runner.scale = 0.5 # halva originalstorleken
+run_images = ['min_egen_bild']
+runner.images = run_images
+```
+
 ### Justera placeringen
 
 Du kan justera ninjas placering med `runner.x` och `runner.y`. Pröva detta:
