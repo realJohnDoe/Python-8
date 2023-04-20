@@ -41,7 +41,7 @@ pgzrun.go() # Måste vara sista raden
 ✏️ Spara ditt projekt i din egen repl.it. Testkör!
 
 ## Rita
-Vi kan rika olika figurer med hjälp av funktionerna i `screen.draw`. Vi har tidigare använt `screen.draw.text()` men det finns många fler funktioner, som till exempel
+Vi kan rita olika figurer med funktionerna i `screen.draw`. Vi har tidigare använt `screen.draw.text()` men det finns många fler funktioner, som till exempel
 
 - `screen.draw.line()`
 - `screen.draw.circle()`
@@ -123,6 +123,8 @@ def update():
 Detta kollar vad den aktuella bilden är och byter till nästa. Det fungerar, men är mer besvärligt än i Scratch. Som hjälp kan vi använda modulen [Pygame Zero Helper](https://www.aposteriori.com.sg/pygame-zero-helper), som redan är med i startprojektet. Det är den som heter *pgzhelper.py* i listan med filer. Din egen kod lägger du alltid i *main.py*.
 
 ![image](https://user-images.githubusercontent.com/4598641/225400386-96e08db6-2009-4729-a895-1b209d094c0a.png)
+
+Pygame Zero Helper har många praktiska funktioner, t.ex. för att skala en figur eller flytta den.<br>Här finns en lista över funktionerna: https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md
 
 ## Modulen Pygame Zero Helper
 
