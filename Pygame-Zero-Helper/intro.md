@@ -1,8 +1,8 @@
 # `Actor` har många användbara funktioner i Pygame Zero Helper
 
-Det finns en del vanliga grafikfunktioner som saknas i vanliga Pygame Zero.
+Det finns en del användbara grafikfunktioner som saknas i vanliga *Pygame Zero*.
 
-Här är metoderna listade med en väldigt kort förklaring.
+Här är en lista med funktionena i *Pygame Zero Helper* och en väldigt kort förklaring av varje.
 
 Kodexempel hittar du på hemsidan  https://www.aposteriori.com.sg/pygame-zero-helper/
 och i projekten [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) och [Ninja Runner](https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md).
