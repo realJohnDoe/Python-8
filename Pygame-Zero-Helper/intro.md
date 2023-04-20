@@ -5,7 +5,7 @@ Det finns en del vanliga grafikfunktioner som saknas i vanliga Pygame Zero.
 Här är metoderna listade med en väldigt kort förklaring.
 
 Kodexempel hittar du på hemsidan  https://www.aposteriori.com.sg/pygame-zero-helper/
-och i projekten Gem Catcher och Ninja Runner.
+och i projekten [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) och [Ninja Runner](https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md).
 
 | Python-funktion för Actor | Kort förklaring |
 | ----------------- | --------------- |
@@ -22,3 +22,7 @@ och i projekten Gem Catcher och Ninja Runner.
 | `obb_collidepoint()`, `obb_collidepoints()` | Upptäck kollisioner ungefär men snabbt |
 | `circle_collidepoint()`, `circle_collidepoints()` | Upptäck kollision för runda figurer, ungefär men snabbt |
 | `set_fulscreen()`, `set_windowed()`, `toggle_fullscreen()`,<br>`hide_mouse()`, `show_mouse()` | Byt till fullskärm eller fönster. Göm eller visa muspekare |
+
+Gem Catcher hittar du här: https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md
+
+Ninja Runner hittar du här: https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md
