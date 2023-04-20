@@ -18,6 +18,8 @@ Välkommen till Pythonuppgifter för årskurs 8 🐍 Spelen är översatta från
   
 [**Hitta symboler på tangentbordet**](#var-hittar-jag-symbolerna-på-tangentbordet)
 
+[**Actor har många bra funktioner i Pygame Zero Helper**](https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md)
+
 ### Gradering
 ⭐: lättare uppgift &ndash; du ska göra minst en av dessa och får göra alla om du vill<br>
 ⭐⭐: lite svårare uppgift<br>
