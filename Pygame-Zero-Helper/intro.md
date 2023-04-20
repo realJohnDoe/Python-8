@@ -4,8 +4,9 @@ Det finns en del användbara grafikfunktioner som saknas i vanliga *Pygame Zero*
 
 Här är en lista med funktionena i *Pygame Zero Helper* och en väldigt kort förklaring av varje.
 
-Kodexempel hittar du på hemsidan  https://www.aposteriori.com.sg/pygame-zero-helper/
-och i projektet [Ninja Runner](https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md).
+Kodexempel hittar du 
+* på hemsidan  https://www.aposteriori.com.sg/pygame-zero-helper/ och
+* i projektet [Ninja Runner](https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md), https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md.
 
 | Python-funktion för Actor | Kort förklaring |
 | ----------------- | --------------- |
@@ -23,6 +24,3 @@ och i projektet [Ninja Runner](https://github.com/coderdojolund/Python-8/blob/ma
 | `circle_collidepoint()`, `circle_collidepoints()` | Upptäck kollision för runda figurer, ungefär men snabbt |
 | `set_fulscreen()`, `set_windowed()`, `toggle_fullscreen()`,<br>`hide_mouse()`, `show_mouse()` | Byt till fullskärm eller fönster. Göm eller visa muspekare |
 
-Gem Catcher hittar du här: https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md
-
-Ninja Runner hittar du här: https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md
