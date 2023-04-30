@@ -508,7 +508,7 @@ pgzrun.go()  # måste vara sista raden
 ## Hindra att ormen rör sig rakt bakåt
 Ormen ska inte kunna röra sig i motsatt riktning som den för närvarande går. När den t.ex. går åt höger ska den inte direkt gå åt vänster. Detta kontrolleras innan riktningen ställs in.
 
-✏️ Uppdatera funktionen `on_key_down()`. Testkör svängar med piltangenterna och kolla om det blev rätt!
+✏️ Uppdatera funktionen `on_key_down()`. 
 
 ```python
 def on_key_down(key):
@@ -523,6 +523,8 @@ def on_key_down(key):
     elif key == keys.UP and direction != 'down': #ändrat 🐍
         direction = 'up'
 ```
+
+✏️ Testkör svängar med piltangenterna och kolla om det blev rätt!
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -609,8 +611,8 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Använd en kö för riktningarna
-Just nu kan ormen fortfarande gå bakåt om en annan riktning och sedan den motsatta riktningen trycks in inom ett enda tick på timern.
-Om ormen t.ex. slingrade åt höger på den sista ticket och spelaren trycker neråtpil och sedan vänsterpil före nästa tick, kommer ormen att flytta åt vänster på nästa tick.
+Just nu kan ormen fortfarande gå bakåt om en annan riktning och sedan den motsatta riktningen trycks inom ett enda tick på timern.
+Om ormen t.ex. slingrade åt höger på den sista ticket och du trycker neråtpil och sedan vänsterpil före nästa tick, kommer ormen att flytta åt vänster på nästa tick.
 
 Dessutom kan spelaren vilja ge flera anvisningar inom ett enda tick. I exemplet ovan kan spelaren ha velat att ormen skulle flytta neråt ett tick och sen vänster nästa tick.
 
@@ -620,9 +622,9 @@ Om  riktningskön har mer än ett element, tas det första elementet bort vid va
 
 När en knapp trycks ned läggs riktningen till i slutet av riktningskön.
 
-Den sista posten i riktningskön, alltså den senast tryckta riktningen, kontrolleras för att se om att inte är i motsatt riktning mot den nya riktningen innan den nya riktningen läggs till i riktningskön.
+Det sista elementet i riktningskön, alltså den senast tryckta riktningen, kontrolleras för att se om att inte är i motsatt riktning mot den nya riktningen innan den nya riktningen läggs till i riktningskön.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när du trycker snabbt på de olika piltangenterna?
+✏️ Uppdatera koden.
 
 ```python
 import pgzrun
@@ -710,6 +712,7 @@ def draw():
 pgzrun.go()  # måste vara sista raden
 
 ```
+✏️ Testkör &ndash; vad händer när du trycker snabbt på de olika piltangenterna?
 
 ![image](https://user-images.githubusercontent.com/4598641/226439688-1765d719-ee76-4b94-be2f-d8760ced80d7.png)
 
@@ -813,7 +816,7 @@ pgzrun.go()  # måste vara sista raden
 ## Hindra att lägga till samma riktning två gånger
 Om den senaste riktningen är samma som den nya riktningen, ska den nya riktningen inte läggas till i riktningskön.
 
-✏️ Uppdatera `on_key_down()`. Testkör &ndash; vad händer när du  snabbt trycker på olika piltangenter, eller samma piltangent?
+✏️ Uppdaterad 🐍-raderna i `on_key_down()`. 
 
 ```python
 def on_key_down(key):
@@ -838,6 +841,8 @@ def on_key_down(key):
         direction_queue.append('up')
 ```
 
+Testkör &ndash; vad händer när du  snabbt trycker på olika piltangenter, eller samma piltangent?
+
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -856,7 +861,6 @@ timer = 0
 direction_queue = ['right']
 
 # Funktioner här nedanför
-
 
 def update(dt):
     global timer
@@ -944,7 +948,7 @@ Om nästa position skulle vara utanför rutnätet, slår vi över till motsatta 
 
 Rutnätets X/Y-storlek återanvänds från att rita bakgrunden, så de variablerna flyttas till att vara globala.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ormen når kanten?
+✏️ Uppdatera/flytta raderna med 🐍 så att det blir så här:
 
 ```python
 # etc.
@@ -981,6 +985,7 @@ def draw():
     # Flyttat: grid_x_count = 20
     # Flyttat: grid_y_count = 15
 ```
+✏️ Testkör &ndash; vad händer när ormen når kanten?
 
 ![image](https://user-images.githubusercontent.com/4598641/226439789-ce8299ae-1e6c-449b-9dc0-6c64b6124c6f.png)
 
