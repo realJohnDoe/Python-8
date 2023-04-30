@@ -146,6 +146,9 @@ def draw():
 pgzrun.go()  # måste vara sista raden
 ```
 
+✏️ Testkör koden. Så här ska det se ut.
+>Fungerar det inte? Kolla dina ändringar noga.
+
 ![image](https://user-images.githubusercontent.com/4598641/226439469-a0bf9621-d2ff-4b38-810e-9a1be63b3324.png)
 
 
@@ -178,6 +181,10 @@ def update(dt): #nytt 🐍
 
 # etc.
 ```
+✏️ Testkör och kolla utskriften i terminalfönstret. Ser det ut så här?
+
+![image](https://user-images.githubusercontent.com/4598641/235365117-32e6a3e4-1427-450b-8f0b-8fddb4fb64ee.png)
+
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -246,7 +253,7 @@ Det sista elementet i segmentlistan, ormens svans, tas bort.
 
 Segmentlistan ändras i funktionen `update()`, så den flyttas till att vara global.
 
-✏️ Uppdatera koden. Testkör! Flyttar ormens i X-led?
+✏️ Uppdatera koden och testkör.
 
 ```python
 import pgzrun
@@ -291,6 +298,7 @@ def draw():
     for segment in snake_segments:
     # etc.
 ```
+✏️ Testkör! Flyttar ormen i X-led?
 
 ![image](https://user-images.githubusercontent.com/4598641/226439549-4395b5df-c7f0-4a1f-9a91-921994eb1365.png)
 
@@ -310,7 +318,6 @@ snake_segments = [
 timer = 0
 
 # Funktioner här nedanför
-
 
 def update(dt):
     global timer
@@ -411,6 +418,8 @@ def on_key_down(key): #nytt 🐍
 
 # etc.
 ```
+
+✏️ Testkör med piltangenterna.
 
 ![image](https://user-images.githubusercontent.com/4598641/226439597-2d0fded6-4174-4bbb-8dc1-9f3499761701.png)
 
