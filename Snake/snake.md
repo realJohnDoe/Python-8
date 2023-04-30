@@ -1109,7 +1109,7 @@ Maten lagras som ett talpar med X- och Y-koordinater. Maten ritas som en kvadrat
 
 Slumpmodulen importeras så att `random.randint` kan användas.
 
-✏️ Uppdatera koden. Testkör &ndash; fungerar maten?
+✏️ Uppdatera koden.
 
 ```python
 import pgzrun
@@ -1138,6 +1138,7 @@ def draw():
         color=(255, 76, 76) #nytt 🐍
     ) #nytt 🐍 
 ```
+✏️ Testkör &ndash; ritas maten?
 
 ![image](https://user-images.githubusercontent.com/4598641/226439842-6fae488e-e72d-494c-bad4-9204c860144a.png)
 <details>
@@ -1265,9 +1266,10 @@ pgzrun.go()  # måste vara sista raden
 
 ## Förenkla koden
 
-Koden för att rita en orms segment och rita maten är samma, förutom färgen. Vi gör det till en funktion med färgen som parameter.
+Koden för att rita en orms segment och rita maten är samma, förutom färgen. 
+Vi gör det till en funktion med färgen som parameter.
 
-✏️ Uppdatera koden i `draw`. Testkör &ndash; fungerar koden som innan vi städade den?
+✏️ Uppdatera de markerade raderna i `draw`.
 
 ```python
 def draw():
@@ -1294,6 +1296,7 @@ def draw():
 
     draw_cell(food_position['x'], food_position['y'], (255, 76, 76)) #nytt 🐍
 ```
+✏️ Testkör &ndash; fungerar koden som innan vi förenklade den?
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1408,7 +1411,6 @@ def draw():
 
 # Kod för att starta appen här nedanför
 
-
 pgzrun.go()  # måste vara sista raden
 
 ```
@@ -1421,9 +1423,9 @@ Om ormens nya huvudposition är samma som matens position, tas inte ormens svans
     
 På så vis blir ormen en ruta längre.
 
-✏️ Uppdatera koden i `update()`. Testkör &ndash; vad händer när ormen äter?
+✏️ Uppdatera raderna i `update()`.
 
-```python
+  ```python
 def update(dt):
     global timer, food_position #ändrat 🐍
 
@@ -1468,7 +1470,8 @@ def update(dt):
         else: #nytt 🐍
             snake_segments.pop() #dra in raden 🐍
 ```
-
+                                   
+✏️ Testkör &ndash; vad händer när ormen äter?
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1597,9 +1600,9 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Förenkla koden
-Koden för att lägga maten på en slumpmässig position återanvänds. Vi gör en funktion för det.
+Koden för att lägga maten på en slumpmässig position behövs på fler ställen. Vi gör en funktion för det.
     
-✏️ Uppdatera koden. Testkör &ndash; fungerar koden lika bra som innan?
+✏️ Uppdatera koden.
 
 ```python
 def move_food(): #nytt 🐍
@@ -1626,7 +1629,7 @@ move_food() #nytt 🐍
 
 pgzrun.go()  # måste vara sista raden
 ```
-
+✏️ Testkör &ndash; fungerar koden lika bra som innan?
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1762,9 +1765,11 @@ pgzrun.go()  # måste vara sista raden
     
 Istället för att flytta maten till en slumpmässig plats, flyttar den till en plats där ormen inte är just nu.
     
-Alla positioner i rutnätet loopas igenom. För varje rutnätsposition loopar vi igenom alla ormens segment. Om inga ormsegment är på en viss rutnätsposition, läggs rutnätspositionen till till en lista över möjliga matpositioner. Nästa matposition väljs sen slumpmässigt från denna lista.
+Alla positioner i rutnätet loopas igenom. För varje rutnätsposition loopar vi igenom alla ormens segment.
+Om inga ormsegment är på en viss rutnätsposition, läggs den positionen till i en lista över möjliga matpositioner.
+Nästa matposition väljs sen slumpmässigt från den listan.
 
-✏️ Uppdatera koden i `move_food`. Testkör &ndash; vad händer när ormen äter?
+✏️ Uppdatera kodraderna i `move_food`. 
 
 ```python
 def move_food():
@@ -1785,6 +1790,8 @@ def move_food():
 
     food_position = random.choice(possible_food_positions) #nytt 🐍
 ```
+
+✏️ Testkör &ndash; vad händer när ormen äter?
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -1927,13 +1934,12 @@ pgzrun.go()  # måste vara sista raden
 ## Game over
     
 Ormens segment loopas igenom. Om något av dem &ndash; förutom det sista &ndash; är i samma position som ormens nya huvudposition, så har ormen kraschat in i sig själv.
+>Det sista segmentet på ormen ska inte kollas eftersom det kommer att tas bort inom samma tick.
 
-Det sista segmentet på ormen ska inte kollas eftersom det kommer att tas bort inom samma tick.
+För närvarande skrivs `collision` ut när ormen kraschar in i sig själv. 
 
-För närvarande skrivs `collision` ut när ormen kraschar in i sig själv.
-
-✏️ Uppdatera i funktionen `update`. Testkör &ndash; vad händer när ormen kraschar in sig själv?
-
+✏️ Uppdatera i funktionen `update`.
+  
 ```python
 def update(dt):
     # etc.
@@ -1960,7 +1966,8 @@ def update(dt):
         else: #nytt 🐍
             print('collision') #nytt 🐍    
 ```
-
+✏️ Testkör &ndash; vad händer när ormen kraschar in sig själv? Kolla i det svarta terminalfönstret (Console) nere till höger.
+                                   
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
 
@@ -2115,7 +2122,7 @@ Vi gör en funktion som ställer in spelets startläge.
 
 Funktionen anropas innan spelet börjar och när ormen kraschar.
 
-✏️ Lägg till funktionen `reset()` och gör de andra småändringarna. Testkör &ndash; vad händer när ormen kraschar?
+✏️ Lägg till funktionen `reset()` och gör de andra småändringarna på markerade rader.
 
 ```python
 grid_x_count = 20
@@ -2152,6 +2159,8 @@ reset() #ändrat 🐍
 pgzrun.go()  # måste vara sista raden
     
 ```
+
+✏️ Testkör &ndash; vad händer när ormen kraschar?
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -2313,11 +2322,11 @@ pgzrun.go()  # måste vara sista raden
 
 ## Pausa efter att ormen har kraschat
     
-En variabel används för att lagra om ormen är vid liv eller inte. Om den är inställd på False så har ormen kraschat.
+En variabel används för att lagra om ormen är vid liv eller inte. Om den är `False` (falskt) så har ormen kraschat.
 
 Om ormen är död, väntar timern i 2 sekunder innan den anropar `reset()` för att starta om spelet.
     
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ormen kraschar?
+✏️ Uppdatera koden på de markerade raderna.
 
 ```python
 def reset():
@@ -2346,6 +2355,7 @@ def update(dt):
     elif timer >= 2: #nytt 🐍
         reset() #nytt 🐍
 ```
+✏️ Testkör &ndash; vad händer när ormen kraschar?
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>
@@ -2509,9 +2519,10 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Ändra ormens färg när den är död
+
 Ormens färg ändras beroende på om den är vid liv eller inte.
 
-✏️ Uppdatera koden. Testkör &ndash; vad händer när ormen dör?
+✏️ Uppdatera kodraderna i `draw()`.
 
 ```python
 def draw():
@@ -2525,6 +2536,7 @@ def draw():
 
     # etc.    
 ```
+✏️ Testkör &ndash; vad händer när ormen dör?
 
 
 ![image](https://user-images.githubusercontent.com/4598641/226440133-a580b309-3b49-400d-ab5b-97c545c75ecd.png)
@@ -2699,9 +2711,13 @@ Pröva att göra några ändringar eller tillägg. Det kan vara en poängräknar
 - Beskriv hur du fick ändra koden för att göra ändringen. Glöm inte kodexempel.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
 
+## 3. Be någon annan att testa ditt projekt
+- Be om konstruktiv kritik på spelet. Skriv ner
+- Be om konstruktiv kritik på koden. Skriv ner
+- Har du något tips att för någon som inte har gjort det här projektet innan? Skriv ner
+  
 # Källor
 
 https://simplegametutorials.github.io/pygamezero/snake/
 
 https://web.archive.org/web/20140820192218/http://www.realtid.se/ArticlePages/200603/01/20060301132710_Realtid437/20060301132710_Realtid437.dbp.asp?Action=Print
-
