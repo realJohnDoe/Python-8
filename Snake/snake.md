@@ -69,7 +69,7 @@ En rektangel ritas för bakgrunden.
 
 ```python
 import pgzrun
-from pygame import Rect, screen
+from pygame import Rect
 
 # Globala variabler här nedanför
 
