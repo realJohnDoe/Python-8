@@ -31,6 +31,9 @@
 
 ![image](https://user-images.githubusercontent.com/4598641/226439115-c9800ff9-c916-406c-9efb-39407658988a.png)
 
+✏️ Pennan visar något du ska göra. Mata in koden och testkör innan du går vidare. 
+**Fungerar det inte? Rätta koden innan du fortsätter till nästa ändring.**
+
 # Regler
 När ormen äter mat, växer den. När en matbit är uppäten, dyker det upp en ny på en slumpmässig position.
 
@@ -67,6 +70,13 @@ En rektangel ritas för bakgrunden.
 
 ✏️ Se till att du är inloggad i repl.it. Öppna startprojektet https://replit.com/@RobertStorlind/snake-starter och spara en egen kopia med knappen "Fork".
 
+✏️ Kör koden med Run i repl.it. Ser det ut så här?
+
+![image](https://user-images.githubusercontent.com/4598641/235364441-4af78ea9-4545-40d5-af52-ed10b6de87da.png)
+
+<details>
+    <summary>📝 Så här kan koden se ut nu</summary>
+
 ```python
 import pgzrun
 from pygame import Rect
@@ -90,13 +100,13 @@ def draw():
 
 pgzrun.go() # måste vara sista raden
 ```
-
-![image](https://user-images.githubusercontent.com/4598641/226439410-a04eb468-d4cf-4b10-9916-02534cea3a3d.png)
+</details>
 
 ## Rita ormen
 Ormens segment lagras som X- och Y-koordinater och ritas som rutor.
 
-Uppdatera funktionen `draw` och testkör! Ritas ormen rätt?
+✏️ Uppdatera funktionen `draw` och testkör! Ritas ormen rätt?
+>Raderna som ska ändras är markerade med 🐍
 
 ```python
 import pgzrun
