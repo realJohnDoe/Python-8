@@ -16,9 +16,9 @@ Välkommen till Pythonuppgifter för årskurs 8 🐍 Spelen är översatta från
   &bull; [Snake](#snake-)
   &bull; [Sokoban](#sokoban-)
   
-[**Hitta symboler på tangentbordet**](#var-hittar-jag-symbolerna-på-tangentbordet)
+[**Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]**](#var-hittar-jag-symbolerna-på-tangentbordet)
 
-[**Actor har många bra funktioner i Pygame Zero Helper**](https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md)
+[**Hur ändrar jag storleken på en Actor?**](https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md)
 
 ### Gradering
 ⭐: lättare uppgift &ndash; du ska göra minst en av dessa och får göra alla om du vill<br>
