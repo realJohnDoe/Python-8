@@ -33,7 +33,7 @@ Precis som i [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/G
 ```python
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 pgzrun.go() # Måste vara sista raden
 ```
@@ -55,7 +55,7 @@ För tillfället ska vi bara använda `screen.draw.filled_rect()`. Den ritar en 
 ```python
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
@@ -77,7 +77,7 @@ Steget innan ritade himlen. Vi lägger till en andra rektangel för att rita mar
 ```python
 import pgzrun
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
@@ -132,7 +132,7 @@ Pygame Zero Helper har många praktiska funktioner, t.ex. för att skala en figu
 import pgzrun
 from pgzhelper import *
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 def draw():
   screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
@@ -176,7 +176,7 @@ Det här gör de olika raderna:
 import pgzrun
 from pgzhelper import *
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
@@ -211,6 +211,7 @@ runner.scale = 0.5 # halva originalstorleken
 run_images = ['min_egen_bild']
 runner.images = run_images
 ```
+>Andra saker du kan göra med en `Actor` hittar du här: [https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md](https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md)
 
 ### Justera placeringen
 
@@ -291,7 +292,7 @@ Ditt program bör nu se ut så här:
 import pgzrun
 from pgzhelper import *
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
@@ -327,7 +328,7 @@ pgzrun.go() # Måste vara sista raden
 ## En lista med figurer
 
 I vårt [Gem Catcher-spel](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) har vi bara en ädelsten i taget och den flyttar sig till toppen av skärmen varje gång vi fångar den.
-I vårt ninjaspel kommer vi att flera hinder på skärmen samtidigt.
+I ninjaspelet kommer vi att flera hinder på skärmen samtidigt.
 För att klara det behöver vi använda **listor**.
 
 ![image](https://user-images.githubusercontent.com/4598641/223222660-26ee39e0-5420-47ba-8ef9-d4cb855636fe.png)
@@ -378,7 +379,7 @@ Nu ska ditt program se ut ungefär så här:
 import pgzrun
 from pgzhelper import *
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
@@ -518,7 +519,7 @@ Ditt spel bör se ut så här till slut:
 import pgzrun
 from pgzhelper import *
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 600, 450
 
 runner = Actor('run__000')
 run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
@@ -594,7 +595,6 @@ Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ov
 Ge ett par exempel.
 
 ## Uppgift 4
-
 Välj och gör minst en av utmaningarna 1, 2, 3 här nedanför. Redovisa så här:
 - Beskriv kort vad förändringen är och hur den ska fungera.
 - Beskriv hur du fick ändra koden för att göra ändringen.
