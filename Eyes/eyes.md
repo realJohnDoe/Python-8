@@ -74,6 +74,7 @@ def draw():
 pgzrun.go() # måste vara sist
 ```
 
+Så här ser det ut när jag testkör. Fungerar det inte? Kolla koden igen.
 
 ![image](https://user-images.githubusercontent.com/4598641/223817639-1363643f-481d-44e3-979b-d0b48eb0c9da.png)
 
@@ -86,6 +87,8 @@ Avståndet, `distance`, kan vi räkna ut med Pythagoras sats. Se figuren.
 Avståndet i pixlar är roten ur (antalet pixlar i X-led i kvadrat + antalet pixlar i Y-led i kvadrat).
 - Operatorn `**2` betyder upphöjt till 2, alltså kvadraten
 - Vi importerar mattemodulen `math` för att räkna roten ur med `math.sqrt()`.
+
+:pencil2: **Uppdatera koden** och testkör den!
 
 ```python
 import pgzrun
@@ -118,8 +121,7 @@ def draw():
 pgzrun.go()  # måste vara sist
 ```
 
-:pencil2: **Uppdatera** och testkör koden!
-
+Verkar avståndet räknas ut rätt? Flytta muspekaren sakta och kolla.
 
 # Rörlig pupill
 
@@ -232,7 +234,7 @@ def draw():
 
 # behåll resten av koden
 ```
-:pencil2: **Uppdatera och testa koden.** Fungerar den bra även när muspekaren är utanför ögats cirkel?
+:pencil2: **Uppdatera de markerade raderna och testa koden.** Fungerar den bra även när muspekaren är utanför ögats cirkel?
 
 <details>
   <summary>📝 Så här ser hela koden ut nu</summary>
@@ -277,7 +279,7 @@ pgzrun.go()  # måste vara sist
 </details>
 
 # Två ögon
-Vi vill ha två ögon som följer muspekaren. Vi kan återanvända samma kod.
+Vi vill ha *två* ögon som följer muspekaren. Vi kan återanvända samma kod.
 Därför lägger vi ögats kod
 i funktionen `draw_eye` som har ögats x- och y-koordinat som indata/parametrar.
 
@@ -319,7 +321,7 @@ def draw():
 
 pgzrun.go()
 ```
-:pencil2: **Uppdatera och testa koden.** Följer båda ögonen muspekaren på rätt sätt?
+:pencil2: **Uppdatera de ändrade raderna och testa koden.** Följer båda ögonen muspekaren på rätt sätt?
 >Tänk på att justera indragen i koden när du lägger till funktionen `draw_eye()`.
     
 # Uppgifter
@@ -343,8 +345,9 @@ Kan du förenkla koden så att vi inte behöver två olika uträkningar av `pupi
 - Glöm inte kodexempel när du redovisar
     
 ## Extrauppgift 3
-Kan du få ögonen att byta färg, försvinna eller röra sig?
+Kan du få ögonen att byta färg, försvinna eller flytta sig till en annan position på skärmen ibland?
 - Glöm inte kodexempel när du redovisar
+- Om du gör `from random import randint` kan du använda funktionen `randint(min, max)` för att få ett heltal mellan min och max. 
     
 ## Extrauppgift 4
 Kan du lägga in någon annan slags figur och få ögonen att följa den figuren istället för muspekaren?
