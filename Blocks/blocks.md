@@ -1315,7 +1315,7 @@ pgzrun.go()  # måste vara sista raden
 
 ## Timer
 
-Bitar kommer att falla med 0.5 s mellanrum.
+Bitar kommer att falla med 0,5 s mellanrum.
 
 En timervariabel börjar vid 0 och ökar med `dt` för varje bildruta.
 >`dt` talar om hur lång tid det har gått sedan vi senast ritade på skärmen.
@@ -1458,7 +1458,7 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 ## Fallande bit
-Timern används för att öka bitens Y-koordinat var 0.5:e sekund.
+Timern används för att öka bitens Y-koordinat var 0,5:e sekund.
 
 ✏️ Uppdatera funktionen `update()` och testkör! Faller biten som den ska?
 
