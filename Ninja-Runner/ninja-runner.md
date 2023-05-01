@@ -52,6 +52,9 @@ Vi kan rita olika figurer med funktionerna i `screen.draw`. Vi har tidigare anv�
 För att lära mer kan du läsa i [dokumentationen för Pygame Zero](https://pygame-zero.readthedocs.io/en/stable/builtins.html#screen).
 
 För tillfället ska vi bara använda `screen.draw.filled_rect()`. Den ritar en rektangel på skärmen, så vi behöver lägga till anropet i funktionen `draw()`.
+
+✏️ Uppdatera koden så att den blir så här:
+
 ```python
 import pgzrun
 
@@ -102,10 +105,10 @@ Det här gör den nya raden:
 # Ninjan
 
 ## Animering
-I Scratch kan du animera dina sprajtar genom att ändra klädseln. I Pygame Zero gör vi det genom att byta bild. Ett sätt att göra det på är så här:
+I Scratch kan du animera dina sprajtar genom att ändra klädseln. I Pygame Zero gör vi det genom att byta bild. Ett sätt att göra det på är så här. *Detta är ett exempel &ndash; ändra inte din kod än.*
 
 ```python
-def update():
+def update(): #exempel -- du behöver inte ändra än
     if runner.image == 'run__000':
       runner.image == 'run__001'
     elif runner.image == 'run__001':
@@ -114,13 +117,16 @@ def update():
       runner.image == 'run__000'
 ```
 
-Detta kollar vad den aktuella bilden är och byter till nästa. Det fungerar, men är mer besvärligt än i Scratch. Som hjälp kan vi använda modulen [Pygame Zero Helper](https://www.aposteriori.com.sg/pygame-zero-helper), som redan är med i startprojektet. Det är den som heter *pgzhelper.py* i listan med filer. Din egen kod lägger du alltid i *main.py*.
+Detta kollar vad den aktuella bilden är och byter till nästa. Det fungerar, men är mer besvärligt än i Scratch. 
+Som hjälp kan vi använda modulen [Pygame Zero Helper](https://www.aposteriori.com.sg/pygame-zero-helper), som redan är med i startprojektet. Det är den som heter *pgzhelper.py* i listan med filer. Din egen kod lägger du alltid i *main.py*.
 
 ![image](https://user-images.githubusercontent.com/4598641/225400386-96e08db6-2009-4729-a895-1b209d094c0a.png)
 
 Pygame Zero Helper har många praktiska funktioner, t.ex. för att skala en figur eller flytta den.<br>Här finns en lista över funktionerna: https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md
 
 ## Modulen Pygame Zero Helper
+
+✏️ Uppdatera koden så att den blir så här:
 
 ```python
 import pgzrun
@@ -148,7 +154,7 @@ Det finns redan ett antal ninjabilder förberedda i startprojektet. De ligger i 
 
 ## Programmera ninjan
 
-Vi lägger till ninjan i vårt spel så här:
+✏️ Vi lägger till ninjan i vårt spel så här:
 
 ```python
 runner = Actor('run__000')
@@ -184,7 +190,9 @@ def draw():
 pgzrun.go() # Måste vara sista raden
 ```
 
-Det ska få ninjan att synas på skärmen, men den springer inte än! Lägg till det i `update`-funktionen så här:
+Det ska få ninjan att synas på skärmen, men den springer inte än! '
+
+✏️ Lägg till det i `update`-funktionen så här:
 
 ```python
 def update():
@@ -209,7 +217,9 @@ runner.images = run_images
 
 ### Justera placeringen
 
-Du kan justera ninjas placering med `runner.x` och `runner.y`. Pröva detta:
+Du kan justera ninjas placering med `runner.x` och `runner.y`.
+
+✏️ Pröva detta:
 
 ```python
 runner.x = 100
@@ -227,7 +237,7 @@ Vilken av de här ser mest realistisk ut?
 
 I verkliga livet påverkas föremål av gravitationen. För att få vår ninja att hoppa realistiskt, behöver vi simulera gravitationens effekter i vårt spel.
 
-Vi börjar med att lägga till variabler för `velocity_y` och `gravity`, alltså hastigheten i y-led och gravitationen.
+✏️ Vi börjar med att lägga till variabler för `velocity_y` och `gravity`, alltså hastigheten i y-led och gravitationen.
 
 ```python
 velocity_y = 0
@@ -240,7 +250,7 @@ Förklaring av kodraderna:
 
 `gravity = 1` : Gravitationen påverkar hastigheten. Vi kan ändra detta senare och se effekten av det, men just nu låter vi värdet vara 1. 
 
-I `update()` ska vi sen ändra hastigheten när uppåtpilen trycks ner.
+✏️ I `update()` ska vi sen ändra hastigheten när uppåtpilen trycks ner.
 
 ```python
 def update():
@@ -267,8 +277,9 @@ Det här gör raderna:
 >Funkar inte uppåtpil? Kom ihåg att klicka i spelfönstret när du startat spelet med *Run*.
 
 ## Gravitation
-Graviationen ändrar ninjans hastighet. 
-Under raden `runner.y += velocity_y` lägger vi till gravitionen med `velocity_y += gravity`.
+Gravitationen ändrar ninjans hastighet. 
+
+✏️ Under raden `runner.y += velocity_y` lägger vi till gravitionen med `velocity_y += gravity`.
 
 Nu ramlar vår ninja rakt ner! Vi har inte talat om för ninjan när den ska sluta falla! Vi lägger till det nu:
 
@@ -327,17 +338,17 @@ För att klara det behöver vi använda **listor**.
 
 ![image](https://user-images.githubusercontent.com/4598641/223222660-26ee39e0-5420-47ba-8ef9-d4cb855636fe.png)
 
-Först skapar vi en tom lista som heter `obstacles` och en heltalsvariabel `obstacles_timeout`.
+✏️ Först skapar vi en tom lista som heter `obstacles` och en heltalsvariabel `obstacles_timeout`.
 
 ```python
 obstacles = []
 obstacles_timeout = 0
 ```
-I vår funktion `update()` ska vi räkna upp `timeout` med 1 varje gång.
+✏️ I vår funktion `update()` ska vi räkna upp `timeout` med 1 varje gång.
 ```python
 obstacles_timeout += 1
 ```
-Och om `timeout` är större än 50 lägger vi till ett hinder och sätter `timeout` till 0.
+✏️ Och om `timeout` är större än 50 lägger vi till ett hinder och sätter `timeout` till 0.
 
 ```python
 if obstacles_timeout > 50:
@@ -352,20 +363,20 @@ Det enda nya här är `obstacles.append(actor)`. Det lägger till figuren `actor
 
 **VIKTIGT: Du behöver ha bilden med kaktusen i mappen images. Om du vill använda en annan bild, glöm inte att byta bildnamnet i koden också.**
 
-För att få hindren att röra sig över skärmen:
+✏️ För att få hindren att röra sig över skärmen:
 ```python
 for actor in obstacles:
   actor.x -= 8
 ```
 Detta går igenom hela listan `obstacles` och minskar x-koordinaten för varje hinder. Att minska *x* gör att hindret rör sig åt vänster.
 
-Till slut behöver vi rita hindren på skärmen. Lägg till det här i `draw()`-funktionen:
+✏️ Till slut behöver vi rita hindren på skärmen. Lägg till det här i `draw()`-funktionen:
 ```python
 for actor in obstacles:
   actor.draw()
 ```
 
-✏️ Uppdatera och testkör!
+✏️ Testkör din kod!
 
 Nu ska ditt program se ut ungefär så här:
 
@@ -427,10 +438,11 @@ pgzrun.go() # Måste vara sista raden
 
 Precis som i [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md), använder vi en variabel `score` för att hålla reda på  poängställningen.
 
+✏️ Uppdatera koden.
 ```python
 score = 0
 ```
-Vi ökar poängen varje gång ett hinder försvinner ut åt vänster. Ändra det här inuti `update()`, från
+✏️ Vi ökar poängen varje gång ett hinder försvinner ut åt vänster. Ändra det här inuti `update()`, från
 ```python
   for actor in obstacles:
     actor.x -= 8
@@ -451,16 +463,19 @@ Detta är vad raderna betyder:
 
 `score += 1` : öka poängen med 1. Kom ihåg att deklarera `score` som global variabel!
 
+✏️ Testkör!
+
 ## Rita hinder och skriva ut poängen
-Hindren ritas inte om vi glömmer att göra det i `draw()`. Så vi lägger till detta:
+Hindren ritas inte om vi glömmer att göra det i `draw()`. 
+
+✏️ Vi lägger till detta:
 ```python
 for actor in obstacles:
   actor.draw()
 ```
 Det går igenom listan med hinder och ritar dem ett i taget.
 
-Vi behöver också visa poängen på skärmen så här:
-
+✏️ Vi behöver också visa poängen på skärmen så här:
 ```python
 screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
 ```
@@ -470,18 +485,19 @@ screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
 # Game Over
 Just nu gör spelet inget även om vår ninja krockar med kaktusen. Vi lägger till ett game over-läge. Om ninjan rör något av hindren så avslutar vi spelet.
 
-Först lägger vi till en variabel `game_over` och sätter den till `False` i början.
+✏️ Först lägger vi till en variabel `game_over` och sätter den till `False` i början.
 
 ```python
 game_over = False
 ```
-Inuti funktionen `update()` ska vi upptäckte om vår ninja har krockat med något av hindren. Om hon gjorde det så sätter vi `game_over` till `True`.
+
+✏️ Inuti funktionen `update()` ska vi upptäcka om vår ninja har krockat med något av hindren. Om hon gjorde det så sätter vi `game_over` till `True`.
 
 ```python
 if runner.collidelist(obstacles) != -1:
   game_over = True
 ```
-**Viktigt: kom ihåg att deklarera `game_over` som global i funktionen `update()`**
+✏️ **Viktigt: kom ihåg att deklarera `game_over` som global i funktionen `update()`**
 
 Frågan `runner.collidelist(obstacles)` kollar om ninjan har krockat med något av hindren i listan `obstacles`.
 Om hon inte gjorde det, ger funktionen `collidelist` värdet &ndash;1.
@@ -493,7 +509,7 @@ Sen behöver vi skriva texten *Game over* inuti `draw()` genom att ändra från
     actor.draw()
   screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
 ```
-till
+✏️ till detta:
 ```python
 if game_over:
   screen.draw.text('Game Over', centerx=WIDTH/2, centery=HEIGHT - 330, color=(255, 255, 255), fontsize=60)
@@ -577,7 +593,7 @@ pgzrun.go() # Måste vara sista raden
 
 # Uppgifter
 
-Det är vanligt att program har buggar. Jag har avsiktligt lämnat kvar ett par buggar i vårt ninjaspel. Har du hittat några än? Pröva att rätta dem!
+Det är vanligt att program har buggar. Jag har avsiktligt lämnat kvar ett par buggar i vårt ninjaspel. Har du hittat några än? Pröva att rätta dem! Redovisa hur du gjorde.
 
 ## Uppgift 1: Buggfix 1. Game Over-poäng
 Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren efter game over … Såg du att poängen fortsatte öka? Det händer eftersom vi fortsätter lägga till kaktusar i hinderlistan efter game over. Kan du fixa det?
