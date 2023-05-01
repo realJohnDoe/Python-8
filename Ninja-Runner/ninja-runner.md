@@ -71,6 +71,10 @@ Det här gör de nya raderna:
 
 ✏️ **Testa att experimentera med olika färger och se vad du får. Kom ihåg att varje färgkomponent ska vara mellan 0 och 255.**
 
+Så här ser det ut när jag testar:
+
+![image](https://user-images.githubusercontent.com/4598641/235426777-440c48fd-7882-43e0-af99-1b1327ebb411.png)
+
 ## Marken
 Steget innan ritade himlen. Vi lägger till en andra rektangel för att rita marken.
 
