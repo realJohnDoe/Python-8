@@ -97,17 +97,7 @@ Det här gör den nya raden:
 
 ![image](https://user-images.githubusercontent.com/4598641/223218919-66ee7ecf-043f-4c08-a775-074ff487bb3c.png)
 
-**Är det ont om plats på skärmen? Några tips**
-1. Försök att göra mer plats genom att minimera fönstret med filerna längst till vänster i repl.it.
-Använd knappen Close Sidebar uppe till vänster för att fälla in fillistan.
-![image](https://user-images.githubusercontent.com/4598641/232329210-328729ca-8ca8-487f-9d16-a5f7015c83d0.png)
 
-2. Gör spelfönstret större genom att dra i de små handtagen (strecken) som finns i mitten till vänster och under det svarta spelfönstret.
-
-3. Ändra spelfönstrets storlek med `WIDTH` och `HEIGHT` i koden, t.ex. `WIDTH, HEIGHT = 600, 450`. Du kan behövs justera markens storlek och ninjans koordinater för att det ska se bra ut.
-
-4. Gör mer plats i Chrome genom att klicka på de tre prickarna högst uppe till höger. Välj sen kvadrat-ikonen (helskärm) ![image](https://user-images.githubusercontent.com/4598641/232329741-2b9f94c8-32b1-42a8-8246-85bec9c80328.png)
- 
 
 # Ninjan
 
