@@ -60,11 +60,10 @@ En cell ritas som en kvadrat.
 
 ✏️ Logga in i repl.it. Klona startprojektet https://replit.com/@RobertStorlind/life-starter så att du får en egen kopia
 
-Mata in koden och testkör! Blir det som i exempelbilden?
+✏️ Mata in koden och testkör! Blir det som i exempelbilden? Ser du den lilla gråa rutan/cellen?
 
 ```python
 import pgzrun
-
 
 # Funktioner här nedanför
 def draw():
@@ -85,10 +84,10 @@ En rad med celler ritas, med en pixel mellan varje cell.
 
 ✏️ Mata in koden och testkör! Du behöver uppdatera funktionen `draw()`.
 >Tänk på att dra in koden som ritar när du lägger till `for`.
+>De rader du ska ändra är markerade.
 
 ```python
 import pgzrun
-
 
 def draw():
     screen.fill((255, 255, 255))
@@ -218,7 +217,7 @@ Vi importerar modulen pygame så att `pygame.mouse.get_pos` kan användas för a
 
 Matematikmodulen importerar vi så att vi kan använda `math.floor` för att avrunda ett tal neråt till närmast mindre heltal.
 
-✏️ Uppdatera koden och testkör! Vad händer om du har muspekaren utanför rutnätet med celler?
+✏️ Uppdatera koden (markerade rader) och testkör! Vad händer om du har muspekaren utanför rutnätet med celler?
 
 ```python
 import pgzrun
