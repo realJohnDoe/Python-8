@@ -15,10 +15,12 @@ Välkommen till Pythonuppgifter för årskurs 8 🐍 Spelen är översatta från
   &bull; [Repeat](#repeat-)
   &bull; [Snake](#snake-)
   &bull; [Sokoban](#sokoban-)
-  
-[**Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]**](#var-hittar-jag-symbolerna-på-tangentbordet)
+* **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
+&bull;
+[Hur får jag mer plats på skärmen?](https://github.com/coderdojolund/Python-8/edit/main/README.md#hur-f%C3%A5r-jag-ett-st%C3%B6rre-spelf%C3%B6nster)
+&bull;
+[Hur ändrar jag storleken på en Actor?](https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md)
 
-[**Hur ändrar jag storleken på en Actor?**](https://github.com/coderdojolund/Python-8/blob/main/Pygame-Zero-Helper/intro.md)
 
 ### Gradering
 ⭐: lättare uppgift &ndash; du ska göra minst en av dessa och får göra alla om du vill<br>
@@ -27,7 +29,7 @@ Välkommen till Pythonuppgifter för årskurs 8 🐍 Spelen är översatta från
 
 ### Gör så här
 Uppgifterna är bara en början &ndash; gör egna förbättringar och tillägg.
-- Be dina klasskamrater att testköra och ge konstruktiv feedback. 
+- Be dina klasskamrater att testköra och ge konstruktiv feedback på spelet *och* koden. 
 - Skriv ner vilka kommentarer du fick och om du gjorde några ändringar baserat på kommentarerna.
 - Mata in koden för hand. Kopiera bara när instruktionen säger så.
 
@@ -123,4 +125,16 @@ https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md
 | @ | `alt gr` + `2` |
 | _ *understreck* | `⬆️` + `–` |
 
+# Hur får jag ett större spelfönster?
+
+1. Försök att göra mer plats genom att minimera fönstret med filerna längst till vänster i repl.it.
+Använd knappen Close Sidebar uppe till vänster för att fälla in fillistan.
+![image](https://user-images.githubusercontent.com/4598641/232329210-328729ca-8ca8-487f-9d16-a5f7015c83d0.png)
+
+2. Gör spelfönstret större genom att dra i de små handtagen (strecken) som finns i mitten till vänster och under det svarta spelfönstret.
+
+3. Ändra spelfönstrets storlek med `WIDTH` och `HEIGHT` i koden, t.ex. `WIDTH, HEIGHT = 600, 450`. Du kan behövs justera markens storlek och ninjans koordinater för att det ska se bra ut.
+
+4. Gör mer plats i Chrome genom att klicka på de tre prickarna högst uppe till höger. Välj sen kvadrat-ikonen (helskärm) ![image](https://user-images.githubusercontent.com/4598641/232329741-2b9f94c8-32b1-42a8-8246-85bec9c80328.png)
+ 
 
