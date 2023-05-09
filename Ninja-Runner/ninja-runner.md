@@ -608,8 +608,12 @@ Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren 
 ## Uppgift 2: Buggfix 2. Multihopp
 Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ovanför det som syns på skärmen? Ninjan ska bara kunna hoppa när hon är på marken och inte i luften. Kan du fixa det?
 
-## Uppgift 3: Vad tyckte du var svårt med kodningen?
-Ge ett par exempel.
+## Uppgift 3: Utvärdera ert eget arbete!
+När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
+
+**3A.** De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+
+**3B.** De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
 
 ## Uppgift 4
 Välj och gör minst en av utmaningarna 1, 2, 3 här nedanför. Redovisa så här:
