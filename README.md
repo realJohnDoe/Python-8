@@ -118,12 +118,12 @@ https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md
 
 | Symbol | Tangent på Chromebook, svenskt tangentbord |
 | ------------- | ------------- |
-| { *vänster måsvinge* | `alt gr` + `7` |
+| { *vänster måsvinge* | `alt gr` + `7` &ndash; håll ner `alt gr` medan du trycker 7 |
 | } *höger måsvinge* | `alt gr` + `0` |
 | [ *vänsterklammer* | `alt gr` + `8` |
 | ] *högerklammer* | `alt gr` + `9` |
 | @ | `alt gr` + `2` |
-| _ *understreck* | `⬆️` + `–` |
+| _ *understreck* | `⬆️` + `–` &ndash; håll ner skifttangenten medan du trycker `-` |
 
 # Hur får jag ett större spelfönster?
 
