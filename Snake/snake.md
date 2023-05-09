@@ -2709,8 +2709,12 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 # Uppgifter
-## 1.  Vad tyckte du var svårt med kodningen? 
-Ge ett par exempel där du/ni körde fast eller hade svårt att förstå koden.
+## 1. Utvärdera ert eget arbete!
+När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
+
+**1A.** De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+
+**1B.** De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
 
 ## 2. Gör spelet ännu bättre
 Pröva att göra några ändringar eller tillägg. Det kan vara en poängräknare för ormens längd, high score, roligare game over, en introskärm eller något annat som är standard i den här typen av spel.
