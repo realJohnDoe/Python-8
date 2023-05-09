@@ -4,6 +4,13 @@
 
 Vi vill göra en animering där ögonen följer muspekaren.
 
+## Jobba så här
+Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
+- Få det att fungera innan ni går vidare till nästa avsnitt. 
+- Testkör ofta, efter varje avsnitt eller ännu oftare.
+
+Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
+
 ## Innehåll
 [Rita ett öga](#rita-ett-öga)
 &bull; [Räkna ut avståndet i X- och Y-led mellan muspekaren och ögat](#räkna-ut-avståndet-i-x--och-y-led-mellan-muspekaren-och-ögat)
