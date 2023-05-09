@@ -12,6 +12,13 @@
 [Game Over](#game-over) &bull;
 [Uppgifter och utmaningar](#uppgifter-och-utmaningar)
 
+## Jobba så här
+Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
+- Få det att fungera innan ni går vidare till nästa avsnitt. 
+- Testkör ofta, efter varje avsnitt eller ännu oftare.
+
+Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
+
 # Första koden
 
 ✏️ Se till att vara inloggad i repl.it. Öppna startprojektet här i repl.it: https://replit.com/@RobertStorlind/gem-catcher-starter
