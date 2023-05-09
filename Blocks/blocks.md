@@ -41,6 +41,12 @@
 &bull; [Rita nästa bit](#rita-nästa-bit)
 &bull; **[Uppgifter](#uppgifter)**
   
+## Jobba så här
+Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
+- Få det att fungera innan ni går vidare till nästa avsnitt. 
+- Testkör ofta, efter varje avsnitt eller ännu oftare.
+
+Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
 
 # Regler
 
