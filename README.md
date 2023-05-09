@@ -133,7 +133,7 @@ Använd knappen Close Sidebar uppe till vänster för att fälla in fillistan.
 
 2. Gör spelfönstret större genom att dra i de små handtagen (strecken) som finns i mitten till vänster och under det svarta spelfönstret.
 
-3. Ändra spelfönstrets storlek med `WIDTH` och `HEIGHT` i koden, t.ex. `WIDTH, HEIGHT = 600, 450`. Du kan behövs justera markens storlek och ninjans koordinater för att det ska se bra ut.
+3. Ändra spelfönstrets storlek med `WIDTH` och `HEIGHT` i koden, t.ex. `WIDTH, HEIGHT = 600, 450`. Exempel: i spelet Ninja Runner kan du justera markens storlek och ninjans koordinater för att det ska se bra ut. Pröva dig fram!
 
 4. Gör mer plats i Chrome genom att klicka på de tre prickarna högst uppe till höger. Välj sen kvadrat-ikonen (helskärm) ![image](https://user-images.githubusercontent.com/4598641/232329741-2b9f94c8-32b1-42a8-8246-85bec9c80328.png)
  
