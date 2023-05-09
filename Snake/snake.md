@@ -31,6 +31,13 @@
 
 ![image](https://user-images.githubusercontent.com/4598641/226439115-c9800ff9-c916-406c-9efb-39407658988a.png)
 
+## Jobba så här
+Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
+- Få det att fungera innan ni går vidare till nästa avsnitt. 
+- Testkör ofta, efter varje avsnitt eller ännu oftare.
+
+Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
+
 ✏️ Pennan visar något du ska göra. Mata in koden och testkör innan du går vidare. 
 **Fungerar det inte? Rätta koden innan du fortsätter till nästa ändring.**
 
