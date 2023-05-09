@@ -19,6 +19,13 @@ För att göra vårt spel ska vi använda vad vi lärt oss från spelet [Gem Cat
 - fysik
 - listor med figurer (aktörer).
 
+## Jobba så här
+Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
+- Få det att fungera innan ni går vidare till nästa avsnitt. 
+- Testkör ofta, efter varje avsnitt eller ännu oftare.
+
+Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
+
 ## Nytt projekt
 ✏️ Se till att du är inloggad i repl.it. Öppna startprojektet i repl.it: https://replit.com/@RobertStorlind/ninja-runner-starter.
 Använd knappen **Fork** för att spara en kopia.
