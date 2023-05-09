@@ -333,8 +333,12 @@ pgzrun.go()
     
 # Uppgifter
 
-## Uppgift 1
-Vad tyckte du var svårt med kodningen? Ge ett par exempel.
+## 1. Utvärdera ert eget arbete!
+När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
+
+**1A.** De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+
+**1B.** De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
 
 ## Uppgift 2
 Uträkningen av scale går att göra om så att vi får ännu färre kodrader. Just nu har vi den här koden, där det är väldigt lite skillnad mellan de två kodblocken under `if`  respektive `else`:
