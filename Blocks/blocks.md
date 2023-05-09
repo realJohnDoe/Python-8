@@ -5370,9 +5370,13 @@ pgzrun.go()  # måste vara sista raden
 
 # Uppgifter
 
-## 1. Vad var svårt med kodningen?
-Ge ett par exempel.
+## 1. Utvärdera ert eget arbete!
+När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
 
+A. De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+
+B. De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
+  
 ## 2. Varför förenklar vi koden ibland?
 Vad tycker du är de viktigaste anledningarna till att vi ibland stannar upp och förenklar koden? Försök hitta några olika svar.
 
