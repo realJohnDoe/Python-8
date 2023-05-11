@@ -34,6 +34,13 @@
 &bull;
 **[Källor](#källor)**
 
+## Jobba så här
+Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
+- Få det att fungera innan ni går vidare till nästa avsnitt. 
+- Testkör ofta, efter varje avsnitt eller ännu oftare.
+
+Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
+
 # Regler
 
 Det finns en tavla med 15 bitar och en tom ruta. 
@@ -1729,15 +1736,19 @@ pgzrun.go()  # Ska alltid vara sist
 </details>
 
 # Uppgifter
-### 1. Vad tyckte du var svårt med uppgiften? 
-Ge ett par exempel. Glöm inte att ha med kodexempel.
+## 1. Utvärdera ert eget arbete!
+När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
 
-### 2. Pröva att göra några ändringar eller tillägg
+A. De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+
+B. De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
+
+## 2. Pröva att göra några ändringar eller tillägg
 - Beskriv kort med ord eller bilder vad förändringen är och hur den ska fungera.
 - Beskriv hur du fick ändra koden för att göra ändringen.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel.
 
-### 3. Varför kan vi inte blanda bitarna helt slumpmässigt? 
+## 3. Varför kan vi inte blanda bitarna helt slumpmässigt? 
 I funktionen `reset()` har vi den här koden:
 ```
     for move_number in range(1000):
