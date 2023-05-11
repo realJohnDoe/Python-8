@@ -26,6 +26,12 @@ Game of Life uppfanns av John Conway år 1970. Det är ett spel utan spelare &nd
 
 [**Uppgifter**](#uppgifter)
 
+## Jobba så här
+Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
+- Få det att fungera innan ni går vidare till nästa avsnitt. 
+- Testkör ofta, efter varje avsnitt eller ännu oftare.
+
+Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
 
 # Regler
 Det finns ett rutnät av celler, där varje enskild cell antingen är levande eller död.
@@ -1167,8 +1173,12 @@ Vad tyckte du var intressant med mönstret du valde?
 ## 2. Intressanta mönster med en knapptryckning
 🤔 Kan du lägga in kod så att du automatiskt kan få ett eller flera mönster när du trycker på någon speciell knapp?
 
-## 3. Vad var svårast med kodningen?
-Ge ett par exempel där ni körde fast eller har svårt att förstå vad koden gör. Förklara med ett par meningar och glöm inte kodexempel!
+## 3. Utvärdera ert eget arbete!
+När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
+
+A. De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+
+B. De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
 
 # Källor
 Efter originalet på https://simplegametutorials.github.io/pygamezero/life/
