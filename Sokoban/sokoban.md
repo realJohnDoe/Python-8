@@ -42,6 +42,13 @@
 
 **[Källor](#källor)**
 
+## Jobba så här
+Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
+- Få det att fungera innan ni går vidare till nästa avsnitt. 
+- Testkör ofta, efter varje avsnitt eller ännu oftare.
+
+Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
+
 # Regler
 Skjut in alla lådorna på lagerplatserna.
 
@@ -6961,8 +6968,13 @@ pgzrun.go()  # måste vara sista raden
 </details>
 
 # Uppgifter
-## 1. Vad tyckte du var svårt med kodningen?
-Ge ett par exempel. Glöm inte kodexempel!
+
+## 1. Utvärdera ert eget arbete!
+När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
+
+A. De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+
+B. De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
 
 ## 2. Gör det ännu bättre
 - Beskriv kort vad förändringen är och hur den ska fungera. Kanske bättre grafik, en introskärm med förklaringar eller poängräknare?
