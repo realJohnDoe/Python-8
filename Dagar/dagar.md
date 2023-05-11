@@ -738,7 +738,11 @@ def dagar_före(år):
 # Uppgifter
 1. När fyller/fyllde du 5000 dagar? Hur många dagar fyller du idag?
 
-2. Vad tyckte du var svårt med kodningen? Ge ett par exempel.
+
+2. Utvärdera ert eget arbete!
+När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
+- 2A. De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+- 2B. De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
 
 3. Pröva att göra någon ändring eller förbättring. Se uppgift 5 för en idé.
 - Beskriv kort vad ändringen är och hur den ska fungera.
