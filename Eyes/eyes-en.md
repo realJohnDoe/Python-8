@@ -4,7 +4,7 @@
 
 We want to make an animation where the eyes follow the mouse pointer.
 
-## Work like this
+## Introduction
 The road to a finished project is one puzzle piece at a time 🧩. Therefore, do one section at a time from top to bottom.
 - Get it working before moving on to the next section.
 - Test often, after every episode or even more frequently.
