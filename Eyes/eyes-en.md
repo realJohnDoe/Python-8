@@ -87,7 +87,7 @@ This is what it looks like when I test drive. If it is not working, check the co
 
 
 # Calculate the distance between the mouse pointer and the eye
-We can calculate the distance, `distance', using the Pythagorean theorem. See the figure.
+We can calculate the distance, `distance`, using the Pythagorean theorem. See the figure.
 
 ![image](https://user-images.githubusercontent.com/4598641/224125785-ee2eedc9-2155-4508-9fc2-d8518bfdfe32.png)
 
@@ -200,14 +200,14 @@ pgzrun.go() # must be last
 
 # The pupil should not move when the mouse pointer is outside the eye
 
-🤔 How do we know the mouse pointer is in the eye? We have calculated the distance from the center of the eye to the mouse pointer in the `distance' variable, so we use the radius of the eye as a limit, for example 30 pixels. There must be some space to draw the pupil as well.
+🤔 How do we know the mouse pointer is in the eye? We have calculated the distance from the center of the eye to the mouse pointer in the `distance` variable, so we use the radius of the eye as a limit, for example 30 pixels. There must be some space to draw the pupil as well.
 
 If the mouse pointer is more than 30 pixels from the center of the eye, we place the pupil at the edge of the eye. See the picture.
 
 ![image](https://user-images.githubusercontent.com/4598641/224125785-ee2eedc9-2155-4508-9fc2-d8518bfdfe32.png)
 
 - The dashed triangle has a hypotenuse of 30 pixels and is congruent with the larger triangle with the mouse pointer in one corner.
-- The proportion between the dashed triangle and the large triangle is `30 / distance' when the mouse pointer is outside the eye. If e.g. `distance` is 60 so the sides of the small dashed triangle are 30/60 = 1/2 of the large triangle.
+- The proportion between the dashed triangle and the large triangle is `30 / distance` when the mouse pointer is outside the eye. If e.g. `distance` is 60 then the sides of the small dashed triangle are 30/60 = 1/2 of the large triangle.
 - We must therefore scale `distance_x` and `distance_y` with that scale factor when calculating the x and y coordinates of the pupil.
 - Then the pupil will be drawn inside the circle of the eye, as we want.
 
@@ -333,12 +333,12 @@ pgzrun.go()
     
 # Tasks
 
-## 1. Evaluate your own work!
+## Task 1: Evaluate your own work!
 When you answer this, imagine that *you have access to the task* &ndash; so you don't need to know the code by heart.
 
-**1A.** We have done these parts of the task. We understand them and can explain the code to Susanne or in front of the class.
+**1A.** Show what you did to the rest of your group.
 
-**1B.** We have done these parts of the task *but we do not understand them 100%*. Give examples of something you don't understand.
+**1B.** Are there some parts of the exercise that you do not understand yet? Give examples of something you don't understand.
 
 ## Task 2
 The calculation of scale can be redone so that we get even fewer lines of code. Right now we have this code, where there is very little difference between the two code blocks under `if` and `else` respectively:
@@ -352,13 +352,13 @@ The calculation of scale can be redone so that we get even fewer lines of code. 
              pupil_x = eye_x + distance_x * scale
              pupil_y = eye_y + distance_y * scale
 ```
-Can you simplify the code so that we don't need two different calculations of `pupil_x' or `pupil_y`?[^1]
+Can you simplify the code so that we don't need two different calculations of `pupil_x` or `pupil_y`?[^1]
 - Don't forget code examples when you report
     
 ## Extra task 3
 Can you make your eyes change color, disappear or move to a different position on the screen sometimes?
 - Don't forget code examples when you report
-- If you do `from random import randint`, you can use the function `randint(min, max)` to get an integer between min and max.
+- If you do `from random import randint`, you can use the function `randint(min, max)` to get a random integer between min and max.
     
 ## Extra task 4
 Can you insert some other kind of shape and make the eyes follow that shape instead of the mouse pointer?
