@@ -16,7 +16,7 @@ Was there anything in the description that was difficult to understand? Please l
 &bull; [Calculate the distance in X- and Y-direction between the mouse pointer and the eye](#calculate-the-distance-in-x--and-y-direction-between-the-mouse-pointer-and-the-eye)
 &bull; [Calculate the distance between the mouse pointer and the eye](#calculate-the-distance-between-the-mouse-pointer-and-the-eye)
 &bull; [Moving pupil](#moving-pupil)
-&bull; [The pupil should not dilate when the mouse cursor is outside the eye](#the pupil-should-not-dilate-when-the-mouse-cursor-is-outside-the-eye)
+&bull; [The pupil should not dilate when the mouse cursor is outside the eye](#the pupil-should-not-move-when-the-mouse-cursor-is-outside-the-eye)
 &bull; [Two eyes](#two-eyes)
 &bull; [Data](#data)
 &bull; [Sources](#sources)
@@ -198,7 +198,7 @@ pgzrun.go() # must be last
     
 </details>
 
-# The pupil should not drift when the mouse pointer is outside the eye
+# The pupil should not move when the mouse pointer is outside the eye
 
 🤔 How do we know the mouse pointer is in the eye? We have calculated the distance from the center of the eye to the mouse pointer in the `distance' variable, so we use the radius of the eye as a limit, for example 30 pixels. There must be some space to draw the pupil as well.
 
