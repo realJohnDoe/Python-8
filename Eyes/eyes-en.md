@@ -42,7 +42,7 @@ pgzrun.go() # must be last
 ```
 
 ✏️ Make sure you are logged in to repl.it. Make a copy of the starter project https://replit.com/@RobertStorlind/eyes-starter
-with the "Fork" button. Test run!
+with the "Fork" button. Try running it!
 
 # Calculate the distance in X and Y directions between the mouse pointer and the eye
 We add code so that the distance between the center of the eye and the mouse pointer is displayed, counted in pixels.
@@ -51,7 +51,7 @@ We add code so that the distance between the center of the eye and the mouse poi
 - We import the `pygame` module to be able to use the `pygame.mouse.get_pos` function.
 - The function `update()` is empty for so long. The `draw()` function redraws the screen on each update.
 
-✏️ **Enter** and test run the code!
+✏️ **Enter** and run the code!
 
 The code so far &ndash; new lines are highlighted:
 
@@ -95,7 +95,7 @@ The distance in pixels is the square root of (the number of pixels in the X dire
 - The operator `**2` means raised to 2, i.e. the square
 - We import the math module `math` to calculate the square root with `math.sqrt()`.
 
-:pencil2: **Update the code** and test run it!
+:pencil2: **Update the code** and run it!
 
 ```python
 import pgzrun
