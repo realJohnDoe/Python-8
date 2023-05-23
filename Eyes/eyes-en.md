@@ -57,26 +57,26 @@ The code so far &ndash; new lines are highlighted:
 
 ```python
 import pgzrun
-import pygame #newrad 👀
+import pygame #new line 👀
 WIDTH, HEIGHT = 530, 400
 
-def update(): #new row 👀
-     pass #nyrad 👀
+def update(): #new line 👀
+     pass #new line 👀
 
 def draw():
      screen.fill((0, 0, 0))
 
-     mouse_x, mouse_y = pygame.mouse.get_pos() #new row 👀
-     eye_x = 200 #new row 👀
-     eye_y = 200 #newrow 👀
+     mouse_x, mouse_y = pygame.mouse.get_pos() #new line 👀
+     eye_x = 200 #new line 👀
+     eye_y = 200 #new line 👀
 
-     distance_x = mouse_x - eye_x #new row 👀
-     distance_y = mouse_y - eye_y #new row 👀
+     distance_x = mouse_x - eye_x #new line 👀
+     distance_y = mouse_y - eye_y #new line 👀
 
      screen.draw.filled_circle((eye_x, eye_y), 50, color=(255, 255, 255)) #slightly changed 👀
      screen.draw.filled_circle((200, 200), 15, color=(0, 0, 100))
 
-     screen.draw.text(f"distance x: {distance_x}\ndistance y: {distance_y}", (0, 0)) #new row 👀
+     screen.draw.text(f"distance x: {distance_x}\ndistance y: {distance_y}", (0, 0)) #new line 👀
 
 pgzrun.go() # must be last
 ```
@@ -100,12 +100,12 @@ The distance in pixels is the square root of (the number of pixels in the X dire
 ```python
 import pgzrun
 import pygame
-import math # newline 👀
+import math # new line 👀
 
 WIDTH, HEIGHT = 530, 400
 
 def update():
-     Pass
+     pass
 
 def draw():
      screen.fill((0, 0, 0))
@@ -116,7 +116,7 @@ def draw():
 
      distance_x = mouse_x - eye_x
      distance_y = mouse_y - eye_y
-     distance = math.sqrt(distance_x**2 + distance_y**2) # new row 👀
+     distance = math.sqrt(distance_x**2 + distance_y**2) #new line 👀
 
      screen.draw.filled_circle(
          (eye_x, eye_y), 50, color=(255, 255, 255))
@@ -173,7 +173,7 @@ WIDTH, HEIGHT = 530, 400
 
 
 def update():
-     Pass
+     pass
 
 
 def draw(): #function is updated 👀
@@ -220,7 +220,7 @@ def draw():
      screen.fill((0, 0, 0))
 
      mouse_x, mouse_y = pygame.mouse.get_pos()
-     radius = 30 #newrow
+     radius = 30 #new line
      eye_x = 200
      eye_y = 200
 
@@ -254,7 +254,7 @@ import math
 WIDTH, HEIGHT = 530, 400
 
 def update():
-     Pass
+     pass
 
 def draw(): # updated 👀
      screen.fill((0, 0, 0))
@@ -300,7 +300,7 @@ import math
 WIDTH, HEIGHT = 530, 400
 
 def update():
-     Pass
+     pass
 
 def draw():
      screen.fill((0, 0, 0))
