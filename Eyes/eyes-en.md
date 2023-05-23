@@ -18,7 +18,7 @@ Was there anything in the description that was difficult to understand? Please l
 &bull; [Moving pupil](#moving-pupil)
 &bull; [The pupil should not dilate when the mouse cursor is outside the eye](#the-pupil-should-not-move-when-the-mouse-cursor-is-outside-the-eye)
 &bull; [Two eyes](#two-eyes)
-&bull; [Data](#data)
+&bull; [Tasks](#tasks)
 &bull; [Sources](#sources)
 
 # Draw an eye
