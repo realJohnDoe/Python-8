@@ -128,7 +128,7 @@ def draw():
 pgzrun.go() # must be last
 ```
 
-Does the distance seem to be calculated correctly? Move the mouse pointer slowly and check.
+Is the distance calculated correctly? Move the mouse pointer slowly and check.
 
 # Moving pupil
 
