@@ -353,16 +353,16 @@ The calculation of scale can be redone so that we get even fewer lines of code. 
              pupil_y = eye_y + distance_y * scale
 ```
 Can you simplify the code so that we don't need two different calculations of `pupil_x` or `pupil_y`?[^1]
-- Don't forget code examples when you report
+- Don't forget to save code examples before you move on
     
 ## Extra task 3
 Can you make your eyes change color, disappear or move to a different position on the screen sometimes?
-- Don't forget code examples when you report
+- Don't forget to save code examples before you move on
 - If you do `from random import randint`, you can use the function `randint(min, max)` to get a random integer between min and max.
     
 ## Extra task 4
 Can you insert some other kind of shape and make the eyes follow that shape instead of the mouse pointer?
-- Don't forget code examples when you report
+- Don't forget to save code examples before you move on
 
 # More about the code in Pygame Zero and Pygame, explained in English
 
