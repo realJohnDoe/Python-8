@@ -81,7 +81,7 @@ def draw():
 pgzrun.go() # must be last
 ```
 
-This is what it looks like when I test drive. Doesn't it work? Check the code again.
+This is what it looks like when I test drive. If it is not working, check the code again.
 
 ![image](https://user-images.githubusercontent.com/4598641/223817639-1363643f-481d-44e3-979b-d0b48eb0c9da.png)
 
