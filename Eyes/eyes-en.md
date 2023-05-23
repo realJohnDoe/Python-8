@@ -16,7 +16,7 @@ Was there anything in the description that was difficult to understand? Please l
 &bull; [Calculate the distance in X- and Y-direction between the mouse pointer and the eye](#calculate-the-distance-in-x--and-y-direction-between-the-mouse-pointer-and-the-eye)
 &bull; [Calculate the distance between the mouse pointer and the eye](#calculate-the-distance-between-the-mouse-pointer-and-the-eye)
 &bull; [Moving pupil](#moving-pupil)
-&bull; [The pupil should not dilate when the mouse cursor is outside the eye](#the pupil-should-not-move-when-the-mouse-cursor-is-outside-the-eye)
+&bull; [The pupil should not dilate when the mouse cursor is outside the eye](#the-pupil-should-not-move-when-the-mouse-cursor-is-outside-the-eye)
 &bull; [Two eyes](#two-eyes)
 &bull; [Data](#data)
 &bull; [Sources](#sources)
