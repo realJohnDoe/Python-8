@@ -47,7 +47,7 @@ with the "Fork" button. Try running it!
 # Calculate the distance in X and Y directions between the mouse pointer and the eye
 We add code so that the distance between the center of the eye and the mouse pointer is displayed, counted in pixels.
 
-- We reuse the eye's x and y coordinates from when we draw the eye and therefore save the coordinates in variables.
+- We reuse the eye's x and y coordinates from when we draw the eye and save the coordinates from there in variables.
 - We import the `pygame` module to be able to use the `pygame.mouse.get_pos` function.
 - The function `update()` is empty for so long. The `draw()` function redraws the screen on each update.
 
